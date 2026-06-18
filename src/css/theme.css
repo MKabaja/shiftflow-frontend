@@ -1,0 +1,42 @@
+
+@theme {
+    /* Tła */
+    --color-bg-primary: #1E1E20;
+    --color-bg-offset: #26272C;
+    --color-bg-card: #2C2D32;
+
+    /* Akcent — złoty */
+    --color-accent: #C9A347;
+    --color-accent-dark: #AE9510;
+    --color-accent-text: #F0C84A;
+
+    /* Tekst */
+    --color-text-primary: #FAF7F1;
+    --color-text-muted: #8B8B8F;
+
+    /* Statusy */
+    --color-success: #4CAF7D;
+    --color-warning: #E8922A;
+    --color-danger: #E05252;
+
+    /* Cienie neumorphism */
+    --shadow-nm-raised: 4px 4px 10px #0a0a0b, -4px -4px 10px #323235;
+    --shadow-nm-raised-sm: 3px 3px 8px #0a0a0b, -3px -3px 8px #323235;
+    --shadow-nm-raised-lg: 6px 6px 14px #0a0a0b, -6px -6px 14px #323235;
+    --shadow-nm-inset: inset 3px 3px 7px #0a0a0b, inset -3px -3px 7px #323235;
+    --shadow-nm-inset-soft: inset 2px 2px 5px #0a0a0b, inset -2px -2px 5px #323235;
+    --shadow-nm-pressed: inset 2px 2px 5px #0a0a0b, inset -2px -2px 5px #323235;
+    --shadow-nm-subtle: 2px 2px 6px #0a0a0b, -2px -2px 6px #323235;
+
+    /* Fonty */
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+
+    /* Border radius */
+    --radius-sm: 6px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 16px;
+}
+
+/* Globalne style */
