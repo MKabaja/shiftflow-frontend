@@ -16,7 +16,7 @@
     "test:run": "vitest run",
     "test:watch": "vitest watch",
     "test:coverage": "vitest run --coverage",
-    "check": "pnpm typecheck && pnpm lint && pnpm test --run && pnpm build"
+    "check": "npm run typecheck && npm run lint && npm run test -- --run && npm run build"
   },
   "dependencies": {
     "@floating-ui/react": "^0.27.19",
@@ -46,6 +46,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@tanstack/router-devtools": "^1.167.0",
     "@testing-library/jest-dom": "^6.9.1",
     "@testing-library/react": "^16.3.2",
     "@testing-library/user-event": "^14.6.1",
