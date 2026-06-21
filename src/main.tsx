@@ -6,7 +6,7 @@ import { RouterProvider } from '@tanstack/react-router';
 import { Toaster } from 'sonner';
 import { queryClient } from './shared/lib/queryClient';
 import { router } from './shared/lib/router';
-// import './shared/i18n'; // side-effect init (Task 1.6)
+import './shared/i18n';
 import '@/css/Index.css';
 
 createRoot(document.getElementById('root')!).render(
