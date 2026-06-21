@@ -6,6 +6,7 @@ import { RouterProvider } from '@tanstack/react-router';
 import { Toaster } from 'sonner';
 import { queryClient } from './shared/lib/queryClient';
 import { router } from './shared/lib/router';
+import { config } from './shared/lib/config';
 import './shared/i18n';
 import '@/css/Index.css';
 
@@ -18,7 +19,7 @@ createRoot(document.getElementById('root')!).render(
         theme="dark"
         richColors
       />
-      <ReactQueryDevtools initialIsOpen={false} />
+      {config.isDev && <ReactQueryDevtools initialIsOpen={false} />}
     </QueryClientProvider>
   </StrictMode>,
 );
