@@ -1,4 +1,5 @@
 import { Badge } from '@/shared/components/Badge/Badge.tsx';
+import { Spinner } from '@/shared/components/Spinner/Spinner.tsx';
 
 export function DevShowcase() {
   return (
@@ -22,6 +23,15 @@ export function DevShowcase() {
         >
           Danger
         </Badge>
+      </section>
+
+      <section className="bg-bg-offset flex w-full flex-col items-center justify-center space-y-6 px-2 py-5">
+        <h2 className="border-border w-full border-b text-2xl">Spinner</h2>
+        <div className="flex items-center gap-6">
+          <Spinner size="sm" />
+          <Spinner size="md" />
+          <Spinner size="lg" />
+        </div>
       </section>
     </div>
   );
