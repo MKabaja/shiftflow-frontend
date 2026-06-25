@@ -4,8 +4,8 @@ type Action = 'ArrowDown' | 'ArrowUp';
 type Actionfunction = (index: number, length: number) => number;
 
 const actionStrategy: Record<Action, Actionfunction> = {
-    ArrowDown: (index, length) => (index + 1) % length,
-    ArrowUp: (index, length) => (index - 1 + length) % length,
+  ArrowDown: (index, length) => (index + 1) % length,
+  ArrowUp: (index, length) => (index - 1 + length) % length,
 };
 
 /**
@@ -24,45 +24,40 @@ const actionStrategy: Record<Action, Actionfunction> = {
  * ```
  */
 function useRovingFocus<T extends HTMLElement>(
-    containerRef: RefObject<T | null>,
-    isOpen: boolean,
-    selector = 'a',
+  containerRef: RefObject<T | null>,
+  isOpen: boolean,
+  selector = 'a',
 ) {
-    const currentIndexRef = useRef<number>(0);
-    useLayoutEffect(() => {
-        if (isOpen) {
-            currentIndexRef.current = 0;
-        }
-    }, [isOpen]);
+  const currentIndexRef = useRef<number>(0);
+  useLayoutEffect(() => {
+    if (isOpen) {
+      currentIndexRef.current = 0;
+    }
+  }, [isOpen]);
 
-    useEffect(() => {
-        const container = containerRef.current;
-        if (!container) return;
+  useEffect(() => {
+    const container = containerRef.current;
+    if (!container) return;
 
-        const focusableElements: HTMLElement[] = Array.from(
-            container.querySelectorAll(selector),
-        );
+    const focusableElements: HTMLElement[] = Array.from(container.querySelectorAll(selector));
 
-        const handleKeyDown = (e: KeyboardEvent) => {
-            const allowedKeys: Action[] = ['ArrowDown', 'ArrowUp'];
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const allowedKeys: Action[] = ['ArrowDown', 'ArrowUp'];
 
-            if (!allowedKeys.includes(e.key as Action)) return;
+      if (!allowedKeys.includes(e.key as Action)) return;
 
-            e.preventDefault();
-            const action = e.key as Action;
-            const nextIndex = actionStrategy[action](
-                currentIndexRef.current,
-                focusableElements.length,
-            );
-            currentIndexRef.current=nextIndex;
-            focusableElements[nextIndex]?.focus();
-        };
+      e.preventDefault();
+      const action = e.key as Action;
+      const nextIndex = actionStrategy[action](currentIndexRef.current, focusableElements.length);
+      currentIndexRef.current = nextIndex;
+      focusableElements[nextIndex]?.focus();
+    };
 
-        container.addEventListener('keydown', handleKeyDown);
-        return () => {
-            container.removeEventListener('keydown', handleKeyDown);
-        };
-    }, [containerRef, selector]);
+    container.addEventListener('keydown', handleKeyDown);
+    return () => {
+      container.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [containerRef, selector]);
 }
 
 export default useRovingFocus;

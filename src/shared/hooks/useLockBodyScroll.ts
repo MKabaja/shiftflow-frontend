@@ -4,9 +4,9 @@ type Axis = 'x' | 'y' | 'both';
 type Properties = 'overflowX' | 'overflowY' | 'overflow';
 
 const axisMap: Record<Axis, Properties> = {
-    x: 'overflowX',
-    y: 'overflowY',
-    both: 'overflow',
+  x: 'overflowX',
+  y: 'overflowY',
+  both: 'overflow',
 };
 
 /**
@@ -21,16 +21,16 @@ const axisMap: Record<Axis, Properties> = {
  */
 
 export function useLockBodyScroll(isOpen: boolean, axis: Axis = 'x'): void {
-    useEffect(() => {
-        const property = axisMap[axis];
+  useEffect(() => {
+    const property = axisMap[axis];
 
-        setBodyStyle(property, isOpen ? 'hidden' : '');
+    setBodyStyle(property, isOpen ? 'hidden' : '');
 
-        return () => {
-            setBodyStyle(property, '');
-        };
-    }, [isOpen, axis]);
+    return () => {
+      setBodyStyle(property, '');
+    };
+  }, [isOpen, axis]);
 }
 function setBodyStyle(property: Properties, value: string) {
-    document.body.style[property] = value;
+  document.body.style[property] = value;
 }

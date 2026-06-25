@@ -22,12 +22,12 @@ import { useKeyClose } from './useKeyClose';
  */
 
 export function useDropdown(axis: 'x' | 'y' | 'both' = 'x') {
-    const [isOpen, setIsOpen] = useState(false);
-    const close = useCallback(() => setIsOpen(false), []);
-    const toggle = useCallback(() => setIsOpen((prev) => !prev), []);
+  const [isOpen, setIsOpen] = useState(false);
+  const close = useCallback(() => setIsOpen(false), []);
+  const toggle = useCallback(() => setIsOpen((prev) => !prev), []);
 
-    useLockBodyScroll(isOpen, axis);
-    useKeyClose(isOpen, close);
+  useLockBodyScroll(isOpen, axis);
+  useKeyClose(isOpen, close);
 
-    return { isOpen, close, toggle };
+  return { isOpen, close, toggle };
 }

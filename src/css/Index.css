@@ -1,7 +1,5 @@
+@import 'tailwindcss';
 
-@import "tailwindcss";
-
-
-@import "./theme.css";
-@import "./globals.css";
-@import "./helpers.css";
+@import './theme.css';
+@import './globals.css';
+@import './helpers.css';
