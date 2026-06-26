@@ -1,10 +1,10 @@
-import type { Sizes, Variants } from './Badge.tsx';
+import type { BadgeSize, BadgeVariant } from './Badge.tsx';
 
-type VariantStyle = Record<Variants, string>;
-type SizeStyle = Record<Sizes, string>;
+type VariantStyle = Record<BadgeVariant, string>;
+type SizeStyle = Record<BadgeSize, string>;
 
 const variantStyles: VariantStyle = {
-  default: 'text-primary bg-primary/10',
+  default: 'text-primary bg-surface border-none',
   success: 'text-success bg-success/10 border-success',
   warning: 'text-warning bg-warning/10 border-warning',
   danger: 'text-danger bg-danger/10 border-danger',

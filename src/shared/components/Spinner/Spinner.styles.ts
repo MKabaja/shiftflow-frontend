@@ -1,6 +1,6 @@
-import type { Sizes } from './Spinner.tsx';
+import type { SpinnerSize } from './Spinner.tsx';
 
-type SizeStyle = Record<Sizes, string>;
+type SizeStyle = Record<SpinnerSize, string>;
 
 const sizeStyles: SizeStyle = {
   sm: 'size-4 border-2',

@@ -1,10 +1,10 @@
 import { cn } from '@/shared/lib/cn.ts';
 import { baseStyles, sizeStyles } from './Spinner.styles.ts';
 
-export type Sizes = 'sm' | 'md' | 'lg';
+export type SpinnerSize = 'sm' | 'md' | 'lg';
 
 type SpinnerProps = {
-  size?: Sizes;
+  size?: SpinnerSize;
   label?: string;
 };
 

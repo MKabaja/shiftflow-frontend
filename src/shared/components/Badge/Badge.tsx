@@ -2,13 +2,13 @@ import type { ReactNode } from 'react';
 import { cn } from '@/shared/lib/cn.ts';
 import { baseStyles, sizeStyles, variantStyles } from './Badge.styles.ts';
 
-export type Variants = 'default' | 'success' | 'warning' | 'danger';
-export type Sizes = 'sm' | 'md';
+export type BadgeVariant = 'default' | 'success' | 'warning' | 'danger';
+export type BadgeSize = 'sm' | 'md';
 
 type BadgeProps = {
-  variant: Variants;
+  variant: BadgeVariant;
   children?: ReactNode;
-  size?: Sizes;
+  size?: BadgeSize;
 };
 export function Badge({ variant = 'default', size = 'sm', children }: BadgeProps) {
   return (
