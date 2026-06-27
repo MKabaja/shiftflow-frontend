@@ -5,6 +5,7 @@ import { baseStyles, sizeStyles, variantStyles } from './Badge.styles.ts';
 export type BadgeVariant = 'default' | 'success' | 'warning' | 'danger';
 export type BadgeSize = 'sm' | 'md';
 
+
 type BadgeProps = {
   variant: BadgeVariant;
   children?: ReactNode;

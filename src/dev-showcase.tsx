@@ -1,5 +1,6 @@
 import { Badge } from '@/shared/components/Badge/Badge.tsx';
 import { Spinner } from '@/shared/components/Spinner/Spinner.tsx';
+import {Avatar} from '@/shared/components/Avatar/Avatar.tsx';
 
 export function DevShowcase() {
   return (
@@ -31,6 +32,16 @@ export function DevShowcase() {
           <Spinner size="sm" />
           <Spinner size="md" />
           <Spinner size="lg" />
+        </div>
+      </section>
+      <section className="bg-bg-offset flex w-full flex-col items-center justify-center space-y-6 px-2 py-5">
+        <h2 className="border-border w-full border-b text-2xl">Avatar</h2>
+        <div className="flex items-center gap-6">
+          <Avatar size="xs"  name=' Mateusz Kabaja' />
+          <Avatar size="sm"  name ='Katarzyna Kabaja'/>
+          <Avatar size="md"  name = ''/>
+          <Avatar size="lg"  name = 'piotr zator'/>
+          <Avatar size="xl"  name = 'mirosław gawęda' onClick={()=>console.log('xd')}/>
         </div>
       </section>
     </div>
