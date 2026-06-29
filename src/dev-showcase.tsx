@@ -65,21 +65,6 @@ export function DevShowcase() {
       <section className="bg-bg-offset flex w-full flex-col items-center justify-center space-y-6 px-2 py-5">
         <h2 className="border-border w-full border-b text-2xl">Skeleton</h2>
         <div className="flex items-center gap-6">
-          <Skeleton
-            variant="circle"
-            width={40}
-            height={40}
-          />
-          <Skeleton
-            variant="rect"
-            width={80}
-            height={40}
-          />
-          <Skeleton
-            variant="text"
-            width={40}
-            height={40}
-          />
           <div
             role="status"
             aria-busy="true"
@@ -92,13 +77,11 @@ export function DevShowcase() {
               >
                 <Skeleton
                   variant="circle"
-                  width={40}
-                  height={40}
+                  className="h-10 w-10"
                 />
                 <Skeleton
                   variant="text"
-                  width={160}
-                  height={16}
+                  className="h-10 w-20"
                 />
               </div>
             ))}
