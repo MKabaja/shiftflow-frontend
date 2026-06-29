@@ -1,7 +1,45 @@
+import { useState } from 'react';
 import { Badge } from '@/shared/components/Badge/Badge.tsx';
 import { Spinner } from '@/shared/components/Spinner/Spinner.tsx';
 import { Avatar } from '@/shared/components/Avatar/Avatar.tsx';
 import { Skeleton } from '@/shared/components/Skeleton/Skeleton.tsx';
+import { Toggle } from '@/shared/components/Toggle/Toggle.tsx';
+
+function ToggleDemo() {
+  const [a, setA] = useState(false);
+  const [b, setB] = useState(true);
+  const [c, setC] = useState(false);
+
+  return (
+    <div className="flex flex-col gap-4">
+      <Toggle
+        checked={a}
+        onChange={setA}
+        label="Powiadomienia"
+        description="Otrzymuj alerty o zmianach w grafiku"
+        size="md"
+      />
+      <Toggle
+        checked={b}
+        onChange={setB}
+        label="Pokaż weekendy"
+        size="md"
+      />
+      <Toggle
+        checked={c}
+        onChange={setC}
+        label="Tylko ja"
+        size="sm"
+      />
+      <Toggle
+        checked={true}
+        onChange={() => {}}
+        label="Zablokowany (disabled)"
+        disabled
+      />
+    </div>
+  );
+}
 
 export function DevShowcase() {
   return (
@@ -87,6 +125,11 @@ export function DevShowcase() {
             ))}
           </div>
         </div>
+      </section>
+
+      <section className="bg-bg-offset flex w-full flex-col items-center justify-center space-y-6 px-2 py-5">
+        <h2 className="border-border w-full border-b text-2xl">Toggle</h2>
+        <ToggleDemo />
       </section>
     </div>
   );
