@@ -135,10 +135,26 @@ export function DevShowcase() {
       <section className="bg-bg-offset flex w-full flex-col items-center justify-center space-y-6 px-2 py-5">
         <h2 className="border-border w-full border-b text-2xl">Button</h2>
         <Button>zapisz</Button>
-        <Button variant="danger">zapisz</Button>
-        <Button variant="ghost">zapisz</Button>
+        <Button
+          variant="danger"
+          size="md"
+        >
+          zapisz
+        </Button>
+        <Button
+          variant="ghost"
+          size="lg"
+        >
+          zapisz
+        </Button>
         <Button variant="secondary">zapisz</Button>
-        <Button isLoading={true}>zapisz</Button>
+        <Button
+          variant="secondary"
+          isLoading={true}
+          fullWidth={true}
+        >
+          zapisz
+        </Button>
       </section>
     </div>
   );

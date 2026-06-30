@@ -9,12 +9,12 @@ const sizeStyles: SizeStyle = {
   lg: 'h-12 min-w-[96px] px-6',
 };
 const variantStyles: VariantStyle = {
-  primary: 'bg-accent text-bg-primary',
+  primary: 'bg-accent text-bg-primary hover:shadow-nm-hover-accent ',
   secondary: 'bg-card text-primary',
-  ghost: 'bg-transparent text-primary',
-  danger: 'bg-danger/40 text-primary',
+  ghost: 'bg-transparent text-text-primar hover:bg-elevated',
+  danger: 'bg-danger/40 text-primary hover:bg-danger/80 hover:text-bg-primary',
 };
 const baseStyles: string =
-  'gap-2 inline-flex items-center justify-center font-semibold transition-all duration-200 ease-out';
+  'hover:scale-105 shadow-nm-subtle  rounded-sm gap-2 inline-flex items-center justify-center font-semibold transition-all duration-200 ease-out';
 
 export { sizeStyles, variantStyles, baseStyles };

@@ -30,7 +30,14 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
         fullWidth ? 'w-full' : undefined,
       )}
     >
-      {isLoading ? <Spinner size="sm" /> : children}
+      {isLoading ? (
+        <Spinner
+          size="sm"
+          variant={variant === 'primary' ? 'contrast' : 'accent'}
+        />
+      ) : (
+        children
+      )}
     </button>
   );
 });
