@@ -26,6 +26,7 @@
     --color-warning: #e8922a;
     --color-danger: #e05252;
     --color-info: #5a8ac9;
+    --color-focus: #9097a4;
 
     /* Akcent dodatkowy */
     --color-accent-light: #eac162;
@@ -37,15 +38,11 @@
     --shadow-nm-inset: inset 3px 3px 7px #0a0a0b, inset -3px -3px 7px #323235;
     --shadow-nm-inset-soft: inset 2px 2px 5px #0a0a0b, inset -2px -2px 5px #323235;
     --shadow-nm-pressed: inset 2px 2px 5px #0a0a0b, inset -2px -2px 5px #323235;
-    --shadow-nm-hover-accent: inset 2px 2px 6px #856819,
-    inset -2px -2px 6px #f4d887;
-    --shadow-nm-pressed-accent: inset 4px 4px 10px #7a5e15,
-    inset -4px -4px 10px #f8e39f;
+    --shadow-nm-hover-accent: inset 2px 2px 6px #856819, inset -2px -2px 6px #f4d887;
+    --shadow-nm-pressed-accent: inset 4px 4px 10px #7a5e15, inset -4px -4px 10px #f8e39f;
     --shadow-nm-subtle: 2px 2px 6px #0a0a0b, -2px -2px 6px #323235;
-    --shadow-nm-hover-danger: inset 2px 2px 6px #7a1a1a,
-    inset -2px -2px 6px #ff9090;
-    --shadow-nm-pressed-danger: inset 4px 4px 10px #6b1515,
-    inset -4px -4px 10px #ffa0a0;
+    --shadow-nm-hover-danger: inset 2px 2px 6px #7a1a1a, inset -2px -2px 6px #ff9090;
+    --shadow-nm-pressed-danger: inset 4px 4px 10px #6b1515, inset -4px -4px 10px #ffa0a0;
 
     /* Fonty */
     --font-display: 'Space Grotesk', sans-serif;

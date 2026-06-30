@@ -8,15 +8,17 @@ type SpinnerProps = {
   variant: SpinnerVariant;
   size?: SpinnerSize;
   label?: string;
-  isDark?: boolean;
 };
 
 export function Spinner({ size = 'md', label = 'loading...', variant = 'accent' }: SpinnerProps) {
   return (
-    <span
-      role="status"
-      aria-label={label}
-      className={cn(baseStyles, sizeStyles[size], variantStyles[variant])}
-    />
+    <>
+      <span
+        role="status"
+        aria-label={label}
+        className={cn(baseStyles, sizeStyles[size], variantStyles[variant])}
+      ></span>
+      <span>{label}</span>
+    </>
   );
 }
