@@ -1,7 +1,7 @@
 import { User } from 'lucide-react';
-import { getInitials } from '@/shared/lib/getInitials.ts';
-import { hashColor } from '@/shared/lib/hashColor.ts';
-import { cn } from '@/shared/lib/cn.ts';
+import { getInitials } from '@/shared/lib/helpers/getInitials.ts';
+import { hashColor } from '@/shared/lib/helpers/hashColor.ts';
+import { cn } from '@/shared/lib/helpers/cn.ts';
 import { baseStyles, sizeStyles } from '@/shared/components/Avatar/Avatar.styles.ts';
 
 export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';

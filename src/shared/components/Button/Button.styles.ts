@@ -19,6 +19,6 @@ const variantStyles: VariantStyle = {
     'bg-danger text-bg-primary shadow-nm-subtle hover:shadow-nm-hover-danger active:shadow-nm-pressed-danger',
 };
 const baseStyles: string =
-  'disabled:opacity-50 disabled:cursor-not-allowed disabled:pointer-events-none rounded-sm gap-2 inline-flex items-center justify-center font-semibold transition-all duration-200 ease-out';
+  'rounded-sm gap-2 inline-flex items-center justify-center font-semibold transition-all duration-200 ease-out';
 
 export { sizeStyles, variantStyles, baseStyles };

@@ -4,9 +4,9 @@ import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { RouterProvider } from '@tanstack/react-router';
 import { Toaster } from 'sonner';
-import { queryClient } from './shared/lib/queryClient';
-import { router } from './shared/lib/router';
-import { config } from './shared/lib/config';
+import { queryClient } from './shared/lib/config/queryClient.ts';
+import { router } from './shared/lib/config/router.ts';
+import { config } from './shared/lib/config/config.ts';
 import './shared/i18n';
 import '@/css/Index.css';
 

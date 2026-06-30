@@ -1,6 +1,6 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import { config } from '@/shared/lib/config';
+import { config } from '@/shared/lib/config/config.ts';
 
 import plCommon from './locales/pl/common.json';
 import enCommon from './locales/en/common.json';

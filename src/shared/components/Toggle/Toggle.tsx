@@ -1,6 +1,6 @@
 import { forwardRef, useId } from 'react';
 import { motion } from 'motion/react';
-import { cn } from '@/shared/lib/cn.ts';
+import { cn } from '@/shared/lib/helpers/cn.ts';
 import { knobBaseStyles, sizeStyles, trackBaseStyles } from './Toggle.styles.ts';
 
 export type ToggleSize = 'sm' | 'md';

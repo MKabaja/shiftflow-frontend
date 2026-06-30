@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react';
-import { cn } from '@/shared/lib/cn.ts';
+import { cn } from '@/shared/lib/helpers/cn.ts';
 import { baseStyles, sizeStyles, variantStyles } from './Badge.styles.ts';
 
 export type BadgeVariant = 'default' | 'success' | 'warning' | 'danger';

@@ -1,9 +1,10 @@
 import { forwardRef, type ReactNode } from 'react';
 import { Spinner } from '@/shared/components/Spinner';
-import { cn } from '@/shared/lib/cn.ts';
+import { cn } from '@/shared/lib/helpers/cn.ts';
 import { baseStyles, sizeStyles, variantStyles } from './Button.styles.ts';
 import { type HTMLMotionProps, motion } from 'motion/react';
-import { focusStyles } from '@/shared/lib/focusStyles.ts';
+import { focusStyles } from '@/shared/lib/styles/focusStyles.ts';
+import { disabledStyles } from '@/shared/lib/styles/disabledStyles.ts';
 
 export type ButtonSize = 'sm' | 'md' | 'lg';
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
@@ -31,7 +32,14 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       transition={{ type: 'spring', stiffness: 400, damping: 20 }}
       disabled={isLoading || rest.disabled}
       aria-busy={isLoading}
-      className={cn(sizeStyles[size], variantStyles[variant], baseStyles, focusStyles, className)}
+      className={cn(
+        sizeStyles[size],
+        variantStyles[variant],
+        baseStyles,
+        focusStyles,
+        disabledStyles,
+        className,
+      )}
     >
       {isLoading ? (
         <Spinner

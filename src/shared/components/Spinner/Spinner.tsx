@@ -1,11 +1,11 @@
-import { cn } from '@/shared/lib/cn.ts';
+import { cn } from '@/shared/lib/helpers/cn.ts';
 import { baseStyles, sizeStyles, variantStyles } from './Spinner.styles.ts';
 
 export type SpinnerSize = 'sm' | 'md' | 'lg';
 export type SpinnerVariant = 'accent' | 'contrast';
 
 type SpinnerProps = {
-  variant: SpinnerVariant;
+  variant?: SpinnerVariant;
   size?: SpinnerSize;
   label?: string;
 };

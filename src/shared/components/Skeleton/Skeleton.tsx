@@ -1,5 +1,5 @@
 import { baseStyles, variantStyles } from './Skeleton.styles.ts';
-import { cn } from '@/shared/lib/cn.ts';
+import { cn } from '@/shared/lib/helpers/cn.ts';
 
 export type SkeletonVariant = 'text' | 'circle' | 'rect';
 

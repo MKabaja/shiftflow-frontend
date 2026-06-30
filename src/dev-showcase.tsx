@@ -151,7 +151,6 @@ export function DevShowcase() {
         <Button
           variant="secondary"
           isLoading={true}
-          fullWidth={false}
         >
           Spinner
         </Button>
