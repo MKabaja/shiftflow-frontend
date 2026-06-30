@@ -42,6 +42,10 @@
     --shadow-nm-pressed-accent: inset 4px 4px 10px #7a5e15,
     inset -4px -4px 10px #f8e39f;
     --shadow-nm-subtle: 2px 2px 6px #0a0a0b, -2px -2px 6px #323235;
+    --shadow-nm-hover-danger: inset 2px 2px 6px #7a1a1a,
+    inset -2px -2px 6px #ff9090;
+    --shadow-nm-pressed-danger: inset 4px 4px 10px #6b1515,
+    inset -4px -4px 10px #ffa0a0;
 
     /* Fonty */
     --font-display: 'Space Grotesk', sans-serif;

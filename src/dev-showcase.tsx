@@ -134,26 +134,26 @@ export function DevShowcase() {
       </section>
       <section className="bg-bg-offset flex w-full flex-col items-center justify-center space-y-6 px-2 py-5">
         <h2 className="border-border w-full border-b text-2xl">Button</h2>
-        <Button>zapisz</Button>
+        <Button>Acent</Button>
         <Button
           variant="danger"
           size="md"
         >
-          zapisz
+          Danger
         </Button>
         <Button
           variant="ghost"
           size="lg"
         >
-          zapisz
+          Ghost
         </Button>
-        <Button variant="secondary">zapisz</Button>
+        <Button variant="secondary">Secondaryz</Button>
         <Button
           variant="secondary"
           isLoading={true}
           fullWidth={true}
         >
-          zapisz
+          Spinner
         </Button>
       </section>
     </div>
