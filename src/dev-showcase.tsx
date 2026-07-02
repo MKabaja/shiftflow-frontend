@@ -5,6 +5,8 @@ import { Avatar } from '@/shared/components/Avatar/Avatar.tsx';
 import { Skeleton } from '@/shared/components/Skeleton/Skeleton.tsx';
 import { Toggle } from '@/shared/components/Toggle/Toggle.tsx';
 import { Button } from '@/shared/components/Button/Button.tsx';
+import { Input } from '@/shared/components/Input/Input.tsx';
+import { Eye, EyeOff, Search } from 'lucide-react';
 
 function ToggleDemo() {
   const [a, setA] = useState(false);
@@ -154,6 +156,38 @@ export function DevShowcase() {
         >
           Spinner
         </Button>
+      </section>
+      <section className="bg-bg-offset flex w-full flex-col items-center justify-center space-y-6 px-2 py-5">
+        <h2 className="border-border w-full border-b text-2xl">Skeleton</h2>
+        <div className="grid grid-cols-2 gap-6">
+          <Input
+            label="normal"
+            placeholder=" Wpisz tekst"
+          />
+          <Input
+            label="error"
+            error={'Nieprawiłowe dane logowania'}
+            // helperText={'musisz podac prawidłowe dane logowania'}
+            placeholder=" Wpisz tekst"
+          />
+          <Input
+            label="Left Icon"
+            leftIcon={<Search size={16} />}
+            placeholder=" szukaj..."
+          />
+          <Input
+            label="Password (ukryte)"
+            type="password"
+            rightIcon={<Eye size={16} />}
+            defaultValue="tajnehaslo"
+          />
+          <Input
+            label="Password (widoczne)"
+            type="text"
+            rightIcon={<EyeOff size={16} />}
+            defaultValue="tajnehaslo"
+          />
+        </div>
       </section>
     </div>
   );
