@@ -1,4 +1,4 @@
-import { forwardRef, useId } from 'react';
+import { useId, type Ref } from 'react';
 import { motion } from 'motion/react';
 import { cn } from '@/shared/lib/helpers/cn.ts';
 import { knobBaseStyles, sizeStyles, trackBaseStyles } from './Toggle.styles.ts';
@@ -6,6 +6,7 @@ import { knobBaseStyles, sizeStyles, trackBaseStyles } from './Toggle.styles.ts'
 export type ToggleSize = 'sm' | 'md';
 
 type ToggleProps = {
+  ref?: Ref<HTMLInputElement>;
   checked: boolean;
   onChange: (next: boolean) => void;
   label?: string;
@@ -14,10 +15,15 @@ type ToggleProps = {
   size?: ToggleSize;
 };
 
-export const Toggle = forwardRef<HTMLInputElement, ToggleProps>(function Toggle(
-  { checked, onChange, label, description, disabled = false, size = 'md' },
+export function Toggle({
   ref,
-) {
+  checked,
+  onChange,
+  label,
+  description,
+  disabled = false,
+  size = 'md',
+}: ToggleProps) {
   const id = useId();
   const { track, knob, travel } = sizeStyles[size];
 
@@ -55,4 +61,4 @@ export const Toggle = forwardRef<HTMLInputElement, ToggleProps>(function Toggle(
       )}
     </label>
   );
-});
+}

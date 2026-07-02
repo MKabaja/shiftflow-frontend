@@ -1,4 +1,4 @@
-import { forwardRef, type ReactNode } from 'react';
+import type { ReactNode } from 'react';
 import { Spinner } from '@/shared/components/Spinner';
 import { cn } from '@/shared/lib/helpers/cn.ts';
 import { baseStyles, sizeStyles, variantStyles } from './Button.styles.ts';
@@ -16,10 +16,15 @@ type ButtonProps = HTMLMotionProps<'button'> & {
   isLoading?: boolean;
 };
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
-  { variant = 'primary', size = 'sm', isLoading, children, type = 'button', ...rest },
+export function Button({
   ref,
-) {
+  variant = 'primary',
+  size = 'sm',
+  isLoading,
+  children,
+  type = 'button',
+  ...rest
+}: ButtonProps) {
   const { className, ...motionRest } = rest;
 
   return (
@@ -51,4 +56,4 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button
       )}
     </motion.button>
   );
-});
+}
