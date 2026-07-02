@@ -19,7 +19,7 @@ describe('Skeleton', () => {
 
   it('applies rect variant class', () => {
     const { container } = render(<Skeleton variant="rect" />);
-    expect(container.firstChild).toHaveClass('rounded');
+    expect(container.firstChild).toHaveClass('rounded-md');
   });
 
   it('merges custom className with base styles', () => {

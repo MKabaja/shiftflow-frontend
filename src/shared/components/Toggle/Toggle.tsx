@@ -32,7 +32,7 @@ export function Toggle({
       htmlFor={id}
       className={cn(
         'flex items-center gap-3',
-        disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer',
+        disabled ? 'cursor-not-allowed opacity-40' : 'cursor-pointer',
       )}
     >
       <div className={cn(trackBaseStyles, track, checked ? 'bg-accent/30' : 'bg-bg-offset')}>
@@ -50,13 +50,13 @@ export function Toggle({
         <motion.div
           className={cn(knobBaseStyles, knob)}
           animate={{ x: checked ? travel : 0 }}
-          transition={{ duration: 0.2, ease: 'easeInOut' }}
+          transition={{ duration: 0.2, ease: 'easeOut' }}
         />
       </div>
       {label && (
         <div>
-          <span className="text-text-primary text-sm">{label}</span>
-          {description && <p className="text-text-muted mt-0.5 text-xs">{description}</p>}
+          <span className="text-text-primary text-body-md">{label}</span>
+          {description && <p className="text-text-muted mt-0.5 text-body-sm">{description}</p>}
         </div>
       )}
     </label>

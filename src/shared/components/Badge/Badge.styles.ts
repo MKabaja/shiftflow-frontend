@@ -4,15 +4,18 @@ type VariantStyle = Record<BadgeVariant, string>;
 type SizeStyle = Record<BadgeSize, string>;
 
 const variantStyles: VariantStyle = {
-  default: 'text-primary bg-surface border-none',
-  success: 'text-success bg-success/10 border-success',
-  warning: 'text-warning bg-warning/10 border-warning',
-  danger: 'text-danger bg-danger/10 border-danger',
+  default: 'text-text-primary bg-elevated',
+  accent: 'text-bg-primary bg-accent',
+  success: 'text-success bg-success/15',
+  warning: 'text-warning bg-warning/15',
+  danger: 'text-danger bg-danger/15',
+  info: 'text-info bg-info/15',
+  outline: 'text-text-primary bg-transparent border border-border',
 };
 const sizeStyles: SizeStyle = {
-  sm: 'rounded-sm px-2 py-0.5 text-xs',
-  md: 'rounded-md px-3 py-1 text-sm ',
+  sm: 'h-5 px-2 py-0.5 text-body-xs',
+  md: 'h-6 px-2.5 py-[3px] text-body-xs',
 };
-const baseStyles: string = 'font-medium shadow-nm-raised-sm border';
+const baseStyles: string = 'inline-flex items-center rounded-full font-medium';
 
 export { variantStyles, sizeStyles, baseStyles };

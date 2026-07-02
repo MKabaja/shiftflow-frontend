@@ -10,6 +10,6 @@ const sizeStyles: SizeStyle = {
   xl: 'w-20 h-20 text-3xl',
 };
 const baseStyles: string =
-  'transition duration-200 border border-border shadow-nm-subtle font-display rounded-full  font-semibold flex items-center justify-center select-none shrink-0 overflow-hidden text-bg-primary';
+  'transition duration-200 border border-border shadow-nm-subtle font-display rounded-full  font-semibold flex items-center justify-center select-none shrink-0 overflow-hidden text-bg-deep';
 
 export { baseStyles, sizeStyles };

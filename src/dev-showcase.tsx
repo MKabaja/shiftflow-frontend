@@ -50,22 +50,59 @@ export function DevShowcase() {
       <h1 className="font-display text-accent text-2xl">Dev Showcase</h1>
       <section className="bg-bg-offset flex w-full flex-col items-center justify-center space-y-6 px-2 py-5">
         <h2 className="border-border w-full border-b text-2xl">Badge</h2>
-        <Badge variant="default">Default</Badge>
-        <Badge variant="success">Success</Badge>
-        <Badge variant="warning">Warning</Badge>
-        <Badge variant="danger">Danger</Badge>
-        <Badge
-          variant="default"
-          size="md"
-        >
-          default
-        </Badge>
-        <Badge
-          variant="danger"
-          size="md"
-        >
-          Danger
-        </Badge>
+        <div className="flex flex-row flex-wrap items-center gap-3">
+          <Badge variant="default">Default</Badge>
+          <Badge variant="accent">Accent</Badge>
+          <Badge variant="success">Success</Badge>
+          <Badge variant="warning">Warning</Badge>
+          <Badge variant="danger">Danger</Badge>
+          <Badge variant="info">Info</Badge>
+          <Badge variant="outline">Outline</Badge>
+        </div>
+        <div className="flex flex-row flex-wrap items-center gap-3">
+          <Badge
+            variant="default"
+            size="md"
+          >
+            Default
+          </Badge>
+          <Badge
+            variant="accent"
+            size="md"
+          >
+            Accent
+          </Badge>
+          <Badge
+            variant="success"
+            size="md"
+          >
+            Success
+          </Badge>
+          <Badge
+            variant="warning"
+            size="md"
+          >
+            Warning
+          </Badge>
+          <Badge
+            variant="danger"
+            size="md"
+          >
+            Danger
+          </Badge>
+          <Badge
+            variant="info"
+            size="md"
+          >
+            Info
+          </Badge>
+          <Badge
+            variant="outline"
+            size="md"
+          >
+            Outline
+          </Badge>
+        </div>
       </section>
 
       <section className="bg-bg-offset flex w-full flex-col items-center justify-center space-y-6 px-2 py-5">
