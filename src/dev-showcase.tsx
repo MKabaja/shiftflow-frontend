@@ -6,6 +6,7 @@ import { Skeleton } from '@/shared/components/Skeleton/Skeleton.tsx';
 import { Toggle } from '@/shared/components/Toggle/Toggle.tsx';
 import { Button } from '@/shared/components/Button/Button.tsx';
 import { Input } from '@/shared/components/Input/Input.tsx';
+import { Card } from '@/shared/components/Card/Card.tsx';
 import { Eye, EyeOff, Search } from 'lucide-react';
 
 function ToggleDemo() {
@@ -224,6 +225,81 @@ export function DevShowcase() {
             rightIcon={<EyeOff size={16} />}
             defaultValue="tajnehaslo"
           />
+        </div>
+      </section>
+
+      <section className="bg-bg-offset flex w-full flex-col items-center justify-center space-y-6 px-2 py-5">
+        <h2 className="border-border w-full border-b text-2xl">Card</h2>
+        <div className="grid w-full grid-cols-3 gap-6">
+          <Card variant="elevated">
+            <div className="flex flex-col items-start gap-4">
+              <Avatar
+                size="lg"
+                name="Jan Kowalski"
+              />
+              <div className="flex flex-col gap-1">
+                <h3 className="font-display text-display-sm text-text-primary">
+                  Jestem pracownikiem
+                </h3>
+                <p className="text-body-sm text-text-muted">
+                  Zaloguj się PIN-em, żeby sprawdzić swój grafik i złożyć dyspozycję.
+                </p>
+              </div>
+              <div className="flex flex-row flex-wrap gap-2">
+                <Badge variant="default">Employee</Badge>
+                <Badge variant="success">Aktywny</Badge>
+              </div>
+              <Button variant="ghost">zaloguj jako pracownika</Button>
+            </div>
+          </Card>
+          <Card variant="default">
+            <div className="flex flex-col items-start gap-4">
+              <Avatar
+                size="lg"
+                name="Anna Nowak"
+              />
+              <div className="flex flex-col gap-1">
+                <h3 className="font-display text-display-sm text-text-primary">
+                  Jestem przełożonym
+                </h3>
+                <p className="text-body-sm text-text-muted">
+                  Zaloguj się loginem i hasłem, żeby zarządzać grafikiem i pracownikami.
+                </p>
+              </div>
+              <div className="flex flex-row flex-wrap gap-2">
+                <Badge variant="accent">Manager</Badge>
+                <Badge variant="outline">Admin</Badge>
+              </div>
+              <Button variant="primary">zaloguj jako przełożony</Button>
+            </div>
+          </Card>
+          <Card
+            variant="default"
+            interactive
+            className="w-full"
+          >
+            <div className="flex flex-row items-center justify-between gap-4">
+              <div className="flex flex-row items-center gap-3">
+                <Avatar
+                  size="md"
+                  name="Piotr Zator"
+                />
+                <div className="flex flex-col">
+                  <span className="text-body-md text-text-primary font-medium">Piotr Zator</span>
+                  <span className="text-body-sm text-text-muted">
+                    Magazynier · zmiana 6:00-14:00
+                  </span>
+                </div>
+              </div>
+              <Badge variant="warning">Oczekuje</Badge>
+              <Button
+                variant="secondary"
+                className="w-40"
+              >
+                Szczegóły zmiany
+              </Button>
+            </div>
+          </Card>
         </div>
       </section>
     </div>
