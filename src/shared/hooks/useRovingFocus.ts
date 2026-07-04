@@ -1,9 +1,9 @@
-import { useEffect, type RefObject, useLayoutEffect, useRef } from 'react';
+import { type RefObject, useEffect, useLayoutEffect, useRef } from 'react';
 
 type Action = 'ArrowDown' | 'ArrowUp';
-type Actionfunction = (index: number, length: number) => number;
+type ActionFunction = (index: number, length: number) => number;
 
-const actionStrategy: Record<Action, Actionfunction> = {
+const actionStrategy: Record<Action, ActionFunction> = {
   ArrowDown: (index, length) => (index + 1) % length,
   ArrowUp: (index, length) => (index - 1 + length) % length,
 };
@@ -19,7 +19,7 @@ const actionStrategy: Record<Action, Actionfunction> = {
  *
  * Usage:
  * ```tsx
- * const containerRef = useRef<HTMLUListElement>(null);
+ * const containerRef = useRef<HTMLUlistElement>(null);
  * useRovingFocus(containerRef, isOpen);
  * ```
  */

@@ -7,6 +7,7 @@ import { Toggle } from '@/shared/components/Toggle/Toggle.tsx';
 import { Button } from '@/shared/components/Button/Button.tsx';
 import { Input } from '@/shared/components/Input/Input.tsx';
 import { Card } from '@/shared/components/Card/Card.tsx';
+import { PinInput } from '@/shared/components/PinInput/PinInput.tsx';
 import { Eye, EyeOff, Search } from 'lucide-react';
 
 function ToggleDemo() {
@@ -41,6 +42,48 @@ function ToggleDemo() {
         label="Zablokowany (disabled)"
         disabled
       />
+    </div>
+  );
+}
+
+function PinInputDemo() {
+  const [pin, setPin] = useState('');
+  const [completed, setCompleted] = useState('');
+
+  return (
+    <div className="flex flex-col items-center gap-8">
+      <div className="flex flex-col items-center gap-2">
+        <span className="text-body-sm text-text-muted">Domyślny (4, maskowany)</span>
+        <PinInput
+          autoFocus={false}
+          onChange={setPin}
+          onComplete={setCompleted}
+        />
+        <span className="text-body-sm text-text-muted">
+          value: {pin || '—'} · complete: {completed || '—'}
+        </span>
+      </div>
+      <div className="flex flex-col items-center gap-2">
+        <span className="text-body-sm text-text-muted">Błąd (error)</span>
+        <PinInput
+          autoFocus={false}
+          error
+        />
+      </div>
+      <div className="flex flex-col items-center gap-2">
+        <span className="text-body-sm text-text-muted">Wyłączony (disabled)</span>
+        <PinInput
+          autoFocus={false}
+          disabled
+        />
+      </div>
+      <div className="flex flex-col items-center gap-2">
+        <span className="text-body-sm text-text-muted">Dłuższy (length=6)</span>
+        <PinInput
+          autoFocus={false}
+          length={6}
+        />
+      </div>
     </div>
   );
 }
@@ -226,6 +269,11 @@ export function DevShowcase() {
             defaultValue="tajnehaslo"
           />
         </div>
+      </section>
+
+      <section className="bg-bg-offset flex w-full flex-col items-center justify-center space-y-6 px-2 py-5">
+        <h2 className="border-border w-full border-b text-2xl">PinInput</h2>
+        <PinInputDemo />
       </section>
 
       <section className="bg-bg-offset flex w-full flex-col items-center justify-center space-y-6 px-2 py-5">

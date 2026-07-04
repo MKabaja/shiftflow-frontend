@@ -44,6 +44,9 @@
     --shadow-nm-hover-danger: inset 2px 2px 6px #7a1a1a, inset -2px -2px 6px #ff9090;
     --shadow-nm-pressed-danger: inset 4px 4px 10px #6b1515, inset -4px -4px 10px #ffa0a0;
 
+    /* Focus ring — accent glow for inputs / PIN boxes */
+    --shadow-focus-ring: 0 0 0 3px rgba(201, 163, 71, 0.15);
+
     /* Fonty */
     --font-display: 'Space Grotesk', sans-serif;
     --font-body: 'Inter', sans-serif;

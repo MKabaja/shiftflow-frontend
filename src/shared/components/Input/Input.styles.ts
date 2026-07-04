@@ -1,4 +1,5 @@
 import { cn } from '@/shared/lib/helpers/cn.ts';
+import { inputFocusStyles } from '@/shared/lib/styles/inputFocusStyles.ts';
 
 type InputStyleProps = {
   hasError?: boolean;
@@ -11,9 +12,7 @@ function inputStyles({ hasError, hasLeftIcon, hasRightIcon }: InputStyleProps): 
     'h-10 w-full rounded-md bg-bg-offset text-body-md text-text-primary shadow-nm-inset transition-all border border-border placeholder:text-text-muted',
     hasLeftIcon ? 'pl-9' : 'px-3.5',
     hasRightIcon && 'pr-9',
-    hasError
-      ? 'border-danger'
-      : 'focus-visible:border-accent-dark focus-visible:shadow-[0_0_0_3px_rgba(201,163,71,0.15)]',
+    hasError ? 'border-danger' : inputFocusStyles,
   );
 }
 function iconStyles(side: 'left' | 'right'): string {
