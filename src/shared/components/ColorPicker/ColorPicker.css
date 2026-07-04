@@ -1,0 +1,22 @@
+.sf-color-picker .react-colorful {
+    width: 100%;
+    height: 10rem;
+    border: 2px solid var(--color-border);
+    border-radius: var(--radius-sm);
+}
+
+.sf-color-picker .react-colorful__saturation {
+    border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    box-shadow: var(--shadow-nm-inset);
+}
+
+.sf-color-picker .react-colorful__hue {
+    height: 1.25rem;
+    border-radius: 0 0 var(--radius-sm) var(--radius-sm);
+}
+
+.sf-color-picker .react-colorful__pointer {
+    width: 1.125rem;
+    height: 1.125rem;
+    border: 0.125rem solid var(--color-text-primary);
+}

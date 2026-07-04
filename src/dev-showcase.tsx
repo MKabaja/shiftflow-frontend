@@ -8,6 +8,7 @@ import { Button } from '@/shared/components/Button/Button.tsx';
 import { Input } from '@/shared/components/Input/Input.tsx';
 import { Card } from '@/shared/components/Card/Card.tsx';
 import { PinInput } from '@/shared/components/PinInput/PinInput.tsx';
+import { ColorPicker } from '@/shared/components/ColorPicker/ColorPicker.tsx';
 import { Eye, EyeOff, Search } from 'lucide-react';
 
 function ToggleDemo() {
@@ -82,6 +83,42 @@ function PinInputDemo() {
         <PinInput
           autoFocus={false}
           length={6}
+        />
+      </div>
+    </div>
+  );
+}
+
+function ColorPickerDemo() {
+  const [color, setColor] = useState('#C9A347');
+
+  return (
+    <div className="grid w-full max-w-3xl grid-cols-2 gap-8">
+      <div className="flex flex-col items-center gap-2">
+        <span className="text-body-sm text-text-muted">Domyślny (controlled)</span>
+        <ColorPicker
+          label="Kolor pozycji"
+          value={color}
+          onChange={setColor}
+        />
+        <span className="text-body-sm text-text-muted">value: {color}</span>
+      </div>
+      <div className="flex flex-col items-center gap-2">
+        <span className="text-body-sm text-text-muted">Błąd (error)</span>
+        <ColorPicker
+          label="Kolor pozycji"
+          value={color}
+          onChange={setColor}
+          error="Wybierz kolor"
+        />
+      </div>
+      <div className="flex flex-col items-center gap-2">
+        <span className="text-body-sm text-text-muted">Wyłączony (disabled)</span>
+        <ColorPicker
+          label="Kolor pozycji"
+          value={color}
+          onChange={setColor}
+          disabled
         />
       </div>
     </div>
@@ -274,6 +311,11 @@ export function DevShowcase() {
       <section className="bg-bg-offset flex w-full flex-col items-center justify-center space-y-6 px-2 py-5">
         <h2 className="border-border w-full border-b text-2xl">PinInput</h2>
         <PinInputDemo />
+      </section>
+
+      <section className="bg-bg-offset flex w-full flex-col items-center justify-center space-y-6 px-2 py-5">
+        <h2 className="border-border w-full border-b text-2xl">ColorPicker</h2>
+        <ColorPickerDemo />
       </section>
 
       <section className="bg-bg-offset flex w-full flex-col items-center justify-center space-y-6 px-2 py-5">
