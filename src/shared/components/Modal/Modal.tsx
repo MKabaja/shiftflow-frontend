@@ -1,11 +1,24 @@
-import { motion } from 'motion/react';
-import type { ComponentProps, ReactNode } from 'react';
+import type { HTMLMotionProps } from 'motion/react';
+import { AnimatePresence, motion } from 'motion/react';
+import type { ReactNode } from 'react';
 import { useId } from 'react';
 import { X } from 'lucide-react';
+import { Overlay } from './Overlay.tsx';
+import { cn } from '@/shared/lib/helpers/cn.ts';
+import {
+  baseStyles,
+  bodyStyles,
+  buttonStyles,
+  descriptionStyles,
+  footerStyles,
+  headerStyles,
+  sizeStyles,
+  titleStyles,
+} from './Modal.styles.ts';
 
 export type ModalSize = 'sm' | 'md' | 'lg' | 'xl';
 
-type ModalProps = ComponentProps<'div'> & {
+type ModalProps = HTMLMotionProps<'div'> & {
   isOpen: boolean;
   onClose: () => void;
   title: string;
@@ -13,6 +26,7 @@ type ModalProps = ComponentProps<'div'> & {
   size?: ModalSize;
   footer?: ReactNode;
   closeOnBackdrop?: boolean;
+  children?: ReactNode;
 };
 
 export function Modal({
@@ -44,32 +58,52 @@ export function Modal({
   // TODO i18n: aria-label przycisku close (np. t('common.close')) zamiast "close"
   // TODO: spread {...rest} na panel, self-closing <X size={16} />
   return (
-    <motion.div
-      role="dialog"
-      aria-modal={true}
-      aria-labelledby={titleId}
-      aria-describedby={description ? descId : undefined}
-      className=""
-      initial={{ opacity: 0, scale: 0.95 }}
-      animate={{ opacity: 1, scale: 1 }}
-      exit={{ opacity: 0, scale: 0.95 }}
-      transition={{ duration: 0.2, ease: 'easeOut' }}
-    >
-      <header>
-        <div>
-          <h2 id={titleId}>{title}</h2>
-          {description && <p id={descId}>{description}</p>}
-        </div>
-        <button
-          type="button"
-          onClick={onClose}
-          aria-label="close" //TODO: tłumaczenia
-        >
-          <X size={16}></X>
-        </button>
-      </header>
-      <div>{children}</div>
-      {footer && <footer>{footer}</footer>}
-    </motion.div>
+    <AnimatePresence>
+      {isOpen && (
+        <Overlay onClose={closeOnBackdrop ? onClose : () => {}}>
+          <motion.div
+            role="dialog"
+            aria-modal={true}
+            aria-labelledby={titleId}
+            aria-describedby={description ? descId : undefined}
+            className={cn(sizeStyles[size], baseStyles, className)}
+            initial={{ opacity: 0, scale: 0.95 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0.95 }}
+            transition={{ duration: 0.2, ease: 'easeOut' }}
+            {...rest}
+          >
+            <header className={headerStyles}>
+              <div>
+                <h2
+                  className={cn(titleStyles)}
+                  id={titleId}
+                >
+                  {title}
+                </h2>
+                {description && (
+                  <p
+                    id={descId}
+                    className={cn(descriptionStyles)}
+                  >
+                    {description}
+                  </p>
+                )}
+              </div>
+              <button
+                className={cn(buttonStyles)}
+                type="button"
+                onClick={onClose}
+                aria-label="close" //TODO: tłumaczenia
+              >
+                <X size={16}></X>
+              </button>
+            </header>
+            <div className={cn(bodyStyles)}>{children}</div>
+            {footer && <footer className={cn(footerStyles)}>{footer}</footer>}
+          </motion.div>
+        </Overlay>
+      )}
+    </AnimatePresence>
   );
 }

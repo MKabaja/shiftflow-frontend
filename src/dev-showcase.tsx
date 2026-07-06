@@ -9,6 +9,8 @@ import { Input } from '@/shared/components/Input/Input.tsx';
 import { Card } from '@/shared/components/Card/Card.tsx';
 import { PinInput } from '@/shared/components/PinInput/PinInput.tsx';
 import { ColorPicker } from '@/shared/components/ColorPicker/ColorPicker.tsx';
+import type { ModalSize } from '@/shared/components/Modal/Modal.tsx';
+import { Modal } from '@/shared/components/Modal/Modal.tsx';
 import { Eye, EyeOff, Search } from 'lucide-react';
 
 function ToggleDemo() {
@@ -122,6 +124,70 @@ function ColorPickerDemo() {
         />
       </div>
     </div>
+  );
+}
+
+function ModalDemo() {
+  const [openSize, setOpenSize] = useState<ModalSize | null>(null);
+  const sizes: ModalSize[] = ['sm', 'md', 'lg', 'xl'];
+
+  return (
+    <>
+      <div className="flex flex-row flex-wrap items-center gap-3">
+        {sizes.map((size) => (
+          <Button
+            key={size}
+            variant="secondary"
+            onClick={() => setOpenSize(size)}
+          >
+            Otwórz modal {size}
+          </Button>
+        ))}
+      </div>
+
+      {sizes.map((size) => (
+        <Modal
+          key={size}
+          isOpen={openSize === size}
+          onClose={() => setOpenSize(null)}
+          title={`Modal ${size}`}
+          description="Przykładowy opis modala — służy do podglądu stylów headera."
+          size={size}
+          footer={
+            <>
+              <Button
+                variant="ghost"
+                onClick={() => setOpenSize(null)}
+              >
+                Anuluj
+              </Button>
+              <Button
+                variant="primary"
+                onClick={() => setOpenSize(null)}
+              >
+                Zapisz
+              </Button>
+            </>
+          }
+        >
+          <div className="flex flex-col gap-4">
+            <p className="text-body-md text-text-primary">
+              To jest dummy content modala <strong>{size}</strong>. Wrzuć tu tyle tekstu, żeby
+              sprawdzić scroll body przy dużej treści.
+            </p>
+            {Array.from({ length: 8 }).map((_, i) => (
+              <p
+                key={i}
+                className="text-body-sm text-text-muted"
+              >
+                Akapit {i + 1}. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do
+                eiusmod tempor incididunt ut labore et dolore magna aliqua.
+              </p>
+            ))}
+          </div>
+        </Modal>
+      ))}
+    </>
   );
 }
 
@@ -316,6 +382,11 @@ export function DevShowcase() {
       <section className="bg-bg-offset flex w-full flex-col items-center justify-center space-y-6 px-2 py-5">
         <h2 className="border-border w-full border-b text-2xl">ColorPicker</h2>
         <ColorPickerDemo />
+      </section>
+
+      <section className="bg-bg-offset flex w-full flex-col items-center justify-center space-y-6 px-2 py-5">
+        <h2 className="border-border w-full border-b text-2xl">Modal</h2>
+        <ModalDemo />
       </section>
 
       <section className="bg-bg-offset flex w-full flex-col items-center justify-center space-y-6 px-2 py-5">
