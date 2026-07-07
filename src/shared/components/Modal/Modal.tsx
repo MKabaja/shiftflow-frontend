@@ -2,8 +2,9 @@ import type { HTMLMotionProps } from 'motion/react';
 import { AnimatePresence, motion } from 'motion/react';
 import type { ReactNode } from 'react';
 import { useId } from 'react';
+import { focusStyles } from '@/shared/lib/styles/focusStyles.ts';
+import { useModal } from '@/shared/hooks/useModal.ts';
 import { X } from 'lucide-react';
-import { useFocusReturn } from '@/shared/hooks/useFocusReturn.ts';
 import { Overlay } from './Overlay.tsx';
 import { cn } from '@/shared/lib/helpers/cn.ts';
 import {
@@ -45,12 +46,7 @@ export function Modal({
   const titleId = useId();
   const descId = useId();
 
-  useFocusReturn(isOpen);
-
-  // TODO focus/scroll: useLockBodyScroll(isOpen,'both') + useKeyClose(isOpen,onClose) + useFocusReturn(isOpen,triggerRef)
-  //   + nowy useFocusTrap(panelRef) — panelRef jako ref na tym <motion.div>
-
-  // TODO i18n: aria-label przycisku close (np. t('common.close')) zamiast "close"
+  const { panelRef } = useModal(isOpen, onClose);
 
   return (
     <AnimatePresence>
@@ -59,6 +55,8 @@ export function Modal({
           <motion.div
             role="dialog"
             aria-modal={true}
+            ref={panelRef}
+            tabIndex={-1}
             aria-labelledby={titleId}
             aria-describedby={description ? descId : undefined}
             className={cn(sizeStyles[size], baseStyles, className)}
@@ -86,7 +84,7 @@ export function Modal({
                 )}
               </div>
               <button
-                className={cn(buttonStyles)}
+                className={cn(buttonStyles, focusStyles)}
                 type="button"
                 onClick={onClose}
                 aria-label="close" //TODO: tłumaczenia
@@ -94,7 +92,12 @@ export function Modal({
                 <X size={16}></X>
               </button>
             </header>
-            <div className={cn(bodyStyles)}>{children}</div>
+            <div
+              tabIndex={-1}
+              className={cn(bodyStyles)}
+            >
+              {children}
+            </div>
             {footer && <footer className={cn(footerStyles)}>{footer}</footer>}
           </motion.div>
         </Overlay>

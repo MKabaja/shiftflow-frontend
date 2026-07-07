@@ -9,19 +9,13 @@ const actionStrategy: Record<Action, ActionFunction> = {
 };
 
 /**
- * Custom hook to manage roving focus within a container element, such as a dropdown menu.
+ * Moves focus between items inside a container using the arrow keys (roving focus), e.g. a dropdown menu.
+ * `ArrowDown` and `ArrowUp` cycle through the matching elements, wrapping around at the ends.
+ * Focus resets to the first item each time the container opens.
  *
- * @param containerRef - A ref to the container element that holds the focusable items.
- * @param isOpen - A boolean indicating whether the dropdown is currently open.
- * @param selector - A CSS selector string to identify focusable elements within the container (default is "a").
- *
- * This hook listens for keyboard events on the container element and updates the focus based on arrow key navigation. When the dropdown is opened, it resets the focus to the first item.
- *
- * Usage:
- * ```tsx
- * const containerRef = useRef<HTMLUlistElement>(null);
- * useRovingFocus(containerRef, isOpen);
- * ```
+ * @param {RefObject<T | null>} containerRef - The container holding the focusable items.
+ * @param {boolean} isOpen - When `true`, focus resets to the first item.
+ * @param {string} [selector="a"] - CSS selector for the focusable items within the container.
  */
 function useRovingFocus<T extends HTMLElement>(
   containerRef: RefObject<T | null>,
@@ -60,4 +54,4 @@ function useRovingFocus<T extends HTMLElement>(
   }, [containerRef, selector]);
 }
 
-export default useRovingFocus;
+export { useRovingFocus };

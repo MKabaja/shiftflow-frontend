@@ -1,25 +1,19 @@
-import { type RefObject, useEffect, useRef } from 'react';
+import { type RefObject, useLayoutEffect, useRef } from 'react';
 
 /**
- * Custom hook to return focus to a trigger element when a dropdown or modal is closed.
+ * Returns focus to the triggering element when a dropdown or modal closes.
+ * On open it remembers where focus should go — an explicit `triggerRef`, or the currently
+ * focused element as a fallback — and restores focus there on close.
  *
- * @param isOpen - A boolean indicating whether the dropdown/modal is currently open.
- * @param triggerRef - A ref to the element that should receive focus when the dropdown/modal closes.
- *
- * This hook uses a ref to keep track of the previous open state of the dropdown/modal. When the `isOpen` state changes from `true` to `false`, it checks if the `triggerRef` is valid and focuses it.
- *
- * Usage:
- * ```tsx
- * const buttonRef = useRef<HTMLButtonElement>(null);
- * useFocusReturn(isOpen, buttonRef);
- * ```
+ * @param {boolean} isOpen - On the transition to `true` the focus source is captured; on the transition to `false` focus is restored.
+ * @param {RefObject<T | null>} [triggerRef] - The element to focus on close. When omitted, the element focused at open time is used instead.
  */
 
 function useFocusReturn<T extends HTMLElement>(isOpen: boolean, triggerRef?: RefObject<T | null>) {
   const preIsOpenRef = useRef<boolean>(isOpen);
   const fallbackRef = useRef<HTMLElement | null>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     const wasOpened: boolean = !preIsOpenRef.current && isOpen && !triggerRef;
     const wasClosed: boolean = preIsOpenRef.current && !isOpen;
 

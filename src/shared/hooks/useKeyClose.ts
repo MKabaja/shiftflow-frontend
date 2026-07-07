@@ -1,8 +1,12 @@
 import { useEffect } from 'react';
 
 /**
- * Custom hook to close dropdowns or modals when a specific key is pressed (default is "Escape").
- * It listens for keydown events when `isOpen` is true and calls the `onClose` callback if the specified key is pressed.
+ * Closes a dropdown or modal when a key is pressed while it is open (default `Escape`).
+ * Listens on `document` only while `isOpen` is `true`, and removes the listener on close or unmount.
+ *
+ * @param {boolean} isOpen - When `true`, the key listener is active. When `false`, it is removed.
+ * @param {() => void} onClose - Called when the watched key is pressed.
+ * @param {string} [key="Escape"] - The `KeyboardEvent.key` value that triggers `onClose`.
  */
 export function useKeyClose(isOpen: boolean, onClose: () => void, key: string = 'Escape'): void {
   useEffect(() => {
