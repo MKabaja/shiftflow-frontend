@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'motion/react';
 import type { ReactNode } from 'react';
 import { useId } from 'react';
 import { X } from 'lucide-react';
+import { useFocusReturn } from '@/shared/hooks/useFocusReturn.ts';
 import { Overlay } from './Overlay.tsx';
 import { cn } from '@/shared/lib/helpers/cn.ts';
 import {
@@ -44,19 +45,13 @@ export function Modal({
   const titleId = useId();
   const descId = useId();
 
-  // TODO (montaż — jutro): obudować return w <AnimatePresence> + <Overlay>, render warunkowy na isOpen:
-  //   <AnimatePresence>
-  //     {isOpen && (
-  //       <Overlay onClose={closeOnBackdrop ? onClose : () => {}}>
-  //         {/* ten <motion.div> = panel */}
-  //       </Overlay>
-  //     )}
-  //   </AnimatePresence>
+  useFocusReturn(isOpen);
+
   // TODO focus/scroll: useLockBodyScroll(isOpen,'both') + useKeyClose(isOpen,onClose) + useFocusReturn(isOpen,triggerRef)
   //   + nowy useFocusTrap(panelRef) — panelRef jako ref na tym <motion.div>
-  // TODO style: Modal.styles.ts → panelBase + sizeStyles[size], wpiąć przez cn(panelBase, sizeStyles[size], className)
+
   // TODO i18n: aria-label przycisku close (np. t('common.close')) zamiast "close"
-  // TODO: spread {...rest} na panel, self-closing <X size={16} />
+
   return (
     <AnimatePresence>
       {isOpen && (

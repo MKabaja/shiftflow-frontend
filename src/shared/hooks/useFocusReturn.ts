@@ -1,4 +1,5 @@
-import { useEffect, useRef, type RefObject } from 'react';
+import { type RefObject, useEffect, useRef } from 'react';
+
 /**
  * Custom hook to return focus to a trigger element when a dropdown or modal is closed.
  *
@@ -14,15 +15,23 @@ import { useEffect, useRef, type RefObject } from 'react';
  * ```
  */
 
-function useFocusReturn<T extends HTMLElement>(isOpen: boolean, triggerRef: RefObject<T | null>) {
+function useFocusReturn<T extends HTMLElement>(isOpen: boolean, triggerRef?: RefObject<T | null>) {
   const preIsOpenRef = useRef<boolean>(isOpen);
+  const fallbackRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
-    if (preIsOpenRef.current && !isOpen && triggerRef?.current) {
-      triggerRef.current.focus();
+    const wasOpened: boolean = !preIsOpenRef.current && isOpen && !triggerRef;
+    const wasClosed: boolean = preIsOpenRef.current && !isOpen;
+
+    if (wasOpened) {
+      fallbackRef.current = document.activeElement as HTMLElement | null;
+    }
+    if (wasClosed) {
+      const target = triggerRef?.current ?? fallbackRef.current;
+      target?.focus();
     }
     preIsOpenRef.current = isOpen;
   }, [isOpen, triggerRef]);
 }
 
-export default useFocusReturn;
+export { useFocusReturn };
