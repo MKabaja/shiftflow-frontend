@@ -1,6 +1,5 @@
 import { render, screen } from '@testing-library/react';
 import { Input } from '../Input.tsx';
-import { expect } from 'vitest';
 import { createRef } from 'react';
 
 const renderInput = (props = {}) => render(<Input {...props} />);
