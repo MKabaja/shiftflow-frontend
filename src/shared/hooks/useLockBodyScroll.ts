@@ -23,11 +23,12 @@ const axisMap: Record<Axis, Properties> = {
 export function useLockBodyScroll(isOpen: boolean, axis: Axis = 'both'): void {
   useEffect(() => {
     const property = axisMap[axis];
+    const previousValue = document.body.style[property];
 
     setBodyStyle(property, isOpen ? 'hidden' : '');
 
     return () => {
-      setBodyStyle(property, '');
+      setBodyStyle(property, previousValue);
     };
   }, [isOpen, axis]);
 }

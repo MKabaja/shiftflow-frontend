@@ -55,9 +55,14 @@ describe('LinkButton', () => {
     expect(screen.getByRole('link')).toHaveAttribute('rel', 'noopener noreferrer');
   });
 
-  it('uses provided rel when target="_blank"', () => {
+  it('merges security tokens into provided rel for target="_blank"', () => {
+    renderLink({ target: '_blank', rel: 'nofollow' });
+    expect(screen.getByRole('link')).toHaveAttribute('rel', 'nofollow noopener noreferrer');
+  });
+
+  it('does not duplicate security tokens already present in rel', () => {
     renderLink({ target: '_blank', rel: 'noopener' });
-    expect(screen.getByRole('link')).toHaveAttribute('rel', 'noopener');
+    expect(screen.getByRole('link')).toHaveAttribute('rel', 'noopener noreferrer');
   });
 
   it('does not add rel when target is not _blank', () => {

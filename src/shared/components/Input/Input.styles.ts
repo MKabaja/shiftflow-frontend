@@ -10,7 +10,8 @@ type InputStyleProps = {
 function inputStyles({ hasError, hasLeftIcon, hasRightIcon }: InputStyleProps): string {
   return cn(
     'h-10 w-full rounded-md bg-bg-offset text-body-md text-text-primary shadow-nm-inset transition-all border border-border placeholder:text-text-muted',
-    hasLeftIcon ? 'pl-9' : 'px-3.5',
+    'px-3.5',
+    hasLeftIcon && 'pl-9',
     hasRightIcon && 'pr-9',
     hasError ? 'border-danger' : inputFocusStyles,
   );

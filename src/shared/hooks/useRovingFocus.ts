@@ -31,7 +31,7 @@ function useRovingFocus<T extends HTMLElement>(
 
   useEffect(() => {
     const container = containerRef.current;
-    if (!container) return;
+    if (!container || !isOpen) return;
 
     const focusableElements: HTMLElement[] = Array.from(container.querySelectorAll(selector));
 
@@ -51,7 +51,7 @@ function useRovingFocus<T extends HTMLElement>(
     return () => {
       container.removeEventListener('keydown', handleKeyDown);
     };
-  }, [containerRef, selector]);
+  }, [containerRef, selector, isOpen]);
 }
 
 export { useRovingFocus };

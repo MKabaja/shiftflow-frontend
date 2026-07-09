@@ -34,7 +34,10 @@ export function LinkButton({
   rel,
   ...rest
 }: LinkButtonProps) {
-  const safeRel = target === '_blank' ? (rel ?? 'noopener noreferrer') : rel;
+  const safeRel =
+    target === '_blank'
+      ? Array.from(new Set([...(rel?.split(/\s+/) ?? []), 'noopener', 'noreferrer'])).join(' ')
+      : rel;
 
   return (
     <MotionLink
