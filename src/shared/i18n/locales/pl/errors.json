@@ -1,0 +1,13 @@
+{
+  "network": "Brak połączenia z serwerem",
+  "unexpected": "Coś poszło nie tak. Spróbuj ponownie.",
+  "unauthorized": "Twoja sesja wygasła. Zaloguj się ponownie.",
+  "forbidden": "Nie masz uprawnień do tej akcji.",
+  "notFound": "Nie znaleziono zasobu.",
+  "conflict": "Konflikt — ta akcja już została wykonana.",
+  "validation": "Popraw zaznaczone pola.",
+  "tooMany": "Za dużo prób. Odczekaj chwilę.",
+  "auth": {
+    "invalidCredentials": "Nieprawidłowy login lub hasło."
+  }
+}

@@ -4,10 +4,12 @@ import { config } from '@/shared/lib/config/config.ts';
 
 import plCommon from './locales/pl/common.json';
 import enCommon from './locales/en/common.json';
+import plErrors from './locales/pl/errors.json';
+import enErrors from './locales/en/errors.json';
 
 const resources = {
-  pl: { common: plCommon },
-  en: { common: enCommon },
+  pl: { common: plCommon, errors: plErrors },
+  en: { common: enCommon, errors: enErrors },
 } as const;
 
 type SupportedLocale = keyof typeof resources;
@@ -24,6 +26,7 @@ i18n.use(initReactI18next).init({
   resources,
   fallbackLng: 'pl',
   lng: getInitialLocale(),
+  ns: ['common', 'errors'],
   defaultNS: 'common',
   interpolation: { escapeValue: false },
   debug: config.isDev,

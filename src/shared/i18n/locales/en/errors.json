@@ -1,0 +1,13 @@
+{
+  "network": "Cannot connect to the server",
+  "unexpected": "Something went wrong. Please try again.",
+  "unauthorized": "Your session has expired. Please log in again.",
+  "forbidden": "You don't have permission for this action.",
+  "notFound": "Resource not found.",
+  "conflict": "Conflict — this action was already performed.",
+  "validation": "Please correct the highlighted fields.",
+  "tooMany": "Too many attempts. Please wait a moment.",
+  "auth": {
+    "invalidCredentials": "Invalid login or password."
+  }
+}
