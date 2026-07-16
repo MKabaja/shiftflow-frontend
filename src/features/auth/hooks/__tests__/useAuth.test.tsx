@@ -4,7 +4,6 @@ import { renderHook } from '@testing-library/react';
 import { useMe } from '@/features/auth/api/queries.ts';
 import type { User } from '@/shared/types/api.ts';
 
-const employee = makeUser();
 const mockUseMe = (data: User | undefined) => {
   vi.mocked(useMe).mockReturnValue({
     data,
@@ -14,6 +13,8 @@ const mockUseMe = (data: User | undefined) => {
 vi.mock('@/features/auth/api/queries.ts', () => ({
   useMe: vi.fn(),
 }));
+
+const employee = makeUser();
 
 describe('useAuth', () => {
   beforeEach(() => vi.clearAllMocks());
