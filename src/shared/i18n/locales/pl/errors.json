@@ -8,6 +8,7 @@
   "validation": "Popraw zaznaczone pola.",
   "tooMany": "Za dużo prób. Odczekaj chwilę.",
   "auth": {
-    "invalidCredentials": "Nieprawidłowy login lub hasło."
+    "invalidCredentials": "Nieprawidłowy login lub hasło.",
+    "accountDeactivated": "To konto jest nieaktywne. Skontaktuj się z przełożonym."
   }
 }
