@@ -6,6 +6,7 @@ import { router } from '@/shared/lib/config/router.ts';
 import type { AxiosError } from 'axios';
 import type {
   ApiError,
+  ChangePasswordInput,
   LoginInput,
   LoginPinInput,
   SingleResource,
@@ -54,5 +55,13 @@ function useLogout() {
     },
   });
 }
+function useChangePassword() {
+  return useMutation<void, AxiosError<ApiError>, ChangePasswordInput>({
+    meta: { handled: true },
+    mutationFn: async (payload) => {
+      await apiClient.patch('/me/password', payload);
+    },
+  });
+}
 
-export { useLogin, useLoginPin, useLogout };
+export { useLogin, useLoginPin, useLogout, useChangePassword };
