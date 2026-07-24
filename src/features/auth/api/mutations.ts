@@ -4,7 +4,13 @@ import { queryKeys } from '@/shared/lib/config/queryKeys.ts';
 import { queryClient } from '@/shared/lib/config/queryClient.ts';
 import { router } from '@/shared/lib/config/router.ts';
 import type { AxiosError } from 'axios';
-import type { ApiError, LoginInput, SingleResource, User } from '@/shared/types/api.ts';
+import type {
+  ApiError,
+  LoginInput,
+  LoginPinInput,
+  SingleResource,
+  User,
+} from '@/shared/types/api.ts';
 
 function useLogin() {
   return useMutation<User, AxiosError<ApiError>, LoginInput>({
@@ -21,5 +27,20 @@ function useLogin() {
     },
   });
 }
+function useLoginPin() {
+  return useMutation<User, AxiosError<ApiError>, LoginPinInput>({
+    meta: { handled: true },
+    mutationFn: async (payload) => {
+      const res = await apiClient.post<SingleResource<User>>('/auth/login-pin', payload);
+      return res.data.data;
+    },
+    onSuccess: (user) => {
+      queryClient.setQueryData(queryKeys.auth.me, user);
 
-export { useLogin };
+      const href = user.role === 'employee' ? '/home' : '/schedule';
+      void router.navigate({ href }); // TODO: zmień na `to` po 3.6(typed routes)
+    },
+  });
+}
+
+export { useLogin, useLoginPin };
