@@ -43,4 +43,16 @@ function useLoginPin() {
   });
 }
 
-export { useLogin, useLoginPin };
+function useLogout() {
+  return useMutation<void, AxiosError<ApiError>>({
+    mutationFn: async () => {
+      await apiClient.post('/auth/logout');
+    },
+    onSuccess: () => {
+      queryClient.clear();
+      void router.navigate({ to: '/' });
+    },
+  });
+}
+
+export { useLogin, useLoginPin, useLogout };
