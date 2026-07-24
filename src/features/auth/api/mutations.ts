@@ -6,6 +6,7 @@ import { router } from '@/shared/lib/config/router.ts';
 import type { AxiosError } from 'axios';
 import type {
   ApiError,
+  ChangeLocaleInput,
   ChangePasswordInput,
   ChangePinInput,
   LoginInput,
@@ -13,6 +14,7 @@ import type {
   SingleResource,
   User,
 } from '@/shared/types/api.ts';
+import i18n from '@/shared/i18n';
 
 function useLogin() {
   return useMutation<User, AxiosError<ApiError>, LoginInput>({
@@ -72,5 +74,16 @@ function useChangePin() {
     },
   });
 }
+function useChangeLocale() {
+  return useMutation<void, AxiosError<ApiError>, ChangeLocaleInput>({
+    mutationFn: async (payload) => {
+      await apiClient.patch('/me/locale', payload);
+    },
+    onSuccess: (_data, variables) => {
+      void i18n.changeLanguage(variables.locale);
+      void queryClient.invalidateQueries({ queryKey: queryKeys.auth.me });
+    },
+  });
+}
 
-export { useLogin, useLoginPin, useLogout, useChangePassword, useChangePin };
+export { useLogin, useLoginPin, useLogout, useChangePassword, useChangePin, useChangeLocale };

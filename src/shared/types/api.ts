@@ -111,6 +111,7 @@ export type ChangePinInput = {
   new_pin: string;
   new_pin_confirmation: string;
 };
+export type ChangeLocaleInput = { locale: Locale };
 
 // === BATCH ===
 export type BatchShiftInput = {
