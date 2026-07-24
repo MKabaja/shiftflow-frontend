@@ -106,6 +106,11 @@ export type ChangePasswordInput = {
   new_password: string;
   new_password_confirmation: string;
 };
+export type ChangePinInput = {
+  current_pin?: string;
+  new_pin: string;
+  new_pin_confirmation: string;
+};
 
 // === BATCH ===
 export type BatchShiftInput = {

@@ -7,6 +7,7 @@ import type { AxiosError } from 'axios';
 import type {
   ApiError,
   ChangePasswordInput,
+  ChangePinInput,
   LoginInput,
   LoginPinInput,
   SingleResource,
@@ -63,5 +64,13 @@ function useChangePassword() {
     },
   });
 }
+function useChangePin() {
+  return useMutation<void, AxiosError<ApiError>, ChangePinInput>({
+    meta: { handled: true },
+    mutationFn: async (payload) => {
+      await apiClient.patch('/me/pin', payload);
+    },
+  });
+}
 
-export { useLogin, useLoginPin, useLogout, useChangePassword };
+export { useLogin, useLoginPin, useLogout, useChangePassword, useChangePin };
