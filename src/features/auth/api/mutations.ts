@@ -26,8 +26,8 @@ function useLogin() {
     onSuccess: (user) => {
       queryClient.setQueryData(queryKeys.auth.me, user);
 
-      const href = user.role === 'employee' ? '/home' : '/schedule';
-      void router.navigate({ href }); // TODO: zmień na `to` po 3.6(typed routes)
+      const to = user.role === 'employee' ? '/home' : '/schedule';
+      void router.navigate({ to });
     },
   });
 }
@@ -41,8 +41,8 @@ function useLoginPin() {
     onSuccess: (user) => {
       queryClient.setQueryData(queryKeys.auth.me, user);
 
-      const href = user.role === 'employee' ? '/home' : '/schedule';
-      void router.navigate({ href }); // TODO: zmień na `to` po 3.6(typed routes)
+      const to = user.role === 'employee' ? '/home' : '/schedule';
+      void router.navigate({ to });
     },
   });
 }

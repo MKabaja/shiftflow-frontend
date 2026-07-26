@@ -4,9 +4,9 @@ import { queryClient } from '@/shared/lib/config/queryClient.ts';
 import type { User } from '@/shared/types/api.ts';
 import { meQueryOptions } from '@/features/auth/api/queries.ts';
 
-const panelRoute = createRoute({
+const dispositionRoute = createRoute({
   getParentRoute: () => rootRoute,
-  id: '_panel',
+  id: '_disposition',
   component: Outlet,
   beforeLoad: async () => {
     let user: User | null;
@@ -16,9 +16,8 @@ const panelRoute = createRoute({
       user = null;
     }
 
-    if (!user) throw redirect({ to: '/login' });
-    if (user.role === 'employee') throw redirect({ to: '/my-schedule' });
+    if (!user) throw redirect({ to: '/login-pin' });
   },
 });
 
-export { panelRoute };
+export { dispositionRoute };

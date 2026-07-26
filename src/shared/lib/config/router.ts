@@ -1,10 +1,28 @@
 import { createRouter } from '@tanstack/react-router';
-import { indexRoute } from '@/routes';
+import { Splash } from '@/shared/components/Splash';
 import { Route as rootRoute } from '@/routes/__root.tsx';
+import { publicRoute } from '@/routes/_public.tsx';
+import { dispositionRoute } from '@/routes/_disposition.tsx';
+import { panelRoute } from '@/routes/_panel.tsx';
+import { indexRoute } from '@/routes/index.tsx';
+import { loginRoute } from '@/routes/login.tsx';
+import { loginPinRoute } from '@/routes/login-pin.tsx';
+import { homeRoute } from '@/routes/home.tsx';
+import { availabilityRoute } from '@/routes/availability.tsx';
+import { myScheduleRoute } from '@/routes/my-schedule.tsx';
+import { scheduleRoute } from '@/routes/schedule.tsx';
+import { employeesRoute } from '@/routes/employees.tsx';
+import { positionsRoute } from '@/routes/positions.tsx';
+import { newsRoute } from '@/routes/news.tsx';
+import { settingsRoute } from '@/routes/settings.tsx';
 
-const routeTree = rootRoute.addChildren([indexRoute]);
+const routeTree = rootRoute.addChildren([
+  publicRoute.addChildren([indexRoute, loginRoute, loginPinRoute]),
+  dispositionRoute.addChildren([homeRoute, availabilityRoute, myScheduleRoute]),
+  panelRoute.addChildren([scheduleRoute, employeesRoute, positionsRoute, newsRoute, settingsRoute]),
+]);
 
-export const router = createRouter({ routeTree });
+export const router = createRouter({ routeTree, defaultPendingComponent: Splash });
 
 declare module '@tanstack/react-router' {
   interface Register {

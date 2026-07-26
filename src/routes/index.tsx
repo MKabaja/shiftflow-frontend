@@ -1,9 +1,9 @@
 import { createRoute } from '@tanstack/react-router';
-import { Route } from './__root.tsx';
+import { publicRoute } from '@/routes/_public.tsx';
 import { Logo } from '@/shared/components/Logo';
 
 export const indexRoute = createRoute({
-  getParentRoute: () => Route,
+  getParentRoute: () => publicRoute,
   path: '/',
   component: () => (
     <div className="auth-bg grid h-screen w-screen place-items-center">
