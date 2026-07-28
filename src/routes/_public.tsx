@@ -1,10 +1,11 @@
-import { createRoute, Outlet } from '@tanstack/react-router';
+import { createRoute } from '@tanstack/react-router';
 import { Route as rootRoute } from '@/routes/__root.tsx';
+import { AuthLayout } from '@/layouts/AuthLayout.tsx';
 
 const publicRoute = createRoute({
   getParentRoute: () => rootRoute,
   id: '_public',
-  component: Outlet,
+  component: AuthLayout,
 });
 
 export { publicRoute };
