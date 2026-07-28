@@ -18,6 +18,7 @@ import type { AxiosError } from 'axios';
  */
 const meQueryOptions = queryOptions<User, AxiosError<ApiError>>({
   queryKey: queryKeys.auth.me,
+  meta: { handled: true },
   queryFn: async () => {
     const response = await apiClient.get<SingleResource<User>>('/me');
 
