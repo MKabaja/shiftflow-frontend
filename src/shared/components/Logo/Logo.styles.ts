@@ -6,6 +6,7 @@ const sizeStyles: SizeStyle = {
   sm: 'w-24',
   md: 'w-32',
   lg: 'w-44',
+  xl: 'w-60',
 };
 
 const baseStyles: string = 'h-auto select-none';

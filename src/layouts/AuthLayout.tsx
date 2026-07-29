@@ -9,14 +9,14 @@ function AuthLayout() {
   return (
     <div className="auth-bg flex min-h-screen flex-col">
       <header className="flex justify-center pt-10 pb-4">
-        <Logo size="md" />
+        <Logo size="xl" />
       </header>
 
       <main className="flex flex-1 items-center justify-center px-4">
         <Outlet />
       </main>
 
-      <footer className="text-text-muted pb-6 text-center text-body-sm">
+      <footer className="text-text-muted text-body-sm pb-6 text-center">
         © {year} {t('appName')}
       </footer>
     </div>

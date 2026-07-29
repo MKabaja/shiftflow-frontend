@@ -2,7 +2,7 @@ import { cn } from '@/shared/lib/helpers/cn.ts';
 import logoUrl from '@/shared/assets/Logo.svg';
 import { baseStyles, sizeStyles } from '@/shared/components/Logo/Logo.styles.ts';
 
-export type LogoSize = 'sm' | 'md' | 'lg';
+export type LogoSize = 'sm' | 'md' | 'lg' | 'xl';
 
 type LogoProps = {
   size: LogoSize;

@@ -1,8 +1,9 @@
 import { createRoute } from '@tanstack/react-router';
 import { publicRoute } from '@/routes/_public.tsx';
+import { LandingPage } from '@/features/auth/components/LandingPage.tsx';
 
 export const indexRoute = createRoute({
   getParentRoute: () => publicRoute,
   path: '/',
-  component: () => <div className="text-text-muted">Landing (placeholder)</div>,
+  component: LandingPage,
 });
