@@ -4,7 +4,7 @@ type VariantStyle = Record<BadgeVariant, string>;
 type SizeStyle = Record<BadgeSize, string>;
 
 const variantStyles: VariantStyle = {
-  default: 'text-text-primary bg-elevated',
+  default: 'text-text-primary bg-bg-elevated',
   accent: 'text-bg-primary bg-accent',
   success: 'text-success bg-success/15',
   warning: 'text-warning bg-warning/15',

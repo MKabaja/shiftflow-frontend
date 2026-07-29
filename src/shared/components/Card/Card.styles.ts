@@ -3,7 +3,7 @@ import type { CardVariant } from './Card.tsx';
 type VariantStyle = Record<CardVariant, string>;
 
 const variantStyles: VariantStyle = {
-  default: 'bg-card shadow-nm-raised',
+  default: 'bg-bg-card shadow-nm-subtle',
   elevated:
     'shadow-nm-subtle bg-[radial-gradient(circle_at_50%_35%,var(--color-bg-elevated)_0%,var(--color-bg-card)_100%)]',
 };
