@@ -8,14 +8,14 @@ type BoxStyleProps = {
 
 function boxStyles({ hasError }: BoxStyleProps): string {
   return cn(
-    'h-14 w-12 rounded-md border border-border bg-bg-offset text-center font-display text-2xl font-semibold text-text-primary caret-accent shadow-nm-inset outline-none transition-all sm:h-16 sm:w-14',
+    'h-10 w-14 shrink-0 rounded-md border border-border bg-bg-offset text-center font-display text-display-md text-text-primary caret-accent shadow-nm-inset outline-none transition-all',
     hasError ? 'border-danger' : inputFocusStyles,
     disabledStyles,
   );
 }
 
-const containerStyles: string = 'flex flex-col items-center gap-4';
-const boxRowStyles: string = 'flex justify-center gap-3';
+const containerStyles: string = 'flex flex-row items-center gap-4';
+const boxRowStyles: string = 'flex flex-1 justify-between max-w-xs';
 const toggleButtonStyles: string = cn(
   'inline-flex items-center justify-center text-text-muted transition-colors hover:text-text-primary',
   disabledStyles,
