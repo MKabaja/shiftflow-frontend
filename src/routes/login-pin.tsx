@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { publicRoute } from '@/routes/_public.tsx';
 import { Card } from '@/shared/components/Card';
 import { LoginPinForm } from '@/features/auth/components/LoginPinForm.tsx';
+import { AuthIllustration } from '@/features/auth/components/AuthIllustration.tsx';
+import loginPinArt from '@/assets/access-denied.svg';
 
 function LoginPinPage() {
   const { t } = useTranslation('auth');
@@ -14,10 +16,9 @@ function LoginPinPage() {
         <p className="text-text-muted text-body-md">{t('loginPin.subheading')}</p>
       </div>
 
-      <Card
-        variant="elevated"
-        className="w-full"
-      >
+      <Card className="w-full">
+        <AuthIllustration src={loginPinArt} />
+
         <LoginPinForm />
       </Card>
 

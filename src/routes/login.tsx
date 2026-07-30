@@ -3,6 +3,8 @@ import { useTranslation } from 'react-i18next';
 import { publicRoute } from '@/routes/_public.tsx';
 import { Card } from '@/shared/components/Card';
 import { LoginForm } from '@/features/auth/components/LoginForm.tsx';
+import { AuthIllustration } from '@/features/auth/components/AuthIllustration.tsx';
+import loginArt from '@/assets/business-deadline-setting.svg';
 
 function LoginPage() {
   const { t } = useTranslation('auth');
@@ -14,10 +16,9 @@ function LoginPage() {
         <p className="text-text-muted text-body-md">{t('login.subheading')}</p>
       </div>
 
-      <Card
+      <Card className="w-full">
+        <AuthIllustration src={loginArt} />
 
-        className="w-full"
-      >
         <LoginForm />
       </Card>
 
