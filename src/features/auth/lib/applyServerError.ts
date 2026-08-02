@@ -1,8 +1,3 @@
-import type { FieldValues, Path, UseFormSetError } from 'react-hook-form';
-import type { ParseKeys } from 'i18next';
-import { parseApiError } from '@/shared/lib/helpers/parseApiError.ts';
-import i18n from '@/shared/i18n';
-
 /**
  * Translates a failed auth request into React Hook Form error state.
  *
@@ -10,6 +5,20 @@ import i18n from '@/shared/i18n';
  * would otherwise be invisible: the submit button simply stops spinning. This
  * is the only place that decides where such an error shows up on screen.
  */
+
+// function applyServerError<T extends FieldValues>(
+//   error: unknown,
+//   setError: UseFormSetError<T>,
+//   keys: { invalid: ParseKeys<'errors'> },
+// ): void {
+//   const { messageKey, fieldErrors, statusCode } = parseApiError(error);
+//
+//   if (fieldErrors) {
+//     Object.entries(fieldErrors).forEach(([key, field]) => {
+//       setError(field as Path<T>, { type: 'server', message: messages[0] });
+//     });
+//   }
+// }
 
 // --- TYPES -------------------------------------------------------------------
 //
