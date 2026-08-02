@@ -9,6 +9,7 @@
   "tooMany": "Za dużo prób. Odczekaj chwilę.",
   "auth": {
     "invalidCredentials": "Nieprawidłowy login lub hasło.",
+    "invalidPin": "Nieprawidłowy login lub PIN.",
     "accountDeactivated": "To konto jest nieaktywne. Skontaktuj się z przełożonym."
   }
 }

@@ -9,6 +9,7 @@
   "tooMany": "Too many attempts. Please wait a moment.",
   "auth": {
     "invalidCredentials": "Invalid login or password.",
+    "invalidPin": "Invalid login or PIN.",
     "accountDeactivated": "This account is inactive. Please contact your supervisor."
   }
 }
