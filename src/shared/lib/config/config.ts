@@ -10,6 +10,7 @@ export const config = {
   apiUrl,
   isDev: import.meta.env.DEV,
   pinLength,
+  passwordMinLength: 6,
   staleTime: {
     auth: 5 * 60 * 1000, //5min
     default: 30 * 1000, //30 sec
