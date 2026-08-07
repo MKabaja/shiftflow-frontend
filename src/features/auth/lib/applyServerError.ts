@@ -1,3 +1,9 @@
+import type { UseFormSetError } from 'react-hook-form';
+import type { LoginFormValues } from '@/features/auth/lib/schemas.ts';
+import type { ParseKeys } from 'i18next';
+import i18n from '@/shared/i18n';
+import { parseApiError } from '@/shared/lib/helpers/parseApiError.ts';
+
 /**
  * Translates a failed auth request into React Hook Form error state.
  *
@@ -6,19 +12,35 @@
  * is the only place that decides where such an error shows up on screen.
  */
 
-// function applyServerError<T extends FieldValues>(
-//   error: unknown,
-//   setError: UseFormSetError<T>,
-//   keys: { invalid: ParseKeys<'errors'> },
-// ): void {
-//   const { messageKey, fieldErrors, statusCode } = parseApiError(error);
-//
-//   if (fieldErrors) {
-//     Object.entries(fieldErrors).forEach(([key, field]) => {
-//       setError(field as Path<T>, { type: 'server', message: messages[0] });
-//     });
-//   }
-// }
+function applyServerError(
+  error: unknown,
+  setError: UseFormSetError<LoginFormValues>,
+  invalidKey: ParseKeys<'errors'>,
+): void {
+  const { messageKey, statusCode, fieldErrors } = parseApiError(error);
+  if (fieldErrors) {
+    const entries = Object.entries(fieldErrors) as [keyof LoginFormValues, string[]][];
+
+    entries.forEach(([field, value]) => {
+      setError(field, {
+        type: 'server',
+        message: value[0],
+      });
+    });
+    return;
+  }
+
+  let key = messageKey;
+  if (statusCode === 401) key = invalidKey;
+  if (statusCode === 403) key = 'auth.accountDeactivated';
+
+  setError('root.serverError', {
+    type: 'server',
+    message: i18n.t(key, { ns: 'errors' }),
+  });
+}
+
+export { applyServerError };
 
 // --- TYPES -------------------------------------------------------------------
 //

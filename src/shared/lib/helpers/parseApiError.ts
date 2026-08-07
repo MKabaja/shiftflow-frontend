@@ -30,7 +30,11 @@ function parseApiError(error: unknown): ParsedApiError {
   const isValidationError = status === 422 && data?.errors;
 
   if (isValidationError)
-    return { messageKey: 'validation', fieldErrors: data.errors, statusCode: status };
+    return {
+      messageKey: 'validation',
+      fieldErrors: data.errors,
+      statusCode: status,
+    };
 
   return {
     statusCode: status,
