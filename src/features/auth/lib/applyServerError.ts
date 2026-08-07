@@ -10,15 +10,19 @@ function applyServerError<T extends FieldValues>(
 ): void {
   const { messageKey, statusCode, fieldErrors } = parseApiError(error);
   if (fieldErrors) {
-    const entries = Object.entries(fieldErrors) as [Path<T>, string[]][];
+    const entries = (Object.entries(fieldErrors) as [Path<T>, string[]][]).filter(
+      ([, messages]) => messages.length > 0,
+    );
 
-    entries.forEach(([field, value]) => {
-      setError(field, {
-        type: 'server',
-        message: value[0],
+    if (entries.length > 0) {
+      entries.forEach(([field, messages]) => {
+        setError(field, {
+          type: 'server',
+          message: messages[0],
+        });
       });
-    });
-    return;
+      return;
+    }
   }
 
   let key = messageKey;
