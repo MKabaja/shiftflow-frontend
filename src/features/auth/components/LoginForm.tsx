@@ -34,7 +34,7 @@ function LoginForm() {
 
   const loginErrorKey = loginField.fieldState.error?.message;
   const passwordErrorKey = passwordField.fieldState.error?.message;
-  const connectionError = errors.root?.serverError;
+  const backendError = errors.root?.serverError;
 
   const loginError = loginErrorKey ? t(loginErrorKey as ParseKeys<'auth'>) : undefined;
   const passwordError = passwordErrorKey
@@ -48,6 +48,10 @@ function LoginForm() {
     });
   }
 
+  function clearServerError() {
+    if (backendError) clearErrors('root.serverError');
+  }
+
   return (
     <form
       className="flex w-full flex-col gap-4"
@@ -56,6 +60,10 @@ function LoginForm() {
     >
       <Input
         {...loginField.field}
+        onChange={(event) => {
+          clearServerError();
+          loginField.field.onChange(event);
+        }}
         label={t('login.loginLabel')}
         placeholder={t('login.loginPlaceholder')}
         autoComplete="username"
@@ -65,6 +73,10 @@ function LoginForm() {
 
       <Input
         {...passwordField.field}
+        onChange={(event) => {
+          clearServerError();
+          passwordField.field.onChange(event);
+        }}
         label={t('login.passwordLabel')}
         placeholder={t('login.passwordPlaceholder')}
         type={isPasswordVisible ? 'text' : 'password'}
@@ -83,12 +95,12 @@ function LoginForm() {
         }
         error={passwordError}
       />
-      {connectionError && (
+      {backendError && (
         <p
           role="alert"
           className="text-danger text-body-sm mt-1"
         >
-          {connectionError.message}
+          {backendError.message}
         </p>
       )}
       <Button
