@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Eye, EyeOff, Lock, User } from 'lucide-react';
 import { Input } from '@/shared/components/Input';
 import { Button } from '@/shared/components/Button';
+import { Alert } from '@/shared/components/Alert';
 import { focusStyles } from '@/shared/lib/styles/focusStyles.ts';
 import { cn } from '@/shared/lib/helpers/cn.ts';
 import { useController, useForm } from 'react-hook-form';
@@ -29,11 +30,17 @@ function LoginForm() {
     defaultValues: { login: '', password: '' },
   });
 
-  const loginField = useController({ control, name: 'login' });
-  const passwordField = useController({ control, name: 'password' });
+  const { field: loginField, fieldState: loginFieldState } = useController({
+    control,
+    name: 'login',
+  });
+  const { field: passwordField, fieldState: passwordFieldState } = useController({
+    control,
+    name: 'password',
+  });
 
-  const loginErrorKey = loginField.fieldState.error?.message;
-  const passwordErrorKey = passwordField.fieldState.error?.message;
+  const loginErrorKey = loginFieldState.error?.message;
+  const passwordErrorKey = passwordFieldState.error?.message;
   const backendError = errors.root?.serverError;
 
   const loginError = loginErrorKey ? t(loginErrorKey as ParseKeys<'auth'>) : undefined;
@@ -59,10 +66,10 @@ function LoginForm() {
       onSubmit={handleSubmit(submitCredentials)}
     >
       <Input
-        {...loginField.field}
+        {...loginField}
         onChange={(event) => {
           clearServerError();
-          loginField.field.onChange(event);
+          loginField.onChange(event);
         }}
         label={t('login.loginLabel')}
         placeholder={t('login.loginPlaceholder')}
@@ -72,10 +79,10 @@ function LoginForm() {
       />
 
       <Input
-        {...passwordField.field}
+        {...passwordField}
         onChange={(event) => {
           clearServerError();
-          passwordField.field.onChange(event);
+          passwordField.onChange(event);
         }}
         label={t('login.passwordLabel')}
         placeholder={t('login.passwordPlaceholder')}
@@ -95,14 +102,7 @@ function LoginForm() {
         }
         error={passwordError}
       />
-      {backendError && (
-        <p
-          role="alert"
-          className="text-danger text-body-sm mt-1"
-        >
-          {backendError.message}
-        </p>
-      )}
+      <Alert message={backendError?.message} />
       <Button
         type="submit"
         size="lg"
