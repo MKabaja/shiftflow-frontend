@@ -1,11 +1,10 @@
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Eye, EyeOff, Lock, User } from 'lucide-react';
+import { Lock, User } from 'lucide-react';
 import { Input } from '@/shared/components/Input';
 import { Button } from '@/shared/components/Button';
 import { Alert } from '@/shared/components/Alert';
-import { focusStyles } from '@/shared/lib/styles/focusStyles.ts';
-import { cn } from '@/shared/lib/helpers/cn.ts';
+import { VisibilityToggle } from '@/shared/components/VisibilityToggle';
 import { useController, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { type LoginFormValues, loginSchema } from '../lib/schemas.ts';
@@ -16,7 +15,7 @@ import { applyServerError } from '@/features/auth/lib/applyServerError.ts';
 
 function LoginForm() {
   const { t } = useTranslation('auth');
-  const [isPasswordVisible, setIsPasswordVisible] = useState(false);
+  const [isPasswordMasked, setIsPasswordMasked] = useState(true);
   const { mutate, isPending } = useLogin();
 
   const {
@@ -86,19 +85,16 @@ function LoginForm() {
         }}
         label={t('login.passwordLabel')}
         placeholder={t('login.passwordPlaceholder')}
-        type={isPasswordVisible ? 'text' : 'password'}
+        type={isPasswordMasked ? 'password' : 'text'}
         autoComplete="current-password"
         leftIcon={<Lock className="size-4" />}
         rightIcon={
-          <button
-            type="button"
-            onClick={() => setIsPasswordVisible((visible) => !visible)}
-            aria-label={isPasswordVisible ? t('login.hidePassword') : t('login.showPassword')}
-            aria-pressed={isPasswordVisible}
-            className={cn('hover:text-text-primary rounded-sm transition-colors', focusStyles)}
-          >
-            {isPasswordVisible ? <EyeOff className="size-4" /> : <Eye className="size-4" />}
-          </button>
+          <VisibilityToggle
+            masked={isPasswordMasked}
+            setMasked={setIsPasswordMasked}
+            showLabel={t('login.showPassword')}
+            hideLabel={t('login.hidePassword')}
+          />
         }
         error={passwordError}
       />
