@@ -14,11 +14,8 @@ function boxStyles({ hasError }: BoxStyleProps): string {
   );
 }
 
-const containerStyles: string = 'flex flex-row items-center gap-4';
+const containerStyles: string = 'flex w-full flex-col gap-1.5';
+const rowStyles: string = 'flex flex-row items-center gap-4';
 const boxRowStyles: string = 'flex flex-1 justify-between max-w-xs';
-const toggleButtonStyles: string = cn(
-  'inline-flex items-center justify-center text-text-muted transition-colors hover:text-text-primary',
-  disabledStyles,
-);
 
-export { boxStyles, containerStyles, boxRowStyles, toggleButtonStyles };
+export { boxStyles, containerStyles, rowStyles, boxRowStyles };

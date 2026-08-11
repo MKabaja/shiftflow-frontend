@@ -1,4 +1,10 @@
 {
   "appName": "SHIFTFlow",
-  "loading": "Loading…"
+  "loading": "Loading…",
+  "pin": {
+    "groupLabel": "PIN",
+    "digitLabel": "PIN digit {{index}} of {{length}}",
+    "showPin": "Show PIN",
+    "hidePin": "Hide PIN"
+  }
 }

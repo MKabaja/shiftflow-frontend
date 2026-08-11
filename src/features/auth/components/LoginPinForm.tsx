@@ -87,7 +87,6 @@ function LoginPinForm() {
           }}
           autoFocus={false}
         />
-        {pinError && <p className="text-danger text-body-sm mt-1">{pinError}</p>}
       </div>
 
       <Alert message={backendError?.message} />
