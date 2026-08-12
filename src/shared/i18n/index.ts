@@ -15,14 +15,25 @@ const resources = {
   en: { common: enCommon, errors: enErrors, auth: enAuth },
 } as const;
 
+const LOCALE_KEY: string = 'shiftflow.locale';
+
 type SupportedLocale = keyof typeof resources;
 const supportedLocales = Object.keys(resources) as SupportedLocale[];
 
 function getInitialLocale(): SupportedLocale {
-  const htmlLang = document.documentElement.lang?.split('-')[0];
-  return supportedLocales.includes(htmlLang as SupportedLocale)
-    ? (htmlLang as SupportedLocale)
-    : 'pl';
+  const locale = getStoredLocale() ?? document.documentElement.lang.split('-')[0];
+  return supportedLocales.includes(locale as SupportedLocale) ? (locale as SupportedLocale) : 'pl';
+}
+
+/** Reading localStorage throws when storage is blocked
+ (private mode, disabled cookies). */
+
+function getStoredLocale(): string | null {
+  try {
+    return localStorage.getItem(LOCALE_KEY);
+  } catch {
+    return null;
+  }
 }
 
 i18n.use(initReactI18next).init({
