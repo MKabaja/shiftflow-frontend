@@ -1,6 +1,7 @@
 import { Outlet } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 import { Logo } from '@/shared/components/Logo';
+import { LocaleSwitcher } from '@/shared/components/LocaleSwitcher';
 
 function AuthLayout() {
   const { t } = useTranslation();
@@ -8,8 +9,9 @@ function AuthLayout() {
 
   return (
     <div className="auth-bg flex min-h-screen flex-col">
-      <header className="flex justify-center pt-10 pb-4">
-        <Logo size="xl" />
+      <header className="mx-auto flex w-full max-w-5xl items-center justify-between px-4 pt-10 pb-4">
+        <Logo size="md" />
+        <LocaleSwitcher />
       </header>
 
       <main className="flex flex-1 items-center justify-center px-4">

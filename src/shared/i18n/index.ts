@@ -45,7 +45,7 @@ function setLocale(locale: SupportedLocale): void {
   document.documentElement.lang = locale;
 }
 
-i18n.use(initReactI18next).init({
+void i18n.use(initReactI18next).init({
   resources,
   fallbackLng: 'pl',
   lng: getInitialLocale(),
@@ -54,6 +54,7 @@ i18n.use(initReactI18next).init({
   interpolation: { escapeValue: false },
   debug: config.isDev,
 });
+document.documentElement.lang = i18n.resolvedLanguage ?? 'pl';
 
 export type { SupportedLocale };
 export { setLocale, supportedLocales };
