@@ -3,6 +3,7 @@ import { apiClient } from '@/shared/lib/config/axios.ts';
 import { queryKeys } from '@/shared/lib/config/queryKeys.ts';
 import { queryClient } from '@/shared/lib/config/queryClient.ts';
 import { router } from '@/shared/lib/config/router.ts';
+import { landingPathFor } from '@/features/auth/lib/landingPathFor.ts';
 import type { AxiosError } from 'axios';
 import type {
   ApiError,
@@ -26,7 +27,7 @@ function useLogin() {
     onSuccess: (user) => {
       queryClient.setQueryData(queryKeys.auth.me, user);
 
-      const to = user.role === 'employee' ? '/home' : '/schedule';
+      const to = landingPathFor(user);
       void router.navigate({ to });
     },
   });
@@ -41,7 +42,7 @@ function useLoginPin() {
     onSuccess: (user) => {
       queryClient.setQueryData(queryKeys.auth.me, user);
 
-      const to = user.role === 'employee' ? '/home' : '/schedule';
+      const to = landingPathFor(user);
       void router.navigate({ to });
     },
   });
