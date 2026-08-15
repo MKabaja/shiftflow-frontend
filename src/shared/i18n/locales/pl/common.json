@@ -6,5 +6,10 @@
     "digitLabel": "Cyfra PIN {{index}} z {{length}}",
     "showPin": "Pokaż PIN",
     "hidePin": "Ukryj PIN"
+  },
+  "locale": {
+    "groupLabel": "Zmień język",
+    "pl": "Polski",
+    "en": "English"
   }
 }

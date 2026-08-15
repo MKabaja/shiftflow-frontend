@@ -27,7 +27,7 @@ function getInitialLocale(): SupportedLocale {
 
 /** Reading localStorage throws when storage is blocked
  (private mode, disabled cookies). */
-function getStoredLocale() {
+function getStoredLocale(): string | undefined | null {
   try {
     return localStorage.getItem(LOCALE_KEY);
   } catch (error) {
@@ -35,7 +35,7 @@ function getStoredLocale() {
   }
 }
 
-export function setLocale(locale: SupportedLocale) {
+function setLocale(locale: SupportedLocale): void {
   try {
     localStorage.setItem(LOCALE_KEY, locale);
   } catch (error) {
@@ -54,5 +54,8 @@ i18n.use(initReactI18next).init({
   interpolation: { escapeValue: false },
   debug: config.isDev,
 });
+
+export type { SupportedLocale };
+export { setLocale, supportedLocales };
 
 export default i18n;
