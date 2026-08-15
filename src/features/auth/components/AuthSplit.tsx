@@ -10,7 +10,7 @@ function AuthSplit({ image, children }: AuthSplitProps) {
   return (
     <Card
       variant="auth"
-      className="grid w-full overflow-hidden p-0 lg:min-h-[30rem] lg:grid-cols-2"
+      className="grid w-full overflow-hidden p-0 lg:min-h-120 lg:grid-cols-2"
     >
       <div
         aria-hidden
