@@ -27,13 +27,22 @@ function getInitialLocale(): SupportedLocale {
 
 /** Reading localStorage throws when storage is blocked
  (private mode, disabled cookies). */
-
-function getStoredLocale(): string | null {
+function getStoredLocale() {
   try {
     return localStorage.getItem(LOCALE_KEY);
-  } catch {
-    return null;
+  } catch (error) {
+    console.error('getStoredLocale()', error);
   }
+}
+
+export function setLocale(locale: SupportedLocale) {
+  try {
+    localStorage.setItem(LOCALE_KEY, locale);
+  } catch (error) {
+    console.error(error);
+  }
+  void i18n.changeLanguage(locale);
+  document.documentElement.lang = locale;
 }
 
 i18n.use(initReactI18next).init({
