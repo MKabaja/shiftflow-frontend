@@ -1,41 +1,40 @@
 import { createRoute, Link } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 import { publicRoute } from '@/routes/_public.tsx';
-import { Card } from '@/shared/components/Card';
 import { LoginPinForm } from '@/features/auth/components/LoginPinForm.tsx';
-import { AuthIllustration } from '@/features/auth/components/AuthIllustration.tsx';
-import loginPinArt from '@/assets/access-denied.svg';
+import { AuthHeading } from '@/features/auth/components/AuthHeading.tsx';
+import { AuthSplit } from '@/features/auth/components/AuthSplit.tsx';
+import loginPinArt from '@/assets/EMPLOYEE_LOGIN.webp';
 
 function LoginPinPage() {
   const { t } = useTranslation('auth');
 
   return (
-    <section className="flex w-full max-w-sm flex-col items-center gap-8">
-      <div className="flex flex-col items-center gap-2 text-center">
-        <h1 className="text-display-lg md:text-display-xl">{t('loginPin.heading')}</h1>
-        <p className="text-text-muted text-body-md">{t('loginPin.subheading')}</p>
-      </div>
-
-      <Card className="w-full">
-        <AuthIllustration src={loginPinArt} />
+    <section className="flex w-full max-w-md flex-col items-center gap-6 lg:max-w-6xl">
+      <AuthSplit image={loginPinArt}>
+        <AuthHeading
+          title={t('loginPin.heading')}
+          subtitle={t('loginPin.subheading')}
+        />
 
         <LoginPinForm />
-      </Card>
 
-      <div className="text-text-muted text-body-sm flex flex-col items-center gap-2">
+        <hr className="border-border-subtle my-6" />
+
         <Link
           to="/login"
-          className="hover:text-accent-text transition-colors"
+          className="text-accent-text text-body-sm hover:text-accent flex items-center justify-center gap-2 transition-colors"
         >
           {t('loginPin.toPasswordLogin')} →
         </Link>
-        <Link
-          to="/"
-          className="hover:text-accent-text transition-colors"
-        >
-          ← {t('loginPin.back')}
-        </Link>
-      </div>
+      </AuthSplit>
+
+      <Link
+        to="/"
+        className="text-text-muted text-body-sm hover:text-accent-text transition-colors"
+      >
+        ← {t('loginPin.back')}
+      </Link>
     </section>
   );
 }

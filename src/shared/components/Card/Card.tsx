@@ -2,7 +2,7 @@ import type { ComponentProps, ReactNode } from 'react';
 import { cn } from '@/shared/lib/helpers/cn.ts';
 import { baseStyles, interactiveStyles, variantStyles } from './Card.styles.ts';
 
-export type CardVariant = 'default' | 'elevated';
+export type CardVariant = 'default' | 'elevated' | 'auth';
 
 type CardProps = ComponentProps<'div'> & {
   children: ReactNode;

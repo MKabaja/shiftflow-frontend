@@ -9,7 +9,7 @@ function AuthLayout() {
 
   return (
     <div className="auth-bg flex min-h-screen flex-col">
-      <header className="mx-auto flex w-full max-w-5xl items-center justify-between px-4 pt-10 pb-4">
+      <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 pt-8 pb-6">
         <Logo size="md" />
         <LocaleSwitcher />
       </header>
