@@ -11,5 +11,29 @@
     "groupLabel": "Zmień język",
     "pl": "Polski",
     "en": "English"
+  },
+  "nav": {
+    "label": "Nawigacja główna",
+    "panel": {
+      "schedule": "Grafik",
+      "employees": "Pracownicy",
+      "positions": "Pozycje",
+      "news": "Aktualności",
+      "settings": "Ustawienia"
+    },
+    "disposition": {
+      "availability": "Dyspozycja",
+      "home": "Start",
+      "mySchedule": "Mój grafik"
+    }
+  },
+  "roles": {
+    "admin": "Administrator",
+    "manager": "Kierownik",
+    "employee": "Pracownik"
+  },
+  "desktopOnly": {
+    "title": "Ten widok wymaga większego ekranu",
+    "description": "Panel zarządzania działa na komputerze. Na telefonie skorzystaj z widoku pracownika."
   }
 }

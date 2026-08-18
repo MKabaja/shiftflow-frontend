@@ -11,5 +11,29 @@
     "groupLabel": "Change language",
     "pl": "Polski",
     "en": "English"
+  },
+  "nav": {
+    "label": "Main navigation",
+    "panel": {
+      "schedule": "Schedule",
+      "employees": "Employees",
+      "positions": "Positions",
+      "news": "News",
+      "settings": "Settings"
+    },
+    "disposition": {
+      "availability": "Availability",
+      "home": "Home",
+      "mySchedule": "My schedule"
+    }
+  },
+  "roles": {
+    "admin": "Administrator",
+    "manager": "Manager",
+    "employee": "Employee"
+  },
+  "desktopOnly": {
+    "title": "This view needs a bigger screen",
+    "description": "The management panel works on a computer. On a phone, use the employee view."
   }
 }
