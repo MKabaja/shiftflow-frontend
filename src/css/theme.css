@@ -49,6 +49,15 @@
     /* Focus ring — accent glow for inputs / PIN boxes */
     --shadow-focus-ring: 0 0 0 3px rgba(201, 163, 71, 0.15);
 
+    /* Warstwy z-index — jedna skala dla całej apki.
+       Odstępy co 10 zostawiają miejsce na warstwy pośrednie (dropdown, tooltip)
+       bez przenumerowywania istniejących.
+       Uwaga: z-index nie jest namespace'em motywu w Tailwind v4, więc same
+       zmienne NIE generują klas — utilities `z-*` są zadeklarowane w helpers.css. */
+    --z-sidebar: 20;
+    --z-bottom-nav: 20;
+    --z-modal: 50;
+
     /* Fonty */
     --font-display: 'Space Grotesk', sans-serif;
     --font-body: 'Inter', sans-serif;

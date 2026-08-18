@@ -1,3 +1,19 @@
+/* Utilities dla skali z-index z theme.css.
+   Muszą tu być, bo Tailwind v4 generuje klasy tylko dla znanych namespace'ów
+   motywu (--color-*, --shadow-*, --text-*, …), a z-index do nich nie należy —
+   sam `--z-modal` w @theme nie dałby klasy `z-modal`, po cichu i bez błędu. */
+@utility z-sidebar {
+    z-index: var(--z-sidebar);
+}
+
+@utility z-bottom-nav {
+    z-index: var(--z-bottom-nav);
+}
+
+@utility z-modal {
+    z-index: var(--z-modal);
+}
+
 .auth-bg {
     background-color: var(--color-bg-deep);
     background-image: radial-gradient(circle at 50% 40%, transparent 30%, var(--color-bg-deep) 85%),
