@@ -7,11 +7,11 @@ type BottomNavLabelKey = Extract<ParseKeys<'common'>, `nav.disposition.${string}
 
 type BottomNavLink = {
   labelKey: BottomNavLabelKey;
-  to: LinkProps['to'];
+  to: NonNullable<LinkProps['to']>;
   icon: LucideIcon;
 };
 
-const BOTTOM_NAV_LINKS: BottomNavLink[] = [
+const BOTTOM_NAV_LINKS: readonly BottomNavLink[] = [
   {
     labelKey: 'nav.disposition.availability',
     to: '/availability',
@@ -30,3 +30,4 @@ const BOTTOM_NAV_LINKS: BottomNavLink[] = [
 ];
 
 export { BOTTOM_NAV_LINKS };
+export type { BottomNavLink };

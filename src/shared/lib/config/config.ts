@@ -8,7 +8,7 @@ const pinLength = Number.isInteger(rawPinLength) && rawPinLength > 0 ? rawPinLen
 
 export const config = {
   apiUrl,
-  isDev: import.meta.env.DEV,
+  isDev: false,
   pinLength,
   passwordMinLength: 6,
   staleTime: {

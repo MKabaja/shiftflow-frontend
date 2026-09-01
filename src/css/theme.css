@@ -7,6 +7,7 @@
     --color-bg-card: #2c2d32;
     --color-bg-card-auth: #1a1a1c;
     --color-bg-elevated: #353531;
+    --color-bg-nav: #1A1A1C;
 
     /* Akcent — złoty */
     --color-accent: #c9a347;
@@ -40,20 +41,18 @@
     --shadow-nm-inset-soft: inset 2px 2px 5px #0a0a0b, inset -2px -2px 5px #323235;
     --shadow-nm-pressed: inset 2px 2px 5px #0a0a0b, inset -2px -2px 5px #323235;
     --shadow-nm-hover-accent: inset 2px 2px 6px #856819, inset -2px -2px 6px #f4d887;
+    --shadow-drop-accent: 2px 2px 10px #0a0a0b;
     --shadow-nm-pressed-accent: inset 4px 4px 10px #7a5e15, inset -4px -4px 10px #f8e39f;
     --shadow-nm-subtle: 2px 2px 6px #0a0a0b, -2px -2px 6px #323235;
     --shadow-nm-auth: 0 10px 15px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.14);
     --shadow-nm-hover-danger: inset 2px 2px 6px #7a1a1a, inset -2px -2px 6px #ff9090;
     --shadow-nm-pressed-danger: inset 4px 4px 10px #6b1515, inset -4px -4px 10px #ffa0a0;
+    --shadow-nav-top: 0 -2px 8px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 
     /* Focus ring — accent glow for inputs / PIN boxes */
     --shadow-focus-ring: 0 0 0 3px rgba(201, 163, 71, 0.15);
 
-    /* Warstwy z-index — jedna skala dla całej apki.
-       Odstępy co 10 zostawiają miejsce na warstwy pośrednie (dropdown, tooltip)
-       bez przenumerowywania istniejących.
-       Uwaga: z-index nie jest namespace'em motywu w Tailwind v4, więc same
-       zmienne NIE generują klas — utilities `z-*` są zadeklarowane w helpers.css. */
+
     --z-sidebar: 20;
     --z-bottom-nav: 20;
     --z-modal: 50;
