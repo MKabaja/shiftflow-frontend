@@ -52,6 +52,10 @@
     /* Focus ring — accent glow for inputs / PIN boxes */
     --shadow-focus-ring: 0 0 0 3px rgba(201, 163, 71, 0.15);
 
+    /* Neonowa poświata wzdłuż konturu elementu (filter: drop-shadow) */
+    --drop-shadow-glow-accent:
+        0 0 3px color-mix(in srgb, var(--color-accent) 60%, transparent),
+        0 0 8px color-mix(in srgb, var(--color-accent) 35%, transparent);
 
     --z-sidebar: 20;
     --z-bottom-nav: 20;
