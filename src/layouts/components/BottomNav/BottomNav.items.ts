@@ -3,7 +3,10 @@ import type { LinkProps } from '@tanstack/react-router';
 import type { LucideIcon } from 'lucide-react';
 import { ClipboardList, House, SquarePen } from 'lucide-react';
 
-type BottomNavLabelKey = Extract<ParseKeys<'common'>, `nav.disposition.${string}`>;
+type BottomNavLabelKey = Extract<
+  ParseKeys<'common'>,
+  `nav.disposition.${string}` | `nav.panel.${string}`
+>;
 
 type BottomNavLink = {
   labelKey: BottomNavLabelKey;
