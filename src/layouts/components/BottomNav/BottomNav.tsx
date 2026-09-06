@@ -3,6 +3,7 @@ import { Link, useMatchRoute } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 import { motion, useReducedMotion } from 'motion/react';
 import { cn } from '@/shared/lib/helpers/cn.ts';
+
 import {
   iconActiveStyles,
   iconBoxActiveStyles,
@@ -44,9 +45,9 @@ function BottomNav({ links }: BottomNavProps) {
                 <motion.span
                   layoutId="bottom-nav-indicator"
                   transition={
-                    shouldReduceMotion ?
-                      { duration: 0 }
-                    : { type: 'spring', stiffness: 400, damping: 32 }
+                    shouldReduceMotion
+                      ? { duration: 0 }
+                      : { type: 'spring', stiffness: 400, damping: 32 }
                   }
                   className={indicatorStyles}
                 />
