@@ -1,4 +1,5 @@
 import type { NavLink } from '@/layouts/navigation';
+import type { LinkProps } from '@tanstack/react-router';
 import { Link, useMatchRoute } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 import { motion, useReducedMotion } from 'motion/react';
@@ -25,6 +26,7 @@ import {
 type SidebarProps = {
   links: readonly NavLink[];
   settingsLink: NavLink;
+  homeTo: NonNullable<LinkProps['to']>;
   userName?: string;
 };
 
@@ -69,7 +71,7 @@ function SidebarNavLink({ link: { icon: Icon, labelKey, to }, isActive }: Sideba
   );
 }
 
-function Sidebar({ links, settingsLink, userName }: SidebarProps) {
+function Sidebar({ links, settingsLink, homeTo, userName }: SidebarProps) {
   const { t } = useTranslation();
   const matchRoute = useMatchRoute();
 
@@ -79,7 +81,7 @@ function Sidebar({ links, settingsLink, userName }: SidebarProps) {
     <div className={spacerStyles}>
       <div className={panelStyles}>
         <Link
-          to="/schedule"
+          to={homeTo}
           className={logoLinkStyles}
         >
           <Logo size="sm" />

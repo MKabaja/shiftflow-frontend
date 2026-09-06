@@ -31,9 +31,5 @@
     "admin": "Administrator",
     "manager": "Manager",
     "employee": "Employee"
-  },
-  "desktopOnly": {
-    "title": "This view needs a bigger screen",
-    "description": "The management panel works on a computer. On a phone, use the employee view."
   }
 }

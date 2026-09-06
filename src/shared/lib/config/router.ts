@@ -2,6 +2,7 @@ import { createRouter } from '@tanstack/react-router';
 import { Splash } from '@/shared/components/Splash';
 import { Route as rootRoute } from '@/routes/__root.tsx';
 import { publicRoute } from '@/routes/_public.tsx';
+import { appRoute } from '@/routes/_app.tsx';
 import { dispositionRoute } from '@/routes/_disposition.tsx';
 import { panelRoute } from '@/routes/_panel.tsx';
 import { indexRoute } from '@/routes/index.tsx';
@@ -18,8 +19,11 @@ import { settingsRoute } from '@/routes/settings.tsx';
 
 const routeTree = rootRoute.addChildren([
   publicRoute.addChildren([indexRoute, loginRoute, loginPinRoute]),
-  dispositionRoute.addChildren([homeRoute, availabilityRoute, myScheduleRoute]),
-  panelRoute.addChildren([scheduleRoute, employeesRoute, positionsRoute, newsRoute, settingsRoute]),
+  appRoute.addChildren([
+    settingsRoute,
+    dispositionRoute.addChildren([homeRoute, availabilityRoute, myScheduleRoute]),
+    panelRoute.addChildren([scheduleRoute, employeesRoute, positionsRoute, newsRoute]),
+  ]),
 ]);
 
 export const router = createRouter({ routeTree, defaultPendingComponent: Splash });

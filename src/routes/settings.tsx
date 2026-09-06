@@ -1,8 +1,8 @@
 import { createRoute } from '@tanstack/react-router';
-import { panelRoute } from '@/routes/_panel.tsx';
+import { appRoute } from '@/routes/_app.tsx';
 
 const settingsRoute = createRoute({
-  getParentRoute: () => panelRoute,
+  getParentRoute: () => appRoute,
   path: '/settings',
   component: () => <div className="grid min-h-screen place-items-center">/settings</div>,
 });

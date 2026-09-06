@@ -31,9 +31,5 @@
     "admin": "Administrator",
     "manager": "Kierownik",
     "employee": "Pracownik"
-  },
-  "desktopOnly": {
-    "title": "Ten widok wymaga większego ekranu",
-    "description": "Panel zarządzania działa na komputerze. Na telefonie skorzystaj z widoku pracownika."
   }
 }
