@@ -14,12 +14,12 @@
   },
   "nav": {
     "label": "Nawigacja główna",
+    "settings": "Ustawienia",
     "panel": {
       "schedule": "Grafik",
       "employees": "Pracownicy",
       "positions": "Pozycje",
-      "news": "Aktualności",
-      "settings": "Ustawienia"
+      "news": "Aktualności"
     },
     "disposition": {
       "availability": "Dyspozycja",

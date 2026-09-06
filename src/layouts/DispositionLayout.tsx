@@ -1,7 +1,8 @@
 import { Outlet } from '@tanstack/react-router';
 import { Avatar } from '@/shared/components/Avatar';
 import { Logo } from '@/shared/components/Logo';
-import { BOTTOM_NAV_LINKS, BottomNav } from '@/layouts/components/BottomNav';
+import { BottomNav } from '@/layouts/components/BottomNav';
+import { DISPOSITION_NAV_LINKS } from '@/layouts/navigation';
 
 import { useAuth } from '@/features/auth/hooks/useAuth.ts';
 
@@ -18,7 +19,7 @@ function DispositionLayout() {
       <main className="flex flex-1 px-4">
         <Outlet />
       </main>
-      <BottomNav links={BOTTOM_NAV_LINKS} />
+      <BottomNav links={DISPOSITION_NAV_LINKS} />
     </div>
   );
 }

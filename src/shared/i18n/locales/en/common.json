@@ -14,12 +14,12 @@
   },
   "nav": {
     "label": "Main navigation",
+    "settings": "Settings",
     "panel": {
       "schedule": "Schedule",
       "employees": "Employees",
       "positions": "Positions",
-      "news": "News",
-      "settings": "Settings"
+      "news": "News"
     },
     "disposition": {
       "availability": "Availability",

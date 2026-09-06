@@ -1,4 +1,4 @@
-import type { BottomNavLink } from './BottomNav.items.ts';
+import type { NavLink } from '@/layouts/navigation';
 import { Link, useMatchRoute } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 import { motion, useReducedMotion } from 'motion/react';
@@ -17,7 +17,7 @@ import {
 } from './BottomNav.styles.ts';
 
 type BottomNavProps = {
-  links: readonly BottomNavLink[];
+  links: readonly NavLink[];
 };
 
 function BottomNav({ links }: BottomNavProps) {

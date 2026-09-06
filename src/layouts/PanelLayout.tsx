@@ -1,5 +1,6 @@
 import { Outlet } from '@tanstack/react-router';
-import { Sidebar, SIDEBAR_LINKS, SIDEBAR_SETTINGS_LINK } from '@/layouts/components/Sidebar';
+import { Sidebar } from '@/layouts/components/Sidebar';
+import { PANEL_NAV_LINKS, SETTINGS_LINK } from '@/layouts/navigation';
 
 import { useAuth } from '@/features/auth/hooks/useAuth.ts';
 
@@ -9,8 +10,8 @@ function PanelLayout() {
   return (
     <div className="bg-bg-primary flex min-h-dvh">
       <Sidebar
-        links={SIDEBAR_LINKS}
-        settingsLink={SIDEBAR_SETTINGS_LINK}
+        links={PANEL_NAV_LINKS}
+        settingsLink={SETTINGS_LINK}
         userName={user?.name}
       />
 

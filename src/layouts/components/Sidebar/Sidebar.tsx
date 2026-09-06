@@ -1,4 +1,4 @@
-import type { SidebarLink } from './Sidebar.items.ts';
+import type { NavLink } from '@/layouts/navigation';
 import { Link, useMatchRoute } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 import { motion, useReducedMotion } from 'motion/react';
@@ -23,13 +23,13 @@ import {
 } from './Sidebar.styles.ts';
 
 type SidebarProps = {
-  links: readonly SidebarLink[];
-  settingsLink: SidebarLink;
+  links: readonly NavLink[];
+  settingsLink: NavLink;
   userName?: string;
 };
 
 type SidebarNavLinkProps = {
-  link: SidebarLink;
+  link: NavLink;
   isActive: boolean;
 };
 
