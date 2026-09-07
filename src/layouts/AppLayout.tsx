@@ -3,10 +3,13 @@ import { Avatar } from '@/shared/components/Avatar';
 import { Logo } from '@/shared/components/Logo';
 import { BottomNav } from '@/layouts/components/BottomNav';
 import { Sidebar } from '@/layouts/components/Sidebar';
+import { Modal } from '@/shared/components/Modal';
 import { navLinksFor, SETTINGS_LINK } from '@/layouts/navigation';
 import { useMatchMedia } from '@/shared/hooks/useMatchMedia.ts';
 import { cn } from '@/shared/lib/helpers/cn.ts';
 import { config } from '@/shared/lib/config/config.ts';
+import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { landingPathFor } from '@/features/auth/lib/landingPathFor.ts';
 import { useAuth } from '@/features/auth/hooks/useAuth.ts';
@@ -14,6 +17,8 @@ import { useAuth } from '@/features/auth/hooks/useAuth.ts';
 function AppLayout() {
   const { user } = useAuth();
   const isDesktop = useMatchMedia(config.desktopMediaQuery);
+  const [isProfileOpen, setIsProfileOpen] = useState<boolean>(false);
+  const { t } = useTranslation('auth');
 
   const links = navLinksFor(user);
   const homeTo = user ? landingPathFor(user) : '/';
@@ -26,11 +31,15 @@ function AppLayout() {
           settingsLink={SETTINGS_LINK}
           homeTo={homeTo}
           userName={user?.name}
+          onProfileClick={() => setIsProfileOpen(true)}
         />
       ) : (
         <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 pt-8 pb-6">
           <Logo size="md" />
-          <Avatar name={user?.name} />
+          <Avatar
+            name={user?.name}
+            onClick={() => setIsProfileOpen(true)}
+          />
         </header>
       )}
 
@@ -39,6 +48,11 @@ function AppLayout() {
       </main>
 
       {!isDesktop && <BottomNav links={links} />}
+      <Modal
+        isOpen={isProfileOpen}
+        onClose={() => setIsProfileOpen(false)}
+        title={t('profile.title')}
+      />
     </div>
   );
 }

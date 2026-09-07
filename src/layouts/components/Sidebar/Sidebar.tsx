@@ -28,6 +28,7 @@ type SidebarProps = {
   settingsLink: NavLink;
   homeTo: NonNullable<LinkProps['to']>;
   userName?: string;
+  onProfileClick: () => void;
 };
 
 type SidebarNavLinkProps = {
@@ -71,7 +72,7 @@ function SidebarNavLink({ link: { icon: Icon, labelKey, to }, isActive }: Sideba
   );
 }
 
-function Sidebar({ links, settingsLink, homeTo, userName }: SidebarProps) {
+function Sidebar({ links, settingsLink, homeTo, userName, onProfileClick }: SidebarProps) {
   const { t } = useTranslation();
   const matchRoute = useMatchRoute();
 
@@ -117,6 +118,7 @@ function Sidebar({ links, settingsLink, homeTo, userName }: SidebarProps) {
             <Avatar
               name={userName}
               size="sm"
+              onClick={onProfileClick}
             />
 
             {userName && <span className={userNameStyles}>{userName}</span>}
