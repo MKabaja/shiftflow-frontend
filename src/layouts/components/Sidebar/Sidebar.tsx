@@ -117,6 +117,7 @@ function Sidebar({ links, settingsLink, homeTo, userName, onProfileClick }: Side
           <div className={userStyles}>
             <Avatar
               name={userName}
+              label={t('profile.openLabel', { ns: 'auth' })}
               size="sm"
               onClick={onProfileClick}
             />

@@ -38,6 +38,7 @@ function AppLayout() {
           <Logo size="md" />
           <Avatar
             name={user?.name}
+            label={t('profile.openLabel')}
             onClick={() => setIsProfileOpen(true)}
           />
         </header>
