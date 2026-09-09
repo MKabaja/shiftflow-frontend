@@ -1,6 +1,9 @@
 {
   "appName": "SHIFTFlow",
   "loading": "Ładowanie…",
+  "actions": {
+    "close": "Zamknij"
+  },
   "pin": {
     "groupLabel": "PIN",
     "digitLabel": "Cyfra PIN {{index}} z {{length}}",

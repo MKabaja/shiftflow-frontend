@@ -1,10 +1,11 @@
 import type { HTMLMotionProps } from 'motion/react';
-import { AnimatePresence, motion } from 'motion/react';
+import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import type { ReactNode } from 'react';
 import { useId } from 'react';
 import { focusStyles } from '@/shared/lib/styles/focusStyles.ts';
 import { useModal } from '@/shared/hooks/useModal.ts';
 import { X } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { Overlay } from './Overlay.tsx';
 import { cn } from '@/shared/lib/helpers/cn.ts';
 import {
@@ -14,11 +15,35 @@ import {
   descriptionStyles,
   footerStyles,
   headerStyles,
+  placementStyles,
   sizeStyles,
   titleStyles,
 } from './Modal.styles.ts';
 
 export type ModalSize = 'sm' | 'md' | 'lg' | 'xl';
+export type ModalPlacement = 'center' | 'sheet';
+
+type AnimationProps = 'initial' | 'animate' | 'exit';
+type PanelAnimation = Pick<HTMLMotionProps<'div'>, AnimationProps>;
+
+const panelAnimations: Record<ModalPlacement, PanelAnimation> = {
+  center: {
+    initial: { opacity: 0, scale: 0.95 },
+    animate: { opacity: 1, scale: 1 },
+    exit: { opacity: 0, scale: 0.95 },
+  },
+  sheet: {
+    initial: { y: '100%' },
+    animate: { y: 0 },
+    exit: { y: '100%' },
+  },
+};
+
+const reducedPanelAnimation: PanelAnimation = {
+  initial: { opacity: 0 },
+  animate: { opacity: 1 },
+  exit: { opacity: 0 },
+};
 
 type ModalProps = HTMLMotionProps<'div'> & {
   isOpen: boolean;
@@ -26,6 +51,7 @@ type ModalProps = HTMLMotionProps<'div'> & {
   title: string;
   description?: string;
   size?: ModalSize;
+  placement?: ModalPlacement;
   footer?: ReactNode;
   closeOnBackdrop?: boolean;
   children?: ReactNode;
@@ -37,6 +63,7 @@ export function Modal({
   title,
   description,
   size = 'md',
+  placement = 'center',
   footer,
   closeOnBackdrop = true,
   className,
@@ -45,13 +72,19 @@ export function Modal({
 }: ModalProps) {
   const titleId = useId();
   const descId = useId();
+  const { t } = useTranslation('common');
+  const shouldReduceMotion = useReducedMotion();
 
   const { panelRef } = useModal(isOpen, onClose);
+  const panelAnimation = shouldReduceMotion ? reducedPanelAnimation : panelAnimations[placement];
 
   return (
     <AnimatePresence>
       {isOpen && (
-        <Overlay onClose={closeOnBackdrop ? onClose : () => {}}>
+        <Overlay
+          onClose={closeOnBackdrop ? onClose : () => {}}
+          placement={placement}
+        >
           <motion.div
             role="dialog"
             aria-modal={true}
@@ -59,10 +92,8 @@ export function Modal({
             tabIndex={-1}
             aria-labelledby={titleId}
             aria-describedby={description ? descId : undefined}
-            className={cn(sizeStyles[size], baseStyles, className)}
-            initial={{ opacity: 0, scale: 0.95 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0.95 }}
+            className={cn(sizeStyles[size], placementStyles[placement], baseStyles, className)}
+            {...panelAnimation}
             transition={{ duration: 0.2, ease: 'easeOut' }}
             {...rest}
           >
@@ -87,7 +118,7 @@ export function Modal({
                 className={cn(buttonStyles, focusStyles)}
                 type="button"
                 onClick={onClose}
-                aria-label="close" //TODO: tłumaczenia
+                aria-label={t('actions.close')}
               >
                 <X size={16}></X>
               </button>

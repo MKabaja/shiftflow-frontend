@@ -1,14 +1,25 @@
-import type { ModalSize } from './Modal.tsx';
+import type { ModalPlacement, ModalSize } from './Modal.tsx';
 
 type SizeStyle = Record<ModalSize, string>;
+type PlacementStyle = Record<ModalPlacement, string>;
+
 const sizeStyles: SizeStyle = {
   sm: 'max-w-[25rem]',
   md: 'max-w-[35rem]',
   lg: 'max-w-[47.5rem]',
   xl: 'max-w-[60rem]',
 };
+const placementStyles: PlacementStyle = {
+  center: 'mx-4 rounded-lg',
+  sheet:
+    'max-w-none rounded-t-2xl [&>div:last-child]:pb-[calc(1.5rem+env(safe-area-inset-bottom))] [&>footer:last-child]:pb-[calc(1rem+env(safe-area-inset-bottom))]',
+};
+const overlayPlacementStyles: PlacementStyle = {
+  center: 'items-center justify-center',
+  sheet: 'items-end justify-center',
+};
 const baseStyles: string =
-  ' relative mx-4 flex w-full flex-col max-h-[85vh] overflow-hidden bg-bg-card rounded-lg shadow-nm-raised-lg';
+  ' relative flex w-full flex-col max-h-[85dvh] overflow-hidden bg-bg-card shadow-nm-raised-lg';
 const headerStyles: string =
   ' flex items-center  justify-between  gap-4 border-b border-border-subtle p-6';
 const titleStyles: string = 'text-display-md text-text-primary';
@@ -22,6 +33,8 @@ const footerStyles: string =
 export {
   titleStyles,
   sizeStyles,
+  placementStyles,
+  overlayPlacementStyles,
   baseStyles,
   headerStyles,
   buttonStyles,

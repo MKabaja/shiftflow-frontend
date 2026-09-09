@@ -53,6 +53,7 @@ function AppLayout() {
         isOpen={isProfileOpen}
         onClose={() => setIsProfileOpen(false)}
         title={t('profile.title')}
+        placement={isDesktop ? 'center' : 'sheet'}
       />
     </div>
   );
