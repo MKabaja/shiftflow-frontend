@@ -19,7 +19,7 @@ const overlayPlacementStyles: PlacementStyle = {
   sheet: 'items-end justify-center',
 };
 const baseStyles: string =
-  ' relative flex w-full flex-col max-h-[85dvh] overflow-hidden bg-bg-card shadow-nm-raised-lg';
+  ' relative flex w-full flex-col max-h-[85dvh] overflow-hidden bg-bg-card shadow-nm-subtle';
 const headerStyles: string =
   ' flex items-center  justify-between  gap-4 border-b border-border-subtle p-6';
 const titleStyles: string = 'text-display-md text-text-primary';

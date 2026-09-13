@@ -3,14 +3,13 @@ import { Avatar } from '@/shared/components/Avatar';
 import { Logo } from '@/shared/components/Logo';
 import { BottomNav } from '@/layouts/components/BottomNav';
 import { Sidebar } from '@/layouts/components/Sidebar';
-import { Modal } from '@/shared/components/Modal';
 import { navLinksFor, SETTINGS_LINK } from '@/layouts/navigation';
 import { useMatchMedia } from '@/shared/hooks/useMatchMedia.ts';
 import { cn } from '@/shared/lib/helpers/cn.ts';
 import { config } from '@/shared/lib/config/config.ts';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-
+import { ProfileModal } from '@/features/auth/components/ProfileModal.tsx';
 import { landingPathFor } from '@/features/auth/lib/landingPathFor.ts';
 import { useAuth } from '@/features/auth/hooks/useAuth.ts';
 
@@ -49,10 +48,9 @@ function AppLayout() {
       </main>
 
       {!isDesktop && <BottomNav links={links} />}
-      <Modal
+      <ProfileModal
         isOpen={isProfileOpen}
         onClose={() => setIsProfileOpen(false)}
-        title={t('profile.title')}
         placement={isDesktop ? 'center' : 'sheet'}
       />
     </div>
