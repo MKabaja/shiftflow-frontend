@@ -17,6 +17,7 @@ import {
   linkStyles,
   listStyles,
   logoLinkStyles,
+  logoStyles,
   panelStyles,
   spacerStyles,
   userNameStyles,
@@ -85,7 +86,11 @@ function Sidebar({ links, settingsLink, homeTo, userName, onProfileClick }: Side
           to={homeTo}
           className={logoLinkStyles}
         >
-          <Logo size="sm" />
+          <Logo
+            variant="icon"
+            size="md"
+            className={logoStyles}
+          />
         </Link>
 
         <nav aria-label={t('nav.label')}>

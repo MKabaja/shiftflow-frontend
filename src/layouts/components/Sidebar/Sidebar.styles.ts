@@ -32,6 +32,9 @@ const userStyles: string = 'flex h-11 items-center gap-3 px-1.5';
 
 const userNameStyles: string = 'text-text-muted text-body-sm ' + labelStyles;
 
+const logoStyles: string =
+  'transition-[width,height] delay-200 duration-[250ms] ease-out group-hover/sidebar:size-7 group-hover/sidebar:delay-0 group-focus-within/sidebar:size-7 group-focus-within/sidebar:delay-0 motion-reduce:transition-none';
+
 export {
   spacerStyles,
   panelStyles,
@@ -46,4 +49,5 @@ export {
   footerStyles,
   userStyles,
   userNameStyles,
+  logoStyles,
 };
