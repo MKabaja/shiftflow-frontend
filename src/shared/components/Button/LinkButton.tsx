@@ -44,9 +44,8 @@ export function LinkButton({
       {...rest}
       target={target}
       rel={safeRel}
-      whileHover={{ scale: 1.03 }}
-      whileTap={{ scale: 0.95 }}
-      transition={{ type: 'spring', stiffness: 400, damping: 20 }}
+      whileTap={{ scale: 0.98 }}
+      transition={{ duration: 0.12, ease: 'easeOut' }}
       className={cn(sizeStyles[size], variantStyles[variant], baseStyles, focusStyles, className)}
     >
       {children}

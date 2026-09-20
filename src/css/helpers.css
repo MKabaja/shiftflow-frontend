@@ -14,6 +14,64 @@
     z-index: var(--z-modal);
 }
 
+/* Pas światła przejeżdżający przez element: na hover z lewej na prawą, a przy
+   mouseleave tą samą drogą z powrotem. Stąd `transition`, a nie `animation` —
+   przerwane przejście odwraca się z aktualnej pozycji, więc szybkie wyjście
+   kursorem nie zostawia pasa w połowie elementu.
+
+   W spoczynku pas stoi całkowicie poza lewą krawędzią i jest obcięty przez
+   `overflow: hidden`; `opacity` to tylko zabezpieczenie na skrajne proporcje,
+   przy których skew mógłby wypchnąć róg z powrotem w kadr.
+
+   `isolation: isolate` robi z elementu kontekst stackingu, dzięki czemu
+   `z-index: -1` na pseudo-elemencie ląduje NAD tłem elementu, ale POD jego
+   treścią — sweep nie przesłania tekstu. Alfę pasa nadpisuje wariant
+   przez `--sweep-alpha`. */
+@utility sweep-on-hover {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    --sweep-alpha: 0.12;
+
+    &::before {
+        content: '';
+        position: absolute;
+        top: -25%;
+        bottom: -25%;
+        left: -70%;
+        width: 45%;
+        z-index: -1;
+        pointer-events: none;
+        opacity: 0;
+        background: linear-gradient(
+            90deg,
+            transparent 0%,
+            rgb(255 255 255 / var(--sweep-alpha)) 50%,
+            transparent 100%
+        );
+        transform: skewX(-18deg) translateX(0);
+        transition:
+            transform 500ms ease-out,
+            opacity 150ms ease-out 400ms;
+    }
+
+    @media (hover: hover) {
+        &:hover::before {
+            opacity: 1;
+            transform: skewX(-18deg) translateX(420%);
+            transition:
+                transform 500ms ease-out,
+                opacity 150ms ease-out;
+        }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+        &::before {
+            display: none;
+        }
+    }
+}
+
 .auth-bg {
     background-color: var(--color-bg-deep);
     background-image: radial-gradient(circle at 50% 40%, transparent 30%, var(--color-bg-deep) 85%),
