@@ -2,10 +2,15 @@ import type { FieldValues, Path, UseFormSetError } from 'react-hook-form';
 import type { ParseKeys } from 'i18next';
 import { parseApiError } from '@/shared/lib/helpers/parseApiError.ts';
 
+type InvalidCredentialsKey = Extract<
+  ParseKeys<'errors'>,
+  'auth.invalidCredentials' | 'auth.invalidPin'
+>;
+
 function applyServerError<T extends FieldValues>(
   error: unknown,
   setError: UseFormSetError<T>,
-  invalidKey: ParseKeys<'errors'>,
+  invalidKey: InvalidCredentialsKey,
 ): void {
   const { messageKey, statusCode, fieldErrors } = parseApiError(error);
   if (fieldErrors) {
