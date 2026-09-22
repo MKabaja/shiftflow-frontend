@@ -14,6 +14,7 @@ import { useLoginPin } from '@/features/auth/api/mutations.ts';
 
 function LoginPinForm() {
   const { t } = useTranslation('auth');
+  const { t: tErrors } = useTranslation('errors');
   const { mutate, isPending } = useLoginPin();
   const {
     control,
@@ -37,7 +38,10 @@ function LoginPinForm() {
 
   const loginErrorKey = loginFieldState.error?.message;
   const pinErrorKey = pinFieldState.error?.message;
-  const backendError = errors.root?.serverError;
+  const backendErrorKey = errors.root?.serverError?.message;
+  const backendError = backendErrorKey
+    ? tErrors(backendErrorKey as ParseKeys<'errors'>)
+    : undefined;
 
   const loginError = loginErrorKey ? t(loginErrorKey as ParseKeys<'auth'>) : undefined;
   const pinError = pinErrorKey
@@ -89,7 +93,7 @@ function LoginPinForm() {
         />
       </div>
 
-      <Alert message={backendError?.message} />
+      <Alert message={backendError} />
 
       <Button
         type="submit"

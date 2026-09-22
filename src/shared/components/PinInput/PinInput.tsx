@@ -96,6 +96,7 @@ export function PinInput({
 
       {errorMessage && (
         <p
+          role="alert"
           className={cn(errorTextStyles)}
           id={errorId}
         >

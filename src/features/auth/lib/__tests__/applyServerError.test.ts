@@ -3,7 +3,6 @@ import type { FieldValues, UseFormSetError } from 'react-hook-form';
 import { applyServerError } from '../applyServerError.ts';
 import type { LoginFormValues, LoginPinFormValues } from '../schemas.ts';
 import type { ApiError } from '@/shared/types/api.ts';
-import i18n from '@/shared/i18n';
 
 const makeAxiosError = (status?: number, data?: ApiError): AxiosError => {
   const error = new AxiosError('request failed');
@@ -54,10 +53,6 @@ const oneUsableFieldOneEmpty = makeAxiosError(422, {
 const makeSetError = <T extends FieldValues>() => vi.fn<UseFormSetError<T>>();
 
 describe('applyServerError', () => {
-  beforeAll(async () => {
-    await i18n.changeLanguage('en');
-  });
-
   describe('form-level errors (no field to attach to)', () => {
     it('maps 401 to the caller-provided key, not to "session expired"', () => {
       const setError = makeSetError<LoginFormValues>();
@@ -66,7 +61,7 @@ describe('applyServerError', () => {
       expect(setError).toHaveBeenCalledTimes(1);
       expect(setError).toHaveBeenCalledWith('root.serverError', {
         type: 'server',
-        message: 'Invalid login or password.',
+        message: 'auth.invalidCredentials',
       });
     });
 
@@ -76,7 +71,7 @@ describe('applyServerError', () => {
 
       expect(setError).toHaveBeenCalledWith(
         'root.serverError',
-        expect.objectContaining({ message: 'Invalid login or PIN.' }),
+        expect.objectContaining({ message: 'auth.invalidPin' }),
       );
     });
 
@@ -87,7 +82,7 @@ describe('applyServerError', () => {
       expect(setError).toHaveBeenCalledWith(
         'root.serverError',
         expect.objectContaining({
-          message: 'This account is inactive. Please contact your supervisor.',
+          message: 'auth.accountDeactivated',
         }),
       );
     });
@@ -98,7 +93,7 @@ describe('applyServerError', () => {
 
       expect(setError).toHaveBeenCalledWith(
         'root.serverError',
-        expect.objectContaining({ message: 'Too many attempts. Please wait a moment.' }),
+        expect.objectContaining({ message: 'tooMany' }),
       );
     });
 
@@ -108,7 +103,7 @@ describe('applyServerError', () => {
 
       expect(setError).toHaveBeenCalledWith(
         'root.serverError',
-        expect.objectContaining({ message: 'Cannot connect to the server' }),
+        expect.objectContaining({ message: 'network' }),
       );
     });
 
@@ -118,7 +113,7 @@ describe('applyServerError', () => {
 
       expect(setError).toHaveBeenCalledWith(
         'root.serverError',
-        expect.objectContaining({ message: 'Something went wrong. Please try again.' }),
+        expect.objectContaining({ message: 'unexpected' }),
       );
     });
   });
@@ -199,7 +194,7 @@ describe('applyServerError', () => {
       expect(setError).toHaveBeenCalledTimes(1);
       expect(setError).toHaveBeenCalledWith(
         'root.serverError',
-        expect.objectContaining({ message: 'Please correct the highlighted fields.' }),
+        expect.objectContaining({ message: 'validation' }),
       );
     });
 
@@ -210,7 +205,7 @@ describe('applyServerError', () => {
       expect(setError).toHaveBeenCalledTimes(1);
       expect(setError).toHaveBeenCalledWith(
         'root.serverError',
-        expect.objectContaining({ message: 'Please correct the highlighted fields.' }),
+        expect.objectContaining({ message: 'validation' }),
       );
     });
   });

@@ -15,6 +15,7 @@ import { applyServerError } from '@/features/auth/lib/applyServerError.ts';
 
 function LoginForm() {
   const { t } = useTranslation('auth');
+  const { t: tErrors } = useTranslation('errors');
   const [isPasswordMasked, setIsPasswordMasked] = useState(true);
   const { mutate, isPending } = useLogin();
 
@@ -40,7 +41,10 @@ function LoginForm() {
 
   const loginErrorKey = loginFieldState.error?.message;
   const passwordErrorKey = passwordFieldState.error?.message;
-  const backendError = errors.root?.serverError;
+  const backendErrorKey = errors.root?.serverError?.message;
+  const backendError = backendErrorKey
+    ? tErrors(backendErrorKey as ParseKeys<'errors'>)
+    : undefined;
 
   const loginError = loginErrorKey ? t(loginErrorKey as ParseKeys<'auth'>) : undefined;
   const passwordError = passwordErrorKey
@@ -98,7 +102,7 @@ function LoginForm() {
         }
         error={passwordError}
       />
-      <Alert message={backendError?.message} />
+      <Alert message={backendError} />
       <Button
         type="submit"
         size="lg"

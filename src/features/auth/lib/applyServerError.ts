@@ -1,6 +1,5 @@
 import type { FieldValues, Path, UseFormSetError } from 'react-hook-form';
 import type { ParseKeys } from 'i18next';
-import i18n from '@/shared/i18n';
 import { parseApiError } from '@/shared/lib/helpers/parseApiError.ts';
 
 function applyServerError<T extends FieldValues>(
@@ -31,7 +30,7 @@ function applyServerError<T extends FieldValues>(
 
   setError('root.serverError', {
     type: 'server',
-    message: i18n.t(key, { ns: 'errors' }),
+    message: key,
   });
 }
 

@@ -4,7 +4,7 @@ import { publicRoute } from '@/routes/_public.tsx';
 import { LoginPinForm } from '@/features/auth/components/LoginPinForm.tsx';
 import { AuthHeading } from '@/features/auth/components/AuthHeading.tsx';
 import { AuthSplit } from '@/features/auth/components/AuthSplit.tsx';
-import loginPinArt from '@/assets/EMPLOYEE_LOGIN.webp';
+import loginPinArt from '@/assets/login-employee.webp';
 
 function LoginPinPage() {
   const { t } = useTranslation('auth');

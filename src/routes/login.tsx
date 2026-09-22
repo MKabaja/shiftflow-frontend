@@ -4,7 +4,7 @@ import { publicRoute } from '@/routes/_public.tsx';
 import { LoginForm } from '@/features/auth/components/LoginForm.tsx';
 import { AuthHeading } from '@/features/auth/components/AuthHeading.tsx';
 import { AuthSplit } from '@/features/auth/components/AuthSplit.tsx';
-import loginArt from '@/assets/ADMIN_LOGIN.webp';
+import loginArt from '@/assets/login-admin.webp';
 
 function LoginPage() {
   const { t } = useTranslation('auth');
