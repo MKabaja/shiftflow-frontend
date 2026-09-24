@@ -29,6 +29,7 @@ const buttonStyles: string =
 const bodyStyles: string = 'flex-1 overflow-y-auto p-6';
 const footerStyles: string =
   'flex justify-end gap-2 border-t border-border-subtle bg-bg-offset px-6 py-4';
+const metaStyles: string = 'text-text-muted/50 text-body-xs mt-1';
 
 export {
   titleStyles,
@@ -41,4 +42,5 @@ export {
   bodyStyles,
   footerStyles,
   descriptionStyles,
+  metaStyles,
 };

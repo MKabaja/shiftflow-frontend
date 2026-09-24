@@ -18,6 +18,7 @@ import {
   placementStyles,
   sizeStyles,
   titleStyles,
+  metaStyles,
 } from './Modal.styles.ts';
 
 export type ModalSize = 'sm' | 'md' | 'lg' | 'xl';
@@ -55,6 +56,7 @@ type ModalProps = HTMLMotionProps<'div'> & {
   footer?: ReactNode;
   closeOnBackdrop?: boolean;
   children?: ReactNode;
+  meta?: ReactNode;
 };
 
 export function Modal({
@@ -68,6 +70,7 @@ export function Modal({
   closeOnBackdrop = true,
   className,
   children,
+  meta,
   ...rest
 }: ModalProps) {
   const titleId = useId();
@@ -113,6 +116,7 @@ export function Modal({
                     {description}
                   </p>
                 )}
+                {meta && <div className={metaStyles}>{meta}</div>}
               </div>
               <button
                 className={cn(buttonStyles, focusStyles)}

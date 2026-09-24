@@ -29,6 +29,7 @@ function ProfileModal({ isOpen, onClose, placement }: ProfileModalProps) {
       onClose={onClose}
       placement={placement}
       title={t('profile.title')}
+      meta={`${t('profile.version')} ${__APP_VERSION__}`}
       footer={
         <>
           <Link
