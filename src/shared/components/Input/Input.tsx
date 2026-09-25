@@ -72,6 +72,7 @@ export function Input({
       </div>
       {error && (
         <p
+          role="alert"
           className={cn(errorTextStyles)}
           id={errorId}
         >

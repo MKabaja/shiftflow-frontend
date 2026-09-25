@@ -110,26 +110,35 @@ describe('PinInput', () => {
     expect(onComplete).toHaveBeenCalledWith('1234');
   });
 
-  it('masks digits by default and toggles visibility', async () => {
+  it('masks digits by default and unmasks them through the visibility toggle', async () => {
     const user = userEvent.setup();
     renderPin();
-    const toggle = screen.getByRole('button', { name: 'Toggle PIN visibility' });
+    const toggle = screen.getByRole('button');
 
     expect(box(1)).toHaveAttribute('type', 'password');
-    expect(toggle).toHaveAttribute('aria-pressed', 'false');
 
     await user.click(toggle);
     expect(box(1)).toHaveAttribute('type', 'text');
-    expect(toggle).toHaveAttribute('aria-pressed', 'true');
 
     await user.click(toggle);
     expect(box(1)).toHaveAttribute('type', 'password');
-    expect(toggle).toHaveAttribute('aria-pressed', 'false');
   });
 
   it('marks the boxes as invalid when error is set', () => {
     renderPin({ error: true });
     expect(box(1)).toHaveAttribute('aria-invalid', 'true');
+  });
+
+  it('renders no message when error is a boolean', () => {
+    renderPin({ error: true });
+    expect(screen.getByRole('group')).not.toHaveAttribute('aria-describedby');
+  });
+
+  it('renders the error message and describes the boxes with it', () => {
+    renderPin({ error: 'PIN must be 4 digits' });
+    const message = screen.getByText('PIN must be 4 digits');
+
+    expect(screen.getByRole('group')).toHaveAttribute('aria-describedby', message.id);
   });
 
   it('forwards the ref to the first box', () => {
@@ -146,6 +155,6 @@ describe('PinInput', () => {
   it('disables the boxes and the toggle when disabled', () => {
     renderPin({ disabled: true });
     expect(box(1)).toBeDisabled();
-    expect(screen.getByRole('button', { name: 'Toggle PIN visibility' })).toBeDisabled();
+    expect(screen.getByRole('button')).toBeDisabled();
   });
 });

@@ -5,7 +5,9 @@
     --color-bg-primary: #1e1e20;
     --color-bg-offset: #26272c;
     --color-bg-card: #2c2d32;
+    --color-bg-card-auth: #1a1a1c;
     --color-bg-elevated: #353531;
+    --color-bg-nav: #1A1A1C;
 
     /* Akcent — złoty */
     --color-accent: #c9a347;
@@ -32,20 +34,32 @@
     --color-accent-light: #eac162;
 
     /* Cienie neumorphism */
-    --shadow-nm-raised: 4px 4px 10px #0a0a0b, -4px -4px 10px #323235;
-    --shadow-nm-raised-sm: 3px 3px 8px #0a0a0b, -3px -3px 8px #323235;
-    --shadow-nm-raised-lg: 6px 6px 14px #0a0a0b, -6px -6px 14px #323235;
-    --shadow-nm-inset: inset 3px 3px 7px #0a0a0b, inset -3px -3px 7px #323235;
-    --shadow-nm-inset-soft: inset 2px 2px 5px #0a0a0b, inset -2px -2px 5px #323235;
-    --shadow-nm-pressed: inset 2px 2px 5px #0a0a0b, inset -2px -2px 5px #323235;
-    --shadow-nm-hover-accent: inset 2px 2px 6px #856819, inset -2px -2px 6px #f4d887;
+    --shadow-nm-subtle: 2px 2px 6px rgba(0, 0, 0, 0.45), -1px -1px 4px rgba(255, 255, 255, 0.03);
+    --shadow-nm-raised: 6px 6px 14px rgba(0, 0, 0, 0.5), -4px -4px 12px rgba(255, 255, 255, 0.035);
+    --shadow-nm-raised-sm: 3px 3px 8px rgba(0, 0, 0, 0.45), -2px -2px 6px rgba(255, 255, 255, 0.03);
+    --shadow-nm-raised-lg: 8px 8px 20px rgba(0, 0, 0, 0.55), -5px -5px 14px rgba(255, 255, 255, 0.04);
+    --shadow-nm-inset: inset 3px 3px 7px rgba(0, 0, 0, 0.55), inset -2px -2px 6px rgba(255, 255, 255, 0.035);
+    --shadow-nm-pressed: inset 3px 3px 7px rgba(0, 0, 0, 0.58), inset -2px -2px 5px rgba(255, 255, 255, 0.03);
+    --shadow-drop-accent: 2px 2px 10px #0a0a0b;
     --shadow-nm-pressed-accent: inset 4px 4px 10px #7a5e15, inset -4px -4px 10px #f8e39f;
-    --shadow-nm-subtle: 2px 2px 6px #0a0a0b, -2px -2px 6px #323235;
-    --shadow-nm-hover-danger: inset 2px 2px 6px #7a1a1a, inset -2px -2px 6px #ff9090;
+    --shadow-nm-auth: 0 10px 15px rgba(0, 0, 0, 0.65), 0 0 0 1px rgba(255, 255, 255, 0.14);
     --shadow-nm-pressed-danger: inset 4px 4px 10px #6b1515, inset -4px -4px 10px #ffa0a0;
+    --shadow-nav-top: 0 -2px 8px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
 
     /* Focus ring — accent glow for inputs / PIN boxes */
     --shadow-focus-ring: 0 0 0 3px rgba(201, 163, 71, 0.15);
+
+    /* Neonowa poświata wzdłuż konturu elementu (filter: drop-shadow) */
+    --drop-shadow-glow-accent: 0 0 3px color-mix(in srgb, var(--color-accent) 60%, transparent),
+    0 0 8px color-mix(in srgb, var(--color-accent) 35%, transparent);
+
+    --z-sidebar: 20;
+    --z-bottom-nav: 20;
+    --z-modal: 50;
+
+    /* Sidebar — szerokości stanów */
+    --container-sidebar-collapsed: 3.5rem;
+    --container-sidebar: 13.75rem;
 
     /* Fonty */
     --font-display: 'Space Grotesk', sans-serif;

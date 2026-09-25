@@ -1,5 +1,6 @@
 import { cn } from '@/shared/lib/helpers/cn.ts';
 import { inputFocusStyles } from '@/shared/lib/styles/inputFocusStyles.ts';
+import { errorTextStyles } from '@/shared/lib/styles/errorTextStyles.ts';
 
 type InputStyleProps = {
   hasError?: boolean;
@@ -26,7 +27,6 @@ function iconStyles(side: 'left' | 'right'): string {
 const containerStyles: string = 'flex flex-col gap-1.5 w-full';
 const fieldWrapperStyles: string = 'relative flex items-center';
 const labelStyles: string = 'block mb-1.5 text-text-muted text-label';
-const errorTextStyles: string = 'text-danger mt-1 text-body-sm';
 const helperTextStyles: string = 'text-text-muted mt-1 text-body-sm';
 
 export {

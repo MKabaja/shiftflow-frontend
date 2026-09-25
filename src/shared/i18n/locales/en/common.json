@@ -1,3 +1,38 @@
 {
-  "appName": "SHIFTFlow"
+  "appName": "SHIFTFlow",
+  "loading": "Loading…",
+  "actions": {
+    "close": "Close"
+  },
+  "pin": {
+    "groupLabel": "PIN",
+    "digitLabel": "PIN digit {{index}} of {{length}}",
+    "showPin": "Show PIN",
+    "hidePin": "Hide PIN"
+  },
+  "locale": {
+    "groupLabel": "Change language",
+    "pl": "Polski",
+    "en": "English"
+  },
+  "nav": {
+    "label": "Main navigation",
+    "settings": "Settings",
+    "panel": {
+      "schedule": "Schedule",
+      "employees": "Employees",
+      "positions": "Positions",
+      "news": "News"
+    },
+    "disposition": {
+      "availability": "Availability",
+      "home": "Home",
+      "mySchedule": "My schedule"
+    }
+  },
+  "roles": {
+    "admin": "Administrator",
+    "manager": "Manager",
+    "employee": "Employee"
+  }
 }

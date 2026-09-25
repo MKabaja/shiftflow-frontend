@@ -11,6 +11,7 @@ const themeColors = [
   'bg-primary',
   'bg-offset',
   'bg-card',
+  'bg-card-auth',
   'bg-elevated',
   'text-primary',
   'text-muted',

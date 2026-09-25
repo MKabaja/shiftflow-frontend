@@ -3,9 +3,9 @@ import type { CardVariant } from './Card.tsx';
 type VariantStyle = Record<CardVariant, string>;
 
 const variantStyles: VariantStyle = {
-  default: 'bg-card shadow-nm-raised',
-  elevated:
-    'shadow-nm-raised-lg bg-[radial-gradient(circle_at_50%_35%,var(--color-bg-elevated)_0%,var(--color-bg-card)_100%)]',
+  default: 'bg-bg-card shadow-nm-subtle',
+  elevated: 'bg-bg-card-auth border border-border-subtle shadow-nm-raised',
+  auth: 'bg-bg-card-auth shadow-nm-auth',
 };
 const baseStyles: string = 'rounded-lg p-6';
 const interactiveStyles: string =

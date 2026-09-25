@@ -72,7 +72,7 @@ describe('Modal', () => {
       const user = userEvent.setup();
       renderModal({ onClose });
 
-      await user.click(screen.getByRole('button', { name: 'close' }));
+      await user.click(screen.getByRole('button', { name: 'Close' }));
       expect(onClose).toHaveBeenCalledTimes(1);
     });
 
@@ -140,7 +140,7 @@ describe('Modal', () => {
   describe('focus management', () => {
     it('moves focus to the close button when opened', () => {
       renderModal();
-      expect(screen.getByRole('button', { name: 'close' })).toHaveFocus();
+      expect(screen.getByRole('button', { name: 'Close' })).toHaveFocus();
     });
 
     it('returns focus to the trigger after closing', () => {
@@ -190,14 +190,14 @@ describe('Modal', () => {
       save.focus();
       await user.tab();
 
-      expect(screen.getByRole('button', { name: 'close' })).toHaveFocus();
+      expect(screen.getByRole('button', { name: 'Close' })).toHaveFocus();
     });
 
     it('wraps focus from the first element back to the last on Shift+Tab', async () => {
       const user = userEvent.setup();
       renderModal({ footer: <button>Save</button> });
 
-      const close = screen.getByRole('button', { name: 'close' });
+      const close = screen.getByRole('button', { name: 'Close' });
       close.focus();
       await user.tab({ shift: true });
 
