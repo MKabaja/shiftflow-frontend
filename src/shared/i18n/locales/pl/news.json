@@ -1,0 +1,14 @@
+{
+  "feed": {
+    "title": "Aktualności",
+    "empty": "Brak aktualności",
+    "emptyHint": "Gdy zarząd coś opublikuje, zobaczysz to tutaj.",
+    "error": "Nie udało się wczytać aktualności."
+  },
+  "card": {
+    "important": "Ważne",
+    "readMore": "Czytaj więcej",
+    "readLess": "Zwiń",
+    "meta": "{{author}} · {{time}}"
+  }
+}

@@ -2,7 +2,8 @@
   "appName": "SHIFTFlow",
   "loading": "Loading…",
   "actions": {
-    "close": "Close"
+    "close": "Close",
+    "retry": "Try again"
   },
   "pin": {
     "groupLabel": "PIN",

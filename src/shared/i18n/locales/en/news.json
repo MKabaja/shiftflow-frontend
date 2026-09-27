@@ -1,0 +1,14 @@
+{
+  "feed": {
+    "title": "News",
+    "empty": "No news yet",
+    "emptyHint": "When management posts something, you'll see it here.",
+    "error": "Couldn't load news."
+  },
+  "card": {
+    "important": "Important",
+    "readMore": "Read more",
+    "readLess": "Show less",
+    "meta": "{{author}} · {{time}}"
+  }
+}

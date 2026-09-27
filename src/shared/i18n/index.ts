@@ -5,14 +5,16 @@ import { config } from '@/shared/lib/config/config.ts';
 import plCommon from './locales/pl/common.json';
 import plErrors from './locales/pl/errors.json';
 import plAuth from './locales/pl/auth.json';
+import plNews from './locales/pl/news.json';
 
 import enAuth from './locales/en/auth.json';
 import enCommon from './locales/en/common.json';
 import enErrors from './locales/en/errors.json';
+import enNews from './locales/en/news.json';
 
 const resources = {
-  pl: { common: plCommon, errors: plErrors, auth: plAuth },
-  en: { common: enCommon, errors: enErrors, auth: enAuth },
+  pl: { common: plCommon, errors: plErrors, auth: plAuth, news: plNews },
+  en: { common: enCommon, errors: enErrors, auth: enAuth, news: enNews },
 } as const;
 
 const LOCALE_KEY: string = 'shiftflow.locale';
@@ -49,7 +51,7 @@ void i18n.use(initReactI18next).init({
   resources,
   fallbackLng: 'pl',
   lng: getInitialLocale(),
-  ns: ['common', 'errors', 'auth'],
+  ns: ['common', 'errors', 'auth', 'news'],
   defaultNS: 'common',
   interpolation: { escapeValue: false },
   debug: config.isDev,
