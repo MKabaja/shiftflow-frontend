@@ -56,7 +56,7 @@ export function Toggle({
       {label && (
         <div>
           <span className="text-text-primary text-body-md">{label}</span>
-          {description && <p className="text-text-muted mt-0.5 text-body-sm">{description}</p>}
+          {description && <p className="text-text-muted text-body-sm mt-0.5">{description}</p>}
         </div>
       )}
     </label>

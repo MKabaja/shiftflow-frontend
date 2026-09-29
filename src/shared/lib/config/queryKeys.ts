@@ -9,6 +9,6 @@ export const queryKeys = {
   },
   news: {
     all: ['news'] as const,
-    latest: ['news','latest'] as const,
-  }
+    latest: ['news', 'latest'] as const,
+  },
 };
