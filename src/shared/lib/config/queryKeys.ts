@@ -1,3 +1,5 @@
+//TANSTACK query cache keys
+
 export const queryKeys = {
   auth: { me: ['auth', 'me'] as const },
   schedules: {
@@ -5,4 +7,8 @@ export const queryKeys = {
     list: (filters: Record<string, unknown>) => ['schedules', 'list', filters] as const,
     detail: (id: number) => ['schedules', 'detail', id] as const,
   },
+  news: {
+    all: ['news'] as const,
+    latest: ['news','latest'] as const,
+  }
 };
