@@ -8,7 +8,6 @@
   "card": {
     "important": "Important",
     "readMore": "Read more",
-    "readLess": "Show less",
-    "meta": "{{author}} · {{time}}"
+    "readLess": "Show less"
   }
 }

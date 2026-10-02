@@ -85,7 +85,7 @@ export type NewsPost = {
   title: string;
   content: string;
   is_important: boolean;
-  author: { id: number; name: string };
+  author: { id: number; name: string } | null;
   created_at: string;
   updated_at: string;
 };
