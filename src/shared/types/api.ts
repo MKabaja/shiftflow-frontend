@@ -3,7 +3,7 @@ export type UserRole = 'admin' | 'manager' | 'employee';
 export type ContractType = 'employment_contract' | 'mandate_contract';
 export type ShiftStatus = 'scheduled' | 'cancelled';
 export type ScheduleStatus = 'draft' | 'published';
-export type Locale = 'pl' | 'en';
+export type UserLocale = 'pl' | 'en';
 
 // === USER ===
 export type User = {
@@ -18,7 +18,7 @@ export type User = {
   quarter_hour_limit: number | null;
   break_limit: number | null;
   contract_type: ContractType | null;
-  locale: Locale;
+  locale: UserLocale;
   positions: Position[];
   created_at: string;
 };
@@ -111,7 +111,7 @@ export type ChangePinInput = {
   new_pin: string;
   new_pin_confirmation: string;
 };
-export type ChangeLocaleInput = { locale: Locale };
+export type ChangeLocaleInput = { locale: UserLocale };
 
 // === BATCH ===
 export type BatchShiftInput = {
