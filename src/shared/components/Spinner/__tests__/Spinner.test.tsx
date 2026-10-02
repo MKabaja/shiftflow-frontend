@@ -7,14 +7,14 @@ describe('Spinner', () => {
     expect(screen.getByRole('status')).toBeInTheDocument();
   });
 
-  it('has default aria-label', () => {
+  it('has translated default aria-label', () => {
     render(<Spinner />);
-    expect(screen.getByRole('status')).toHaveAttribute('aria-label', 'loading...');
+    expect(screen.getByRole('status')).toHaveAttribute('aria-label', 'Loading…');
   });
 
   it('accepts custom aria-label', () => {
-    render(<Spinner label="loading..." />);
-    expect(screen.getByRole('status')).toHaveAttribute('aria-label', 'loading...');
+    render(<Spinner label="Saving" />);
+    expect(screen.getByRole('status')).toHaveAttribute('aria-label', 'Saving');
   });
 
   it('applies size class', () => {
