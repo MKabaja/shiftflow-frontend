@@ -52,7 +52,7 @@ function NewsCard({ post }: NewsCardProps) {
           ref={contentRef}
           className={cn(
             'text-text-primary text-body-md wrap-break-word whitespace-pre-line',
-            !expanded && 'line-clamp-4',
+            !expanded && 'line-clamp-2',
           )}
         >
           {post.content}

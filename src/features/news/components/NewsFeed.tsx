@@ -7,12 +7,12 @@ import { useLatestNews } from '@/features/news/api/queries.ts';
 import { NewsCard } from '@/features/news/components/NewsCard.tsx';
 import { NewsCardSkeleton } from '@/features/news/components/NewsCardSkeleton.tsx';
 
-const SKELETON_COUNT = 3;
+const SKELETON_COUNT = 2;
 
 function NewsFeed() {
   const { t } = useTranslation('news');
   const { t: tCommon } = useTranslation('common');
-  const { data: posts, isError, isFetching, errorUpdatedAt, refetch } = useLatestNews();
+  const { data: posts, isError, isFetching, isPending, errorUpdatedAt, refetch } = useLatestNews();
   const headingId = useId();
   const headingRef = useRef<HTMLHeadingElement>(null);
 
@@ -22,7 +22,7 @@ function NewsFeed() {
   }
 
   let content;
-  if (posts === undefined && !isError) {
+  if (isPending) {
     content = (
       <div
         role="status"
@@ -34,7 +34,7 @@ function NewsFeed() {
         ))}
       </div>
     );
-  } else if (posts === undefined) {
+  } else if (isError && posts === undefined) {
     content = (
       <div className="flex flex-col items-start gap-3">
         <Alert

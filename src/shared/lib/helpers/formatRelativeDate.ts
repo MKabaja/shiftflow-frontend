@@ -13,28 +13,21 @@ import { config } from '@/shared/lib/config/config.ts';
 import { formatDate } from '@/shared/lib/helpers/formatDate.ts';
 
 /**
- * Formats a past date relative to `now` (`3 godziny temu`, `1 day ago`)
- * while it is younger than `config.relativeDateLimitDays` full days, and as a
- * full date from {@link formatDate} after that.
+ * Formats a date relative to `now` (`3 godziny temu`), or as a full date once it is
+ * `config.relativeDateLimitDays` days old.
  *
- * From one minute up the distance is rounded down, so the label never
- * overstates the age and the switch to a full date happens exactly at the
- * limit. Under a minute it reads as "less than a minute ago" or "1 minute ago"
- * instead of a seconds count.
- *
- * A date later than `now` is treated as `now`, so a server clock running
- * slightly ahead never produces "in 2 minutes".
- *
+ * @param date - date to format; a future date is treated as `now`.
+ * @param locale - date-fns locale of the output.
  * @param now - reference point, defaults to the current time.
- * @returns The formatted date, or an empty string when `date` is invalid.
+ * @returns The relative or full date, or `null` when `date` is invalid.
  */
 export function formatRelativeDate(
   date: DateArg<Date>,
   locale: Locale,
   now: Date = new Date(),
-): string {
+): string | null {
   const parsedDate = toDate(date);
-  if (!isValid(parsedDate)) return '';
+  if (!isValid(parsedDate)) return null;
 
   if (differenceInDays(now, parsedDate) >= config.relativeDateLimitDays) {
     return formatDate(parsedDate, locale);
