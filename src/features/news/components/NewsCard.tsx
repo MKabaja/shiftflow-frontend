@@ -58,7 +58,7 @@ function NewsCard({ post }: NewsCardProps) {
           {post.content}
         </p>
 
-        {(expanded || isClamped) && (
+        {isClamped && (
           <Button
             variant="ghost"
             aria-expanded={expanded}

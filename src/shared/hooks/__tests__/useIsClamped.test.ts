@@ -1,7 +1,7 @@
 import { act, renderHook } from '@testing-library/react';
 import { useIsClamped } from '../useIsClamped.ts';
 
-let trigger: () => void;
+let callback: () => void;
 const observe = vi.fn();
 const disconnect = vi.fn();
 
@@ -10,7 +10,7 @@ const setSize = (element: HTMLElement, scrollHeight: number, clientHeight: numbe
   Object.defineProperty(element, 'clientHeight', { configurable: true, value: clientHeight });
 };
 
-const measure = () => act(() => trigger());
+const triggerResize = () => act(() => callback());
 
 const renderUseIsClamped = (enabled = true) => {
   const ref = { current: document.createElement('p') };
@@ -27,8 +27,8 @@ describe('useIsClamped', () => {
     vi.stubGlobal(
       'ResizeObserver',
       class {
-        constructor(callback: () => void) {
-          trigger = callback;
+        constructor(cb: () => void) {
+          callback = cb;
         }
         observe = observe;
         disconnect = disconnect;
@@ -57,7 +57,7 @@ describe('useIsClamped', () => {
       const { element, result } = renderUseIsClamped();
 
       setSize(element, scrollHeight, clientHeight);
-      measure();
+      triggerResize();
 
       expect(result.current).toBe(expected);
     },
@@ -67,22 +67,22 @@ describe('useIsClamped', () => {
     const { element, result } = renderUseIsClamped();
 
     setSize(element, 40, 40);
-    measure();
+    triggerResize();
     expect(result.current).toBe(false);
 
     setSize(element, 80, 40);
-    measure();
+    triggerResize();
     expect(result.current).toBe(true);
 
     setSize(element, 40, 40);
-    measure();
+    triggerResize();
     expect(result.current).toBe(false);
   });
 
   it('keeps the last result and disconnects when disabled', () => {
     const { element, result, rerender } = renderUseIsClamped();
     setSize(element, 80, 40);
-    measure();
+    triggerResize();
 
     rerender({ enabled: false });
 
@@ -99,7 +99,7 @@ describe('useIsClamped', () => {
   it('measures again with a new observer when re-enabled', () => {
     const { element, result, rerender } = renderUseIsClamped();
     setSize(element, 80, 40);
-    measure();
+    triggerResize();
     rerender({ enabled: false });
     setSize(element, 40, 40);
 
@@ -108,7 +108,7 @@ describe('useIsClamped', () => {
     expect(observe).toHaveBeenCalledTimes(2);
     expect(observe).toHaveBeenLastCalledWith(element);
 
-    measure();
+    triggerResize();
     expect(result.current).toBe(false);
   });
 
