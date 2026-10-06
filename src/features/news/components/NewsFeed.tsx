@@ -12,13 +12,13 @@ const SKELETON_COUNT = 2;
 function NewsFeed() {
   const { t } = useTranslation('news');
   const { t: tCommon } = useTranslation('common');
-  const { data: posts, isError, isFetching, isPending, errorUpdatedAt, refetch } = useLatestNews();
+  const { data: posts, isError, isPending, refetch } = useLatestNews();
   const headingId = useId();
   const headingRef = useRef<HTMLHeadingElement>(null);
 
   async function handleRetry() {
-    const result = await refetch();
-    if (result.isSuccess) headingRef.current?.focus();
+    await refetch();
+    headingRef.current?.focus();
   }
 
   let content;
@@ -37,13 +37,9 @@ function NewsFeed() {
   } else if (isError && posts === undefined) {
     content = (
       <div className="flex flex-col items-start gap-3">
-        <Alert
-          key={errorUpdatedAt}
-          message={t('feed.error')}
-        />
+        <Alert message={t('feed.error')} />
         <Button
           variant="secondary"
-          isLoading={isFetching}
           onClick={() => void handleRetry()}
         >
           {tCommon('actions.retry')}
