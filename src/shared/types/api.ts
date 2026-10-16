@@ -79,6 +79,11 @@ export type Availability = {
   updated_at: string;
 };
 
+export type AvailabilityQueryParams = {
+  year: number;
+  month: number;
+};
+
 // === NEWS POST ===
 export type NewsPost = {
   id: number;
@@ -141,6 +146,11 @@ export type PaginatedResponse<T> = {
   data: T[];
   links: { first: string; last: string; prev: string | null; next: string | null };
   meta: { current_page: number; last_page: number; per_page: number; total: number };
+};
+
+// === COLLECTION ===
+export type CollectionResponse<T> = {
+  data: T[];
 };
 
 export type SingleResource<T> = { data: T; message?: string };
