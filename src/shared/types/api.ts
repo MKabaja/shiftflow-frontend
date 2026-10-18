@@ -83,6 +83,11 @@ export type AvailabilityQueryParams = {
   year: number;
   month: number;
 };
+export type UpsertAvailabilityInput = {
+  date: string;
+  is_available: boolean;
+  notes: string | null;
+};
 
 // === NEWS POST ===
 export type NewsPost = {
