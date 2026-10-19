@@ -88,6 +88,8 @@ export type UpsertAvailabilityInput = {
   is_available: boolean;
   notes: string | null;
 };
+type DeleteAvailabilityKeys = 'id' | 'date';
+export type DeleteAvailabilityInput = Pick<Availability, DeleteAvailabilityKeys>;
 
 // === NEWS POST ===
 export type NewsPost = {
