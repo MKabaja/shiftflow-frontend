@@ -3,14 +3,6 @@ import { toMonthParams } from '../toMonthParams.ts';
 const NEGATIVE_OFFSET_TIME_ZONE = 'America/New_York';
 const DECEMBER_INDEX = 11;
 
-function setTimeZone(timeZone: string | undefined) {
-  if (timeZone === undefined) {
-    delete process.env.TZ;
-  } else {
-    process.env.TZ = timeZone;
-  }
-}
-
 describe('toMonthParams', () => {
   const originalTimeZone = process.env.TZ;
 
@@ -34,3 +26,11 @@ describe('toMonthParams', () => {
     expect(toMonthParams(firstOfJanuary)).toEqual({ year: 2026, month: 1 });
   });
 });
+
+function setTimeZone(timeZone: string | undefined) {
+  if (timeZone === undefined) {
+    delete process.env.TZ;
+  } else {
+    process.env.TZ = timeZone;
+  }
+}

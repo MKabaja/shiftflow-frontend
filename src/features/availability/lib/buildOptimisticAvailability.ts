@@ -8,17 +8,22 @@ import type { Availability, UpsertAvailabilityInput } from '@/shared/types/api.t
  *
  * @param input Data sent to the backend.
  * @param userId Owner of the entry — the logged-in user.
- * @returns A complete {@link Availability} with a temporary `id` and current timestamps.
+ * @param now Moment of the change; sets the timestamps and the temporary `id`.
+ * @returns A complete {@link Availability} with a temporary `id` and timestamps set to `now`.
  */
-function buildOptimisticAvailability(input: UpsertAvailabilityInput, userId: number): Availability {
-  const now = new Date().toISOString();
+function buildOptimisticAvailability(
+  input: UpsertAvailabilityInput,
+  userId: number,
+  now: Date,
+): Availability {
+  const timestamp = now.toISOString();
 
   return {
     ...input,
-    id: -Date.now(),
+    id: -now.getTime(),
     user_id: userId,
-    created_at: now,
-    updated_at: now,
+    created_at: timestamp,
+    updated_at: timestamp,
   };
 }
 

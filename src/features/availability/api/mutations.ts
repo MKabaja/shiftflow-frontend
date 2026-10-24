@@ -55,7 +55,10 @@ function useUpsertAvailability() {
           const user = getCachedUser();
           if (!user) return availabilities;
 
-          return [...availabilities, buildOptimisticAvailability(availabilityInput, user.id)];
+          return [
+            ...availabilities,
+            buildOptimisticAvailability(availabilityInput, user.id, new Date()),
+          ];
         }
 
         return availabilities.map((availability) =>
