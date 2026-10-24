@@ -42,8 +42,13 @@ sterowalnego mocka), jest bezwartościowy.
   }));
   ```
 - Motion mockuj tylko, gdy testy bez tego padają (v12 renderuje się w jsdom poprawnie).
-- MSW nie jest zainstalowany — sieć mockujemy na module `shared/lib/config/axios.ts` sterowalnym `vi.fn()`
-  (MSW planowany osobnym branchem).
+- **Sieć → MSW (v2)**, nigdy `vi.mock` klienta HTTP ani własnych modułów API. Serwer `test/msw/server.ts` startuje
+  w `setup.ts` z `onUnhandledRequest: 'error'` (żądanie bez handlera = błąd testu), handlery resetowane po każdym
+  teście. Każdy test deklaruje odpowiedzi przez `server.use(http.get('/api/…', …))`. Kopertę Laravela buduje
+  `test/msw/envelopes.ts` (`page(items)`), żeby testy nie znały kształtu `{ data }`. „Wiecznie w toku” →
+  `await delay('infinite')`, błąd sieci → `HttpResponse.error()`, liczba zapytań → licznik w handlerze.
+- Helpery: `test/utils/renderWithQueryClient.tsx` (świeży `QueryClient`, `retry: false`, opcjonalny `setup` do
+  zasiania cache), `test/utils/deferred.ts` (odpowiedź wstrzymana do ręcznego `resolve()`).
 - Komponenty czysto prezentacyjne (`Alert`, `Logo`, `Separator`, `Splash`) nie mają testów.
 - Testy widoków i layoutów odłożone (decyzja 2026-07-29) — nie proponuj ich przy każdym tasku, odnotuj lukę.
 
