@@ -19,7 +19,12 @@ export function Card({
 }: CardProps) {
   return (
     <div
-      className={cn(baseStyles, variantStyles[variant], interactive && interactiveStyles, className)}
+      className={cn(
+        baseStyles,
+        variantStyles[variant],
+        interactive && interactiveStyles,
+        className,
+      )}
       {...rest}
     >
       {children}

@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { cn } from '@/shared/lib/helpers/cn.ts';
 import { baseStyles, sizeStyles, variantStyles } from './Spinner.styles.ts';
 
@@ -10,15 +11,18 @@ type SpinnerProps = {
   label?: string;
 };
 
-export function Spinner({ size = 'md', label = 'loading...', variant = 'accent' }: SpinnerProps) {
+export function Spinner({ size = 'md', label, variant = 'accent' }: SpinnerProps) {
+  const { t } = useTranslation();
+  const text = label ?? t('loading');
+
   return (
     <>
       <span
         role="status"
-        aria-label={label}
+        aria-label={text}
         className={cn(baseStyles, sizeStyles[size], variantStyles[variant])}
       ></span>
-      <span aria-hidden="true">{label}</span>
+      <span aria-hidden="true">{text}</span>
     </>
   );
 }

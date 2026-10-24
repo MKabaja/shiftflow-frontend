@@ -3,15 +3,15 @@
    motywu (--color-*, --shadow-*, --text-*, …), a z-index do nich nie należy —
    sam `--z-modal` w @theme nie dałby klasy `z-modal`, po cichu i bez błędu. */
 @utility z-sidebar {
-    z-index: var(--z-sidebar);
+  z-index: var(--z-sidebar);
 }
 
 @utility z-bottom-nav {
-    z-index: var(--z-bottom-nav);
+  z-index: var(--z-bottom-nav);
 }
 
 @utility z-modal {
-    z-index: var(--z-modal);
+  z-index: var(--z-modal);
 }
 
 /* Pas światła przejeżdżający przez element: na hover z lewej na prawą, a przy
@@ -28,52 +28,53 @@
    treścią — sweep nie przesłania tekstu. Alfę pasa nadpisuje wariant
    przez `--sweep-alpha`. */
 @utility sweep-on-hover {
-    position: relative;
-    isolation: isolate;
-    overflow: hidden;
-    --sweep-alpha: 0.12;
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  --sweep-alpha: 0.12;
 
+  &::before {
+    content: '';
+    position: absolute;
+    top: -25%;
+    bottom: -25%;
+    left: -70%;
+    width: 45%;
+    z-index: -1;
+    pointer-events: none;
+    opacity: 0;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgb(255 255 255 / var(--sweep-alpha)) 50%,
+      transparent 100%
+    );
+    transform: skewX(-18deg) translateX(0);
+    transition:
+      transform 500ms ease-out,
+      opacity 150ms ease-out 400ms;
+  }
+
+  @media (hover: hover) {
+    &:hover::before {
+      opacity: 1;
+      transform: skewX(-18deg) translateX(420%);
+      transition:
+        transform 500ms ease-out,
+        opacity 150ms ease-out;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
     &::before {
-        content: '';
-        position: absolute;
-        top: -25%;
-        bottom: -25%;
-        left: -70%;
-        width: 45%;
-        z-index: -1;
-        pointer-events: none;
-        opacity: 0;
-        background: linear-gradient(
-            90deg,
-            transparent 0%,
-            rgb(255 255 255 / var(--sweep-alpha)) 50%,
-            transparent 100%
-        );
-        transform: skewX(-18deg) translateX(0);
-        transition:
-            transform 500ms ease-out,
-            opacity 150ms ease-out 400ms;
+      display: none;
     }
-
-    @media (hover: hover) {
-        &:hover::before {
-            opacity: 1;
-            transform: skewX(-18deg) translateX(420%);
-            transition:
-                transform 500ms ease-out,
-                opacity 150ms ease-out;
-        }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        &::before {
-            display: none;
-        }
-    }
+  }
 }
 
 .auth-bg {
-    background-color: var(--color-bg-deep);
-    background-image: radial-gradient(circle at 50% 40%, transparent 30%, var(--color-bg-deep) 85%),
+  background-color: var(--color-bg-deep);
+  background-image:
+    radial-gradient(circle at 50% 40%, transparent 30%, var(--color-bg-deep) 85%),
     url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='20' height='20'%3E%3Ccircle cx='10' cy='10' r='0.9' fill='%238B8B8F' fill-opacity='0.14'/%3E%3C/svg%3E");
 }

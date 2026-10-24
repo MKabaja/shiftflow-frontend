@@ -3,7 +3,7 @@ export type UserRole = 'admin' | 'manager' | 'employee';
 export type ContractType = 'employment_contract' | 'mandate_contract';
 export type ShiftStatus = 'scheduled' | 'cancelled';
 export type ScheduleStatus = 'draft' | 'published';
-export type Locale = 'pl' | 'en';
+export type UserLocale = 'pl' | 'en';
 
 // === USER ===
 export type User = {
@@ -18,7 +18,7 @@ export type User = {
   quarter_hour_limit: number | null;
   break_limit: number | null;
   contract_type: ContractType | null;
-  locale: Locale;
+  locale: UserLocale;
   positions: Position[];
   created_at: string;
 };
@@ -79,13 +79,25 @@ export type Availability = {
   updated_at: string;
 };
 
+export type AvailabilityQueryParams = {
+  year: number;
+  month: number;
+};
+export type UpsertAvailabilityInput = {
+  date: string;
+  is_available: boolean;
+  notes: string | null;
+};
+type DeleteAvailabilityKeys = 'id' | 'date';
+export type DeleteAvailabilityInput = Pick<Availability, DeleteAvailabilityKeys>;
+
 // === NEWS POST ===
 export type NewsPost = {
   id: number;
   title: string;
   content: string;
   is_important: boolean;
-  author: { id: number; name: string };
+  author: { id: number; name: string } | null;
   created_at: string;
   updated_at: string;
 };
@@ -111,7 +123,7 @@ export type ChangePinInput = {
   new_pin: string;
   new_pin_confirmation: string;
 };
-export type ChangeLocaleInput = { locale: Locale };
+export type ChangeLocaleInput = { locale: UserLocale };
 
 // === BATCH ===
 export type BatchShiftInput = {
@@ -141,6 +153,11 @@ export type PaginatedResponse<T> = {
   data: T[];
   links: { first: string; last: string; prev: string | null; next: string | null };
   meta: { current_page: number; last_page: number; per_page: number; total: number };
+};
+
+// === COLLECTION ===
+export type CollectionResponse<T> = {
+  data: T[];
 };
 
 export type SingleResource<T> = { data: T; message?: string };

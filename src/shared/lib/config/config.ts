@@ -3,6 +3,8 @@ export const config = {
   isDev: false,
   pinLength: 4,
   passwordMinLength: 6,
+  latestNewsLimit: 10,
+  relativeDateLimitDays: 2,
   desktopMediaQuery: '(min-width: 48rem)',
   staleTime: {
     auth: 5 * 60 * 1000, //5min

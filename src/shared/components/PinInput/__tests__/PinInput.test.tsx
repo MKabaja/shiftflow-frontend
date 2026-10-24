@@ -3,7 +3,13 @@ import userEvent from '@testing-library/user-event';
 import { createRef } from 'react';
 import { PinInput } from '../PinInput.tsx';
 
-const renderPin = (props = {}) => render(<PinInput autoFocus={false} {...props} />);
+const renderPin = (props = {}) =>
+  render(
+    <PinInput
+      autoFocus={false}
+      {...props}
+    />,
+  );
 const box = (n: number) => screen.getByLabelText(`PIN digit ${n} of 4`) as HTMLInputElement;
 
 describe('PinInput', () => {
@@ -13,7 +19,12 @@ describe('PinInput', () => {
   });
 
   it('renders a custom number of boxes when length is passed', () => {
-    render(<PinInput length={6} autoFocus={false} />);
+    render(
+      <PinInput
+        length={6}
+        autoFocus={false}
+      />,
+    );
     expect(screen.getAllByLabelText(/PIN digit \d of 6/)).toHaveLength(6);
   });
 

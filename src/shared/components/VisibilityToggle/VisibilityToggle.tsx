@@ -29,11 +29,7 @@ export function VisibilityToggle({
       aria-pressed={!masked}
       className={cn(baseStyles, className)}
     >
-      {masked ? (
-        <Eye className={cn(iconStyles)} />
-      ) : (
-        <EyeOff className={cn(iconStyles)} />
-      )}
+      {masked ? <Eye className={cn(iconStyles)} /> : <EyeOff className={cn(iconStyles)} />}
     </button>
   );
 }
