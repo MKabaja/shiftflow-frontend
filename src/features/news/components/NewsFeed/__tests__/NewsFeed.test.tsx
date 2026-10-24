@@ -1,50 +1,50 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { delay, http, HttpResponse, type HttpResponseResolver } from 'msw';
 import { NewsFeed } from '../NewsFeed.tsx';
-import { apiClient } from '@/shared/lib/config/axios.ts';
 import { queryKeys } from '@/shared/lib/config/queryKeys.ts';
 import { makePost } from '@/test/factories/newsPost.ts';
 import { stubResizeObserver } from '@/test/mocks/resizeObserver.ts';
+import { page } from '@/test/msw/envelopes.ts';
+import { server } from '@/test/msw/server.ts';
+import { createDeferred } from '@/test/utils/deferred.ts';
+import { renderWithQueryClient } from '@/test/utils/renderWithQueryClient.tsx';
 import type { NewsPost } from '@/shared/types/api.ts';
 
-vi.mock('@/shared/lib/config/axios.ts', () => ({ apiClient: { get: vi.fn() } }));
+let newsRequestCount = 0;
 
-const mockGet = vi.mocked(apiClient.get);
-
-const respondWith = (posts: NewsPost[]) => ({ data: { data: posts } });
-
-const createDeferred = () => {
-  let resolve!: (value: unknown) => void;
-  const promise = new Promise((r) => (resolve = r));
-  return { promise, resolve };
-};
-
-const renderNewsFeed = (setup: (queryClient: QueryClient) => void = () => {}) => {
-  const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
-  setup(queryClient);
-  const result = render(
-    <QueryClientProvider client={queryClient}>
-      <NewsFeed />
-    </QueryClientProvider>,
+const mockNews = (resolver: HttpResponseResolver) => {
+  server.use(
+    http.get('/api/news', (info) => {
+      newsRequestCount += 1;
+      return resolver(info);
+    }),
   );
-  return { queryClient, ...result };
 };
+
+const respondWith = (posts: NewsPost[]) => () => HttpResponse.json(page(posts));
+const failWithNetworkError = () => HttpResponse.error();
+const neverRespond = async () => {
+  await delay('infinite');
+};
+
+const renderNewsFeed = (setup?: Parameters<typeof renderWithQueryClient>[1]) =>
+  renderWithQueryClient(<NewsFeed />, setup);
 
 const getHeading = () => screen.getByRole('heading', { level: 1, name: 'News' });
 
 describe('NewsFeed', () => {
   beforeEach(() => {
+    newsRequestCount = 0;
     stubResizeObserver();
   });
 
   afterEach(() => {
     vi.unstubAllGlobals();
-    vi.clearAllMocks();
   });
 
   it('shows the loading status while the request is pending', () => {
-    mockGet.mockReturnValue(new Promise(() => {}));
+    mockNews(neverRespond);
     renderNewsFeed();
 
     expect(getHeading()).toBeInTheDocument();
@@ -54,7 +54,7 @@ describe('NewsFeed', () => {
   });
 
   it('shows the error with a retry button when the request fails without data', async () => {
-    mockGet.mockRejectedValue(new Error('Network'));
+    mockNews(failWithNetworkError);
     renderNewsFeed();
 
     expect(await screen.findByRole('alert')).toHaveTextContent("Couldn't load news.");
@@ -64,14 +64,14 @@ describe('NewsFeed', () => {
 
   it('sends a new request and shows the loading status on retry', async () => {
     const user = userEvent.setup();
-    mockGet.mockRejectedValue(new Error('Network'));
+    mockNews(failWithNetworkError);
     renderNewsFeed();
     const button = await screen.findByRole('button', { name: 'Try again' });
 
-    mockGet.mockReturnValue(createDeferred().promise);
+    mockNews(neverRespond);
     await user.click(button);
 
-    expect(mockGet).toHaveBeenCalledTimes(2);
+    expect(newsRequestCount).toBe(2);
     expect(screen.getByRole('status')).toBeInTheDocument();
     expect(screen.queryByRole('alert')).toBeNull();
     expect(screen.queryByRole('button', { name: 'Try again' })).toBeNull();
@@ -79,7 +79,7 @@ describe('NewsFeed', () => {
 
   it('shows the error again and focuses the heading after a failed retry', async () => {
     const user = userEvent.setup();
-    mockGet.mockRejectedValue(new Error('Network'));
+    mockNews(failWithNetworkError);
     renderNewsFeed();
     const button = await screen.findByRole('button', { name: 'Try again' });
 
@@ -91,14 +91,17 @@ describe('NewsFeed', () => {
 
   it('shows the list and focuses the heading after a successful retry', async () => {
     const user = userEvent.setup();
-    mockGet.mockRejectedValue(new Error('Network'));
+    mockNews(failWithNetworkError);
     renderNewsFeed();
     const button = await screen.findByRole('button', { name: 'Try again' });
 
-    const deferred = createDeferred();
-    mockGet.mockReturnValue(deferred.promise);
+    const response = createDeferred();
+    mockNews(async () => {
+      await response.promise;
+      return HttpResponse.json(page([makePost()]));
+    });
     await user.click(button);
-    deferred.resolve(respondWith([makePost()]));
+    response.resolve();
 
     expect(await screen.findByRole('list')).toBeInTheDocument();
     expect(screen.queryByRole('alert')).toBeNull();
@@ -107,10 +110,10 @@ describe('NewsFeed', () => {
 
   it('keeps the cached list without a loading status while refreshing', async () => {
     const post = makePost();
-    mockGet.mockReturnValue(new Promise(() => {}));
+    mockNews(neverRespond);
     renderNewsFeed((client) => client.setQueryData(queryKeys.news.latest, [post]));
 
-    await waitFor(() => expect(mockGet).toHaveBeenCalled());
+    await waitFor(() => expect(newsRequestCount).toBe(1));
 
     expect(screen.getByRole('list')).toBeInTheDocument();
     expect(screen.getByText(post.title)).toBeInTheDocument();
@@ -119,13 +122,13 @@ describe('NewsFeed', () => {
 
   it('keeps the cached list without an alert when a refresh fails', async () => {
     const post = makePost();
-    mockGet.mockRejectedValue(new Error('Network'));
+    mockNews(failWithNetworkError);
     const { queryClient } = renderNewsFeed((client) =>
       client.setQueryData(queryKeys.news.latest, [post]),
     );
 
     await waitFor(() => {
-      expect(mockGet).toHaveBeenCalled();
+      expect(newsRequestCount).toBe(1);
       expect(queryClient.getQueryState(queryKeys.news.latest)?.status).toBe('error');
     });
 
@@ -135,7 +138,7 @@ describe('NewsFeed', () => {
   });
 
   it('shows the empty state when there are no posts', async () => {
-    mockGet.mockResolvedValue(respondWith([]));
+    mockNews(respondWith([]));
     renderNewsFeed();
 
     expect(await screen.findByText('No news yet')).toBeInTheDocument();
@@ -151,7 +154,7 @@ describe('NewsFeed', () => {
       makePost({ id: 2, title: 'Second post', content: 'Second content' }),
       makePost({ id: 3, title: 'Third post', content: 'Third content' }),
     ];
-    mockGet.mockResolvedValue(respondWith(posts));
+    mockNews(respondWith(posts));
     renderNewsFeed();
 
     expect(await screen.findAllByRole('listitem')).toHaveLength(3);
