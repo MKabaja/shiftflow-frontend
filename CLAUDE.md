@@ -70,6 +70,7 @@ Przed zadaniem z kodem sprawdź tę mapę. **Na początku odpowiedzi napisz „S
 | --- | --- | --- |
 | pisanie / review TS, React, hooków | `react-clean-code` | `modern-best-practice-react-components`, `clean-typescript` |
 | testy, spec testu, review testu | `testing-react` | — |
+| komentarz `/** */` nad eksportem (TSDoc) | `tsdoc` | — |
 | klasy Tailwind, style | `modern-tailwind` (tokeny i tak z `theme.css`) | — |
 | semantyka, dostępność, klawiatura | `modern-accessible-html-jsx` | `use-modern-browser-apis` |
 | bezpieczeństwo (auth, cookie, dane) | `web-security` | `/security-review` |

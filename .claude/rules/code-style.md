@@ -29,10 +29,9 @@ Pełny standard z przykładami: skill `react-clean-code`. Poniżej rdzeń + konw
 - Decyzje (czyste funkcje) oddzielone od efektów. Czas i losowość przekazywane jako argumenty.
 - Bez abstrakcji, klas i plików bez konkretnego powodu. Bez refaktoru kodu niezwiązanego z zadaniem.
 
-## Komentarze i JSDoc
-- **Bez komentarzy w kodzie** — wyjaśnienia idą do rozmowy / PR.
-- JSDoc tylko na eksportowanym API modułu i hookach wielokrotnego użytku (prywatne helpery bez JSDoc). Opisuje, jak
-  działa kod — bez odwołań do numerów ADR i wewnętrznych dokumentów.
+## Komentarze i TSDoc
+- **Bez komentarzy w kodzie** — wyjaśnienia idą do rozmowy / PR. Jedyny wyjątek: TSDoc na eksportowanym API (skill `tsdoc`).
+- TSDoc bez odwołań do numerów ADR i wewnętrznych dokumentów.
 
 ## React
 - Importy z Reacta nazwane (`import { useState, type ReactNode } from 'react'`), bez `React.`.
