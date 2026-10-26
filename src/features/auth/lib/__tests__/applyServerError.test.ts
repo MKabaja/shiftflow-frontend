@@ -1,53 +1,26 @@
-import { AxiosError, type AxiosResponse } from 'axios';
 import type { FieldValues, UseFormSetError } from 'react-hook-form';
 import { applyServerError } from '../applyServerError.ts';
 import type { LoginFormValues, LoginPinFormValues } from '../schemas.ts';
-import type { ApiError } from '@/shared/types/api.ts';
+import { NetworkError } from '@/shared/api/networkError.ts';
+import { makeHttpError, makeValidationError } from '@/test/factories/httpError.factory.ts';
 
-const makeAxiosError = (status?: number, data?: ApiError): AxiosError => {
-  const error = new AxiosError('request failed');
-  if (status !== undefined) {
-    error.response = { status, data } as unknown as AxiosResponse<ApiError>;
-  }
+const wrongPassword = makeHttpError(401, { message: 'Invalid password or login!' });
+const wrongPin = makeHttpError(401, { message: 'Invalid pin or login' });
+const deactivated = makeHttpError(403, { message: 'Account deactivated.' });
+const rateLimited = makeHttpError(429, { message: 'Too Many Attempts.' });
+const noResponse = new NetworkError(new TypeError('Failed to fetch'));
 
-  return error;
-};
-
-const wrongPassword = makeAxiosError(401, { message: 'Invalid password or login!' });
-const wrongPin = makeAxiosError(401, { message: 'Invalid pin or login' });
-const deactivated = makeAxiosError(403, { message: 'Account deactivated.' });
-const rateLimited = makeAxiosError(429, { message: 'Too Many Attempts.' });
-const noResponse = makeAxiosError();
-const missingPassword = makeAxiosError(422, {
-  message: 'The password field is required.',
-  errors: { password: ['The password field is required.'] },
+const missingPassword = makeValidationError({ password: ['The password field is required.'] });
+const twoBadFields = makeValidationError({
+  login: ['The login field is required.'],
+  password: ['The password field must be at least 6 characters.'],
 });
-const twoBadFields = makeAxiosError(422, {
-  message: 'The given data was invalid.',
-  errors: {
-    login: ['The login field is required.'],
-    password: ['The password field must be at least 6 characters.'],
-  },
-});
-
-const rejectedPin = makeAxiosError(422, {
-  message: 'The pin field must be 4 characters.',
-  errors: { pin: ['The pin field must be 4 characters.'] },
-});
-const noNamedFields = makeAxiosError(422, {
-  message: 'The given data was invalid.',
-  errors: {},
-});
-const fieldWithoutMessage = makeAxiosError(422, {
-  message: 'The given data was invalid.',
-  errors: { password: [] },
-});
-const oneUsableFieldOneEmpty = makeAxiosError(422, {
-  message: 'The given data was invalid.',
-  errors: {
-    login: ['The login field is required.'],
-    password: [],
-  },
+const rejectedPin = makeValidationError({ pin: ['The pin field must be 4 characters.'] });
+const noNamedFields = makeValidationError({});
+const fieldWithoutMessage = makeValidationError({ password: [] });
+const oneUsableFieldOneEmpty = makeValidationError({
+  login: ['The login field is required.'],
+  password: [],
 });
 
 const makeSetError = <T extends FieldValues>() => vi.fn<UseFormSetError<T>>();
@@ -107,7 +80,7 @@ describe('applyServerError', () => {
       );
     });
 
-    it('falls back to the generic message for a non-axios error', () => {
+    it('falls back to the generic message for a non-HTTP error', () => {
       const setError = makeSetError<LoginFormValues>();
       applyServerError<LoginFormValues>(new Error('boom'), setError, 'auth.invalidCredentials');
 
@@ -151,9 +124,8 @@ describe('applyServerError', () => {
 
     it('shows the first message when a field has several', () => {
       const setError = makeSetError<LoginFormValues>();
-      const manyMessages = makeAxiosError(422, {
-        message: 'The given data was invalid.',
-        errors: { password: ['first complaint', 'second complaint'] },
+      const manyMessages = makeValidationError({
+        password: ['first complaint', 'second complaint'],
       });
       applyServerError<LoginFormValues>(manyMessages, setError, 'auth.invalidCredentials');
 

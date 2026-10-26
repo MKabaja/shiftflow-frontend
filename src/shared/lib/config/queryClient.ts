@@ -1,6 +1,6 @@
 import { MutationCache, QueryCache, QueryClient } from '@tanstack/react-query';
 import { config } from '@/shared/lib/config/config.ts';
-import { parseApiError } from '@/shared/lib/helpers/parseApiError.ts';
+import { parseApiError } from '@/shared/api/parseApiError.ts';
 import { toast } from 'sonner';
 import i18n from '@/shared/i18n';
 

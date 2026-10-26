@@ -1,5 +1,6 @@
 import { config } from '@/shared/lib/config/config.ts';
 import { HttpError } from '@/shared/api/httpError.ts';
+import { NetworkError } from '@/shared/api/networkError.ts';
 
 type HttpMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 
@@ -27,6 +28,7 @@ let unauthorizedHandler: UnauthorizedHandler | undefined;
  *
  * - resolves to the parsed body, or `undefined` when the body is empty,
  * - rejects with a plain `Error` when a 2xx body is not JSON,
+ * - rejects with {@link NetworkError} when the server could not be reached (aborts pass through),
  * - rejects with {@link HttpError} for any non-2xx status; a `401` first calls the
  *   {@link onUnauthorized} handler, unless `ignoreUnauthorized` is set.
  */
@@ -65,7 +67,7 @@ async function request<T>(
   const { params, signal, ignoreUnauthorized = false, body } = options;
   const hasBody = body !== undefined;
 
-  const response = await fetch(buildUrl(path, params), {
+  const response = await send(buildUrl(path, params), {
     method,
     signal,
     headers: hasBody ? sendJsonHeaders : acceptJsonHeaders,
@@ -77,6 +79,19 @@ async function request<T>(
   if (response.status === 401 && !ignoreUnauthorized) unauthorizedHandler?.();
 
   throw new HttpError(response.status, await readErrorBody(response));
+}
+
+async function send(url: URL, init: RequestInit): Promise<Response> {
+  try {
+    return await fetch(url, init);
+  } catch (error) {
+    if (isAbortError(error)) throw error;
+    throw new NetworkError(error);
+  }
+}
+
+function isAbortError(error: unknown): boolean {
+  return error instanceof DOMException && error.name === 'AbortError';
 }
 
 function buildUrl(path: string, params: QueryParams = {}): URL {
