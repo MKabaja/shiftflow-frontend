@@ -2,7 +2,8 @@
 
 Grafik zmian pracowników Kopalni Soli „Wieliczka”: panel kierownika + moduł dyspozycji pracownika.
 Stack: React 19, TypeScript 6 (strict), Vite 8, Tailwind CSS v4, TanStack Router + Query v5, Zustand 5,
-React Hook Form + Zod v4, i18next, Axios, Motion 12. Testy: Vitest 4 + Testing Library (jsdom).
+React Hook Form + Zod v4, i18next, Motion 12; HTTP: własny klient na `fetch`. Testy: Vitest 4 + Testing Library
+(jsdom) + MSW 2.
 Backend: Laravel, osobne repo `~/projekty/SHIFTFlow`. Środowisko: WSL (Ubuntu), Node 24 — ta sama wersja co CI.
 
 <!-- Utrzymanie: < 200 linii, każda linia ma zapobiegać realnemu błędowi. Reguły dotyczące części kodu
@@ -70,6 +71,7 @@ Przed zadaniem z kodem sprawdź tę mapę. **Na początku odpowiedzi napisz „S
 | --- | --- | --- |
 | pisanie / review TS, React, hooków | `react-clean-code` | `modern-best-practice-react-components`, `clean-typescript` |
 | testy, spec testu, review testu | `testing-react` | — |
+| komentarz `/** */` nad eksportem (TSDoc) | `tsdoc` | — |
 | klasy Tailwind, style | `modern-tailwind` (tokeny i tak z `theme.css`) | — |
 | semantyka, dostępność, klawiatura | `modern-accessible-html-jsx` | `use-modern-browser-apis` |
 | bezpieczeństwo (auth, cookie, dane) | `web-security` | `/security-review` |
@@ -90,11 +92,11 @@ Agenci projektowi (`.claude/agents/`): `reviewer` — review zmian; `test-automa
   w `shared/lib/config/router.ts` — inaczej ciche 404. Szczegóły: `rules/routing.md`.
 - **Zalogowany user = wyłącznie cache Query pod `auth.me`.** `useMe` → `useAuth` (nakładka z flagami ról, zero
   własnego stanu). Login i login-pin zapisują odpowiedź prosto do `auth.me`. **Nie przenoś usera do Zustanda.**
-- Stan serwerowy → TanStack Query, klucze w `shared/lib/config/queryKeys.ts`. Transport → Axios
-  (`shared/lib/config/axios.ts`, `baseURL: '/api'`, same-origin, cookie wysyłane samo).
+- Stan serwerowy → TanStack Query, klucze w `shared/lib/config/queryKeys.ts`. Transport → `backend` z
+  `shared/api/backend.ts` (ścieżki względem `/api`, same-origin, cookie wysyłane samo); nie wołaj `fetch` bezpośrednio.
 - Zustand → wyłącznie stan UI niezwiązany z serwerem (na dziś brak store'ów; zależność zostaje).
 - Formularze → React Hook Form + Zod v4; komunikaty w schematach to **klucze i18n**.
-- Błędy → warstwowo: interceptor 401 → `parseApiError` → globalny `onError` (toast) → `onError` mutacji / formularz.
+- Błędy → warstwowo: handler 401 (`onUnauthorized`) → `parseApiError` → globalny `onError` (toast) → `onError` mutacji / formularz.
   Szczegóły: `rules/forms-errors.md`.
 - Teksty UI zawsze przez `t()`; typy kluczy pochodzą z plików `pl` (`rules/i18n.md`).
 
@@ -108,6 +110,7 @@ Agenci projektowi (`.claude/agents/`): `reviewer` — review zmian; `test-automa
 | 004 | Zapamiętanie metody logowania w `localStorage` do celowanego redirectu po 401 | planowany (post-MVP); dziś 401 → `/` |
 | 005 | Stałe w `config.ts` zamiast `.env*`; wersja aplikacji przez `define` | wdrożony |
 | 006 | Migracja na file-based routing — osobny branch przed Branchem 5, żaden URL się nie zmienia | odroczony |
+| 007 | Transport na `fetch` (`shared/api/backend.ts`) zamiast axios; błędy `HttpError` / `NetworkError` | wdrożony |
 
 Przed zmianą w tych obszarach przeczytaj pełny ADR w `docs/ARCHITECTURAL_DECISIONS.md` (jeśli jest na dysku).
 

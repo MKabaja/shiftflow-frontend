@@ -4,19 +4,21 @@ paths:
   - "src/features/**/lib/**"
   - "src/features/**/components/**/*Form*.tsx"
   - "src/features/**/components/**/*Modal*.tsx"
-  - "src/shared/lib/config/axios.ts"
+  - "src/shared/api/**"
   - "src/shared/lib/config/queryClient.ts"
   - "src/shared/lib/config/queryKeys.ts"
-  - "src/shared/lib/helpers/parseApiError*"
 ---
 
 # Query, mutacje, formularze, obsługa błędów
 
 ## Warstwy błędów
-1. **Interceptor axios** obsługuje **wyłącznie** 401 = śmierć sesji (poza `/auth/login*`): ustawia `auth.me` na `null`.
-   Sam nie przekierowuje — wyrzuca guard `_app` przy najbliższej nawigacji. Wszystkie błędy odrzuca dalej.
+1. **`backend` (`shared/api/backend.ts`)** odrzuca: status spoza 2xx → `HttpError(status, body)`, brak odpowiedzi →
+   `NetworkError`. Każdy 401 woła handler `onUnauthorized` (rejestrowany w `queryClient.ts`: `auth.me` → `null`).
+   Sam nie przekierowuje — wyrzuca guard `_app` przy najbliższej nawigacji. Endpoint, na którym 401 = złe dane,
+   a nie śmierć sesji (login, login-pin), przekazuje `ignoreUnauthorized: true`.
 2. **`parseApiError`** — czysta funkcja: dowolny błąd → `{ messageKey, fieldErrors?, statusCode? }`. `messageKey` to
-   klucz i18n z przestrzeni `errors` (`ParseKeys<'errors'>`), nigdy surowy tekst backendu.
+   klucz i18n z przestrzeni `errors` (`ParseKeys<'errors'>`), nigdy surowy tekst backendu. Rozpoznaje tylko
+   `HttpError` i `NetworkError`; reszta (też bug w kodzie) → `unexpected`.
 3. **Globalny `onError`** w `queryClient` (QueryCache + MutationCache): zapasowy
    `toast.error(i18n.t(key, { ns: 'errors' }))`. Query/mutacja, która sama pokazuje błąd → `meta: { handled: true }`
    (typowane przez augmentację `Register` w `queryClient.ts`).
