@@ -1,6 +1,8 @@
 import { MutationCache, QueryCache, QueryClient } from '@tanstack/react-query';
 import { config } from '@/shared/lib/config/config.ts';
 import { parseApiError } from '@/shared/api/parseApiError.ts';
+import { onUnauthorized } from '@/shared/api/http.ts';
+import { queryKeys } from '@/shared/lib/config/queryKeys.ts';
 import { toast } from 'sonner';
 import i18n from '@/shared/i18n';
 
@@ -35,6 +37,8 @@ const queryClient = new QueryClient({
     queries: { retry: 1, staleTime: config.staleTime.default, refetchOnWindowFocus: false },
   },
 });
+
+onUnauthorized(() => queryClient.setQueryData(queryKeys.auth.me, null));
 
 function notifyError(error: unknown) {
   const { messageKey } = parseApiError(error);

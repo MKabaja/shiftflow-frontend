@@ -1,13 +1,11 @@
 import { useMutation } from '@tanstack/react-query';
-import { apiClient } from '@/shared/lib/config/axios.ts';
+import { http } from '@/shared/api/http.ts';
 import { queryKeys } from '@/shared/lib/config/queryKeys.ts';
 import { queryClient } from '@/shared/lib/config/queryClient.ts';
 import { toMonthParams } from '@/features/availability/lib/toMonthParams.ts';
 import { buildOptimisticAvailability } from '@/features/availability/lib/buildOptimisticAvailability.ts';
 import { getCachedUser } from '@/features/auth/lib/getCachedUser.ts';
-import type { AxiosError } from 'axios';
 import type {
-  ApiError,
   Availability,
   DeleteAvailabilityInput,
   SingleResource,
@@ -24,26 +22,18 @@ type AvailabilityMonthSnapshot = {
 type AvailabilityListUpdater = (availabilities: Availability[]) => Availability[];
 
 /**
- * Creates or overwrites the availability entry for one day (`POST /availabilities`).
+ * Creates or overwrites one day's availability (`POST /availabilities`).
  *
- * Optimistic: the month's cache changes before the request, is rolled back on error and
- * refetched once the mutation settles. Errors go to the global toast.
- *
- * @returns TanStack mutation; `mutate` takes an {@link UpsertAvailabilityInput}.
+ * Optimistic: updates the month cache first, rolls back on error, refetches when settled.
+ * Errors go to the global toast.
  */
 function useUpsertAvailability() {
-  return useMutation<
-    Availability,
-    AxiosError<ApiError>,
-    UpsertAvailabilityInput,
-    AvailabilityMonthSnapshot
-  >({
-    mutationFn: async (availabilityInput) => {
-      const response = await apiClient.post<SingleResource<Availability>>(
-        '/availabilities',
-        availabilityInput,
-      );
-      return response.data.data;
+  return useMutation({
+    mutationFn: async (availabilityInput: UpsertAvailabilityInput) => {
+      const response = await http.post<SingleResource<Availability>>('/availabilities', {
+        body: availabilityInput,
+      });
+      return response.data;
     },
     onMutate: (availabilityInput) =>
       updateMonthOptimistically(availabilityInput.date, (availabilities) => {
@@ -73,22 +63,15 @@ function useUpsertAvailability() {
 }
 
 /**
- * Deletes one day's availability entry (`DELETE /availabilities/{id}`).
+ * Deletes one day's availability (`DELETE /availabilities/{id}`).
  *
- * Optimistic: the entry disappears from the month's cache before the request, comes back on
- * error and the month is refetched once the mutation settles. Errors go to the global toast.
- *
- * @returns TanStack mutation; `mutate` takes a {@link DeleteAvailabilityInput}.
+ * Optimistic: removes it from the month cache first, restores it on error, refetches when settled.
+ * Errors go to the global toast.
  */
 function useDeleteAvailability() {
-  return useMutation<
-    void,
-    AxiosError<ApiError>,
-    DeleteAvailabilityInput,
-    AvailabilityMonthSnapshot
-  >({
-    mutationFn: async (availabilityInput) => {
-      await apiClient.delete(`/availabilities/${availabilityInput.id}`);
+  return useMutation({
+    mutationFn: async (availabilityInput: DeleteAvailabilityInput) => {
+      await http.delete(`/availabilities/${availabilityInput.id}`);
     },
     onMutate: (availabilityInput) =>
       updateMonthOptimistically(availabilityInput.date, (availabilities) =>

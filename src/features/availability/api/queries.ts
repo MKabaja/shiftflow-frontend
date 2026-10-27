@@ -1,40 +1,31 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
 import type {
   Availability,
-  ApiError,
   CollectionResponse,
   AvailabilityQueryParams,
 } from '@/shared/types/api.ts';
-import type { AxiosError } from 'axios';
 import { queryKeys } from '@/shared/lib/config/queryKeys.ts';
-import { apiClient } from '@/shared/lib/config/axios.ts';
+import { http } from '@/shared/api/http.ts';
 
 /**
- * Query definition for one month of availability entries (`GET /availabilities`).
+ * Query for one month of availability entries (`GET /availabilities`), sorted by date.
  *
- * Marked `handled` — the calendar shows the error in place, without the global toast.
+ * Marked `handled`: errors skip the global toast, the calendar shows them in place.
  *
- * @param params - Year and month to fetch; `month` is 1–12, not `Date.getMonth()` (0–11).
- * @returns Query options resolving to every {@link Availability} in that month, sorted by date.
+ * @param params - `month` is 1–12, not `Date.getMonth()`.
  */
 const availabilitiesQueryOptions = (params: AvailabilityQueryParams) =>
-  queryOptions<Availability[], AxiosError<ApiError>>({
+  queryOptions({
     queryKey: queryKeys.availability.month(params),
     meta: { handled: true },
     queryFn: async () => {
-      const response = await apiClient.get<CollectionResponse<Availability>>('/availabilities', {
+      const response = await http.get<CollectionResponse<Availability>>('/availabilities', {
         params,
       });
-      return response.data.data;
+      return response.data;
     },
   });
 
-/**
- * React binding for {@link availabilitiesQueryOptions}.
- *
- * @param params - Year and month to fetch; `month` is 1–12.
- * @returns TanStack Query result with the month's {@link Availability} entries, or an `AxiosError`.
- */
 function useAvailabilities(params: AvailabilityQueryParams) {
   return useQuery(availabilitiesQueryOptions(params));
 }
