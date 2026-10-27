@@ -1,5 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
-import { http } from '@/shared/api/http.ts';
+import { backend } from '@/shared/api/backend.ts';
 import { queryKeys } from '@/shared/lib/config/queryKeys.ts';
 import { queryClient } from '@/shared/lib/config/queryClient.ts';
 import { toMonthParams } from '@/features/availability/lib/toMonthParams.ts';
@@ -30,7 +30,7 @@ type AvailabilityListUpdater = (availabilities: Availability[]) => Availability[
 function useUpsertAvailability() {
   return useMutation({
     mutationFn: async (availabilityInput: UpsertAvailabilityInput) => {
-      const response = await http.post<SingleResource<Availability>>('/availabilities', {
+      const response = await backend.post<SingleResource<Availability>>('/availabilities', {
         body: availabilityInput,
       });
       return response.data;
@@ -71,7 +71,7 @@ function useUpsertAvailability() {
 function useDeleteAvailability() {
   return useMutation({
     mutationFn: async (availabilityInput: DeleteAvailabilityInput) => {
-      await http.delete(`/availabilities/${availabilityInput.id}`);
+      await backend.delete(`/availabilities/${availabilityInput.id}`);
     },
     onMutate: (availabilityInput) =>
       updateMonthOptimistically(availabilityInput.date, (availabilities) =>

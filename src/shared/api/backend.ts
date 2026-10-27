@@ -32,7 +32,7 @@ let unauthorizedHandler: UnauthorizedHandler | undefined;
  * - rejects with {@link HttpError} for any non-2xx status; a `401` first calls the
  *   {@link onUnauthorized} handler, unless `ignoreUnauthorized` is set.
  */
-const http = {
+const backend = {
   get,
   post,
   patch,
@@ -127,4 +127,4 @@ function isJsonResponse(response: Response): boolean {
   return response.headers.get('Content-Type')?.includes('application/json') ?? false;
 }
 
-export { http, onUnauthorized };
+export { backend, onUnauthorized };

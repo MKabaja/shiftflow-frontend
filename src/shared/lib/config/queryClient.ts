@@ -1,7 +1,7 @@
 import { MutationCache, QueryCache, QueryClient } from '@tanstack/react-query';
 import { config } from '@/shared/lib/config/config.ts';
 import { parseApiError } from '@/shared/api/parseApiError.ts';
-import { onUnauthorized } from '@/shared/api/http.ts';
+import { onUnauthorized } from '@/shared/api/backend.ts';
 import { queryKeys } from '@/shared/lib/config/queryKeys.ts';
 import { toast } from 'sonner';
 import i18n from '@/shared/i18n';

@@ -1,5 +1,5 @@
 /**
- * Thrown by `http` for any non-2xx response.
+ * Thrown by `backend` for any non-2xx response.
  *
  * `body` is the parsed JSON, or `null` when the response was not JSON; narrow it before use.
  */

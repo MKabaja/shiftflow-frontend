@@ -1,6 +1,6 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
 import { queryKeys } from '@/shared/lib/config/queryKeys.ts';
-import { http } from '@/shared/api/http.ts';
+import { backend } from '@/shared/api/backend.ts';
 import { HttpError } from '@/shared/api/httpError.ts';
 import { config } from '@/shared/lib/config/config.ts';
 import type { SingleResource, User } from '@/shared/types/api.ts';
@@ -14,7 +14,7 @@ const meQueryOptions = queryOptions({
   queryKey: queryKeys.auth.me,
   meta: { handled: true },
   queryFn: async () => {
-    const response = await http.get<SingleResource<User>>('/me');
+    const response = await backend.get<SingleResource<User>>('/me');
 
     return response.data;
   },

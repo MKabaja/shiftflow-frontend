@@ -5,7 +5,7 @@ import type {
   AvailabilityQueryParams,
 } from '@/shared/types/api.ts';
 import { queryKeys } from '@/shared/lib/config/queryKeys.ts';
-import { http } from '@/shared/api/http.ts';
+import { backend } from '@/shared/api/backend.ts';
 
 /**
  * Query for one month of availability entries (`GET /availabilities`), sorted by date.
@@ -19,7 +19,7 @@ const availabilitiesQueryOptions = (params: AvailabilityQueryParams) =>
     queryKey: queryKeys.availability.month(params),
     meta: { handled: true },
     queryFn: async () => {
-      const response = await http.get<CollectionResponse<Availability>>('/availabilities', {
+      const response = await backend.get<CollectionResponse<Availability>>('/availabilities', {
         params,
       });
       return response.data;

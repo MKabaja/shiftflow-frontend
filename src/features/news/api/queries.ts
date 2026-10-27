@@ -1,7 +1,7 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
 import type { NewsPost, PaginatedResponse } from '@/shared/types/api.ts';
 import { queryKeys } from '@/shared/lib/config/queryKeys.ts';
-import { http } from '@/shared/api/http.ts';
+import { backend } from '@/shared/api/backend.ts';
 import { config } from '@/shared/lib/config/config.ts';
 
 /**
@@ -13,7 +13,7 @@ const latestNewsQueryOptions = queryOptions({
   queryKey: queryKeys.news.latest,
   meta: { handled: true },
   queryFn: async () => {
-    const response = await http.get<PaginatedResponse<NewsPost>>('/news', {
+    const response = await backend.get<PaginatedResponse<NewsPost>>('/news', {
       params: { per_page: config.latestNewsLimit },
     });
 
