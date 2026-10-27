@@ -18,7 +18,7 @@ Pełny standard z przykładami: skill `react-clean-code`. Poniżej rdzeń + konw
 - Mapy nazywane jak zdanie: `type LabelByStatus = Record<Status, string>`, `const labelByStatus: LabelByStatus`.
 - Zamiast `switch` po unii — obiekt `Record<Stan, Handler>`. Stan przez discriminated union, nie kilka booleanów.
 - Dane z zewnątrz (API, `localStorage`, URL) są niezaufane do walidacji w runtime. Stan: odpowiedzi API są dziś tylko
-  typowane (`apiClient.get<T>`) — walidacja Zod to zaplanowany osobny branch; w nowym kodzie nie mieszaj stylów bez ustalenia.
+  typowane (`backend.get<T>`) — walidacja Zod to zaplanowany osobny branch; w nowym kodzie nie mieszaj stylów bez ustalenia.
 
 ## Funkcje i nazwy
 - Deklaracje `function` (komponenty, hooki, helpery), nie `const f = () => {}`. Stepdown: główne API modułu na górze,

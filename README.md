@@ -46,7 +46,8 @@ and check when they work next. Both flows share one responsive shell rather than
 - **React Hook Form** + **Zod** v4 — form state and validation
 - **i18next** + **react-i18next** — PL/EN, keys type-checked against the Polish locale files
 - **Motion** — layout and entry animations, with `prefers-reduced-motion` handling
-- **Axios** — HTTP transport with a session-expiry interceptor
+- **fetch** — a small own API client (`shared/api/backend.ts`) with a session-expiry hook
+- **MSW** — network mocking in tests
 - **Vitest** + **Testing Library** — unit and component tests in jsdom
 
 ---
@@ -83,7 +84,7 @@ _app         → requires a session; no session → redirect to /
 ### Error handling — four layers
 
 ```
-1. Axios interceptor  → only a session-death 401 (outside /auth/login*): clear cache, redirect
+1. backend 401 hook  → only a session-death 401 (login opts out): clear cache, the route guard redirects
 2. parseApiError      → pure fn: any error → an i18n key from the `errors` namespace
 3. queryClient onError → fallback toast for anything a view does not handle itself
 4. Mutation onError   → contextual: 422 → form fields, 401 on login → one generic message
@@ -124,13 +125,14 @@ ShiftFlow_frontend/
 │   │       ├── hooks/          # useAuth
 │   │       └── lib/            # schemas, applyServerError, landingPathFor, getCurrentUser
 │   ├── shared/
+│   │   ├── api/                # backend (fetch client), HttpError, NetworkError, parseApiError
 │   │   ├── components/         # Alert, Avatar, Badge, Button, Card, ColorPicker, Input, Logo,
 │   │   │                       # Modal, PinInput, Separator, Skeleton, Spinner, Splash, Toggle, …
 │   │   ├── hooks/              # useModal (compositor), useFocusTrap, useRovingFocus, usePinInput, …
 │   │   ├── i18n/               # i18next setup, locales/{pl,en}/*.json, typed key augmentation
 │   │   ├── lib/
-│   │   │   ├── config/         # axios, queryClient, queryKeys, router, config
-│   │   │   ├── helpers/        # cn, parseApiError, getInitials, hashColor
+│   │   │   ├── config/         # queryClient, queryKeys, router, config
+│   │   │   ├── helpers/        # cn, getInitials, hashColor
 │   │   │   └── styles/         # focusStyles, disabledStyles
 │   │   └── types/              # API types
 │   └── css/                    # Index.css → theme.css, globals.css, helpers.css
@@ -189,9 +191,9 @@ mobile module. The full list is in the backend README.
 npm run test:run
 ```
 
-183 tests across 24 files, in jsdom. Coverage is concentrated where behaviour is easy to break silently: shared
+225 tests across 32 files, in jsdom, with MSW for network calls. Coverage is concentrated where behaviour is easy to break silently: shared
 component DOM contracts (ARIA attributes, conditional rendering, event handlers), the focus and keyboard hooks,
-the 401 interceptor, `parseApiError` and `applyServerError`.
+the 401 handler, `parseApiError` and `applyServerError`.
 
 Tests assert behaviour, not appearance — no snapshots of Tailwind classes, no assertions about animations. View
 and layout tests are deliberately deferred until the feature modules exist, so they can be written in one pass
@@ -203,7 +205,7 @@ instead of being rewritten as the screens change.
 
 **Session in the query cache, not in a store**
 Keeping the user in both Zustand and TanStack Query meant two writes on login, two on logout, and a third path
-through the 401 interceptor — three places to forget. The query cache already handles caching, invalidation and
+through the 401 handler — three places to forget. The query cache already handles caching, invalidation and
 request deduplication, so the store was removed and `useAuth` became a wrapper over `useMe`.
 
 **Same-origin API instead of CORS**
