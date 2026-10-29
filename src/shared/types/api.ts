@@ -161,7 +161,6 @@ export type CollectionResponse<T> = {
 };
 
 export type SingleResource<T> = { data: T; message?: string };
-export type ApiError = { message: string; errors?: Record<string, string[]> };
 
 // === OPTIMISTIC ===
 export type OptimisticShiftStatus = 'pending' | 'error' | 'confirmed';

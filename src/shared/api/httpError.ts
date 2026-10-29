@@ -1,3 +1,13 @@
+import { z } from 'zod';
+
+/** Error body sent by the backend; `errors` maps field names to messages and comes only with `422`. */
+const apiErrorBodySchema = z.object({
+  message: z.string(),
+  errors: z.record(z.string(), z.array(z.string())).optional(),
+});
+
+type ApiErrorBody = z.infer<typeof apiErrorBodySchema>;
+
 /**
  * Thrown by `backend` for any non-2xx response.
  *
@@ -15,4 +25,5 @@ class HttpError extends Error {
   }
 }
 
-export { HttpError };
+export { HttpError, apiErrorBodySchema };
+export type { ApiErrorBody };
