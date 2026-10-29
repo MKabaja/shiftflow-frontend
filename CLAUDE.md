@@ -21,7 +21,7 @@ Nie ma stagingu. Zmiany idą małymi branchami przez PR (na PR `deploy` jest pom
 ```bash
 npm run dev                          # Vite + HMR; /api proxowane na localhost:8000
 npm run check                        # typecheck + lint + test + build — przed każdym pushem
-npm run typecheck                    # tsc --noEmit
+npm run typecheck                    # tsc -b (app + node przez references)
 npm run lint                         # ESLint, --max-warnings 0 (autofix: npm run lint:fix)
 npm run test:run                     # vitest jednorazowo (samo `npm run test` = watch)
 npx vitest run src/ścieżka/X.test.tsx  # pojedynczy plik testów
@@ -30,8 +30,8 @@ npm run build                        # tsc -b + vite build
 
 - Po `npm install`, który zmienił `package-lock.json` → `npm ci` przed pushem. `check` pracuje na istniejącym
   `node_modules`, rozjechanego locka nie złapie — CI padnie dopiero na `npm ci`.
-- `tsc` potrafi dać fałszywie czysty wynik przez cache inkrementalny (`.tsbuildinfo`). Gdy IDE pokazuje błąd,
-  a `tsc` nie — ufaj IDE i wymuś świeże sprawdzenie (usuń `.tsbuildinfo`).
+- Typy sprawdzaj przez `npm run typecheck`, nie gołym `tsc` / `npx tsc --noEmit`: główny `tsconfig.json` ma
+  tylko `references` (`"files": []`), więc `tsc` bez `-b` sprawdza 0 plików i zawsze wychodzi „czysto”.
 
 ## Gotowe =
 
