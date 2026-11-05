@@ -1,11 +1,11 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
-import type {
-  Availability,
-  CollectionResponse,
-  AvailabilityQueryParams,
-} from '@/shared/types/api.ts';
 import { queryKeys } from '@/shared/lib/config/queryKeys.ts';
 import { backend } from '@/shared/api/backend.ts';
+import { collectionOf } from '@/shared/api/envelopes.ts';
+import {
+  availabilitySchema,
+  type AvailabilityQueryParams,
+} from '@/features/availability/model/availability.schemas.ts';
 
 /**
  * Query for one month of availability entries (`GET /availabilities`), sorted by date.
@@ -19,10 +19,9 @@ const availabilitiesQueryOptions = (params: AvailabilityQueryParams) =>
     queryKey: queryKeys.availability.month(params),
     meta: { handled: true },
     queryFn: async () => {
-      const response = await backend.get<CollectionResponse<Availability>>('/availabilities', {
-        params,
-      });
-      return response.data;
+      const body = await backend.get('/availabilities', { params });
+
+      return collectionOf(availabilitySchema).parse(body).data;
     },
   });
 

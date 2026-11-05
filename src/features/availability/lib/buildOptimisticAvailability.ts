@@ -1,4 +1,4 @@
-import type { Availability, UpsertAvailabilityInput } from '@/shared/types/api.ts';
+import type { Availability, UpsertAvailabilityInput } from '@/features/availability/model/availability.schemas.ts';
 
 /**
  * Builds a temporary {@link Availability} to show in the cache before the server confirms it.

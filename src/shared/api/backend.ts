@@ -26,7 +26,8 @@ let unauthorizedHandler: UnauthorizedHandler | undefined;
 /**
  * JSON client for the backend; paths are relative to `config.apiUrl`.
  *
- * - resolves to the parsed body, or `undefined` when the body is empty,
+ * - resolves to the parsed body as `unknown` (validate it with a Zod schema before use), or
+ *   `undefined` when the body is empty,
  * - rejects with a plain `Error` when a 2xx body is not JSON,
  * - rejects with {@link NetworkError} when the server could not be reached (aborts pass through),
  * - rejects with {@link HttpError} for any non-2xx status; a `401` first calls the
@@ -43,27 +44,27 @@ function onUnauthorized(handler: UnauthorizedHandler) {
   unauthorizedHandler = handler;
 }
 
-function get<T = unknown>(path: string, options?: RequestOptions): Promise<T> {
-  return request<T>('GET', path, options);
+function get(path: string, options?: RequestOptions): Promise<unknown> {
+  return request('GET', path, options);
 }
 
-function post<T = unknown>(path: string, options?: BodyRequestOptions): Promise<T> {
-  return request<T>('POST', path, options);
+function post(path: string, options?: BodyRequestOptions): Promise<unknown> {
+  return request('POST', path, options);
 }
 
-function patch<T = unknown>(path: string, options?: BodyRequestOptions): Promise<T> {
-  return request<T>('PATCH', path, options);
+function patch(path: string, options?: BodyRequestOptions): Promise<unknown> {
+  return request('PATCH', path, options);
 }
 
-function deleteRequest<T = unknown>(path: string, options?: RequestOptions): Promise<T> {
-  return request<T>('DELETE', path, options);
+function deleteRequest(path: string, options?: RequestOptions): Promise<unknown> {
+  return request('DELETE', path, options);
 }
 
-async function request<T>(
+async function request(
   method: HttpMethod,
   path: string,
   options: BodyRequestOptions = {},
-): Promise<T> {
+): Promise<unknown> {
   const { params, signal, ignoreUnauthorized = false, body } = options;
   const hasBody = body !== undefined;
 
@@ -74,7 +75,7 @@ async function request<T>(
     body: hasBody ? JSON.stringify(body) : undefined,
   });
 
-  if (response.ok) return (await readSuccessBody(response)) as T;
+  if (response.ok) return readSuccessBody(response);
 
   if (response.status === 401 && !ignoreUnauthorized) unauthorizedHandler?.();
 

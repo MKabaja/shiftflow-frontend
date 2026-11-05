@@ -1,4 +1,4 @@
-import type { UpsertAvailabilityInput } from '@/shared/types/api.ts';
+import type { UpsertAvailabilityInput } from '@/features/availability/model/availability.schemas.ts';
 
 import { buildOptimisticAvailability } from '../buildOptimisticAvailability.ts';
 

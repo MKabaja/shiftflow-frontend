@@ -1,6 +1,8 @@
 import { z } from 'zod';
-import type { LoginInput, LoginPinInput } from '@/shared/types/api.ts';
 import { config } from '@/shared/lib/config/config.ts';
+
+type LoginFormValues = z.infer<typeof loginSchema>;
+type LoginPinFormValues = z.infer<typeof loginPinSchema>;
 
 const { pinLength, passwordMinLength } = config;
 
@@ -10,7 +12,7 @@ const loginSchema = z.object({
     .string()
     .min(1, 'validation.passwordRequired')
     .min(passwordMinLength, 'validation.passwordTooShort'),
-}) satisfies z.ZodType<LoginInput>;
+});
 
 const loginPinSchema = z.object({
   login: z.string().trim().min(1, 'validation.loginRequired'),
@@ -18,10 +20,7 @@ const loginPinSchema = z.object({
     .string()
     .regex(/^\d*$/, 'validation.pinDigitsOnly')
     .length(pinLength, 'validation.pinLength'),
-}) satisfies z.ZodType<LoginPinInput>;
-
-type LoginFormValues = z.infer<typeof loginSchema>;
-type LoginPinFormValues = z.infer<typeof loginPinSchema>;
+});
 
 export { loginSchema, loginPinSchema };
 export type { LoginPinFormValues, LoginFormValues };

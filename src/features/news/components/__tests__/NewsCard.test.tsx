@@ -8,7 +8,7 @@ import {
   triggerResize,
   triggerResizeIfObserved,
 } from '@/test/mocks/resizeObserver.ts';
-import type { NewsPost } from '@/shared/types/api.ts';
+import type { NewsPost } from '@/features/news/model/newsPost.schemas.ts';
 
 const renderNewsCard = (overrides: Partial<NewsPost> = {}) => {
   const post = makePost(overrides);

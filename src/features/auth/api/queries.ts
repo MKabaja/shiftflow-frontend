@@ -2,8 +2,9 @@ import { queryOptions, useQuery } from '@tanstack/react-query';
 import { queryKeys } from '@/shared/lib/config/queryKeys.ts';
 import { backend } from '@/shared/api/backend.ts';
 import { HttpError } from '@/shared/api/httpError.ts';
+import { resourceOf } from '@/shared/api/envelopes.ts';
 import { config } from '@/shared/lib/config/config.ts';
-import type { SingleResource, User } from '@/shared/types/api.ts';
+import { userSchema } from '@/features/auth/model/user.schemas.ts';
 
 /**
  * Query for the signed-in user (`GET /me`), shared by hooks and route guards.
@@ -14,9 +15,9 @@ const meQueryOptions = queryOptions({
   queryKey: queryKeys.auth.me,
   meta: { handled: true },
   queryFn: async () => {
-    const response = await backend.get<SingleResource<User>>('/me');
+    const body = await backend.get('/me');
 
-    return response.data;
+    return resourceOf(userSchema).parse(body).data;
   },
   staleTime: config.staleTime.auth,
   retry: (failureCount, error) => {

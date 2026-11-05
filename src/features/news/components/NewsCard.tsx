@@ -8,7 +8,7 @@ import { useIsClamped } from '@/shared/hooks/useIsClamped.ts';
 import { getDateFnsLocale } from '@/shared/i18n/getDateFnsLocale.ts';
 import { cn } from '@/shared/lib/helpers/cn.ts';
 import { formatRelativeDate } from '@/shared/lib/helpers/formatRelativeDate.ts';
-import type { NewsPost } from '@/shared/types/api.ts';
+import type { NewsPost } from '@/features/news/model/newsPost.schemas.ts';
 
 type NewsCardProps = {
   post: NewsPost;

@@ -1,6 +1,6 @@
 import type { FieldValues, UseFormSetError } from 'react-hook-form';
 import { applyServerError } from '../applyServerError.ts';
-import type { LoginFormValues, LoginPinFormValues } from '../schemas.ts';
+import type { LoginFormValues, LoginPinFormValues } from '@/features/auth/model/login.schemas.ts';
 import { NetworkError } from '@/shared/api/networkError.ts';
 import { makeHttpError, makeValidationError } from '@/test/factories/httpError.factory.ts';
 

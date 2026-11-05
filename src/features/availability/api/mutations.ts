@@ -1,16 +1,17 @@
 import { useMutation } from '@tanstack/react-query';
 import { backend } from '@/shared/api/backend.ts';
+import { resourceOf } from '@/shared/api/envelopes.ts';
 import { queryKeys } from '@/shared/lib/config/queryKeys.ts';
 import { queryClient } from '@/shared/lib/config/queryClient.ts';
 import { toMonthParams } from '@/features/availability/lib/toMonthParams.ts';
 import { buildOptimisticAvailability } from '@/features/availability/lib/buildOptimisticAvailability.ts';
 import { getCachedUser } from '@/features/auth/lib/getCachedUser.ts';
-import type {
-  Availability,
-  DeleteAvailabilityInput,
-  SingleResource,
-  UpsertAvailabilityInput,
-} from '@/shared/types/api.ts';
+import {
+  availabilitySchema,
+  type Availability,
+  type DeleteAvailabilityInput,
+  type UpsertAvailabilityInput,
+} from '@/features/availability/model/availability.schemas.ts';
 
 type AvailabilityMonthKey = ReturnType<typeof queryKeys.availability.month>;
 
@@ -30,10 +31,9 @@ type AvailabilityListUpdater = (availabilities: Availability[]) => Availability[
 function useUpsertAvailability() {
   return useMutation({
     mutationFn: async (availabilityInput: UpsertAvailabilityInput) => {
-      const response = await backend.post<SingleResource<Availability>>('/availabilities', {
-        body: availabilityInput,
-      });
-      return response.data;
+      const body = await backend.post('/availabilities', { body: availabilityInput });
+
+      return resourceOf(availabilitySchema).parse(body).data;
     },
     onMutate: (availabilityInput) =>
       updateMonthOptimistically(availabilityInput.date, (availabilities) => {

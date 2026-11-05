@@ -1,6 +1,6 @@
 import { meQueryOptions } from '@/features/auth/api/queries.ts';
 import { queryClient } from '@/shared/lib/config/queryClient.ts';
-import type { User } from '@/shared/types/api.ts';
+import type { User } from '@/features/auth/model/user.schemas.ts';
 
 /**
  * Reads the logged-in user straight from the query cache, synchronously and without a request.

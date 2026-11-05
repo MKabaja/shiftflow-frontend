@@ -7,7 +7,7 @@ import { Alert } from '@/shared/components/Alert';
 import { VisibilityToggle } from '@/shared/components/VisibilityToggle';
 import { useController, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { type LoginFormValues, loginSchema } from '../lib/schemas.ts';
+import { type LoginFormValues, loginSchema } from '@/features/auth/model/login.schemas.ts';
 import type { ParseKeys } from 'i18next';
 import { config } from '@/shared/lib/config/config.ts';
 import { useLogin } from '@/features/auth/api/mutations.ts';

@@ -1,4 +1,4 @@
-import type { AvailabilityQueryParams } from '@/shared/types/api.ts';
+import type { AvailabilityQueryParams } from '@/features/availability/model/availability.schemas.ts';
 
 /**
  * Extracts the year and month from an API date string, to address that month's cache entry.
