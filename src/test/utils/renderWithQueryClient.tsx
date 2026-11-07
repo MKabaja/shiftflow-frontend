@@ -18,7 +18,7 @@ type RenderWithQueryClientResult = RenderResult & {
  * @returns The usual render result plus the `queryClient`, for asserting on cache state.
  *
  * @example
- * renderWithQueryClient(<NewsFeed />, (client) => client.setQueryData(queryKeys.news.latest, [post]));
+ * renderWithQueryClient(<NewsFeed />, (client) => client.setQueryData(newsQueries.latest().queryKey, [post]));
  */
 export function renderWithQueryClient(
   ui: ReactElement,
