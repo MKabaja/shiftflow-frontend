@@ -10,12 +10,12 @@ import type { ParseKeys } from 'i18next';
 import { config } from '@/shared/lib/config/config.ts';
 import { applyServerError } from '@/features/auth/lib/applyServerError.ts';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useLoginPin } from '@/features/auth/api/mutations.ts';
+import { useLoginWithPin } from '@/features/auth/api/useLoginWithPin.ts';
 
 function LoginPinForm() {
   const { t } = useTranslation('auth');
   const { t: tErrors } = useTranslation('errors');
-  const { mutate, isPending } = useLoginPin();
+  const { mutate, isPending } = useLoginWithPin();
   const {
     control,
     formState: { errors },

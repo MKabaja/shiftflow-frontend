@@ -8,7 +8,7 @@ import { Button } from '@/shared/components/Button';
 import { LogOut, Settings } from 'lucide-react';
 import { cn } from '@/shared/lib/helpers/cn.ts';
 import { focusStyles } from '@/shared/lib/styles/focusStyles.ts';
-import { useLogout } from '@/features/auth/api/mutations.ts';
+import { useLogout } from '@/features/auth/api/useLogout.ts';
 import { Link } from '@tanstack/react-router';
 
 type ProfileModalProps = {
