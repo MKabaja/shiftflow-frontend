@@ -1,4 +1,4 @@
-import { meQueryOptions } from '@/features/auth/api/queries.ts';
+import { authQueries } from '@/features/auth/api/auth.queries.ts';
 import { queryClient } from '@/app/queryClient.ts';
 import { makeUser } from '@/test/factories/user.ts';
 
@@ -11,7 +11,7 @@ describe('getCachedUser', () => {
 
   it('returns the very same user object that is stored in the cache', () => {
     const user = makeUser();
-    queryClient.setQueryData(meQueryOptions.queryKey, user);
+    queryClient.setQueryData(authQueries.currentUser().queryKey, user);
 
     const result = getCachedUser();
 

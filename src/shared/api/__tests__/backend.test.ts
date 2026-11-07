@@ -2,7 +2,7 @@ import { http, HttpResponse } from 'msw';
 import { backend } from '../backend.ts';
 import { NetworkError } from '../networkError.ts';
 import { queryClient } from '@/app/queryClient.ts';
-import { queryKeys } from '@/shared/lib/config/queryKeys.ts';
+import { authQueries } from '@/features/auth/api/auth.queries.ts';
 import { makeUser } from '@/test/factories/user.ts';
 import { server } from '@/test/msw/server.ts';
 
@@ -11,11 +11,11 @@ const respondWithStatus = (path: string, status: number) => {
 };
 
 const loggedInUser = makeUser();
-const getCachedMe = () => queryClient.getQueryData(queryKeys.auth.me);
+const getCachedMe = () => queryClient.getQueryData(authQueries.currentUser().queryKey);
 
 describe('backend 401 handling', () => {
   beforeEach(() => {
-    queryClient.setQueryData(queryKeys.auth.me, loggedInUser);
+    queryClient.setQueryData(authQueries.currentUser().queryKey, loggedInUser);
   });
 
   afterEach(() => {

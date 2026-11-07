@@ -1,33 +1,42 @@
-import { useAuth } from '../useAuth.ts';
-import { makeUser } from '@/test/factories/user.ts';
+import type { ReactNode } from 'react';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { renderHook } from '@testing-library/react';
-import { useMe } from '@/features/auth/api/queries.ts';
+import { delay, http } from 'msw';
+import { useAuth } from '../useAuth.ts';
+import { authQueries } from '@/features/auth/api/auth.queries.ts';
+import { makeUser } from '@/test/factories/user.ts';
+import { server } from '@/test/msw/server.ts';
 import type { User } from '@/features/auth/model/user.schemas.ts';
 
-const mockUseMe = (data: User | undefined) => {
-  vi.mocked(useMe).mockReturnValue({
-    data,
-  } as ReturnType<typeof useMe>);
-};
+function renderUseAuth(user?: User) {
+  const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
+  if (user) queryClient.setQueryData(authQueries.currentUser().queryKey, user);
 
-vi.mock('@/features/auth/api/queries.ts', () => ({
-  useMe: vi.fn(),
-}));
+  function wrapper({ children }: { children: ReactNode }) {
+    return <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>;
+  }
+
+  return renderHook(() => useAuth(), { wrapper });
+}
 
 const employee = makeUser();
 
 describe('useAuth', () => {
-  beforeEach(() => vi.clearAllMocks());
+  beforeEach(() => {
+    server.use(
+      http.get('/api/me', async () => {
+        await delay('infinite');
+      }),
+    );
+  });
 
-  it('returns user = null when useMe has no data (undefined)', () => {
-    mockUseMe(undefined);
-    const { result } = renderHook(() => useAuth());
+  it('returns user = null when the user query has no data (undefined)', () => {
+    const { result } = renderUseAuth();
     expect(result.current.user).toBeNull();
   });
 
   it('all role flags are false when there is no user', () => {
-    mockUseMe(undefined);
-    const { result } = renderHook(() => useAuth());
+    const { result } = renderUseAuth();
 
     const { isAuthenticated, isAdmin, isManager, isEmployee } = result.current;
 
@@ -37,22 +46,19 @@ describe('useAuth', () => {
     expect(isEmployee).toBe(false);
   });
 
-  it('returns the user when useMe has data', () => {
-    mockUseMe(employee);
-    const { result } = renderHook(() => useAuth());
+  it('returns the user when the user query has data', () => {
+    const { result } = renderUseAuth(employee);
     expect(result.current.user).toBe(employee);
   });
 
   it('isAuthenticated is true when a user is present', () => {
-    mockUseMe(employee);
-    const { result } = renderHook(() => useAuth());
+    const { result } = renderUseAuth(employee);
     expect(result.current.isAuthenticated).toBe(true);
   });
 
   it('sets isAdmin true (others false) for an admin', () => {
     const admin = makeUser({ role: 'admin' });
-    mockUseMe(admin);
-    const { result } = renderHook(() => useAuth());
+    const { result } = renderUseAuth(admin);
     const { isAdmin, isManager, isEmployee } = result.current;
 
     expect(isAdmin).toBe(true);
@@ -62,8 +68,7 @@ describe('useAuth', () => {
 
   it('sets isManager true (others false) for a manager', () => {
     const manager = makeUser({ role: 'manager' });
-    mockUseMe(manager);
-    const { result } = renderHook(() => useAuth());
+    const { result } = renderUseAuth(manager);
     const { isAdmin, isManager, isEmployee } = result.current;
 
     expect(isAdmin).toBe(false);
@@ -72,8 +77,7 @@ describe('useAuth', () => {
   });
 
   it('sets isEmployee true (others false) for an employee', () => {
-    mockUseMe(employee);
-    const { result } = renderHook(() => useAuth());
+    const { result } = renderUseAuth(employee);
     const { isAdmin, isManager, isEmployee } = result.current;
 
     expect(isAdmin).toBe(false);

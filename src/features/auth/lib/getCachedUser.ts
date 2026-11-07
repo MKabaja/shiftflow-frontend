@@ -1,4 +1,4 @@
-import { meQueryOptions } from '@/features/auth/api/queries.ts';
+import { authQueries } from '@/features/auth/api/auth.queries.ts';
 import { queryClient } from '@/app/queryClient.ts';
 import type { User } from '@/features/auth/model/user.schemas.ts';
 
@@ -11,7 +11,7 @@ import type { User } from '@/features/auth/model/user.schemas.ts';
  * @returns The cached {@link User}, or `null` when nobody is logged in or the session expired.
  */
 function getCachedUser(): User | null {
-  return queryClient.getQueryData(meQueryOptions.queryKey) ?? null;
+  return queryClient.getQueryData(authQueries.currentUser().queryKey) ?? null;
 }
 
 export { getCachedUser };

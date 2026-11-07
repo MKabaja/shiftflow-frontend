@@ -3,7 +3,7 @@ import { ZodError } from 'zod';
 import { config } from '@/shared/lib/config/config.ts';
 import { parseApiError } from '@/shared/api/parseApiError.ts';
 import { onUnauthorized } from '@/shared/api/backend.ts';
-import { queryKeys } from '@/shared/lib/config/queryKeys.ts';
+import { authQueries } from '@/features/auth/api/auth.queries.ts';
 import { toast } from 'sonner';
 import i18n from '@/shared/i18n';
 
@@ -43,7 +43,7 @@ const queryClient = new QueryClient({
   },
 });
 
-onUnauthorized(() => queryClient.setQueryData(queryKeys.auth.me, null));
+onUnauthorized(() => queryClient.setQueryData(authQueries.currentUser().queryKey, null));
 
 function logContractError(error: unknown) {
   if (config.isDev && error instanceof ZodError) console.error(error);

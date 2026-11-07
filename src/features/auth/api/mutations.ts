@@ -1,7 +1,7 @@
 import { useMutation } from '@tanstack/react-query';
 import { backend } from '@/shared/api/backend.ts';
 import { resourceOf } from '@/shared/api/envelopes.ts';
-import { queryKeys } from '@/shared/lib/config/queryKeys.ts';
+import { authQueries } from '@/features/auth/api/auth.queries.ts';
 import { queryClient } from '@/app/queryClient.ts';
 import { router } from '@/shared/lib/config/router.ts';
 import { landingPathFor } from '@/features/auth/lib/landingPathFor.ts';
@@ -19,7 +19,7 @@ function useLogin() {
       return resourceOf(userSchema).parse(body).data;
     },
     onSuccess: (user) => {
-      queryClient.setQueryData(queryKeys.auth.me, user);
+      queryClient.setQueryData(authQueries.currentUser().queryKey, user);
 
       const to = landingPathFor(user);
       void router.navigate({ to });
@@ -37,7 +37,7 @@ function useLoginPin() {
       return resourceOf(userSchema).parse(body).data;
     },
     onSuccess: (user) => {
-      queryClient.setQueryData(queryKeys.auth.me, user);
+      queryClient.setQueryData(authQueries.currentUser().queryKey, user);
 
       const to = landingPathFor(user);
       void router.navigate({ to });

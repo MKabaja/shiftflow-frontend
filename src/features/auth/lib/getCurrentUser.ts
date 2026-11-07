@@ -1,4 +1,4 @@
-import { meQueryOptions } from '@/features/auth/api/queries.ts';
+import { authQueries } from '@/features/auth/api/auth.queries.ts';
 import { queryClient } from '@/app/queryClient.ts';
 import type { User } from '@/features/auth/model/user.schemas.ts';
 
@@ -9,7 +9,7 @@ import type { User } from '@/features/auth/model/user.schemas.ts';
  * outside React, where `useAuth` is unavailable.
  *
  * Being logged out is an ordinary state here, not a failure, so the rejection
- * that {@link meQueryOptions} raises on a `401` is turned into `null`. Every
+ * that the current-user query raises on a `401` is turned into `null`. Every
  * other failure (network down, `500`) collapses to `null` as well, which the
  * guards read as "not logged in" — until route-level error handling exists,
  * bouncing to the login screen beats crashing the route.
@@ -18,7 +18,7 @@ import type { User } from '@/features/auth/model/user.schemas.ts';
  */
 async function getCurrentUser(): Promise<User | null> {
   try {
-    return await queryClient.ensureQueryData(meQueryOptions);
+    return await queryClient.ensureQueryData(authQueries.currentUser());
   } catch {
     return null;
   }

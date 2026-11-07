@@ -1,4 +1,5 @@
-import { useMe } from '@/features/auth/api/queries.ts';
+import { useQuery } from '@tanstack/react-query';
+import { authQueries } from '@/features/auth/api/auth.queries.ts';
 import type { User } from '@/features/auth/model/user.schemas.ts';
 
 type UseAuthResult = {
@@ -10,7 +11,7 @@ type UseAuthResult = {
 };
 
 /**
- * Reads "who is logged in" from the {@link useMe} cache for use in components.
+ * Reads "who is logged in" from the current-user query cache for use in components.
  *
  * Holds no state of its own. Normalizes the query's `undefined` (before the
  * first fetch) to `null`, so consumers handle a single "empty" shape, and
@@ -24,7 +25,7 @@ type UseAuthResult = {
  * if (isAdmin) return <AdminPanel />;
  */
 function useAuth(): UseAuthResult {
-  const { data: user } = useMe();
+  const { data: user } = useQuery(authQueries.currentUser());
   return {
     user: user ?? null,
     isAuthenticated: !!user,
