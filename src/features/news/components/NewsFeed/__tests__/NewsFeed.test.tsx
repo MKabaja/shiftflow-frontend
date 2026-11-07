@@ -9,7 +9,7 @@ import { page } from '@/test/msw/envelopes.ts';
 import { server } from '@/test/msw/server.ts';
 import { createDeferred } from '@/test/utils/deferred.ts';
 import { renderWithQueryClient } from '@/test/utils/renderWithQueryClient.tsx';
-import type { NewsPost } from '@/shared/types/api.ts';
+import type { NewsPost } from '@/features/news/model/newsPost.schemas.ts';
 
 let newsRequestCount = 0;
 

@@ -18,7 +18,9 @@ paths:
    a nie śmierć sesji (login, login-pin), przekazuje `ignoreUnauthorized: true`.
 2. **`parseApiError`** — czysta funkcja: dowolny błąd → `{ messageKey, fieldErrors?, statusCode? }`. `messageKey` to
    klucz i18n z przestrzeni `errors` (`ParseKeys<'errors'>`), nigdy surowy tekst backendu. Rozpoznaje tylko
-   `HttpError` i `NetworkError`; reszta (też bug w kodzie) → `unexpected`.
+   `HttpError` i `NetworkError`; reszta (też bug w kodzie) → `unexpected`. Body 422 parsuje `apiErrorBodySchema` —
+   `validation` + `fieldErrors` tylko, gdy `errors` to `Record<string, string[]>`. `ZodError` z parsowania odpowiedzi
+   (zerwany kontrakt) też daje `unexpected`; w dev `queryClient` loguje go do konsoli, również przy `meta.handled`.
 3. **Globalny `onError`** w `queryClient` (QueryCache + MutationCache): zapasowy
    `toast.error(i18n.t(key, { ns: 'errors' }))`. Query/mutacja, która sama pokazuje błąd → `meta: { handled: true }`
    (typowane przez augmentację `Register` w `queryClient.ts`).

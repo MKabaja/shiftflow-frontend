@@ -1,13 +1,7 @@
-//TANSTACK query cache keys
-import type { AvailabilityQueryParams } from '@/shared/types/api.ts';
+import type { AvailabilityQueryParams } from '@/features/availability/model/availability.schemas.ts';
 
 export const queryKeys = {
   auth: { me: ['auth', 'me'] as const },
-  schedules: {
-    all: ['schedules'] as const,
-    list: (filters: Record<string, unknown>) => ['schedules', 'list', filters] as const,
-    detail: (id: number) => ['schedules', 'detail', id] as const,
-  },
   news: {
     all: ['news'] as const,
     latest: ['news', 'latest'] as const,

@@ -1,6 +1,5 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-import { config } from '@/shared/lib/config/config.ts';
 
 import plCommon from './locales/pl/common.json';
 import plErrors from './locales/pl/errors.json';
@@ -27,8 +26,6 @@ function getInitialLocale(): SupportedLocale {
   return supportedLocales.includes(locale as SupportedLocale) ? (locale as SupportedLocale) : 'pl';
 }
 
-/** Reading localStorage throws when storage is blocked
- (private mode, disabled cookies). */
 function getStoredLocale(): string | undefined | null {
   try {
     return localStorage.getItem(LOCALE_KEY);
@@ -54,7 +51,6 @@ void i18n.use(initReactI18next).init({
   ns: ['common', 'errors', 'auth', 'news'],
   defaultNS: 'common',
   interpolation: { escapeValue: false },
-  debug: config.isDev,
 });
 document.documentElement.lang = i18n.resolvedLanguage ?? 'pl';
 

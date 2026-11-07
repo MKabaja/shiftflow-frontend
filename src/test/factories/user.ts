@@ -1,4 +1,4 @@
-import type { User } from '@/shared/types/api.ts';
+import type { User } from '@/features/auth/model/user.schemas.ts';
 
 /**
  * Test factory for {@link User} — deterministic defaults + shallow overrides.

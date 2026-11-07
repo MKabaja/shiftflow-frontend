@@ -21,7 +21,7 @@ Nie ma stagingu. Zmiany idą małymi branchami przez PR (na PR `deploy` jest pom
 ```bash
 npm run dev                          # Vite + HMR; /api proxowane na localhost:8000
 npm run check                        # typecheck + lint + test + build — przed każdym pushem
-npm run typecheck                    # tsc --noEmit
+npm run typecheck                    # tsc -b (app + node przez references)
 npm run lint                         # ESLint, --max-warnings 0 (autofix: npm run lint:fix)
 npm run test:run                     # vitest jednorazowo (samo `npm run test` = watch)
 npx vitest run src/ścieżka/X.test.tsx  # pojedynczy plik testów
@@ -30,8 +30,8 @@ npm run build                        # tsc -b + vite build
 
 - Po `npm install`, który zmienił `package-lock.json` → `npm ci` przed pushem. `check` pracuje na istniejącym
   `node_modules`, rozjechanego locka nie złapie — CI padnie dopiero na `npm ci`.
-- `tsc` potrafi dać fałszywie czysty wynik przez cache inkrementalny (`.tsbuildinfo`). Gdy IDE pokazuje błąd,
-  a `tsc` nie — ufaj IDE i wymuś świeże sprawdzenie (usuń `.tsbuildinfo`).
+- Typy sprawdzaj przez `npm run typecheck`, nie gołym `tsc` / `npx tsc --noEmit`: główny `tsconfig.json` ma
+  tylko `references` (`"files": []`), więc `tsc` bez `-b` sprawdza 0 plików i zawsze wychodzi „czysto”.
 
 ## Gotowe =
 
@@ -94,6 +94,8 @@ Agenci projektowi (`.claude/agents/`): `reviewer` — review zmian; `test-automa
   własnego stanu). Login i login-pin zapisują odpowiedź prosto do `auth.me`. **Nie przenoś usera do Zustanda.**
 - Stan serwerowy → TanStack Query, klucze w `shared/lib/config/queryKeys.ts`. Transport → `backend` z
   `shared/api/backend.ts` (ścieżki względem `/api`, same-origin, cookie wysyłane samo); nie wołaj `fetch` bezpośrednio.
+- Odpowiedź `backend` to `unknown` → parsuj schematem z `features/<f>/model/*.schemas.ts` w kopercie z
+  `shared/api/envelopes.ts` (`resourceOf` / `collectionOf` / `pageOf`). Typy domenowe tylko przez `z.infer`.
 - Zustand → wyłącznie stan UI niezwiązany z serwerem (na dziś brak store'ów; zależność zostaje).
 - Formularze → React Hook Form + Zod v4; komunikaty w schematach to **klucze i18n**.
 - Błędy → warstwowo: handler 401 (`onUnauthorized`) → `parseApiError` → globalny `onError` (toast) → `onError` mutacji / formularz.
@@ -111,6 +113,7 @@ Agenci projektowi (`.claude/agents/`): `reviewer` — review zmian; `test-automa
 | 005 | Stałe w `config.ts` zamiast `.env*`; wersja aplikacji przez `define` | wdrożony |
 | 006 | Migracja na file-based routing — osobny branch przed Branchem 5, żaden URL się nie zmienia | odroczony |
 | 007 | Transport na `fetch` (`shared/api/backend.ts`) zamiast axios; błędy `HttpError` / `NetworkError` | wdrożony |
+| 008 | Zod parsuje każdą odpowiedź API; `backend` zwraca `unknown`; schematy = pełny kontrakt `*Resource` | wdrożony |
 
 Przed zmianą w tych obszarach przeczytaj pełny ADR w `docs/ARCHITECTURAL_DECISIONS.md` (jeśli jest na dysku).
 

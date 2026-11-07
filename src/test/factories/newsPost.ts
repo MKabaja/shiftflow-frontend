@@ -1,4 +1,4 @@
-import type { NewsPost } from '@/shared/types/api.ts';
+import type { NewsPost } from '@/features/news/model/newsPost.schemas.ts';
 
 /**
  * Test factory for {@link NewsPost} — deterministic defaults + shallow overrides.

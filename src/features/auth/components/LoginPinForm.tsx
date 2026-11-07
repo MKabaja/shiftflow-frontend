@@ -5,7 +5,7 @@ import { PinInput } from '@/shared/components/PinInput';
 import { Button } from '@/shared/components/Button';
 import { Alert } from '@/shared/components/Alert';
 import { useController, useForm } from 'react-hook-form';
-import { type LoginPinFormValues, loginPinSchema } from '@/features/auth/lib/schemas.ts';
+import { type LoginPinFormValues, loginPinSchema } from '@/features/auth/model/login.schemas.ts';
 import type { ParseKeys } from 'i18next';
 import { config } from '@/shared/lib/config/config.ts';
 import { applyServerError } from '@/features/auth/lib/applyServerError.ts';

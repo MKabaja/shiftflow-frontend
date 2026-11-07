@@ -1,4 +1,4 @@
-import type { User } from '@/shared/types/api.ts';
+import type { User } from '@/features/auth/model/user.schemas.ts';
 import type { NavLink } from './navLinks.ts';
 import { DISPOSITION_NAV_LINKS, PANEL_NAV_LINKS } from './navLinks.ts';
 

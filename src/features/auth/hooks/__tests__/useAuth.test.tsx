@@ -2,7 +2,7 @@ import { useAuth } from '../useAuth.ts';
 import { makeUser } from '@/test/factories/user.ts';
 import { renderHook } from '@testing-library/react';
 import { useMe } from '@/features/auth/api/queries.ts';
-import type { User } from '@/shared/types/api.ts';
+import type { User } from '@/features/auth/model/user.schemas.ts';
 
 const mockUseMe = (data: User | undefined) => {
   vi.mocked(useMe).mockReturnValue({

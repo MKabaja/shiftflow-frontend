@@ -1,5 +1,5 @@
 import { useMe } from '@/features/auth/api/queries.ts';
-import type { User } from '@/shared/types/api.ts';
+import type { User } from '@/features/auth/model/user.schemas.ts';
 
 type UseAuthResult = {
   user: User | null;

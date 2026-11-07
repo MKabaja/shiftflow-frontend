@@ -1,8 +1,9 @@
 import { queryOptions, useQuery } from '@tanstack/react-query';
-import type { NewsPost, PaginatedResponse } from '@/shared/types/api.ts';
 import { queryKeys } from '@/shared/lib/config/queryKeys.ts';
 import { backend } from '@/shared/api/backend.ts';
+import { pageOf } from '@/shared/api/envelopes.ts';
 import { config } from '@/shared/lib/config/config.ts';
+import { newsPostSchema } from '@/features/news/model/newsPost.schemas.ts';
 
 /**
  * Query for the first `config.latestNewsLimit` news posts (`GET /news`), important first, then newest.
@@ -13,11 +14,11 @@ const latestNewsQueryOptions = queryOptions({
   queryKey: queryKeys.news.latest,
   meta: { handled: true },
   queryFn: async () => {
-    const response = await backend.get<PaginatedResponse<NewsPost>>('/news', {
+    const body = await backend.get('/news', {
       params: { per_page: config.latestNewsLimit },
     });
 
-    return response.data;
+    return pageOf(newsPostSchema).parse(body).data;
   },
 });
 
