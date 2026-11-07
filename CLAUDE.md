@@ -94,6 +94,8 @@ Agenci projektowi (`.claude/agents/`): `reviewer` — review zmian; `test-automa
   własnego stanu). Login i login-pin zapisują odpowiedź prosto do `auth.me`. **Nie przenoś usera do Zustanda.**
 - Stan serwerowy → TanStack Query, klucze w `shared/lib/config/queryKeys.ts`. Transport → `backend` z
   `shared/api/backend.ts` (ścieżki względem `/api`, same-origin, cookie wysyłane samo); nie wołaj `fetch` bezpośrednio.
+- Odpowiedź `backend` to `unknown` → parsuj schematem z `features/<f>/model/*.schemas.ts` w kopercie z
+  `shared/api/envelopes.ts` (`resourceOf` / `collectionOf` / `pageOf`). Typy domenowe tylko przez `z.infer`.
 - Zustand → wyłącznie stan UI niezwiązany z serwerem (na dziś brak store'ów; zależność zostaje).
 - Formularze → React Hook Form + Zod v4; komunikaty w schematach to **klucze i18n**.
 - Błędy → warstwowo: handler 401 (`onUnauthorized`) → `parseApiError` → globalny `onError` (toast) → `onError` mutacji / formularz.
@@ -111,6 +113,7 @@ Agenci projektowi (`.claude/agents/`): `reviewer` — review zmian; `test-automa
 | 005 | Stałe w `config.ts` zamiast `.env*`; wersja aplikacji przez `define` | wdrożony |
 | 006 | Migracja na file-based routing — osobny branch przed Branchem 5, żaden URL się nie zmienia | odroczony |
 | 007 | Transport na `fetch` (`shared/api/backend.ts`) zamiast axios; błędy `HttpError` / `NetworkError` | wdrożony |
+| 008 | Zod parsuje każdą odpowiedź API; `backend` zwraca `unknown`; schematy = pełny kontrakt `*Resource` | wdrożony |
 
 Przed zmianą w tych obszarach przeczytaj pełny ADR w `docs/ARCHITECTURAL_DECISIONS.md` (jeśli jest na dysku).
 
