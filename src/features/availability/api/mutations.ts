@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { backend } from '@/shared/api/backend.ts';
 import { resourceOf } from '@/shared/api/envelopes.ts';
 import { queryKeys } from '@/shared/lib/config/queryKeys.ts';
-import { queryClient } from '@/shared/lib/config/queryClient.ts';
+import { queryClient } from '@/app/queryClient.ts';
 import { toMonthParams } from '@/features/availability/lib/toMonthParams.ts';
 import { buildOptimisticAvailability } from '@/features/availability/lib/buildOptimisticAvailability.ts';
 import { getCachedUser } from '@/features/auth/lib/getCachedUser.ts';

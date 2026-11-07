@@ -1,7 +1,7 @@
 import { http, HttpResponse } from 'msw';
 import { backend } from '../backend.ts';
 import { NetworkError } from '../networkError.ts';
-import { queryClient } from '@/shared/lib/config/queryClient.ts';
+import { queryClient } from '@/app/queryClient.ts';
 import { queryKeys } from '@/shared/lib/config/queryKeys.ts';
 import { makeUser } from '@/test/factories/user.ts';
 import { server } from '@/test/msw/server.ts';

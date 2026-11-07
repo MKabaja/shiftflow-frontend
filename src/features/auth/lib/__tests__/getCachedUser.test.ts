@@ -1,5 +1,5 @@
 import { meQueryOptions } from '@/features/auth/api/queries.ts';
-import { queryClient } from '@/shared/lib/config/queryClient.ts';
+import { queryClient } from '@/app/queryClient.ts';
 import { makeUser } from '@/test/factories/user.ts';
 
 import { getCachedUser } from '../getCachedUser.ts';

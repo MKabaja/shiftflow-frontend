@@ -2,7 +2,7 @@ import { useMutation } from '@tanstack/react-query';
 import { backend } from '@/shared/api/backend.ts';
 import { resourceOf } from '@/shared/api/envelopes.ts';
 import { queryKeys } from '@/shared/lib/config/queryKeys.ts';
-import { queryClient } from '@/shared/lib/config/queryClient.ts';
+import { queryClient } from '@/app/queryClient.ts';
 import { router } from '@/shared/lib/config/router.ts';
 import { landingPathFor } from '@/features/auth/lib/landingPathFor.ts';
 import { userSchema } from '@/features/auth/model/user.schemas.ts';

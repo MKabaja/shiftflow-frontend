@@ -5,7 +5,7 @@ paths:
   - "src/features/**/components/**/*Form*.tsx"
   - "src/features/**/components/**/*Modal*.tsx"
   - "src/shared/api/**"
-  - "src/shared/lib/config/queryClient.ts"
+  - "src/app/queryClient.ts"
   - "src/shared/lib/config/queryKeys.ts"
 ---
 
