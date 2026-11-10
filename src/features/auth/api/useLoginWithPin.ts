@@ -1,8 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { router } from '@/shared/lib/config/router.ts';
 import { loginWithPin } from '@/features/auth/api/auth.api.ts';
 import { authQueries } from '@/features/auth/api/auth.queries.ts';
-import { landingPathFor } from '@/features/auth/lib/landingPathFor.ts';
 
 function useLoginWithPin() {
   const queryClient = useQueryClient();
@@ -10,12 +8,7 @@ function useLoginWithPin() {
   return useMutation({
     mutationFn: loginWithPin,
     meta: { handled: true },
-    onSuccess: (user) => {
-      queryClient.setQueryData(authQueries.currentUser().queryKey, user);
-
-      const to = landingPathFor(user);
-      void router.navigate({ to });
-    },
+    onSuccess: (user) => queryClient.setQueryData(authQueries.currentUser().queryKey, user),
   });
 }
 

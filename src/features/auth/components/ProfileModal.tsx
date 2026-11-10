@@ -9,7 +9,7 @@ import { LogOut, Settings } from 'lucide-react';
 import { cn } from '@/shared/lib/helpers/cn.ts';
 import { focusStyles } from '@/shared/lib/styles/focusStyles.ts';
 import { useLogout } from '@/features/auth/api/useLogout.ts';
-import { Link } from '@tanstack/react-router';
+import { Link, useNavigate } from '@tanstack/react-router';
 
 type ProfileModalProps = {
   isOpen: boolean;
@@ -22,6 +22,7 @@ function ProfileModal({ isOpen, onClose, placement }: ProfileModalProps) {
   const { t } = useTranslation('auth');
   const positions = user?.positions ?? [];
   const { mutate: logout, isPending } = useLogout();
+  const navigate = useNavigate();
 
   return (
     <Modal
@@ -46,7 +47,7 @@ function ProfileModal({ isOpen, onClose, placement }: ProfileModalProps) {
           <Button
             isLoading={isPending}
             variant="danger"
-            onClick={() => logout()}
+            onClick={() => logout(undefined, { onSuccess: () => void navigate({ to: '/' }) })}
           >
             <LogOut size={20} />
             {t('profile.logout')}

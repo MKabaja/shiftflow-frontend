@@ -11,11 +11,14 @@ import { config } from '@/shared/lib/config/config.ts';
 import { applyServerError } from '@/features/auth/lib/applyServerError.ts';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useLoginWithPin } from '@/features/auth/api/useLoginWithPin.ts';
+import { landingPathFor } from '@/features/auth/lib/landingPathFor.ts';
+import { useNavigate } from '@tanstack/react-router';
 
 function LoginPinForm() {
   const { t } = useTranslation('auth');
   const { t: tErrors } = useTranslation('errors');
   const { mutate, isPending } = useLoginWithPin();
+  const navigate = useNavigate();
   const {
     control,
     formState: { errors },
@@ -51,6 +54,7 @@ function LoginPinForm() {
   function submitCredentials(values: LoginPinFormValues) {
     clearErrors('root.serverError');
     mutate(values, {
+      onSuccess: (user) => void navigate({ to: landingPathFor(user) }),
       onError: (error) => applyServerError(error, setError, 'auth.invalidPin'),
     });
   }
