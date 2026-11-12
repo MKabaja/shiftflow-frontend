@@ -28,6 +28,10 @@ Pełny standard z przykładami: skill `react-clean-code`. Poniżej rdzeń + konw
   helpery pod spodem.
 - Funkcja = czasownik; boolean = `is` / `has` / `can` / `should`. Bez ogólnych nazw (`data`, `item`, `helper`).
   Nazwa zawiera jednostkę (`millisecondsSinceFetch`).
+- Warstwa API (`*.api.ts`, mutacje): `fetchX` dla GET, czasownik akcji dla zapisu (`createOrUpdateX`, `deleteX`, `login`).
+  Dane wysyłane do backendu to `payload`, typ `<Zasób>Payload` albo `<Akcja><Zasób>Payload`
+  (`AvailabilityPayload`, `DeleteAvailabilityPayload`). Wartości formularza: `<Nazwa>FormValues`.
+  Zakazane: `input` (kojarzy się z `<input>`), `save`, `upsert`.
 - 0–2 argumenty, max 3; więcej → obiekt. Bez argumentów flagowych. Guard clauses zamiast zagnieżdżeń.
 - Decyzje (czyste funkcje) oddzielone od efektów. Czas i losowość przekazywane jako argumenty.
 - Bez abstrakcji, klas i plików bez konkretnego powodu. Bez refaktoru kodu niezwiązanego z zadaniem.
