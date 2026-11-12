@@ -35,6 +35,14 @@ Pełny standard z przykładami: skill `react-clean-code`. Poniżej rdzeń + konw
 ## Komentarze i TSDoc
 - **Bez komentarzy w kodzie** — wyjaśnienia idą do rozmowy / PR. Jedyny wyjątek: TSDoc na eksportowanym API (skill `tsdoc`).
 - TSDoc bez odwołań do numerów ADR i wewnętrznych dokumentów.
+- TSDoc jest maksymalnie krótki — tylko to, czego nie widać w sygnaturze:
+  - jedno zdanie opisu: co funkcja robi, nie jak;
+  - `@param` tylko gdy nazwa i typ nie wystarczą (jednostki, zakresy, formaty, np. „w ms”, „ISO 8601”, „0–1”);
+  - `@returns` tylko gdy zwrot jest nieoczywisty (np. `null` przy braku wyniku, posortowana lista);
+  - `@throws`, gdy funkcja rzuca i wywołujący powinien o tym wiedzieć;
+  - efekty uboczne i pułapki (mutacja argumentu, wywołanie API, cache, wymagana kolejność wywołań);
+  - `@example` tylko dla nieoczywistego API: jeden, max 3 linie;
+  - `@deprecated` zawsze ze wskazaniem zamiennika.
 
 ## React
 - Importy z Reacta nazwane (`import { useState, type ReactNode } from 'react'`), bez `React.`.

@@ -13,9 +13,9 @@ type PinBoxElement = HTMLInputElement | null;
 const DIGIT = /^\d$/;
 
 /**
- * All PinInput behavior: refs to every box, per-box change/keydown/paste handlers,
- * focus management, and completion. Controlled when `value` is provided (e.g. RHF
- * Controller), otherwise the hook holds its own state.
+ * Provides the box refs, handlers and focus management of `PinInput`.
+ *
+ * Controlled when `value` is provided, otherwise holds its own state.
  */
 export function usePinInput({
   length,

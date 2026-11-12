@@ -9,16 +9,10 @@ type RenderWithQueryClientResult = RenderResult & {
 };
 
 /**
- * Renders `ui` inside a fresh `QueryClient`, so no cache leaks between tests.
+ * Renders `ui` inside a fresh `QueryClient` with retries off.
  *
- * Retries are off — a failed request shows its error state at once instead of after backoff.
- *
- * @param ui Element to render.
- * @param setup Runs before rendering, e.g. to seed the cache with `setQueryData`.
- * @returns The usual render result plus the `queryClient`, for asserting on cache state.
- *
- * @example
- * renderWithQueryClient(<NewsFeed />, (client) => client.setQueryData(newsQueries.latest().queryKey, [post]));
+ * @param setup - Runs before rendering, e.g. to seed the cache.
+ * @returns The render result plus the `queryClient`.
  */
 export function renderWithQueryClient(
   ui: ReactElement,

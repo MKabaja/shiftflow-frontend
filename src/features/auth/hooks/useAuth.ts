@@ -11,18 +11,9 @@ type UseAuthResult = {
 };
 
 /**
- * Reads "who is logged in" from the current-user query cache for use in components.
+ * Returns the logged-in {@link User} from the query cache, with role flags.
  *
- * Holds no state of its own. Normalizes the query's `undefined` (before the
- * first fetch) to `null`, so consumers handle a single "empty" shape, and
- * precomputes role flags for ergonomic checks in JSX.
- *
- * @returns The current {@link User} (`null` when unauthenticated), plus
- * `isAuthenticated` and per-role booleans (`isAdmin` / `isManager` / `isEmployee`).
- *
- * @example
- * const { user, isAdmin } = useAuth();
- * if (isAdmin) return <AdminPanel />;
+ * @returns `user` is `null` when nobody is logged in or before the first fetch.
  */
 function useAuth(): UseAuthResult {
   const { data: user } = useQuery(authQueries.currentUser());

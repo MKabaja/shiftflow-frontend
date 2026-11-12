@@ -1,15 +1,7 @@
 import type { User } from '@/features/auth/model/user.schemas.ts';
 
 /**
- * Test factory for {@link User} — deterministic defaults + shallow overrides.
- *
- * Mirrors Laravel's `User::factory()->make()`: pass only the fields a test
- * cares about, the rest fall back to stable defaults. Overrides are typed
- * (`Partial<User>`), so field names and value types are still checked.
- *
- * @example
- * const admin = makeUser({ role: 'admin' });
- * const inactive = makeUser({ is_active: false });
+ * Builds a {@link User} with deterministic defaults and shallow overrides.
  */
 export function makeUser(overrides: Partial<User> = {}): User {
   return {

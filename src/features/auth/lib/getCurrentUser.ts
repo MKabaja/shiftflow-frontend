@@ -3,18 +3,11 @@ import { queryClient } from '@/app/queryClient.ts';
 import type { User } from '@/features/auth/model/user.schemas.ts';
 
 /**
- * Reads the logged-in user for the route guards, from cache or the network.
+ * Loads the logged-in user for route guards, from cache or the network.
  *
- * A plain function rather than a hook, so it can run inside `beforeLoad` —
- * outside React, where `useAuth` is unavailable.
+ * Never rejects: any failure, not only `401`, resolves to `null`.
  *
- * Being logged out is an ordinary state here, not a failure, so the rejection
- * that the current-user query raises on a `401` is turned into `null`. Every
- * other failure (network down, `500`) collapses to `null` as well, which the
- * guards read as "not logged in" — until route-level error handling exists,
- * bouncing to the login screen beats crashing the route.
- *
- * @returns The current {@link User}, or `null` when nobody is authenticated.
+ * @returns `null` when nobody is logged in or the request failed.
  */
 async function getCurrentUser(): Promise<User | null> {
   try {

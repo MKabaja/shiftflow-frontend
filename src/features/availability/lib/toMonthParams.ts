@@ -1,13 +1,11 @@
 import type { AvailabilityQueryParams } from '@/features/availability/model/availability.schemas.ts';
 
 /**
- * Extracts the year and month from an API date string, to address that month's cache entry.
+ * Extracts the year and month from a `Y-m-d` date string.
  *
- * Slices the string instead of parsing it with `new Date`, which reads `Y-m-d` as UTC midnight
- * and can shift the 1st of a month into the previous one in negative time zones.
+ * Slices instead of using `new Date`, which shifts the 1st into the previous month in negative time zones.
  *
- * @param date Date in `Y-m-d` format, e.g. `2026-10-18`.
- * @returns `{ year, month }` with `month` as 1–12, e.g. `{ year: 2026, month: 10 }`.
+ * @returns `month` is 1–12.
  */
 function toMonthParams(date: string): AvailabilityQueryParams {
   return {
