@@ -1,7 +1,7 @@
 # SHIFTFlow — Frontend
 
 [![React](https://img.shields.io/badge/React-19-61DAFB?logo=react&logoColor=white)](https://react.dev)
-[![TypeScript](https://img.shields.io/badge/TypeScript-6.0-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
+[![TypeScript](https://img.shields.io/badge/TypeScript-7.0-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 [![Vite](https://img.shields.io/badge/Vite-8-646CFF?logo=vite&logoColor=white)](https://vite.dev)
 [![Tailwind](https://img.shields.io/badge/Tailwind-v4-38BDF8?logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 [![Tests](https://img.shields.io/badge/tests-183%20passing-brightgreen)](#testing)
@@ -38,7 +38,7 @@ and check when they work next. Both flows share one responsive shell rather than
 
 ## Tech Stack
 
-- **React** 19 + **TypeScript** 6 (strict, `noUnusedLocals` / `noUnusedParameters` / `erasableSyntaxOnly`)
+- **React** 19 + **TypeScript** 7 (strict, `noUnusedLocals` / `noUnusedParameters` / `erasableSyntaxOnly`)
 - **Vite** 8 — dev server, build, same-origin API proxy
 - **TanStack Router** — code-based routes with pathless layout routes and `beforeLoad` guards
 - **TanStack Query** — server state, and the single source of truth for the session

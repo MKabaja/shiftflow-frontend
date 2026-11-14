@@ -42,9 +42,10 @@ sterowalnego mocka), jest bezwartościowy.
   }));
   ```
 - Motion mockuj tylko, gdy testy bez tego padają (v12 renderuje się w jsdom poprawnie).
-- **Sieć → MSW (v2)**, nigdy `vi.mock` klienta HTTP ani własnych modułów API. Serwer `test/msw/server.ts` startuje
-  w `setup.ts` z `onUnhandledRequest: 'error'` (żądanie bez handlera = błąd testu), handlery resetowane po każdym
-  teście. Każdy test deklaruje odpowiedzi przez `server.use(http.get('/api/…', …))`. Kopertę Laravela buduje
+- **Sieć → MSW (v3)**, nigdy `vi.mock` klienta HTTP ani własnych modułów API. Serwer `test/msw/server.ts` startuje
+  w `setup.ts` z `onUnhandledFrame: 'error'` (żądanie bez handlera = błąd testu; stara nazwa `onUnhandledRequest`
+  jest w v3 ignorowana po cichu), handlery resetowane po każdym teście. Importy: `http`, `HttpResponse` z
+  `msw/http`, `delay` z `msw/utils/delay` (nie z `msw`). Każdy test deklaruje odpowiedzi przez `server.use(http.get('/api/…', …))`. Kopertę Laravela buduje
   `test/msw/envelopes.ts` (`page(items)`), żeby testy nie znały kształtu `{ data }`. „Wiecznie w toku” →
   `await delay('infinite')`, błąd sieci → `HttpResponse.error()`, liczba zapytań → licznik w handlerze.
 - Helpery: `test/utils/renderWithQueryClient.tsx` (świeży `QueryClient`, `retry: false`, opcjonalny `setup` do

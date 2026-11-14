@@ -1,6 +1,7 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { delay, HttpResponse, type HttpResponseResolver, http } from 'msw';
+import { HttpResponse, type HttpResponseResolver, http } from 'msw/http';
+import { delay } from 'msw/utils/delay';
 import { newsQueries } from '@/features/news/api/news.queries.ts';
 import type { NewsPost } from '@/features/news/model/newsPost.schemas.ts';
 import { makePost } from '@/test/factories/newsPost.ts';

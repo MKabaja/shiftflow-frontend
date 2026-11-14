@@ -1,6 +1,7 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { renderHook } from '@testing-library/react';
-import { delay, http } from 'msw';
+import { http } from 'msw/http';
+import { delay } from 'msw/utils/delay';
 import type { ReactNode } from 'react';
 import { authQueries } from '@/features/auth/api/auth.queries.ts';
 import type { User } from '@/features/auth/model/user.schemas.ts';

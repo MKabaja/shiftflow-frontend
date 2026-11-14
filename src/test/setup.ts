@@ -1,9 +1,9 @@
-import '@testing-library/jest-dom';
+import '@testing-library/jest-dom/vitest';
 import { i18n } from '@/shared/i18n';
 import { server } from '@/test/msw/server.ts';
 
 await i18n.changeLanguage('en');
 
-beforeAll(() => server.listen({ onUnhandledRequest: 'error' }));
+beforeAll(() => server.listen({ onUnhandledFrame: 'error' }));
 afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
