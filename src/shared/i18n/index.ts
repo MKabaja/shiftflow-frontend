@@ -12,8 +12,8 @@ import enErrors from './locales/en/errors.json';
 import enNews from './locales/en/news.json';
 
 const resources = {
-  pl: { common: plCommon, errors: plErrors, auth: plAuth, news: plNews },
-  en: { common: enCommon, errors: enErrors, auth: enAuth, news: enNews },
+	pl: { common: plCommon, errors: plErrors, auth: plAuth, news: plNews },
+	en: { common: enCommon, errors: enErrors, auth: enAuth, news: enNews },
 } as const;
 
 const LOCALE_KEY: string = 'shiftflow.locale';
@@ -22,35 +22,38 @@ type SupportedLocale = keyof typeof resources;
 const supportedLocales = Object.keys(resources) as SupportedLocale[];
 
 function getInitialLocale(): SupportedLocale {
-  const locale = getStoredLocale() ?? document.documentElement.lang.split('-')[0];
-  return supportedLocales.includes(locale as SupportedLocale) ? (locale as SupportedLocale) : 'pl';
+	const locale =
+		getStoredLocale() ?? document.documentElement.lang.split('-')[0];
+	return supportedLocales.includes(locale as SupportedLocale)
+		? (locale as SupportedLocale)
+		: 'pl';
 }
 
 function getStoredLocale(): string | undefined | null {
-  try {
-    return localStorage.getItem(LOCALE_KEY);
-  } catch (error) {
-    console.error('getStoredLocale()', error);
-  }
+	try {
+		return localStorage.getItem(LOCALE_KEY);
+	} catch (error) {
+		console.error('getStoredLocale()', error);
+	}
 }
 
 function setLocale(locale: SupportedLocale): void {
-  try {
-    localStorage.setItem(LOCALE_KEY, locale);
-  } catch (error) {
-    console.error(error);
-  }
-  void i18n.changeLanguage(locale);
-  document.documentElement.lang = locale;
+	try {
+		localStorage.setItem(LOCALE_KEY, locale);
+	} catch (error) {
+		console.error(error);
+	}
+	void i18n.changeLanguage(locale);
+	document.documentElement.lang = locale;
 }
 
 void i18n.use(initReactI18next).init({
-  resources,
-  fallbackLng: 'pl',
-  lng: getInitialLocale(),
-  ns: ['common', 'errors', 'auth', 'news'],
-  defaultNS: 'common',
-  interpolation: { escapeValue: false },
+	resources,
+	fallbackLng: 'pl',
+	lng: getInitialLocale(),
+	ns: ['common', 'errors', 'auth', 'news'],
+	defaultNS: 'common',
+	interpolation: { escapeValue: false },
 });
 document.documentElement.lang = i18n.resolvedLanguage ?? 'pl';
 

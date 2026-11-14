@@ -18,18 +18,30 @@ import { newsRoute } from '@/routes/news.tsx';
 import { settingsRoute } from '@/routes/settings.tsx';
 
 const routeTree = rootRoute.addChildren([
-  publicRoute.addChildren([indexRoute, loginRoute, loginPinRoute]),
-  appRoute.addChildren([
-    settingsRoute,
-    dispositionRoute.addChildren([homeRoute, availabilityRoute, myScheduleRoute]),
-    panelRoute.addChildren([scheduleRoute, employeesRoute, positionsRoute, newsRoute]),
-  ]),
+	publicRoute.addChildren([indexRoute, loginRoute, loginPinRoute]),
+	appRoute.addChildren([
+		settingsRoute,
+		dispositionRoute.addChildren([
+			homeRoute,
+			availabilityRoute,
+			myScheduleRoute,
+		]),
+		panelRoute.addChildren([
+			scheduleRoute,
+			employeesRoute,
+			positionsRoute,
+			newsRoute,
+		]),
+	]),
 ]);
 
-export const router = createRouter({ routeTree, defaultPendingComponent: Splash });
+export const router = createRouter({
+	routeTree,
+	defaultPendingComponent: Splash,
+});
 
 declare module '@tanstack/react-router' {
-  interface Register {
-    router: typeof router;
-  }
+	interface Register {
+		router: typeof router;
+	}
 }

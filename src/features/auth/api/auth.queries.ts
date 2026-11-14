@@ -11,20 +11,20 @@ import type { User } from '@/features/auth/model/user.schemas.ts';
  * session. A `401` is not retried; other errors retry once.
  */
 const authQueries = {
-  all: () => ['auth'] as const,
-  currentUser: () =>
-    queryOptions({
-      queryKey: [...authQueries.all(), 'me'] as const,
-      queryFn: (): Promise<User | null> => fetchCurrentUser(),
-      meta: { handled: true },
-      staleTime: config.staleTime.auth,
-      retry: retryUnlessUnauthorized,
-    }),
+	all: () => ['auth'] as const,
+	currentUser: () =>
+		queryOptions({
+			queryKey: [...authQueries.all(), 'me'] as const,
+			queryFn: (): Promise<User | null> => fetchCurrentUser(),
+			meta: { handled: true },
+			staleTime: config.staleTime.auth,
+			retry: retryUnlessUnauthorized,
+		}),
 };
 
 function retryUnlessUnauthorized(failureCount: number, error: Error): boolean {
-  if (error instanceof HttpError && error.status === 401) return false;
-  return failureCount < 1;
+	if (error instanceof HttpError && error.status === 401) return false;
+	return failureCount < 1;
 }
 
 export { authQueries };

@@ -6,8 +6,8 @@ import { format, isValid, toDate, type DateArg, type Locale } from 'date-fns';
  * @returns `null` when `date` is invalid.
  */
 export function formatDate(date: DateArg<Date>, locale: Locale): string | null {
-  const parsedDate = toDate(date);
-  if (!isValid(parsedDate)) return null;
+	const parsedDate = toDate(date);
+	if (!isValid(parsedDate)) return null;
 
-  return format(parsedDate, 'PPP', { locale });
+	return format(parsedDate, 'PPP', { locale });
 }

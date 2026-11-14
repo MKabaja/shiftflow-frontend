@@ -1,13 +1,13 @@
 import {
-  differenceInDays,
-  differenceInMinutes,
-  formatDistance,
-  formatDistanceStrict,
-  isValid,
-  min,
-  toDate,
-  type DateArg,
-  type Locale,
+	differenceInDays,
+	differenceInMinutes,
+	formatDistance,
+	formatDistanceStrict,
+	isValid,
+	min,
+	toDate,
+	type DateArg,
+	type Locale,
 } from 'date-fns';
 import { config } from '@/shared/lib/config/config.ts';
 import { formatDate } from '@/shared/lib/helpers/formatDate.ts';
@@ -21,25 +21,25 @@ import { formatDate } from '@/shared/lib/helpers/formatDate.ts';
  * @returns `null` when `date` is invalid.
  */
 export function formatRelativeDate(
-  date: DateArg<Date>,
-  locale: Locale,
-  now: Date = new Date(),
+	date: DateArg<Date>,
+	locale: Locale,
+	now: Date = new Date(),
 ): string | null {
-  const parsedDate = toDate(date);
-  if (!isValid(parsedDate)) return null;
+	const parsedDate = toDate(date);
+	if (!isValid(parsedDate)) return null;
 
-  if (differenceInDays(now, parsedDate) >= config.relativeDateLimitDays) {
-    return formatDate(parsedDate, locale);
-  }
+	if (differenceInDays(now, parsedDate) >= config.relativeDateLimitDays) {
+		return formatDate(parsedDate, locale);
+	}
 
-  const pastDate = min([parsedDate, now]);
-  if (differenceInMinutes(now, pastDate) < 1) {
-    return formatDistance(pastDate, now, { addSuffix: true, locale });
-  }
+	const pastDate = min([parsedDate, now]);
+	if (differenceInMinutes(now, pastDate) < 1) {
+		return formatDistance(pastDate, now, { addSuffix: true, locale });
+	}
 
-  return formatDistanceStrict(pastDate, now, {
-    addSuffix: true,
-    roundingMethod: 'floor',
-    locale,
-  });
+	return formatDistanceStrict(pastDate, now, {
+		addSuffix: true,
+		roundingMethod: 'floor',
+		locale,
+	});
 }

@@ -8,10 +8,10 @@ import type { AvailabilityQueryParams } from '@/features/availability/model/avai
  * @returns `month` is 1–12.
  */
 function toMonthParams(date: string): AvailabilityQueryParams {
-  return {
-    year: Number(date.slice(0, 4)),
-    month: Number(date.slice(5, 7)),
-  };
+	return {
+		year: Number(date.slice(0, 4)),
+		month: Number(date.slice(5, 7)),
+	};
 }
 
 export { toMonthParams };

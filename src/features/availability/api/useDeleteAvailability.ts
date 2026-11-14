@@ -1,9 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { deleteAvailability } from '@/features/availability/api/availability.api.ts';
 import {
-  invalidateMonth,
-  rollbackMonth,
-  updateMonthOptimistically,
+	invalidateMonth,
+	rollbackMonth,
+	updateMonthOptimistically,
 } from '@/features/availability/api/availabilityMonthCache.ts';
 
 /**
@@ -13,17 +13,19 @@ import {
  * Errors go to the global toast.
  */
 function useDeleteAvailability() {
-  const queryClient = useQueryClient();
+	const queryClient = useQueryClient();
 
-  return useMutation({
-    mutationFn: deleteAvailability,
-    onMutate: (payload) =>
-      updateMonthOptimistically(queryClient, payload.date, (availabilities) =>
-        availabilities.filter((availability) => availability.id !== payload.id),
-      ),
-    onError: (_error, _payload, snapshot) => rollbackMonth(queryClient, snapshot),
-    onSettled: (_data, _error, _payload, snapshot) => invalidateMonth(queryClient, snapshot),
-  });
+	return useMutation({
+		mutationFn: deleteAvailability,
+		onMutate: (payload) =>
+			updateMonthOptimistically(queryClient, payload.date, (availabilities) =>
+				availabilities.filter((availability) => availability.id !== payload.id),
+			),
+		onError: (_error, _payload, snapshot) =>
+			rollbackMonth(queryClient, snapshot),
+		onSettled: (_data, _error, _payload, snapshot) =>
+			invalidateMonth(queryClient, snapshot),
+	});
 }
 
 export { useDeleteAvailability };

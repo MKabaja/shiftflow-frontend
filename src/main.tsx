@@ -11,15 +11,15 @@ import './shared/i18n';
 import '@/css/Index.css';
 
 createRoot(document.getElementById('root')!).render(
-  <StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <RouterProvider router={router} />
-      <Toaster
-        position="top-right"
-        theme="dark"
-        richColors
-      />
-      {config.isDev && <ReactQueryDevtools initialIsOpen={false} />}
-    </QueryClientProvider>
-  </StrictMode>,
+	<StrictMode>
+		<QueryClientProvider client={queryClient}>
+			<RouterProvider router={router} />
+			<Toaster
+				position="top-right"
+				theme="dark"
+				richColors
+			/>
+			{config.isDev && <ReactQueryDevtools initialIsOpen={false} />}
+		</QueryClientProvider>
+	</StrictMode>,
 );

@@ -10,13 +10,13 @@ import { useFocusTrap } from '@/shared/hooks/useFocusTrap.ts';
  * @returns `panelRef` — attach it to the modal panel to enable the focus trap.
  */
 function useModal(isOpen: boolean, onClose: () => void) {
-  const panelRef = useRef<HTMLDivElement>(null);
+	const panelRef = useRef<HTMLDivElement>(null);
 
-  useLockBodyScroll(isOpen, 'both');
-  useKeyClose(isOpen, onClose);
-  useFocusReturn(isOpen);
-  useFocusTrap(isOpen, panelRef);
+	useLockBodyScroll(isOpen, 'both');
+	useKeyClose(isOpen, onClose);
+	useFocusReturn(isOpen);
+	useFocusTrap(isOpen, panelRef);
 
-  return { panelRef };
+	return { panelRef };
 }
 export { useModal };

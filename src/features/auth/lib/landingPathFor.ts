@@ -8,6 +8,6 @@ type LandingPath = '/home' | '/schedule';
  * Never returns a public path, which would make the route guards redirect in a loop.
  */
 function landingPathFor(user: User): LandingPath {
-  return user.role === 'employee' ? '/home' : '/schedule';
+	return user.role === 'employee' ? '/home' : '/schedule';
 }
 export { landingPathFor };

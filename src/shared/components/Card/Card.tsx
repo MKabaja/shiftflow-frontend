@@ -5,29 +5,29 @@ import { baseStyles, interactiveStyles, variantStyles } from './Card.styles.ts';
 export type CardVariant = 'default' | 'elevated' | 'auth';
 
 type CardProps = ComponentProps<'div'> & {
-  children: ReactNode;
-  variant?: CardVariant;
-  interactive?: boolean;
+	children: ReactNode;
+	variant?: CardVariant;
+	interactive?: boolean;
 };
 
 export function Card({
-  children,
-  className,
-  variant = 'default',
-  interactive = false,
-  ...rest
+	children,
+	className,
+	variant = 'default',
+	interactive = false,
+	...rest
 }: CardProps) {
-  return (
-    <div
-      className={cn(
-        baseStyles,
-        variantStyles[variant],
-        interactive && interactiveStyles,
-        className,
-      )}
-      {...rest}
-    >
-      {children}
-    </div>
-  );
+	return (
+		<div
+			className={cn(
+				baseStyles,
+				variantStyles[variant],
+				interactive && interactiveStyles,
+				className,
+			)}
+			{...rest}
+		>
+			{children}
+		</div>
+	);
 }
