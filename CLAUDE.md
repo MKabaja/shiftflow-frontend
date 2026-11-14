@@ -1,9 +1,9 @@
 # ShiftFlow — frontend
 
 Grafik zmian pracowników Kopalni Soli „Wieliczka”: panel kierownika + moduł dyspozycji pracownika.
-Stack: React 19, TypeScript 6 (strict), Vite 8, Tailwind CSS v4, TanStack Router + Query v5, Zustand 5,
-React Hook Form + Zod v4, i18next, Motion 12; HTTP: własny klient na `fetch`. Testy: Vitest 4 + Testing Library
-(jsdom) + MSW 2. Lint + format: Biome (`biome.json`, wersja przypięta).
+Stack: React 19, TypeScript 7 (strict), Vite 8, Tailwind CSS v4, TanStack Router + Query v5, Zustand 5,
+React Hook Form + Zod v4, i18next, Motion 12; HTTP: własny klient na `fetch`. Testy: Vitest 5 + Testing Library
+(jsdom) + MSW 3. Lint + format: Biome (`biome.json`, wersja przypięta).
 Backend: Laravel, osobne repo `~/projekty/SHIFTFlow`. Środowisko: WSL (Ubuntu), Node 24 — ta sama wersja co CI.
 
 <!-- Utrzymanie: < 200 linii, każda linia ma zapobiegać realnemu błędowi. Reguły dotyczące części kodu

@@ -1,4 +1,4 @@
-import { HttpResponse, http } from 'msw';
+import { HttpResponse, http } from 'msw/http';
 import { queryClient } from '@/app/queryClient.ts';
 import { authQueries } from '@/features/auth/api/auth.queries.ts';
 import { makeUser } from '@/test/factories/user.ts';
