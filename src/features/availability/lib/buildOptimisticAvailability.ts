@@ -1,25 +1,19 @@
-import type { Availability, UpsertAvailabilityInput } from '@/features/availability/model/availability.schemas.ts';
+import type { Availability, AvailabilityPayload } from '@/features/availability/model/availability.schemas.ts';
 
 /**
  * Builds a temporary {@link Availability} to show in the cache before the server confirms it.
  *
- * The `id` is negative, so it never collides with a real one and marks the entry as not yet
- * saved. The server's entry replaces it once the month is refetched.
- *
- * @param input Data sent to the backend.
- * @param userId Owner of the entry — the logged-in user.
- * @param now Moment of the change; sets the timestamps and the temporary `id`.
- * @returns A complete {@link Availability} with a temporary `id` and timestamps set to `now`.
+ * @param now - Sets the timestamps and the temporary `id`, which is negative so it never collides with a real one.
  */
 function buildOptimisticAvailability(
-  input: UpsertAvailabilityInput,
+  payload: AvailabilityPayload,
   userId: number,
   now: Date,
 ): Availability {
   const timestamp = now.toISOString();
 
   return {
-    ...input,
+    ...payload,
     id: -now.getTime(),
     user_id: userId,
     created_at: timestamp,

@@ -5,15 +5,15 @@ paths:
   - "src/features/**/components/**/*Form*.tsx"
   - "src/features/**/components/**/*Modal*.tsx"
   - "src/shared/api/**"
-  - "src/shared/lib/config/queryClient.ts"
-  - "src/shared/lib/config/queryKeys.ts"
+  - "src/app/queryClient.ts"
 ---
 
 # Query, mutacje, formularze, obsługa błędów
 
 ## Warstwy błędów
 1. **`backend` (`shared/api/backend.ts`)** odrzuca: status spoza 2xx → `HttpError(status, body)`, brak odpowiedzi →
-   `NetworkError`. Każdy 401 woła handler `onUnauthorized` (rejestrowany w `queryClient.ts`: `auth.me` → `null`).
+   `NetworkError`. Każdy 401 woła handler `onUnauthorized` (rejestrowany w `queryClient.ts`: wpisuje `null` pod
+   `authQueries.currentUser()`).
    Sam nie przekierowuje — wyrzuca guard `_app` przy najbliższej nawigacji. Endpoint, na którym 401 = złe dane,
    a nie śmierć sesji (login, login-pin), przekazuje `ignoreUnauthorized: true`.
 2. **`parseApiError`** — czysta funkcja: dowolny błąd → `{ messageKey, fieldErrors?, statusCode? }`. `messageKey` to
@@ -44,5 +44,15 @@ paths:
   mutacje bez własnego UI).
 
 ## Query
-- Klucze tylko z `shared/lib/config/queryKeys.ts`. Login i login-pin zapisują odpowiedź prosto do `auth.me`.
+- Trzy role plików w `features/<f>/api/`:
+  - `<zasób>.api.ts` — czyste funkcje HTTP: `backend` + parsowanie Zod + rozpakowanie koperty. Zero Reacta i Query.
+  - `<zasób>.queries.ts` — fabryka `<zasób>Queries`: hierarchiczne klucze (`all()` → `month(params)`) +
+    `queryOptions`. Klucze **tylko** stąd, nigdy literał w komponencie.
+  - `use<Akcja>.ts` — jeden hook mutacji na plik. Hook robi tylko cache (zapis, optimistic, invalidate); nawigacja po
+    sukcesie idzie do komponentu przez `mutate(values, { onSuccess })`.
+- Komponent woła `useQuery(xQueries.y())` bezpośrednio — bez cienkich wrapperów. Hook tylko, gdy dodaje logikę
+  (`useAuth`: flagi ról).
+- Klient przez `useQueryClient()` w hookach; funkcje poza Reactem (`lib/`, `*MonthCache.ts`) dostają `queryClient`
+  argumentem. Generyków `useMutation<…>` nie piszemy — typy wynikają z funkcji w `*.api.ts`.
+- `useLogin` i `useLoginWithPin` zapisują odpowiedź prosto pod `authQueries.currentUser()`.
 - Przed implementacją hooka API potwierdź kształt odpowiedzi curlem (patrz `CLAUDE.md` → Backend API).

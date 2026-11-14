@@ -16,10 +16,9 @@ import { formatDate } from '@/shared/lib/helpers/formatDate.ts';
  * Formats a date relative to `now` (`3 godziny temu`), or as a full date once it is
  * `config.relativeDateLimitDays` days old.
  *
- * @param date - date to format; a future date is treated as `now`.
- * @param locale - date-fns locale of the output.
- * @param now - reference point, defaults to the current time.
- * @returns The relative or full date, or `null` when `date` is invalid.
+ * A future `date` is treated as `now`.
+ *
+ * @returns `null` when `date` is invalid.
  */
 export function formatRelativeDate(
   date: DateArg<Date>,

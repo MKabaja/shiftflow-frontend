@@ -1,15 +1,10 @@
 import type { NewsPost } from '@/features/news/model/newsPost.schemas.ts';
 
 /**
- * Test factory for {@link NewsPost} — deterministic defaults + shallow overrides.
+ * Builds a {@link NewsPost} with deterministic defaults and shallow overrides.
  *
- * `created_at` is older than the relative-date limit, so cards show the full date
- * (`June 18th, 2026` in `en`) regardless of the current time. Posts rendered together
- * need distinct `id` (list key) and `title` / `content` (text queries).
- *
- * @example
- * const anonymous = makePost({ author: null });
- * const posts = [makePost({ id: 1 }), makePost({ id: 2, title: 'Second post' })];
+ * `created_at` is past the relative-date limit, so cards show a full date. Posts rendered
+ * together need distinct `id`, `title` and `content`.
  */
 export function makePost(overrides: Partial<NewsPost> = {}): NewsPost {
   return {

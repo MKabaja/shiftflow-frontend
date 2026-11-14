@@ -1,6 +1,7 @@
 import { useId, useRef } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useLatestNews } from '@/features/news/api/queries.ts';
+import { useQuery } from '@tanstack/react-query';
+import { newsQueries } from '@/features/news/api/news.queries.ts';
 import { NewsFeedEmpty } from './NewsFeedEmpty.tsx';
 import { NewsFeedError } from './NewsFeedError.tsx';
 import { NewsFeedList } from './NewsFeedList.tsx';
@@ -8,7 +9,7 @@ import { NewsFeedLoading } from './NewsFeedLoading.tsx';
 
 function NewsFeed() {
   const { t } = useTranslation('news');
-  const { data: posts, isError, isPending, refetch } = useLatestNews();
+  const { data: posts, isError, isPending, refetch } = useQuery(newsQueries.latest());
   const headingId = useId();
   const headingRef = useRef<HTMLHeadingElement>(null);
 

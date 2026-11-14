@@ -5,16 +5,10 @@ import { useKeyClose } from './useKeyClose';
 type Axis = 'x' | 'y' | 'both';
 
 /**
- * Manages open/close state for a dropdown or modal, with body-scroll lock and Escape-to-close built in.
- * Locks scroll via `useLockBodyScroll` and closes on `Escape` via `useKeyClose` while open.
+ * Manages open state of a dropdown; while open it locks body scroll and closes on `Escape`.
  *
- * @param {Axis} axis - The scroll axis to lock while open.
- * @returns An object with:
- *   - `isOpen` — whether the dropdown is currently open
- *   - `close` — closes the dropdown
- *   - `toggle` — toggles the dropdown open or closed
+ * @param axis - Scroll axis to lock while open.
  */
-
 export function useDropdown(axis: Axis) {
   const [isOpen, setIsOpen] = useState(false);
   const close = useCallback(() => setIsOpen(false), []);

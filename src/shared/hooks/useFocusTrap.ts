@@ -11,12 +11,9 @@ const SELECTOR: string = [
 ].join(',');
 
 /**
- * Traps keyboard focus inside a container while it is open, e.g. a modal dialog.
- * On open, moves focus to the first focusable element (or the container itself if it has none).
- * While open, `Tab` and `Shift+Tab` cycle within the container instead of leaving it.
+ * Traps `Tab` focus inside a container while it is open, moving focus in on open.
  *
- * @param {boolean} isOpen - When `true`, focus is moved inside and trapped. When `false`, the hook does nothing.
- * @param {RefObject<T | null>} containerRef - The container to trap focus within. Give it `tabIndex={-1}` so it can hold focus when it has no focusable children.
+ * @param containerRef - Give it `tabIndex={-1}` so it can hold focus when it has no focusable children.
  */
 function useFocusTrap<T extends HTMLElement>(isOpen: boolean, containerRef: RefObject<T | null>) {
   useLayoutEffect(() => {

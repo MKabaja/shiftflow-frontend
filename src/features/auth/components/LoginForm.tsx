@@ -10,7 +10,9 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { type LoginFormValues, loginSchema } from '@/features/auth/model/login.schemas.ts';
 import type { ParseKeys } from 'i18next';
 import { config } from '@/shared/lib/config/config.ts';
-import { useLogin } from '@/features/auth/api/mutations.ts';
+import { useLogin } from '@/features/auth/api/useLogin.ts';
+import { landingPathFor } from '@/features/auth/lib/landingPathFor.ts';
+import { useNavigate } from '@tanstack/react-router';
 import { applyServerError } from '@/features/auth/lib/applyServerError.ts';
 
 function LoginForm() {
@@ -18,6 +20,7 @@ function LoginForm() {
   const { t: tErrors } = useTranslation('errors');
   const [isPasswordMasked, setIsPasswordMasked] = useState(true);
   const { mutate, isPending } = useLogin();
+  const navigate = useNavigate();
 
   const {
     control,
@@ -54,6 +57,7 @@ function LoginForm() {
   function submitCredentials(values: LoginFormValues) {
     clearErrors('root.serverError');
     mutate(values, {
+      onSuccess: (user) => void navigate({ to: landingPathFor(user) }),
       onError: (error) => applyServerError(error, setError, 'auth.invalidCredentials'),
     });
   }

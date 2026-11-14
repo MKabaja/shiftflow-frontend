@@ -29,8 +29,8 @@ class MockResizeObserver implements ResizeObserver {
 }
 
 /**
- * Replaces the global `ResizeObserver` (missing in jsdom) with a controllable mock.
- * Nothing is measured on its own — resizes are fired by {@link triggerResize}.
+ * Replaces the global `ResizeObserver` with a mock fired by {@link triggerResize}.
+ *
  * Call in `beforeEach`; restore with `vi.unstubAllGlobals()` in `afterEach`.
  */
 export function stubResizeObserver(): void {
@@ -41,8 +41,7 @@ export function stubResizeObserver(): void {
 /**
  * Fires the resize callback of the observer watching `element`, inside `act`.
  *
- * @throws When no active observer watches `element` — a missing observer is a test failure,
- * not a silent no-op.
+ * @throws When no observer watches `element`.
  */
 export function triggerResize(element: Element): void {
   const observer = observed.get(element);
@@ -52,7 +51,6 @@ export function triggerResize(element: Element): void {
 
 /**
  * Like {@link triggerResize}, but does nothing when no observer watches `element`.
- * For checking that a disconnected observer no longer reacts to resizes.
  */
 export function triggerResizeIfObserved(element: Element): void {
   const observer = observed.get(element);
@@ -60,7 +58,7 @@ export function triggerResizeIfObserved(element: Element): void {
 }
 
 /**
- * Sets the element's `scrollHeight` and `clientHeight` (always `0` in jsdom).
+ * Sets `scrollHeight` and `clientHeight` of the element, which are always `0` in jsdom.
  */
 export function setElementSize(
   element: HTMLElement,

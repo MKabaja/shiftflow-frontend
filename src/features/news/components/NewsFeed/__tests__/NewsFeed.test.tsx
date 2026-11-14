@@ -2,7 +2,7 @@ import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { delay, http, HttpResponse, type HttpResponseResolver } from 'msw';
 import { NewsFeed } from '../NewsFeed.tsx';
-import { queryKeys } from '@/shared/lib/config/queryKeys.ts';
+import { newsQueries } from '@/features/news/api/news.queries.ts';
 import { makePost } from '@/test/factories/newsPost.ts';
 import { stubResizeObserver } from '@/test/mocks/resizeObserver.ts';
 import { page } from '@/test/msw/envelopes.ts';
@@ -111,7 +111,7 @@ describe('NewsFeed', () => {
   it('keeps the cached list without a loading status while refreshing', async () => {
     const post = makePost();
     mockNews(neverRespond);
-    renderNewsFeed((client) => client.setQueryData(queryKeys.news.latest, [post]));
+    renderNewsFeed((client) => client.setQueryData(newsQueries.latest().queryKey, [post]));
 
     await waitFor(() => expect(newsRequestCount).toBe(1));
 
@@ -124,12 +124,12 @@ describe('NewsFeed', () => {
     const post = makePost();
     mockNews(failWithNetworkError);
     const { queryClient } = renderNewsFeed((client) =>
-      client.setQueryData(queryKeys.news.latest, [post]),
+      client.setQueryData(newsQueries.latest().queryKey, [post]),
     );
 
     await waitFor(() => {
       expect(newsRequestCount).toBe(1);
-      expect(queryClient.getQueryState(queryKeys.news.latest)?.status).toBe('error');
+      expect(queryClient.getQueryState(newsQueries.latest().queryKey)?.status).toBe('error');
     });
 
     expect(screen.getByRole('list')).toBeInTheDocument();

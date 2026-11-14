@@ -58,13 +58,13 @@ and check when they work next. Both flows share one responsive shell rather than
 
 ```
 Server state      → TanStack Query (users, schedules, availabilities)
-Session           → TanStack Query as well — useMe / useAuth, no auth store
+Session           → TanStack Query as well — authQueries / useAuth, no auth store
 UI / client state → local state today; Zustand only where a value is shared,
                     non-server and genuinely global (first case: schedule toolbar)
 ```
 
-The session deliberately has **no** Zustand store. `useAuth` is a thin wrapper over the `useMe` query, and the
-router's `beforeLoad` awaits `ensureQueryData('/me')`, so a page refresh restores the session from the cookie
+The session deliberately has **no** Zustand store. `useAuth` adds role flags on top of the current-user query, and
+the router's `beforeLoad` awaits `ensureQueryData` for `/me`, so a page refresh restores the session from the cookie
 without a second copy of the user to keep in sync.
 
 ### Authentication
@@ -118,23 +118,26 @@ ShiftFlow_frontend/
 │   │   ├── AuthLayout.tsx
 │   │   ├── components/         # Sidebar, BottomNav
 │   │   └── navigation/         # navLinks config shared by both navigations
+│   ├── app/                    # queryClient (global error toast, 401 handler)
 │   ├── features/
-│   │   └── auth/
-│   │       ├── api/            # useLogin, useLoginPin, useLogout, useChange*
-│   │       ├── components/     # LandingPage, LoginForm, LoginPinForm, ProfileModal, AuthSplit
-│   │       ├── hooks/          # useAuth
-│   │       └── lib/            # schemas, applyServerError, landingPathFor, getCurrentUser
+│   │   ├── auth/
+│   │   │   ├── api/            # auth.api, auth.queries, useLogin, useLoginWithPin, useLogout
+│   │   │   ├── model/          # Zod schemas: user, login forms
+│   │   │   ├── components/     # LandingPage, LoginForm, LoginPinForm, ProfileModal, AuthSplit
+│   │   │   ├── hooks/          # useAuth
+│   │   │   └── lib/            # applyServerError, landingPathFor, getCurrentUser, getCachedUser
+│   │   ├── availability/       # api (month cache, optimistic mutations), model, lib
+│   │   └── news/               # api, model, NewsFeed
 │   ├── shared/
-│   │   ├── api/                # backend (fetch client), HttpError, NetworkError, parseApiError
+│   │   ├── api/                # backend (fetch client), HttpError, NetworkError, parseApiError, envelopes
 │   │   ├── components/         # Alert, Avatar, Badge, Button, Card, ColorPicker, Input, Logo,
 │   │   │                       # Modal, PinInput, Separator, Skeleton, Spinner, Splash, Toggle, …
 │   │   ├── hooks/              # useModal (compositor), useFocusTrap, useRovingFocus, usePinInput, …
 │   │   ├── i18n/               # i18next setup, locales/{pl,en}/*.json, typed key augmentation
 │   │   ├── lib/
-│   │   │   ├── config/         # queryClient, queryKeys, router, config
+│   │   │   ├── config/         # router, config
 │   │   │   ├── helpers/        # cn, getInitials, hashColor
 │   │   │   └── styles/         # focusStyles, disabledStyles
-│   │   └── types/              # API types
 │   └── css/                    # Index.css → theme.css, globals.css, helpers.css
 ├── .github/workflows/ci.yml    # typecheck + lint + test + build
 └── deploy.sh                   # build and rsync to Hetzner (manual fallback)
@@ -206,7 +209,7 @@ instead of being rewritten as the screens change.
 **Session in the query cache, not in a store**
 Keeping the user in both Zustand and TanStack Query meant two writes on login, two on logout, and a third path
 through the 401 handler — three places to forget. The query cache already handles caching, invalidation and
-request deduplication, so the store was removed and `useAuth` became a wrapper over `useMe`.
+request deduplication, so the store was removed and `useAuth` became a thin layer over the current-user query.
 
 **Same-origin API instead of CORS**
 The Vite dev server proxies `/api` to the backend, and on production nginx serves the SPA and forwards `/api` on

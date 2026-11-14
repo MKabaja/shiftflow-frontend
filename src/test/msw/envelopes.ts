@@ -1,11 +1,5 @@
 /**
  * Wraps items in Laravel's pagination envelope, as a single page holding all of them.
- *
- * Keeps knowledge of the backend's response shape in one place, so tests describe only the
- * items they care about.
- *
- * @example
- * server.use(http.get('/api/news', () => HttpResponse.json(page([makePost()]))));
  */
 export function page<T>(items: T[]) {
   const hasItems = items.length > 0;

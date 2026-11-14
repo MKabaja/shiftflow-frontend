@@ -9,13 +9,10 @@ const actionStrategy: Record<Action, ActionFunction> = {
 };
 
 /**
- * Moves focus between items inside a container using the arrow keys (roving focus), e.g. a dropdown menu.
- * `ArrowDown` and `ArrowUp` cycle through the matching elements, wrapping around at the ends.
+ * Moves focus between items with `ArrowDown` / `ArrowUp`, wrapping at the ends.
  * Focus resets to the first item each time the container opens.
  *
- * @param {RefObject<T | null>} containerRef - The container holding the focusable items.
- * @param {boolean} isOpen - When `true`, focus resets to the first item.
- * @param {string} [selector="a"] - CSS selector for the focusable items within the container.
+ * @param selector - CSS selector of the items within the container.
  */
 function useRovingFocus<T extends HTMLElement>(
   containerRef: RefObject<T | null>,

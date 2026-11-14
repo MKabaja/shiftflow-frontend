@@ -28,6 +28,10 @@ Pełny standard z przykładami: skill `react-clean-code`. Poniżej rdzeń + konw
   helpery pod spodem.
 - Funkcja = czasownik; boolean = `is` / `has` / `can` / `should`. Bez ogólnych nazw (`data`, `item`, `helper`).
   Nazwa zawiera jednostkę (`millisecondsSinceFetch`).
+- Warstwa API (`*.api.ts`, mutacje): `fetchX` dla GET, czasownik akcji dla zapisu (`createOrUpdateX`, `deleteX`, `login`).
+  Dane wysyłane do backendu to `payload`, typ `<Zasób>Payload` albo `<Akcja><Zasób>Payload`
+  (`AvailabilityPayload`, `DeleteAvailabilityPayload`). Wartości formularza: `<Nazwa>FormValues`.
+  Zakazane: `input` (kojarzy się z `<input>`), `save`, `upsert`.
 - 0–2 argumenty, max 3; więcej → obiekt. Bez argumentów flagowych. Guard clauses zamiast zagnieżdżeń.
 - Decyzje (czyste funkcje) oddzielone od efektów. Czas i losowość przekazywane jako argumenty.
 - Bez abstrakcji, klas i plików bez konkretnego powodu. Bez refaktoru kodu niezwiązanego z zadaniem.
@@ -35,6 +39,14 @@ Pełny standard z przykładami: skill `react-clean-code`. Poniżej rdzeń + konw
 ## Komentarze i TSDoc
 - **Bez komentarzy w kodzie** — wyjaśnienia idą do rozmowy / PR. Jedyny wyjątek: TSDoc na eksportowanym API (skill `tsdoc`).
 - TSDoc bez odwołań do numerów ADR i wewnętrznych dokumentów.
+- TSDoc jest maksymalnie krótki — tylko to, czego nie widać w sygnaturze:
+  - jedno zdanie opisu: co funkcja robi, nie jak;
+  - `@param` tylko gdy nazwa i typ nie wystarczą (jednostki, zakresy, formaty, np. „w ms”, „ISO 8601”, „0–1”);
+  - `@returns` tylko gdy zwrot jest nieoczywisty (np. `null` przy braku wyniku, posortowana lista);
+  - `@throws`, gdy funkcja rzuca i wywołujący powinien o tym wiedzieć;
+  - efekty uboczne i pułapki (mutacja argumentu, wywołanie API, cache, wymagana kolejność wywołań);
+  - `@example` tylko dla nieoczywistego API: jeden, max 3 linie;
+  - `@deprecated` zawsze ze wskazaniem zamiennika.
 
 ## React
 - Importy z Reacta nazwane (`import { useState, type ReactNode } from 'react'`), bez `React.`.

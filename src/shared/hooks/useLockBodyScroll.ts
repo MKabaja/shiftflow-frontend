@@ -10,16 +10,8 @@ const axisMap: Record<Axis, Properties> = {
 };
 
 /**
- * Locks body scroll on the specified axis when a component is open.
- * Automatically restores the original scroll behavior on close or unmount.
- *
- * @param {boolean} isOpen - When `true`, scroll is locked. When `false`, scroll is restored.
- * @param {Axis} [axis="both"] - The axis to lock:
- *   - `"x"` — locks horizontal scroll (`overflow-x`)
- *   - `"y"` — locks vertical scroll (`overflow-y`)
- *   - `"both"` — locks both axes (`overflow`)
+ * Locks body scroll on `axis` while open; restores the previous value on close or unmount.
  */
-
 export function useLockBodyScroll(isOpen: boolean, axis: Axis = 'both'): void {
   useEffect(() => {
     const property = axisMap[axis];

@@ -7,11 +7,11 @@ type AvailabilityQueryParams = {
   month: number;
 };
 
-type UpsertAvailabilityKeys = 'date' | 'is_available' | 'notes';
-type UpsertAvailabilityInput = Pick<Availability, UpsertAvailabilityKeys>;
+type AvailabilityPayloadKeys = 'date' | 'is_available' | 'notes';
+type AvailabilityPayload = Pick<Availability, AvailabilityPayloadKeys>;
 
-type DeleteAvailabilityKeys = 'id' | 'date';
-type DeleteAvailabilityInput = Pick<Availability, DeleteAvailabilityKeys>;
+type DeleteAvailabilityPayloadKeys = 'id' | 'date';
+type DeleteAvailabilityPayload = Pick<Availability, DeleteAvailabilityPayloadKeys>;
 
 const availabilitySchema = z.object({
   id: z.number(),
@@ -27,6 +27,6 @@ export { availabilitySchema };
 export type {
   Availability,
   AvailabilityQueryParams,
-  UpsertAvailabilityInput,
-  DeleteAvailabilityInput,
+  AvailabilityPayload,
+  DeleteAvailabilityPayload,
 };
