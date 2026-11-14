@@ -181,8 +181,9 @@ mobile module. The full list is in the backend README.
 | -------------------- | -------------------------------------------------------- |
 | `npm run dev`        | Vite dev server with HMR                                 |
 | `npm run build`      | Type-check the project, then build for production        |
-| `npm run typecheck`  | `tsc --noEmit`                                           |
-| `npm run lint`       | ESLint across all `.ts` / `.tsx`, zero warnings allowed  |
+| `npm run typecheck`  | `tsc -b` (app and node configs)                          |
+| `npm run lint`       | Biome: lint, formatting and imports, warnings fail       |
+| `npm run lint:fix`   | Biome with autofix                                       |
 | `npm run test:run`   | Run the test suite once                                  |
 | `npm run check`      | typecheck + lint + tests + build — run before committing |
 
