@@ -90,9 +90,12 @@ Agenci projektowi (`.claude/agents/`): `reviewer` — review zmian; `test-automa
   Reactem (np. w `beforeLoad`) i testowalna bez `renderHook`.
 - **Routing jest code-based** (mimo nazw `_app.tsx`, `_panel.tsx`): nowy route działa dopiero po dopisaniu do drzewa
   w `shared/lib/config/router.ts` — inaczej ciche 404. Szczegóły: `rules/routing.md`.
-- **Zalogowany user = wyłącznie cache Query pod `auth.me`.** `useMe` → `useAuth` (nakładka z flagami ról, zero
-  własnego stanu). Login i login-pin zapisują odpowiedź prosto do `auth.me`. **Nie przenoś usera do Zustanda.**
-- Stan serwerowy → TanStack Query, klucze w `shared/lib/config/queryKeys.ts`. Transport → `backend` z
+- **Zalogowany user = wyłącznie cache Query pod `authQueries.currentUser()` (klucz `['auth', 'me']`).** `useAuth`
+  to `useQuery` + flagi ról, zero własnego stanu. `useLogin` i `useLoginWithPin` zapisują odpowiedź prosto do tego
+  klucza. **Nie przenoś usera do Zustanda.**
+- Stan serwerowy → TanStack Query. Warstwa API w `features/<f>/api/`: `<zasób>.api.ts` (czyste funkcje HTTP),
+  `<zasób>.queries.ts` (fabryka `<zasób>Queries`: klucze + `queryOptions`), `use<Akcja>.ts` (jeden hook mutacji na
+  plik). Komponent woła `useQuery(xQueries.y())`, bez cienkich wrapperów. Transport → `backend` z
   `shared/api/backend.ts` (ścieżki względem `/api`, same-origin, cookie wysyłane samo); nie wołaj `fetch` bezpośrednio.
 - Odpowiedź `backend` to `unknown` → parsuj schematem z `features/<f>/model/*.schemas.ts` w kopercie z
   `shared/api/envelopes.ts` (`resourceOf` / `collectionOf` / `pageOf`). Typy domenowe tylko przez `z.infer`.

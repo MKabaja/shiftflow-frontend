@@ -30,10 +30,10 @@ __root
         └── /news
 ```
 
-- Guardy w `beforeLoad`, user przez `getCurrentUser()` (`ensureQueryData` na `auth.me`; każdy błąd, także 401 → `null`).
-  Async `beforeLoad` = sesja przeżywa F5.
+- Guardy w `beforeLoad`, user przez `getCurrentUser()` (`ensureQueryData(authQueries.currentUser())`; każdy błąd,
+  także 401 → `null`). Async `beforeLoad` = sesja przeżywa F5.
 - `landingPathFor(user)` jest **jedynym** miejscem decydującym o ekranie startowym: `/home` dla pracownika, `/schedule`
-  dla pozostałych ról. Używają go mutacje logowania i guardy.
+  dla pozostałych ról. Używają go formularze logowania (nawigacja w `onSuccess`) i guardy.
 - Pathless `_app` istnieje, bo `/settings` jest wspólne dla obu ról — `_panel` i `_disposition` nie mają własnego
   `component`, tylko warunek roli.
 - Nawigacja: `Sidebar` (desktop) i `BottomNav` (mobile) czytają linki z `layouts/navigation/` (`navLinksFor`).
