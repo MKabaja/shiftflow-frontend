@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { getCachedUser } from '@/features/auth/lib/getCachedUser.ts';
 import { createOrUpdateAvailability } from '@/features/availability/api/availability.api.ts';
 import {
 	invalidateMonth,
@@ -6,7 +7,6 @@ import {
 	updateMonthOptimistically,
 } from '@/features/availability/api/availabilityMonthCache.ts';
 import { buildOptimisticAvailability } from '@/features/availability/lib/buildOptimisticAvailability.ts';
-import { getCachedUser } from '@/features/auth/lib/getCachedUser.ts';
 
 /**
  * Creates or overwrites one day's availability.

@@ -108,6 +108,25 @@
 			}
 		},
 		{
+			"includes": ["**/*.svg"],
+			"linter": { "rules": { "a11y": { "noSvgWithoutTitle": "off" } } }
+		},
+		{
+			"includes": [
+				"src/features/news/components/NewsFeed/NewsFeedLoading.tsx",
+				"src/shared/components/PinInput/PinInput.tsx"
+			],
+			"linter": { "rules": { "suspicious": { "noArrayIndexKey": "off" } } }
+		},
+		{
+			"includes": [
+				"src/shared/components/ColorPicker/ColorPicker.tsx",
+				"src/shared/components/LocaleSwitcher/LocaleSwitcher.tsx",
+				"src/shared/components/Separator/Separator.tsx"
+			],
+			"linter": { "rules": { "a11y": { "useSemanticElements": "off" } } }
+		},
+		{
 			"includes": ["src/css/globals.css"],
 			"linter": { "rules": { "complexity": { "noImportantStyles": "off" } } }
 		},

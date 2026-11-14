@@ -25,4 +25,5 @@ function useAuth(): UseAuthResult {
 		isEmployee: user?.role === 'employee',
 	};
 }
+
 export { useAuth };

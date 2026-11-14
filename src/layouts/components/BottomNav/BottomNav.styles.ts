@@ -24,13 +24,13 @@ const iconBoxActiveStyles: string = '-translate-y-2';
 const iconActiveStyles: string = 'drop-shadow-glow-accent';
 
 export {
-	navStyles,
-	listStyles,
-	itemStyles,
-	linkStyles,
-	linkActiveStyles,
-	indicatorStyles,
-	iconBoxStyles,
-	iconBoxActiveStyles,
 	iconActiveStyles,
+	iconBoxActiveStyles,
+	iconBoxStyles,
+	indicatorStyles,
+	itemStyles,
+	linkActiveStyles,
+	linkStyles,
+	listStyles,
+	navStyles,
 };

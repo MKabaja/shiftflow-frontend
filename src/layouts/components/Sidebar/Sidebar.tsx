@@ -1,12 +1,12 @@
-import type { NavLink } from '@/layouts/navigation';
 import type { LinkProps } from '@tanstack/react-router';
 import { Link, useMatchRoute } from '@tanstack/react-router';
-import { useTranslation } from 'react-i18next';
 import { motion, useReducedMotion } from 'motion/react';
-import { cn } from '@/shared/lib/helpers/cn.ts';
+import { useTranslation } from 'react-i18next';
+import type { NavLink } from '@/layouts/navigation';
 import { Avatar } from '@/shared/components/Avatar';
 import { Logo } from '@/shared/components/Logo';
 import { Separator } from '@/shared/components/Separator';
+import { cn } from '@/shared/lib/helpers/cn.ts';
 import {
 	footerStyles,
 	iconStyles,
@@ -148,5 +148,5 @@ function Sidebar({
 	);
 }
 
-export { Sidebar };
 export type { SidebarProps };
+export { Sidebar };

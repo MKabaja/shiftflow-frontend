@@ -1,5 +1,5 @@
-import type { ParseKeys } from 'i18next';
 import type { LinkProps } from '@tanstack/react-router';
+import type { ParseKeys } from 'i18next';
 import type { LucideIcon } from 'lucide-react';
 import {
 	Briefcase,
@@ -70,5 +70,5 @@ const SETTINGS_LINK: NavLink = {
 	icon: Settings,
 };
 
-export { PANEL_NAV_LINKS, DISPOSITION_NAV_LINKS, SETTINGS_LINK };
 export type { NavLink };
+export { DISPOSITION_NAV_LINKS, PANEL_NAV_LINKS, SETTINGS_LINK };

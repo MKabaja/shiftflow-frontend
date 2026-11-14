@@ -1,5 +1,4 @@
 import type { FieldValues, UseFormSetError } from 'react-hook-form';
-import { applyServerError } from '../applyServerError.ts';
 import type {
 	LoginFormValues,
 	LoginPinFormValues,
@@ -9,6 +8,7 @@ import {
 	makeHttpError,
 	makeValidationError,
 } from '@/test/factories/httpError.factory.ts';
+import { applyServerError } from '../applyServerError.ts';
 
 const wrongPassword = makeHttpError(401, {
 	message: 'Invalid password or login!',

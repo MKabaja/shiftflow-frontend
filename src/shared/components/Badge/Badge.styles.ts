@@ -18,4 +18,4 @@ const sizeStyles: SizeStyle = {
 };
 const baseStyles: string = 'inline-flex items-center rounded-full font-medium';
 
-export { variantStyles, sizeStyles, baseStyles };
+export { baseStyles, sizeStyles, variantStyles };

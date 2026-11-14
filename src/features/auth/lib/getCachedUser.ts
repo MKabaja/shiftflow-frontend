@@ -1,5 +1,5 @@
-import { authQueries } from '@/features/auth/api/auth.queries.ts';
 import type { QueryClient } from '@tanstack/react-query';
+import { authQueries } from '@/features/auth/api/auth.queries.ts';
 import type { User } from '@/features/auth/model/user.schemas.ts';
 
 /**

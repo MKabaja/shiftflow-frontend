@@ -22,5 +22,5 @@ const loginPinSchema = z.object({
 		.length(pinLength, 'validation.pinLength'),
 });
 
-export { loginSchema, loginPinSchema };
-export type { LoginPinFormValues, LoginFormValues };
+export type { LoginFormValues, LoginPinFormValues };
+export { loginPinSchema, loginSchema };

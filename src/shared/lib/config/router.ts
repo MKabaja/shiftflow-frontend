@@ -1,21 +1,21 @@
 import { createRouter } from '@tanstack/react-router';
-import { Splash } from '@/shared/components/Splash';
 import { Route as rootRoute } from '@/routes/__root.tsx';
-import { publicRoute } from '@/routes/_public.tsx';
 import { appRoute } from '@/routes/_app.tsx';
 import { dispositionRoute } from '@/routes/_disposition.tsx';
 import { panelRoute } from '@/routes/_panel.tsx';
+import { publicRoute } from '@/routes/_public.tsx';
+import { availabilityRoute } from '@/routes/availability.tsx';
+import { employeesRoute } from '@/routes/employees.tsx';
+import { homeRoute } from '@/routes/home.tsx';
 import { indexRoute } from '@/routes/index.tsx';
 import { loginRoute } from '@/routes/login.tsx';
 import { loginPinRoute } from '@/routes/login-pin.tsx';
-import { homeRoute } from '@/routes/home.tsx';
-import { availabilityRoute } from '@/routes/availability.tsx';
 import { myScheduleRoute } from '@/routes/my-schedule.tsx';
-import { scheduleRoute } from '@/routes/schedule.tsx';
-import { employeesRoute } from '@/routes/employees.tsx';
-import { positionsRoute } from '@/routes/positions.tsx';
 import { newsRoute } from '@/routes/news.tsx';
+import { positionsRoute } from '@/routes/positions.tsx';
+import { scheduleRoute } from '@/routes/schedule.tsx';
 import { settingsRoute } from '@/routes/settings.tsx';
+import { Splash } from '@/shared/components/Splash';
 
 const routeTree = rootRoute.addChildren([
 	publicRoute.addChildren([indexRoute, loginRoute, loginPinRoute]),

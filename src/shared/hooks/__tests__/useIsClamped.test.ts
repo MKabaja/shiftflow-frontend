@@ -1,11 +1,11 @@
 import { renderHook } from '@testing-library/react';
-import { useIsClamped } from '../useIsClamped.ts';
 import {
 	setElementSize,
 	stubResizeObserver,
 	triggerResize,
 	triggerResizeIfObserved,
 } from '@/test/mocks/resizeObserver.ts';
+import { useIsClamped } from '../useIsClamped.ts';
 
 const renderUseIsClamped = (enabled = true) => {
 	const ref = { current: document.createElement('p') };

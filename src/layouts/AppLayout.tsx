@@ -1,17 +1,17 @@
 import { Outlet } from '@tanstack/react-router';
-import { Avatar } from '@/shared/components/Avatar';
-import { Logo } from '@/shared/components/Logo';
-import { BottomNav } from '@/layouts/components/BottomNav';
-import { Sidebar } from '@/layouts/components/Sidebar';
-import { navLinksFor, SETTINGS_LINK } from '@/layouts/navigation';
-import { useMatchMedia } from '@/shared/hooks/useMatchMedia.ts';
-import { cn } from '@/shared/lib/helpers/cn.ts';
-import { config } from '@/shared/lib/config/config.ts';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ProfileModal } from '@/features/auth/components/ProfileModal.tsx';
-import { landingPathFor } from '@/features/auth/lib/landingPathFor.ts';
 import { useAuth } from '@/features/auth/hooks/useAuth.ts';
+import { landingPathFor } from '@/features/auth/lib/landingPathFor.ts';
+import { BottomNav } from '@/layouts/components/BottomNav';
+import { Sidebar } from '@/layouts/components/Sidebar';
+import { navLinksFor, SETTINGS_LINK } from '@/layouts/navigation';
+import { Avatar } from '@/shared/components/Avatar';
+import { Logo } from '@/shared/components/Logo';
+import { useMatchMedia } from '@/shared/hooks/useMatchMedia.ts';
+import { config } from '@/shared/lib/config/config.ts';
+import { cn } from '@/shared/lib/helpers/cn.ts';
 
 function AppLayout() {
 	const { user } = useAuth();
@@ -24,7 +24,7 @@ function AppLayout() {
 
 	return (
 		<div
-			className={cn('bg-bg-primary flex min-h-dvh', !isDesktop && 'flex-col')}
+			className={cn('flex min-h-dvh bg-bg-primary', !isDesktop && 'flex-col')}
 		>
 			{isDesktop ? (
 				<Sidebar

@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import { LinkButton } from '../LinkButton.tsx';
 import type { ComponentPropsWithoutRef } from 'react';
+import { LinkButton } from '../LinkButton.tsx';
 
 vi.mock('@tanstack/react-router', () => ({
 	Link: ({

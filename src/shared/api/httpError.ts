@@ -25,5 +25,5 @@ class HttpError extends Error {
 	}
 }
 
-export { HttpError, apiErrorBodySchema };
 export type { ApiErrorBody };
+export { apiErrorBodySchema, HttpError };

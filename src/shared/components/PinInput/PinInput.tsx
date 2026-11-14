@@ -1,11 +1,11 @@
-import { type Ref, useId, useState } from 'react';
 import { motion } from 'motion/react';
+import { type Ref, useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { VisibilityToggle } from '@/shared/components/VisibilityToggle';
+import { usePinInput } from '@/shared/hooks/usePinInput.ts';
 import { config } from '@/shared/lib/config/config.ts';
 import { cn } from '@/shared/lib/helpers/cn.ts';
 import { errorTextStyles } from '@/shared/lib/styles/errorTextStyles.ts';
-import { usePinInput } from '@/shared/hooks/usePinInput.ts';
-import { VisibilityToggle } from '@/shared/components/VisibilityToggle';
 import {
 	boxRowStyles,
 	boxStyles,

@@ -1,8 +1,8 @@
 import { useRef } from 'react';
-import { useLockBodyScroll } from '@/shared/hooks/useLockBodyScroll.ts';
-import { useKeyClose } from '@/shared/hooks/useKeyClose.ts';
 import { useFocusReturn } from '@/shared/hooks/useFocusReturn.ts';
 import { useFocusTrap } from '@/shared/hooks/useFocusTrap.ts';
+import { useKeyClose } from '@/shared/hooks/useKeyClose.ts';
+import { useLockBodyScroll } from '@/shared/hooks/useLockBodyScroll.ts';
 
 /**
  * Adds modal behavior: scroll lock, close on `Escape`, focus trap and focus return.
@@ -19,4 +19,5 @@ function useModal(isOpen: boolean, onClose: () => void) {
 
 	return { panelRef };
 }
+
 export { useModal };

@@ -16,4 +16,4 @@ const sizeStyles: SizeStyle = {
 
 const baseStyles: string = 'animate-spin rounded-full  ';
 
-export { sizeStyles, baseStyles, variantStyles };
+export { baseStyles, sizeStyles, variantStyles };

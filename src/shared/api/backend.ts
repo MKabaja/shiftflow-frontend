@@ -1,6 +1,6 @@
-import { config } from '@/shared/lib/config/config.ts';
 import { HttpError } from '@/shared/api/httpError.ts';
 import { NetworkError } from '@/shared/api/networkError.ts';
+import { config } from '@/shared/lib/config/config.ts';
 
 type HttpMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 

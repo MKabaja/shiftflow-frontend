@@ -8,7 +8,7 @@ type HexInputStyleProps = {
 
 function hexInputStyles({ hasError }: HexInputStyleProps): string {
 	return cn(
-		'h-8 w-full rounded-md border border-border bg-bg-offset px-2.5 text-body-sm uppercase text-text-primary shadow-nm-inset transition-all placeholder:text-text-muted',
+		'h-8 w-full rounded-md border border-border bg-bg-offset px-2.5 text-body-sm text-text-primary uppercase shadow-nm-inset transition-all placeholder:text-text-muted',
 		hasError ? 'border-danger' : inputFocusStyles,
 		disabledStyles,
 	);
@@ -23,11 +23,11 @@ const swatchStyles: string = 'h-8 w-8 shrink-0 rounded-md border border-border';
 const errorTextStyles: string = 'text-danger mt-1 text-body-sm';
 
 export {
-	hexInputStyles,
-	containerStyles,
-	labelStyles,
 	cardStyles,
+	containerStyles,
+	errorTextStyles,
+	hexInputStyles,
+	labelStyles,
 	swatchRowStyles,
 	swatchStyles,
-	errorTextStyles,
 };

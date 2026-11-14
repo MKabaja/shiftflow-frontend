@@ -1,16 +1,19 @@
-import { StrictMode } from 'react';
-import { createRoot } from 'react-dom/client';
 import { QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { RouterProvider } from '@tanstack/react-router';
+import { StrictMode } from 'react';
+import { createRoot } from 'react-dom/client';
 import { Toaster } from 'sonner';
 import { queryClient } from './app/queryClient.ts';
-import { router } from './shared/lib/config/router.ts';
 import { config } from './shared/lib/config/config.ts';
+import { router } from './shared/lib/config/router.ts';
 import './shared/i18n';
 import '@/css/Index.css';
 
-createRoot(document.getElementById('root')!).render(
+const rootElement = document.getElementById('root');
+if (!rootElement) throw new Error('Missing #root element in index.html');
+
+createRoot(rootElement).render(
 	<StrictMode>
 		<QueryClientProvider client={queryClient}>
 			<RouterProvider router={router} />

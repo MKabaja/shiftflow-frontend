@@ -1,9 +1,9 @@
-import { type HTMLAttributeAnchorTarget, type ReactNode } from 'react';
 import { Link, type LinkProps } from '@tanstack/react-router';
 import { motion } from 'motion/react';
+import type { HTMLAttributeAnchorTarget, ReactNode } from 'react';
 import { cn } from '@/shared/lib/helpers/cn.ts';
-import { baseStyles, sizeStyles, variantStyles } from './Button.styles.ts';
 import { focusStyles } from '@/shared/lib/styles/focusStyles.ts';
+import { baseStyles, sizeStyles, variantStyles } from './Button.styles.ts';
 import type { ButtonSize, ButtonVariant } from './Button.tsx';
 
 type BaseLinkProps = LinkProps & {

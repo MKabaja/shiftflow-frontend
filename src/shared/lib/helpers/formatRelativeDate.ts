@@ -1,13 +1,13 @@
 import {
+	type DateArg,
 	differenceInDays,
 	differenceInMinutes,
 	formatDistance,
 	formatDistanceStrict,
 	isValid,
+	type Locale,
 	min,
 	toDate,
-	type DateArg,
-	type Locale,
 } from 'date-fns';
 import { config } from '@/shared/lib/config/config.ts';
 import { formatDate } from '@/shared/lib/helpers/formatDate.ts';

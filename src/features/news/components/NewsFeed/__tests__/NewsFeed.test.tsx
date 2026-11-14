@@ -1,15 +1,15 @@
 import { screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { delay, http, HttpResponse, type HttpResponseResolver } from 'msw';
-import { NewsFeed } from '../NewsFeed.tsx';
+import { delay, HttpResponse, type HttpResponseResolver, http } from 'msw';
 import { newsQueries } from '@/features/news/api/news.queries.ts';
+import type { NewsPost } from '@/features/news/model/newsPost.schemas.ts';
 import { makePost } from '@/test/factories/newsPost.ts';
 import { stubResizeObserver } from '@/test/mocks/resizeObserver.ts';
 import { page } from '@/test/msw/envelopes.ts';
 import { server } from '@/test/msw/server.ts';
 import { createDeferred } from '@/test/utils/deferred.ts';
 import { renderWithQueryClient } from '@/test/utils/renderWithQueryClient.tsx';
-import type { NewsPost } from '@/features/news/model/newsPost.schemas.ts';
+import { NewsFeed } from '../NewsFeed.tsx';
 
 let newsRequestCount = 0;
 

@@ -1,5 +1,5 @@
 import type { ParseKeys } from 'i18next';
-import { HttpError, apiErrorBodySchema } from '@/shared/api/httpError.ts';
+import { apiErrorBodySchema, HttpError } from '@/shared/api/httpError.ts';
 import { NetworkError } from '@/shared/api/networkError.ts';
 
 export type ParsedApiError = {

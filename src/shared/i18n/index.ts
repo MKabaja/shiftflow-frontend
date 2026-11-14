@@ -1,15 +1,13 @@
 import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
-
-import plCommon from './locales/pl/common.json';
-import plErrors from './locales/pl/errors.json';
-import plAuth from './locales/pl/auth.json';
-import plNews from './locales/pl/news.json';
-
 import enAuth from './locales/en/auth.json';
 import enCommon from './locales/en/common.json';
 import enErrors from './locales/en/errors.json';
 import enNews from './locales/en/news.json';
+import plAuth from './locales/pl/auth.json';
+import plCommon from './locales/pl/common.json';
+import plErrors from './locales/pl/errors.json';
+import plNews from './locales/pl/news.json';
 
 const resources = {
 	pl: { common: plCommon, errors: plErrors, auth: plAuth, news: plNews },
@@ -58,6 +56,4 @@ void i18n.use(initReactI18next).init({
 document.documentElement.lang = i18n.resolvedLanguage ?? 'pl';
 
 export type { SupportedLocale };
-export { setLocale, supportedLocales };
-
-export default i18n;
+export { i18n, setLocale, supportedLocales };

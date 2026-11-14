@@ -32,15 +32,15 @@ const footerStyles: string =
 const metaStyles: string = 'text-text-muted/50 text-body-xs mt-1';
 
 export {
-	titleStyles,
-	sizeStyles,
-	placementStyles,
-	overlayPlacementStyles,
 	baseStyles,
-	headerStyles,
-	buttonStyles,
 	bodyStyles,
-	footerStyles,
+	buttonStyles,
 	descriptionStyles,
+	footerStyles,
+	headerStyles,
 	metaStyles,
+	overlayPlacementStyles,
+	placementStyles,
+	sizeStyles,
+	titleStyles,
 };

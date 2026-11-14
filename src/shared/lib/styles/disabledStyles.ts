@@ -3,4 +3,4 @@ const disabledStyles =
 
 const disabledContainerStyles = 'opacity-50 pointer-events-none select-none';
 
-export { disabledStyles, disabledContainerStyles };
+export { disabledContainerStyles, disabledStyles };

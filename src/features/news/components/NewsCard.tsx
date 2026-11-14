@@ -1,14 +1,14 @@
+import { Bell } from 'lucide-react';
 import { useId, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Bell } from 'lucide-react';
-import { Card } from '@/shared/components/Card';
+import type { NewsPost } from '@/features/news/model/newsPost.schemas.ts';
 import { Badge } from '@/shared/components/Badge';
 import { Button } from '@/shared/components/Button';
+import { Card } from '@/shared/components/Card';
 import { useIsClamped } from '@/shared/hooks/useIsClamped.ts';
 import { getDateFnsLocale } from '@/shared/i18n/getDateFnsLocale.ts';
 import { cn } from '@/shared/lib/helpers/cn.ts';
 import { formatRelativeDate } from '@/shared/lib/helpers/formatRelativeDate.ts';
-import type { NewsPost } from '@/features/news/model/newsPost.schemas.ts';
 
 type NewsCardProps = {
 	post: NewsPost;
@@ -34,12 +34,12 @@ function NewsCard({ post }: NewsCardProps) {
 			>
 				<header className="flex items-start gap-3">
 					<Bell
-						className="text-text-muted mt-1 size-5 shrink-0"
+						className="mt-1 size-5 shrink-0 text-text-muted"
 						aria-hidden={true}
 					/>
 					<h2
 						id={titleId}
-						className="text-display-md min-w-0 flex-1 wrap-break-word"
+						className="min-w-0 flex-1 text-display-md wrap-break-word"
 					>
 						{post.title}
 					</h2>
@@ -54,7 +54,7 @@ function NewsCard({ post }: NewsCardProps) {
 					id={contentId}
 					ref={contentRef}
 					className={cn(
-						'text-text-primary text-body-md wrap-break-word whitespace-pre-line',
+						'text-body-md wrap-break-word whitespace-pre-line text-text-primary',
 						!expanded && 'line-clamp-2',
 					)}
 				>
@@ -74,7 +74,7 @@ function NewsCard({ post }: NewsCardProps) {
 					</Button>
 				)}
 
-				<footer className="text-text-muted text-body-sm flex flex-wrap gap-1.5">
+				<footer className="flex flex-wrap gap-1.5 text-body-sm text-text-muted">
 					{post.author && <span>{post.author.name}</span>}
 					{post.author && publishedAt && <span aria-hidden={true}>·</span>}
 					{publishedAt && <time dateTime={post.created_at}>{publishedAt}</time>}

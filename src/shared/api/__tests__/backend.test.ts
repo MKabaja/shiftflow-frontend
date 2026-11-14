@@ -1,10 +1,10 @@
-import { http, HttpResponse } from 'msw';
-import { backend } from '../backend.ts';
-import { NetworkError } from '../networkError.ts';
+import { HttpResponse, http } from 'msw';
 import { queryClient } from '@/app/queryClient.ts';
 import { authQueries } from '@/features/auth/api/auth.queries.ts';
 import { makeUser } from '@/test/factories/user.ts';
 import { server } from '@/test/msw/server.ts';
+import { backend } from '../backend.ts';
+import { NetworkError } from '../networkError.ts';
 
 const respondWithStatus = (path: string, status: number) => {
 	server.use(

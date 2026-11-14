@@ -1,21 +1,21 @@
-import { useTranslation } from 'react-i18next';
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useNavigate } from '@tanstack/react-router';
+import type { ParseKeys } from 'i18next';
 import { User } from 'lucide-react';
-import { Input } from '@/shared/components/Input';
-import { PinInput } from '@/shared/components/PinInput';
-import { Button } from '@/shared/components/Button';
-import { Alert } from '@/shared/components/Alert';
 import { useController, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { useLoginWithPin } from '@/features/auth/api/useLoginWithPin.ts';
+import { applyServerError } from '@/features/auth/lib/applyServerError.ts';
+import { landingPathFor } from '@/features/auth/lib/landingPathFor.ts';
 import {
 	type LoginPinFormValues,
 	loginPinSchema,
 } from '@/features/auth/model/login.schemas.ts';
-import type { ParseKeys } from 'i18next';
+import { Alert } from '@/shared/components/Alert';
+import { Button } from '@/shared/components/Button';
+import { Input } from '@/shared/components/Input';
+import { PinInput } from '@/shared/components/PinInput';
 import { config } from '@/shared/lib/config/config.ts';
-import { applyServerError } from '@/features/auth/lib/applyServerError.ts';
-import { zodResolver } from '@hookform/resolvers/zod';
-import { useLoginWithPin } from '@/features/auth/api/useLoginWithPin.ts';
-import { landingPathFor } from '@/features/auth/lib/landingPathFor.ts';
-import { useNavigate } from '@tanstack/react-router';
 
 function LoginPinForm() {
 	const { t } = useTranslation('auth');
@@ -89,7 +89,7 @@ function LoginPinForm() {
 			/>
 
 			<div className="flex flex-col gap-1.5">
-				<span className="text-text-muted text-label">
+				<span className="text-label text-text-muted">
 					{t('loginPin.pinLabel')}
 				</span>
 				<PinInput

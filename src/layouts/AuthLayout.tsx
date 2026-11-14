@@ -1,7 +1,7 @@
 import { Outlet } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
-import { Logo } from '@/shared/components/Logo';
 import { LocaleSwitcher } from '@/shared/components/LocaleSwitcher';
+import { Logo } from '@/shared/components/Logo';
 
 function AuthLayout() {
 	const { t } = useTranslation();
@@ -18,7 +18,7 @@ function AuthLayout() {
 				<Outlet />
 			</main>
 
-			<footer className="text-text-muted text-body-sm pb-6 text-center">
+			<footer className="pb-6 text-center text-body-sm text-text-muted">
 				© {year} {t('appName')}
 			</footer>
 		</div>

@@ -33,7 +33,7 @@ describe('Modal', () => {
 		});
 
 		it('renders the footer when provided', () => {
-			renderModal({ footer: <button>Save</button> });
+			renderModal({ footer: <button type="button">Save</button> });
 			expect(screen.getByRole('button', { name: 'Save' })).toBeInTheDocument();
 		});
 
@@ -150,7 +150,7 @@ describe('Modal', () => {
 		it('returns focus to the trigger after closing', () => {
 			const { rerender } = render(
 				<>
-					<button>Open</button>
+					<button type="button">Open</button>
 					<Modal
 						isOpen={false}
 						onClose={noop}
@@ -164,7 +164,7 @@ describe('Modal', () => {
 
 			rerender(
 				<>
-					<button>Open</button>
+					<button type="button">Open</button>
 					<Modal
 						isOpen
 						onClose={noop}
@@ -175,7 +175,7 @@ describe('Modal', () => {
 
 			rerender(
 				<>
-					<button>Open</button>
+					<button type="button">Open</button>
 					<Modal
 						isOpen={false}
 						onClose={noop}
@@ -188,7 +188,7 @@ describe('Modal', () => {
 
 		it('wraps focus from the last element back to the first on Tab', async () => {
 			const user = userEvent.setup();
-			renderModal({ footer: <button>Save</button> });
+			renderModal({ footer: <button type="button">Save</button> });
 
 			const save = screen.getByRole('button', { name: 'Save' });
 			save.focus();
@@ -199,7 +199,7 @@ describe('Modal', () => {
 
 		it('wraps focus from the first element back to the last on Shift+Tab', async () => {
 			const user = userEvent.setup();
-			renderModal({ footer: <button>Save</button> });
+			renderModal({ footer: <button type="button">Save</button> });
 
 			const close = screen.getByRole('button', { name: 'Close' });
 			close.focus();

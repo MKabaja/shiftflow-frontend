@@ -1,13 +1,12 @@
+import { X } from 'lucide-react';
 import type { HTMLMotionProps } from 'motion/react';
 import { AnimatePresence, motion, useReducedMotion } from 'motion/react';
 import type { ReactNode } from 'react';
 import { useId } from 'react';
-import { focusStyles } from '@/shared/lib/styles/focusStyles.ts';
-import { useModal } from '@/shared/hooks/useModal.ts';
-import { X } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { Overlay } from './Overlay.tsx';
+import { useModal } from '@/shared/hooks/useModal.ts';
 import { cn } from '@/shared/lib/helpers/cn.ts';
+import { focusStyles } from '@/shared/lib/styles/focusStyles.ts';
 import {
 	baseStyles,
 	bodyStyles,
@@ -15,11 +14,12 @@ import {
 	descriptionStyles,
 	footerStyles,
 	headerStyles,
+	metaStyles,
 	placementStyles,
 	sizeStyles,
 	titleStyles,
-	metaStyles,
 } from './Modal.styles.ts';
+import { Overlay } from './Overlay.tsx';
 
 export type ModalSize = 'sm' | 'md' | 'lg' | 'xl';
 export type ModalPlacement = 'center' | 'sheet';

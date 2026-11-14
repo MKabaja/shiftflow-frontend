@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
-import { useLockBodyScroll } from './useLockBodyScroll';
 import { useKeyClose } from './useKeyClose';
+import { useLockBodyScroll } from './useLockBodyScroll';
 
 type Axis = 'x' | 'y' | 'both';
 

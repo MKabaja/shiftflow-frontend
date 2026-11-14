@@ -1,9 +1,9 @@
-import { parseApiError } from '../parseApiError.ts';
-import { NetworkError } from '../networkError.ts';
 import {
 	makeHttpError,
 	makeValidationError,
 } from '@/test/factories/httpError.factory.ts';
+import { NetworkError } from '../networkError.ts';
+import { parseApiError } from '../parseApiError.ts';
 
 describe('parseApiError', () => {
 	it('returns "unexpected" for a non-HTTP error', () => {

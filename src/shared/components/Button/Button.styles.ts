@@ -21,4 +21,4 @@ const variantStyles: VariantStyle = {
 const baseStyles: string =
 	'sweep-on-hover rounded-md inline-flex items-center justify-center font-display font-semibold transition-all duration-150 ease-out';
 
-export { sizeStyles, variantStyles, baseStyles };
+export { baseStyles, sizeStyles, variantStyles };

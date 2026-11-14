@@ -1,7 +1,7 @@
 import type { LinkProps } from '@tanstack/react-router';
 import type { LucideIcon } from 'lucide-react';
+import { type ButtonVariant, LinkButton } from '@/shared/components/Button';
 import { Card } from '@/shared/components/Card';
-import { LinkButton, type ButtonVariant } from '@/shared/components/Button';
 
 type RoleCardProps = {
 	icon: LucideIcon;
@@ -28,11 +28,11 @@ function RoleCard({
 			<div className="flex items-center justify-between">
 				<h2 className="text-display-md">{title}</h2>
 				<Icon
-					className="text-text-muted size-6"
+					className="size-6 text-text-muted"
 					aria-hidden={true}
 				/>
 			</div>
-			<p className="text-text-muted text-body-md">{description}</p>
+			<p className="text-body-md text-text-muted">{description}</p>
 			<LinkButton
 				className="mt-auto self-start"
 				variant={variant}

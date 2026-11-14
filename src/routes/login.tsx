@@ -1,10 +1,10 @@
 import { createRoute, Link } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
-import { publicRoute } from '@/routes/_public.tsx';
-import { LoginForm } from '@/features/auth/components/LoginForm.tsx';
+import loginArt from '@/assets/login-admin.webp';
 import { AuthHeading } from '@/features/auth/components/AuthHeading.tsx';
 import { AuthSplit } from '@/features/auth/components/AuthSplit.tsx';
-import loginArt from '@/assets/login-admin.webp';
+import { LoginForm } from '@/features/auth/components/LoginForm.tsx';
+import { publicRoute } from '@/routes/_public.tsx';
 
 function LoginPage() {
 	const { t } = useTranslation('auth');
@@ -19,11 +19,11 @@ function LoginPage() {
 
 				<LoginForm />
 
-				<hr className="border-border-subtle my-6" />
+				<hr className="my-6 border-border-subtle" />
 
 				<Link
 					to="/login-pin"
-					className="text-accent-text text-body-sm hover:text-accent flex items-center justify-center gap-2 transition-colors"
+					className="flex items-center justify-center gap-2 text-body-sm text-accent-text transition-colors hover:text-accent"
 				>
 					{t('login.toPinLogin')} →
 				</Link>
@@ -31,7 +31,7 @@ function LoginPage() {
 
 			<Link
 				to="/"
-				className="text-text-muted text-body-sm hover:text-accent-text transition-colors"
+				className="text-body-sm text-text-muted transition-colors hover:text-accent-text"
 			>
 				← {t('login.back')}
 			</Link>

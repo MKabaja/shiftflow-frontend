@@ -1,12 +1,12 @@
 import { User } from 'lucide-react';
-import { getInitials } from '@/shared/lib/helpers/getInitials.ts';
-import { hashColor } from '@/shared/lib/helpers/hashColor.ts';
-import { cn } from '@/shared/lib/helpers/cn.ts';
-import { focusStyles } from '@/shared/lib/styles/focusStyles.ts';
 import {
 	baseStyles,
 	sizeStyles,
 } from '@/shared/components/Avatar/Avatar.styles.ts';
+import { cn } from '@/shared/lib/helpers/cn.ts';
+import { getInitials } from '@/shared/lib/helpers/getInitials.ts';
+import { hashColor } from '@/shared/lib/helpers/hashColor.ts';
+import { focusStyles } from '@/shared/lib/styles/focusStyles.ts';
 
 export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 

@@ -1,5 +1,5 @@
-import type { ToggleSize } from './Toggle.tsx';
 import { focusStyles } from '@/shared/lib/styles/focusStyles.ts';
+import type { ToggleSize } from './Toggle.tsx';
 
 type ToggleSizeStyle = Record<
 	ToggleSize,
@@ -21,4 +21,4 @@ const trackBaseStyles = `relative inline-flex shrink-0 items-center rounded-full
 const knobBaseStyles =
 	'absolute left-0.5  rounded-full bg-text-muted shadow-nm-raised-sm';
 
-export { sizeStyles, trackBaseStyles, knobBaseStyles };
+export { knobBaseStyles, sizeStyles, trackBaseStyles };

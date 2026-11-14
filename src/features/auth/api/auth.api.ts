@@ -1,10 +1,10 @@
-import { backend } from '@/shared/api/backend.ts';
-import { resourceOf } from '@/shared/api/envelopes.ts';
-import { userSchema, type User } from '@/features/auth/model/user.schemas.ts';
 import type {
 	LoginFormValues,
 	LoginPinFormValues,
 } from '@/features/auth/model/login.schemas.ts';
+import { type User, userSchema } from '@/features/auth/model/user.schemas.ts';
+import { backend } from '@/shared/api/backend.ts';
+import { resourceOf } from '@/shared/api/envelopes.ts';
 
 /** `GET /me`. Rejects with a `401` `HttpError` when nobody is logged in. */
 async function fetchCurrentUser(): Promise<User> {

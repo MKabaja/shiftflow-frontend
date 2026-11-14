@@ -1,5 +1,5 @@
-import type { FieldValues, Path, UseFormSetError } from 'react-hook-form';
 import type { ParseKeys } from 'i18next';
+import type { FieldValues, Path, UseFormSetError } from 'react-hook-form';
 import { parseApiError } from '@/shared/api/parseApiError.ts';
 
 type InvalidCredentialsKey = Extract<

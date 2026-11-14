@@ -1,5 +1,5 @@
-import { useTranslation } from 'react-i18next';
 import { Briefcase, UserCircle } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { RoleCard } from '@/features/auth/components/RoleCard.tsx';
 
 function LandingPage() {
@@ -10,7 +10,7 @@ function LandingPage() {
 				<h1 className="text-display-xl md:text-display-2xl">
 					{t('landing.heading')}
 				</h1>
-				<p className="text-text-muted text-body-md md:text-body-lg">
+				<p className="text-body-md text-text-muted md:text-body-lg">
 					{t('landing.subheading')}
 				</p>
 			</div>

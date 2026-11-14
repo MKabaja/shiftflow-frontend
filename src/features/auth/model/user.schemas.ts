@@ -26,5 +26,5 @@ const userSchema = z.object({
 	created_at: z.string(),
 });
 
-export { userSchema };
 export type { User };
+export { userSchema };

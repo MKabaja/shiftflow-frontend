@@ -10,4 +10,5 @@ type LandingPath = '/home' | '/schedule';
 function landingPathFor(user: User): LandingPath {
 	return user.role === 'employee' ? '/home' : '/schedule';
 }
+
 export { landingPathFor };

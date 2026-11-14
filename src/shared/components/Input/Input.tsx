@@ -33,7 +33,9 @@ export function Input({
 	const generatedId = useId();
 	const errorId = useId();
 	const helperId = useId();
-	const describedBy = error ? errorId : helperText ? helperId : undefined;
+	let describedBy: string | undefined;
+	if (error) describedBy = errorId;
+	else if (helperText) describedBy = helperId;
 	const inputId = id ?? generatedId;
 	const { className, ...inputRest } = rest;
 

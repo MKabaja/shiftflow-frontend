@@ -1,5 +1,5 @@
-import { useId, type Ref } from 'react';
 import { motion } from 'motion/react';
+import { type Ref, useId } from 'react';
 import { cn } from '@/shared/lib/helpers/cn.ts';
 import {
 	knobBaseStyles,
@@ -65,9 +65,9 @@ export function Toggle({
 			</div>
 			{label && (
 				<div>
-					<span className="text-text-primary text-body-md">{label}</span>
+					<span className="text-body-md text-text-primary">{label}</span>
 					{description && (
-						<p className="text-text-muted text-body-sm mt-0.5">{description}</p>
+						<p className="mt-0.5 text-body-sm text-text-muted">{description}</p>
 					)}
 				</div>
 			)}

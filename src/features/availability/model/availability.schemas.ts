@@ -26,10 +26,10 @@ const availabilitySchema = z.object({
 	updated_at: z.string(),
 });
 
-export { availabilitySchema };
 export type {
 	Availability,
-	AvailabilityQueryParams,
 	AvailabilityPayload,
+	AvailabilityQueryParams,
 	DeleteAvailabilityPayload,
 };
+export { availabilitySchema };

@@ -1,6 +1,6 @@
-import { useId, useRef } from 'react';
-import { useTranslation } from 'react-i18next';
 import { useQuery } from '@tanstack/react-query';
+import { type ReactNode, useId, useRef } from 'react';
+import { useTranslation } from 'react-i18next';
 import { newsQueries } from '@/features/news/api/news.queries.ts';
 import { NewsFeedEmpty } from './NewsFeedEmpty.tsx';
 import { NewsFeedError } from './NewsFeedError.tsx';
@@ -23,7 +23,7 @@ function NewsFeed() {
 		headingRef.current?.focus();
 	}
 
-	let content;
+	let content: ReactNode;
 
 	if (isPending) content = <NewsFeedLoading />;
 	else if (isError && posts === undefined)

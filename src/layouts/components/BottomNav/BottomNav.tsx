@@ -1,7 +1,7 @@
-import type { NavLink } from '@/layouts/navigation';
 import { Link, useMatchRoute } from '@tanstack/react-router';
-import { useTranslation } from 'react-i18next';
 import { motion, useReducedMotion } from 'motion/react';
+import { useTranslation } from 'react-i18next';
+import type { NavLink } from '@/layouts/navigation';
 import { cn } from '@/shared/lib/helpers/cn.ts';
 
 import {
@@ -78,5 +78,5 @@ function BottomNav({ links }: BottomNavProps) {
 	);
 }
 
-export { BottomNav };
 export type { BottomNavProps };
+export { BottomNav };

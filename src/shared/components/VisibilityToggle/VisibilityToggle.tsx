@@ -1,5 +1,5 @@
-import type { Dispatch, SetStateAction } from 'react';
 import { Eye, EyeOff } from 'lucide-react';
+import type { Dispatch, SetStateAction } from 'react';
 import { cn } from '@/shared/lib/helpers/cn.ts';
 import { baseStyles, iconStyles } from './VisibilityToggle.styles.ts';
 

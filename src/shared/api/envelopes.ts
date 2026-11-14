@@ -44,4 +44,4 @@ function pageOf<T extends z.ZodType>(schema: T) {
 	});
 }
 
-export { resourceOf, collectionOf, pageOf };
+export { collectionOf, pageOf, resourceOf };

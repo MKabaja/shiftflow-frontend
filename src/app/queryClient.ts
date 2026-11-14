@@ -1,11 +1,11 @@
 import { MutationCache, QueryCache, QueryClient } from '@tanstack/react-query';
-import { ZodError } from 'zod';
-import { config } from '@/shared/lib/config/config.ts';
-import { parseApiError } from '@/shared/api/parseApiError.ts';
-import { onUnauthorized } from '@/shared/api/backend.ts';
-import { authQueries } from '@/features/auth/api/auth.queries.ts';
 import { toast } from 'sonner';
-import i18n from '@/shared/i18n';
+import { ZodError } from 'zod';
+import { authQueries } from '@/features/auth/api/auth.queries.ts';
+import { onUnauthorized } from '@/shared/api/backend.ts';
+import { parseApiError } from '@/shared/api/parseApiError.ts';
+import { i18n } from '@/shared/i18n';
+import { config } from '@/shared/lib/config/config.ts';
 
 type AppMeta = {
 	handled?: boolean;
@@ -59,4 +59,5 @@ function notifyError(error: unknown) {
 	const { messageKey } = parseApiError(error);
 	toast.error(i18n.t(messageKey, { ns: 'errors' }));
 }
+
 export { queryClient };

@@ -1,5 +1,5 @@
-import { authQueries } from '@/features/auth/api/auth.queries.ts';
 import { queryClient } from '@/app/queryClient.ts';
+import { authQueries } from '@/features/auth/api/auth.queries.ts';
 import type { User } from '@/features/auth/model/user.schemas.ts';
 
 /**
@@ -16,4 +16,5 @@ async function getCurrentUser(): Promise<User | null> {
 		return null;
 	}
 }
+
 export { getCurrentUser };

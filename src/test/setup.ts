@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import i18n from '@/shared/i18n';
+import { i18n } from '@/shared/i18n';
 import { server } from '@/test/msw/server.ts';
 
 await i18n.changeLanguage('en');

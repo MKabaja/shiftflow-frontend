@@ -1,12 +1,12 @@
-import type { ReactNode } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { renderHook } from '@testing-library/react';
 import { delay, http } from 'msw';
-import { useAuth } from '../useAuth.ts';
+import type { ReactNode } from 'react';
 import { authQueries } from '@/features/auth/api/auth.queries.ts';
+import type { User } from '@/features/auth/model/user.schemas.ts';
 import { makeUser } from '@/test/factories/user.ts';
 import { server } from '@/test/msw/server.ts';
-import type { User } from '@/features/auth/model/user.schemas.ts';
+import { useAuth } from '../useAuth.ts';
 
 function renderUseAuth(user?: User) {
 	const queryClient = new QueryClient({

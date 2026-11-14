@@ -1,12 +1,12 @@
-import { backend } from '@/shared/api/backend.ts';
-import { collectionOf, resourceOf } from '@/shared/api/envelopes.ts';
 import {
-	availabilitySchema,
 	type Availability,
 	type AvailabilityPayload,
 	type AvailabilityQueryParams,
+	availabilitySchema,
 	type DeleteAvailabilityPayload,
 } from '@/features/availability/model/availability.schemas.ts';
+import { backend } from '@/shared/api/backend.ts';
+import { collectionOf, resourceOf } from '@/shared/api/envelopes.ts';
 
 /** `GET /availabilities`: entries of one month, sorted by date. `month` is 1–12, not `Date.getMonth()`. */
 async function fetchAvailabilityMonth(
@@ -34,7 +34,7 @@ async function deleteAvailability(
 }
 
 export {
-	fetchAvailabilityMonth,
 	createOrUpdateAvailability,
 	deleteAvailability,
+	fetchAvailabilityMonth,
 };

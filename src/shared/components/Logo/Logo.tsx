@@ -1,10 +1,10 @@
-import { cn } from '@/shared/lib/helpers/cn.ts';
+import logoUrl from '@/shared/assets/Logo.svg';
+import logoIconUrl from '@/shared/assets/LogoIcon.svg';
 import {
 	baseStyles,
 	sizeStyles,
 } from '@/shared/components/Logo/Logo.styles.ts';
-import logoUrl from '@/shared/assets/Logo.svg';
-import logoIconUrl from '@/shared/assets/LogoIcon.svg';
+import { cn } from '@/shared/lib/helpers/cn.ts';
 
 export type LogoSize = 'sm' | 'md' | 'lg' | 'xl';
 export type LogoVariant = 'wordmark' | 'icon';

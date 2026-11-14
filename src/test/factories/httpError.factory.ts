@@ -1,4 +1,4 @@
-import { HttpError, type ApiErrorBody } from '@/shared/api/httpError.ts';
+import { type ApiErrorBody, HttpError } from '@/shared/api/httpError.ts';
 
 type FieldErrors = NonNullable<ApiErrorBody['errors']>;
 

@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
-import { Avatar } from '../Avatar.tsx';
 import userEvent from '@testing-library/user-event';
+import { Avatar } from '../Avatar.tsx';
 
 describe('Avatar Component', () => {
 	it('renders initials from name', () => {

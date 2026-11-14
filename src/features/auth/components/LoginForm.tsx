@@ -1,22 +1,22 @@
-import { useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import { Lock, User } from 'lucide-react';
-import { Input } from '@/shared/components/Input';
-import { Button } from '@/shared/components/Button';
-import { Alert } from '@/shared/components/Alert';
-import { VisibilityToggle } from '@/shared/components/VisibilityToggle';
-import { useController, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
+import { useNavigate } from '@tanstack/react-router';
+import type { ParseKeys } from 'i18next';
+import { Lock, User } from 'lucide-react';
+import { useState } from 'react';
+import { useController, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { useLogin } from '@/features/auth/api/useLogin.ts';
+import { applyServerError } from '@/features/auth/lib/applyServerError.ts';
+import { landingPathFor } from '@/features/auth/lib/landingPathFor.ts';
 import {
 	type LoginFormValues,
 	loginSchema,
 } from '@/features/auth/model/login.schemas.ts';
-import type { ParseKeys } from 'i18next';
+import { Alert } from '@/shared/components/Alert';
+import { Button } from '@/shared/components/Button';
+import { Input } from '@/shared/components/Input';
+import { VisibilityToggle } from '@/shared/components/VisibilityToggle';
 import { config } from '@/shared/lib/config/config.ts';
-import { useLogin } from '@/features/auth/api/useLogin.ts';
-import { landingPathFor } from '@/features/auth/lib/landingPathFor.ts';
-import { useNavigate } from '@tanstack/react-router';
-import { applyServerError } from '@/features/auth/lib/applyServerError.ts';
 
 function LoginForm() {
 	const { t } = useTranslation('auth');

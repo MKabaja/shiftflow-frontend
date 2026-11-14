@@ -1,10 +1,10 @@
+import { type HTMLMotionProps, motion } from 'motion/react';
 import type { ReactNode } from 'react';
 import { Spinner } from '@/shared/components/Spinner';
 import { cn } from '@/shared/lib/helpers/cn.ts';
-import { baseStyles, sizeStyles, variantStyles } from './Button.styles.ts';
-import { type HTMLMotionProps, motion } from 'motion/react';
-import { focusStyles } from '@/shared/lib/styles/focusStyles.ts';
 import { disabledStyles } from '@/shared/lib/styles/disabledStyles.ts';
+import { focusStyles } from '@/shared/lib/styles/focusStyles.ts';
+import { baseStyles, sizeStyles, variantStyles } from './Button.styles.ts';
 
 export type ButtonSize = 'sm' | 'md' | 'lg';
 export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';

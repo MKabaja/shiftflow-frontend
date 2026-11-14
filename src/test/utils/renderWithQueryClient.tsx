@@ -1,6 +1,6 @@
-import type { ReactElement } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, type RenderResult } from '@testing-library/react';
+import { type RenderResult, render } from '@testing-library/react';
+import type { ReactElement } from 'react';
 
 type QueryClientSetup = (queryClient: QueryClient) => void;
 

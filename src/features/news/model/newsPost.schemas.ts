@@ -12,5 +12,5 @@ const newsPostSchema = z.object({
 	updated_at: z.string(),
 });
 
-export { newsPostSchema };
 export type { NewsPost };
+export { newsPostSchema };

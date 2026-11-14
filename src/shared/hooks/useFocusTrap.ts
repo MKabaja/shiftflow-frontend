@@ -55,4 +55,5 @@ function useFocusTrap<T extends HTMLElement>(
 function getFocusableElements(container: HTMLElement): HTMLElement[] {
 	return Array.from(container.querySelectorAll<HTMLElement>(SELECTOR));
 }
+
 export { useFocusTrap };

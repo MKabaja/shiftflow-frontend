@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { NewsCard } from '../NewsCard.tsx';
+import type { NewsPost } from '@/features/news/model/newsPost.schemas.ts';
 import { makePost } from '@/test/factories/newsPost.ts';
 import {
 	setElementSize,
@@ -8,7 +8,7 @@ import {
 	triggerResize,
 	triggerResizeIfObserved,
 } from '@/test/mocks/resizeObserver.ts';
-import type { NewsPost } from '@/features/news/model/newsPost.schemas.ts';
+import { NewsCard } from '../NewsCard.tsx';
 
 const renderNewsCard = (overrides: Partial<NewsPost> = {}) => {
 	const post = makePost(overrides);

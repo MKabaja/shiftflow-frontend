@@ -56,4 +56,4 @@ function invalidateMonth(
 	return queryClient.invalidateQueries({ queryKey: snapshot.key });
 }
 
-export { updateMonthOptimistically, rollbackMonth, invalidateMonth };
+export { invalidateMonth, rollbackMonth, updateMonthOptimistically };
