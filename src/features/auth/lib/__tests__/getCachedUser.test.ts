@@ -1,25 +1,24 @@
+import { QueryClient } from '@tanstack/react-query';
 import { authQueries } from '@/features/auth/api/auth.queries.ts';
-import { queryClient } from '@/app/queryClient.ts';
 import { makeUser } from '@/test/factories/user.ts';
 
 import { getCachedUser } from '../getCachedUser.ts';
 
 describe('getCachedUser', () => {
-  afterEach(() => {
-    queryClient.clear();
-  });
-
   it('returns the very same user object that is stored in the cache', () => {
+    const queryClient = new QueryClient();
     const user = makeUser();
     queryClient.setQueryData(authQueries.currentUser().queryKey, user);
 
-    const result = getCachedUser();
+    const result = getCachedUser(queryClient);
 
     expect(result).toBe(user);
   });
 
   it('returns null when nothing is cached', () => {
-    const result = getCachedUser();
+    const queryClient = new QueryClient();
+
+    const result = getCachedUser(queryClient);
 
     expect(result).toBeNull();
   });

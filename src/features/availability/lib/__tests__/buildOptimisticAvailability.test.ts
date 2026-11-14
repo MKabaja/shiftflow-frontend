@@ -1,4 +1,4 @@
-import type { UpsertAvailabilityInput } from '@/features/availability/model/availability.schemas.ts';
+import type { AvailabilityPayload } from '@/features/availability/model/availability.schemas.ts';
 
 import { buildOptimisticAvailability } from '../buildOptimisticAvailability.ts';
 
@@ -9,9 +9,9 @@ const EXPECTED_TEMPORARY_ID = -1792324800000;
 
 describe('buildOptimisticAvailability', () => {
   it('builds a complete entry with a negative id and timestamps from the given moment', () => {
-    const input = buildInput('Doctor appointment');
+    const payload = buildPayload('Doctor appointment');
 
-    const result = buildOptimisticAvailability(input, CURRENT_USER_ID, MOMENT_OF_CHANGE);
+    const result = buildOptimisticAvailability(payload, CURRENT_USER_ID, MOMENT_OF_CHANGE);
 
     expect(result).toEqual({
       date: '2026-10-18',
@@ -25,14 +25,14 @@ describe('buildOptimisticAvailability', () => {
   });
 
   it('keeps null notes as null', () => {
-    const input = buildInput(null);
+    const payload = buildPayload(null);
 
-    const result = buildOptimisticAvailability(input, CURRENT_USER_ID, MOMENT_OF_CHANGE);
+    const result = buildOptimisticAvailability(payload, CURRENT_USER_ID, MOMENT_OF_CHANGE);
 
     expect(result.notes).toBeNull();
   });
 });
 
-function buildInput(notes: string | null): UpsertAvailabilityInput {
+function buildPayload(notes: string | null): AvailabilityPayload {
   return { date: '2026-10-18', is_available: false, notes };
 }
