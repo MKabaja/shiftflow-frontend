@@ -1,105 +1,105 @@
 import { renderHook } from '@testing-library/react';
-import { useIsClamped } from '../useIsClamped.ts';
 import {
-  setElementSize,
-  stubResizeObserver,
-  triggerResize,
-  triggerResizeIfObserved,
+	setElementSize,
+	stubResizeObserver,
+	triggerResize,
+	triggerResizeIfObserved,
 } from '@/test/mocks/resizeObserver.ts';
+import { useIsClamped } from '../useIsClamped.ts';
 
 const renderUseIsClamped = (enabled = true) => {
-  const ref = { current: document.createElement('p') };
-  const result = renderHook(({ enabled }) => useIsClamped(ref, enabled), {
-    initialProps: { enabled },
-  });
-  return { element: ref.current, ...result };
+	const ref = { current: document.createElement('p') };
+	const result = renderHook(({ enabled }) => useIsClamped(ref, enabled), {
+		initialProps: { enabled },
+	});
+	return { element: ref.current, ...result };
 };
 
 describe('useIsClamped', () => {
-  beforeEach(() => {
-    stubResizeObserver();
-  });
+	beforeEach(() => {
+		stubResizeObserver();
+	});
 
-  afterEach(() => {
-    vi.unstubAllGlobals();
-  });
+	afterEach(() => {
+		vi.unstubAllGlobals();
+	});
 
-  it('returns false before the first measurement and observes the element', () => {
-    const { element, result } = renderUseIsClamped();
+	it('returns false before the first measurement and observes the element', () => {
+		const { element, result } = renderUseIsClamped();
 
-    expect(result.current).toBe(false);
-    expect(() => triggerResize(element)).not.toThrow();
-  });
+		expect(result.current).toBe(false);
+		expect(() => triggerResize(element)).not.toThrow();
+	});
 
-  it.each([
-    { scrollHeight: 40, clientHeight: 40, expected: false },
-    { scrollHeight: 41, clientHeight: 40, expected: false },
-    { scrollHeight: 42, clientHeight: 40, expected: true },
-  ])(
-    'returns $expected for scrollHeight $scrollHeight and clientHeight $clientHeight',
-    ({ scrollHeight, clientHeight, expected }) => {
-      const { element, result } = renderUseIsClamped();
+	it.each([
+		{ scrollHeight: 40, clientHeight: 40, expected: false },
+		{ scrollHeight: 41, clientHeight: 40, expected: false },
+		{ scrollHeight: 42, clientHeight: 40, expected: true },
+	])(
+		'returns $expected for scrollHeight $scrollHeight and clientHeight $clientHeight',
+		({ scrollHeight, clientHeight, expected }) => {
+			const { element, result } = renderUseIsClamped();
 
-      setElementSize(element, scrollHeight, clientHeight);
-      triggerResize(element);
+			setElementSize(element, scrollHeight, clientHeight);
+			triggerResize(element);
 
-      expect(result.current).toBe(expected);
-    },
-  );
+			expect(result.current).toBe(expected);
+		},
+	);
 
-  it('updates the result on every measurement', () => {
-    const { element, result } = renderUseIsClamped();
+	it('updates the result on every measurement', () => {
+		const { element, result } = renderUseIsClamped();
 
-    setElementSize(element, 40, 40);
-    triggerResize(element);
-    expect(result.current).toBe(false);
+		setElementSize(element, 40, 40);
+		triggerResize(element);
+		expect(result.current).toBe(false);
 
-    setElementSize(element, 80, 40);
-    triggerResize(element);
-    expect(result.current).toBe(true);
+		setElementSize(element, 80, 40);
+		triggerResize(element);
+		expect(result.current).toBe(true);
 
-    setElementSize(element, 40, 40);
-    triggerResize(element);
-    expect(result.current).toBe(false);
-  });
+		setElementSize(element, 40, 40);
+		triggerResize(element);
+		expect(result.current).toBe(false);
+	});
 
-  it('keeps the last result and stops measuring when disabled', () => {
-    const { element, result, rerender } = renderUseIsClamped();
-    setElementSize(element, 80, 40);
-    triggerResize(element);
+	it('keeps the last result and stops measuring when disabled', () => {
+		const { element, result, rerender } = renderUseIsClamped();
+		setElementSize(element, 80, 40);
+		triggerResize(element);
 
-    rerender({ enabled: false });
-    setElementSize(element, 40, 40);
-    triggerResizeIfObserved(element);
+		rerender({ enabled: false });
+		setElementSize(element, 40, 40);
+		triggerResizeIfObserved(element);
 
-    expect(result.current).toBe(true);
-  });
+		expect(result.current).toBe(true);
+	});
 
-  it('measures again when re-enabled', () => {
-    const { element, result, rerender } = renderUseIsClamped();
-    setElementSize(element, 80, 40);
-    triggerResize(element);
-    rerender({ enabled: false });
-    setElementSize(element, 40, 40);
+	it('measures again when re-enabled', () => {
+		const { element, result, rerender } = renderUseIsClamped();
+		setElementSize(element, 80, 40);
+		triggerResize(element);
+		rerender({ enabled: false });
+		setElementSize(element, 40, 40);
 
-    rerender({ enabled: true });
-    triggerResize(element);
+		rerender({ enabled: true });
+		triggerResize(element);
 
-    expect(result.current).toBe(false);
-  });
+		expect(result.current).toBe(false);
+	});
 
-  it('does not observe when disabled from the start', () => {
-    const { element, result } = renderUseIsClamped(false);
+	it('does not observe when disabled from the start', () => {
+		const { element, result } = renderUseIsClamped(false);
 
-    expect(() => triggerResize(element)).toThrow('No active ResizeObserver');
-    expect(result.current).toBe(false);
-  });
+		expect(() => triggerResize(element)).toThrow('No active ResizeObserver');
+		expect(result.current).toBe(false);
+	});
 
-  it('stops observing on unmount', () => {
-    const { element, unmount } = renderUseIsClamped();
+	it('stops observing on unmount', () => {
+		const { element, unmount } = renderUseIsClamped();
 
-    unmount();
+		unmount();
 
-    expect(() => triggerResize(element)).toThrow('No active ResizeObserver');
-  });
+		expect(() => triggerResize(element)).toThrow('No active ResizeObserver');
+	});
 });

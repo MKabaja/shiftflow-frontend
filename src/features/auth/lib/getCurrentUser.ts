@@ -1,5 +1,5 @@
-import { authQueries } from '@/features/auth/api/auth.queries.ts';
 import { queryClient } from '@/app/queryClient.ts';
+import { authQueries } from '@/features/auth/api/auth.queries.ts';
 import type { User } from '@/features/auth/model/user.schemas.ts';
 
 /**
@@ -10,10 +10,11 @@ import type { User } from '@/features/auth/model/user.schemas.ts';
  * @returns `null` when nobody is logged in or the request failed.
  */
 async function getCurrentUser(): Promise<User | null> {
-  try {
-    return await queryClient.ensureQueryData(authQueries.currentUser());
-  } catch {
-    return null;
-  }
+	try {
+		return await queryClient.ensureQueryData(authQueries.currentUser());
+	} catch {
+		return null;
+	}
 }
+
 export { getCurrentUser };

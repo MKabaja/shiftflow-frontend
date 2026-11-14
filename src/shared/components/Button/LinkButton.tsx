@@ -1,54 +1,62 @@
-import { type HTMLAttributeAnchorTarget, type ReactNode } from 'react';
 import { Link, type LinkProps } from '@tanstack/react-router';
 import { motion } from 'motion/react';
+import type { HTMLAttributeAnchorTarget, ReactNode } from 'react';
 import { cn } from '@/shared/lib/helpers/cn.ts';
-import { baseStyles, sizeStyles, variantStyles } from './Button.styles.ts';
 import { focusStyles } from '@/shared/lib/styles/focusStyles.ts';
+import { baseStyles, sizeStyles, variantStyles } from './Button.styles.ts';
 import type { ButtonSize, ButtonVariant } from './Button.tsx';
 
 type BaseLinkProps = LinkProps & {
-  target?: HTMLAttributeAnchorTarget;
-  rel?: string;
-  className?: string;
+	target?: HTMLAttributeAnchorTarget;
+	rel?: string;
+	className?: string;
 };
 
 function BaseLink(props: BaseLinkProps) {
-  return <Link {...props} />;
+	return <Link {...props} />;
 }
 
 const MotionLink = motion.create(BaseLink);
 
 type LinkButtonProps = BaseLinkProps & {
-  children: ReactNode;
-  variant?: ButtonVariant;
-  size?: ButtonSize;
-  className?: string;
+	children: ReactNode;
+	variant?: ButtonVariant;
+	size?: ButtonSize;
+	className?: string;
 };
 
 export function LinkButton({
-  variant = 'primary',
-  size = 'sm',
-  children,
-  className,
-  target,
-  rel,
-  ...rest
+	variant = 'primary',
+	size = 'sm',
+	children,
+	className,
+	target,
+	rel,
+	...rest
 }: LinkButtonProps) {
-  const safeRel =
-    target === '_blank'
-      ? Array.from(new Set([...(rel?.split(/\s+/) ?? []), 'noopener', 'noreferrer'])).join(' ')
-      : rel;
+	const safeRel =
+		target === '_blank'
+			? Array.from(
+					new Set([...(rel?.split(/\s+/) ?? []), 'noopener', 'noreferrer']),
+				).join(' ')
+			: rel;
 
-  return (
-    <MotionLink
-      {...rest}
-      target={target}
-      rel={safeRel}
-      whileTap={{ scale: 0.98 }}
-      transition={{ duration: 0.12, ease: 'easeOut' }}
-      className={cn(sizeStyles[size], variantStyles[variant], baseStyles, focusStyles, className)}
-    >
-      {children}
-    </MotionLink>
-  );
+	return (
+		<MotionLink
+			{...rest}
+			target={target}
+			rel={safeRel}
+			whileTap={{ scale: 0.98 }}
+			transition={{ duration: 0.12, ease: 'easeOut' }}
+			className={cn(
+				sizeStyles[size],
+				variantStyles[variant],
+				baseStyles,
+				focusStyles,
+				className,
+			)}
+		>
+			{children}
+		</MotionLink>
+	);
 }

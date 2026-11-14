@@ -1,63 +1,74 @@
-import { http, HttpResponse } from 'msw';
-import { backend } from '../backend.ts';
-import { NetworkError } from '../networkError.ts';
+import { HttpResponse, http } from 'msw';
 import { queryClient } from '@/app/queryClient.ts';
 import { authQueries } from '@/features/auth/api/auth.queries.ts';
 import { makeUser } from '@/test/factories/user.ts';
 import { server } from '@/test/msw/server.ts';
+import { backend } from '../backend.ts';
+import { NetworkError } from '../networkError.ts';
 
 const respondWithStatus = (path: string, status: number) => {
-  server.use(http.all(`/api${path}`, () => HttpResponse.json({ message: 'Error' }, { status })));
+	server.use(
+		http.all(`/api${path}`, () =>
+			HttpResponse.json({ message: 'Error' }, { status }),
+		),
+	);
 };
 
 const loggedInUser = makeUser();
-const getCachedMe = () => queryClient.getQueryData(authQueries.currentUser().queryKey);
+const getCachedMe = () =>
+	queryClient.getQueryData(authQueries.currentUser().queryKey);
 
 describe('backend 401 handling', () => {
-  beforeEach(() => {
-    queryClient.setQueryData(authQueries.currentUser().queryKey, loggedInUser);
-  });
+	beforeEach(() => {
+		queryClient.setQueryData(authQueries.currentUser().queryKey, loggedInUser);
+	});
 
-  afterEach(() => {
-    queryClient.clear();
-  });
+	afterEach(() => {
+		queryClient.clear();
+	});
 
-  it('clears auth.me cache on 401 for a non-auth endpoint', async () => {
-    respondWithStatus('/schedules', 401);
+	it('clears auth.me cache on 401 for a non-auth endpoint', async () => {
+		respondWithStatus('/schedules', 401);
 
-    await expect(backend.get('/schedules')).rejects.toMatchObject({ status: 401 });
-    expect(getCachedMe()).toBeNull();
-  });
+		await expect(backend.get('/schedules')).rejects.toMatchObject({
+			status: 401,
+		});
+		expect(getCachedMe()).toBeNull();
+	});
 
-  it('does not clear cache on 401 from /auth/login', async () => {
-    respondWithStatus('/auth/login', 401);
+	it('does not clear cache on 401 from /auth/login', async () => {
+		respondWithStatus('/auth/login', 401);
 
-    await expect(
-      backend.post('/auth/login', { body: {}, ignoreUnauthorized: true }),
-    ).rejects.toMatchObject({ status: 401 });
-    expect(getCachedMe()).toBe(loggedInUser);
-  });
+		await expect(
+			backend.post('/auth/login', { body: {}, ignoreUnauthorized: true }),
+		).rejects.toMatchObject({ status: 401 });
+		expect(getCachedMe()).toBe(loggedInUser);
+	});
 
-  it('does not clear cache on 401 from /auth/login-pin', async () => {
-    respondWithStatus('/auth/login-pin', 401);
+	it('does not clear cache on 401 from /auth/login-pin', async () => {
+		respondWithStatus('/auth/login-pin', 401);
 
-    await expect(
-      backend.post('/auth/login-pin', { body: {}, ignoreUnauthorized: true }),
-    ).rejects.toMatchObject({ status: 401 });
-    expect(getCachedMe()).toBe(loggedInUser);
-  });
+		await expect(
+			backend.post('/auth/login-pin', { body: {}, ignoreUnauthorized: true }),
+		).rejects.toMatchObject({ status: 401 });
+		expect(getCachedMe()).toBe(loggedInUser);
+	});
 
-  it('ignores non-401 errors', async () => {
-    respondWithStatus('/schedules', 500);
+	it('ignores non-401 errors', async () => {
+		respondWithStatus('/schedules', 500);
 
-    await expect(backend.get('/schedules')).rejects.toMatchObject({ status: 500 });
-    expect(getCachedMe()).toBe(loggedInUser);
-  });
+		await expect(backend.get('/schedules')).rejects.toMatchObject({
+			status: 500,
+		});
+		expect(getCachedMe()).toBe(loggedInUser);
+	});
 
-  it('ignores network errors without a response', async () => {
-    server.use(http.get('/api/schedules', () => HttpResponse.error()));
+	it('ignores network errors without a response', async () => {
+		server.use(http.get('/api/schedules', () => HttpResponse.error()));
 
-    await expect(backend.get('/schedules')).rejects.toBeInstanceOf(NetworkError);
-    expect(getCachedMe()).toBe(loggedInUser);
-  });
+		await expect(backend.get('/schedules')).rejects.toBeInstanceOf(
+			NetworkError,
+		);
+		expect(getCachedMe()).toBe(loggedInUser);
+	});
 });

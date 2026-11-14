@@ -1,24 +1,24 @@
-import { defineConfig } from 'vite';
-import react from '@vitejs/plugin-react';
-import tailwindcss from '@tailwindcss/vite';
-import { fileURLToPath, URL } from 'node:url';
 import { readFileSync } from 'node:fs';
+import { fileURLToPath, URL } from 'node:url';
+import tailwindcss from '@tailwindcss/vite';
+import react from '@vitejs/plugin-react';
+import { defineConfig } from 'vite';
 
 const { version } = JSON.parse(
-  readFileSync(new URL('./package.json', import.meta.url), 'utf8'),
+	readFileSync(new URL('./package.json', import.meta.url), 'utf8'),
 ) as { version: string };
 
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
-  resolve: {
-    alias: {
-      '@': fileURLToPath(new URL('./src', import.meta.url)),
-    },
-  },
-  server: {
-    proxy: {
-      '/api': { target: 'http://localhost:8000', changeOrigin: true },
-    },
-  },
-  define: { __APP_VERSION__: JSON.stringify(version) },
+	plugins: [react(), tailwindcss()],
+	resolve: {
+		alias: {
+			'@': fileURLToPath(new URL('./src', import.meta.url)),
+		},
+	},
+	server: {
+		proxy: {
+			'/api': { target: 'http://localhost:8000', changeOrigin: true },
+		},
+	},
+	define: { __APP_VERSION__: JSON.stringify(version) },
 });

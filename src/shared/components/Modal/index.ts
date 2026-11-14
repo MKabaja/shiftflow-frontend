@@ -1,2 +1,2 @@
-export { Modal } from './Modal';
 export type { ModalPlacement, ModalSize } from './Modal';
+export { Modal } from './Modal';

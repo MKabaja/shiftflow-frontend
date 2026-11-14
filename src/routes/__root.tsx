@@ -3,12 +3,12 @@ import { TanStackRouterDevtools } from '@tanstack/react-router-devtools';
 import { config } from '../shared/lib/config/config.ts';
 
 function RootLayout() {
-  return (
-    <>
-      <Outlet />
-      {config.isDev && <TanStackRouterDevtools />}
-    </>
-  );
+	return (
+		<>
+			<Outlet />
+			{config.isDev && <TanStackRouterDevtools />}
+		</>
+	);
 }
 
 export const Route = createRootRoute({ component: RootLayout });

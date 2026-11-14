@@ -3,11 +3,11 @@ import { authQueries } from '@/features/auth/api/auth.queries.ts';
 import type { User } from '@/features/auth/model/user.schemas.ts';
 
 type UseAuthResult = {
-  user: User | null;
-  isAuthenticated: boolean;
-  isAdmin: boolean;
-  isManager: boolean;
-  isEmployee: boolean;
+	user: User | null;
+	isAuthenticated: boolean;
+	isAdmin: boolean;
+	isManager: boolean;
+	isEmployee: boolean;
 };
 
 /**
@@ -16,13 +16,14 @@ type UseAuthResult = {
  * @returns `user` is `null` when nobody is logged in or before the first fetch.
  */
 function useAuth(): UseAuthResult {
-  const { data: user } = useQuery(authQueries.currentUser());
-  return {
-    user: user ?? null,
-    isAuthenticated: !!user,
-    isAdmin: user?.role === 'admin',
-    isManager: user?.role === 'manager',
-    isEmployee: user?.role === 'employee',
-  };
+	const { data: user } = useQuery(authQueries.currentUser());
+	return {
+		user: user ?? null,
+		isAuthenticated: !!user,
+		isAdmin: user?.role === 'admin',
+		isManager: user?.role === 'manager',
+		isEmployee: user?.role === 'employee',
+	};
 }
+
 export { useAuth };

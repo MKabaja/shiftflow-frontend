@@ -5,15 +5,19 @@ import { useEffect } from 'react';
  *
  * @param key - A `KeyboardEvent.key` value.
  */
-export function useKeyClose(isOpen: boolean, onClose: () => void, key: string = 'Escape'): void {
-  useEffect(() => {
-    if (!isOpen) return;
+export function useKeyClose(
+	isOpen: boolean,
+	onClose: () => void,
+	key: string = 'Escape',
+): void {
+	useEffect(() => {
+		if (!isOpen) return;
 
-    const handler = (e: KeyboardEvent) => {
-      if (e.key === key) onClose();
-    };
+		const handler = (e: KeyboardEvent) => {
+			if (e.key === key) onClose();
+		};
 
-    document.addEventListener('keydown', handler);
-    return () => document.removeEventListener('keydown', handler);
-  }, [isOpen, onClose, key]);
+		document.addEventListener('keydown', handler);
+		return () => document.removeEventListener('keydown', handler);
+	}, [isOpen, onClose, key]);
 }

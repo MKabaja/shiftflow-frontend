@@ -3,7 +3,7 @@
 Grafik zmian pracowników Kopalni Soli „Wieliczka”: panel kierownika + moduł dyspozycji pracownika.
 Stack: React 19, TypeScript 6 (strict), Vite 8, Tailwind CSS v4, TanStack Router + Query v5, Zustand 5,
 React Hook Form + Zod v4, i18next, Motion 12; HTTP: własny klient na `fetch`. Testy: Vitest 4 + Testing Library
-(jsdom) + MSW 2.
+(jsdom) + MSW 2. Lint + format: Biome (`biome.json`, wersja przypięta).
 Backend: Laravel, osobne repo `~/projekty/SHIFTFlow`. Środowisko: WSL (Ubuntu), Node 24 — ta sama wersja co CI.
 
 <!-- Utrzymanie: < 200 linii, każda linia ma zapobiegać realnemu błędowi. Reguły dotyczące części kodu
@@ -22,7 +22,7 @@ Nie ma stagingu. Zmiany idą małymi branchami przez PR (na PR `deploy` jest pom
 npm run dev                          # Vite + HMR; /api proxowane na localhost:8000
 npm run check                        # typecheck + lint + test + build — przed każdym pushem
 npm run typecheck                    # tsc -b (app + node przez references)
-npm run lint                         # ESLint, --max-warnings 0 (autofix: npm run lint:fix)
+npm run lint                         # biome check: lint + format + importy, warning = błąd (autofix: lint:fix)
 npm run test:run                     # vitest jednorazowo (samo `npm run test` = watch)
 npx vitest run src/ścieżka/X.test.tsx  # pojedynczy plik testów
 npm run build                        # tsc -b + vite build
@@ -58,7 +58,8 @@ npm run build                        # tsc -b + vite build
   - operacji git zmieniających stan (commit, branch, PR, push/pull) — podajesz komendy, wykonuje Mateusz;
     czytanie (`status`, `log`, `diff`) jest OK,
   - komend na serwerze — podajesz jeden krok + krótko „dlaczego”, czekasz na wklejony output,
-  - wyłączania reguł ESLint/TS, żeby ukryć błąd,
+  - wyłączania reguł Biome/TS (`biome-ignore`, `@ts-…`), żeby ukryć błąd — uzasadniony wyjątek tylko w `overrides`
+    w `biome.json`,
   - plików `.env*` (stałe → `shared/lib/config/config.ts`),
   - importu `package.json` w kodzie aplikacji (bundler wkleiłby cały plik; wersja = `__APP_VERSION__` z `define`).
 

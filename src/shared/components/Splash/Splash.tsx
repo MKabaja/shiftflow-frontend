@@ -3,14 +3,14 @@ import { Spinner } from '@/shared/components/Spinner';
 import { baseStyles } from '@/shared/components/Splash/Splash.styles.ts';
 
 export function Splash() {
-  const { t } = useTranslation();
+	const { t } = useTranslation();
 
-  return (
-    <div className={baseStyles}>
-      <Spinner
-        size="lg"
-        label={t('loading')}
-      />
-    </div>
-  );
+	return (
+		<div className={baseStyles}>
+			<Spinner
+				size="lg"
+				label={t('loading')}
+			/>
+		</div>
+	);
 }

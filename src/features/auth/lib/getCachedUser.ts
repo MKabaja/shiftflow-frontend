@@ -1,5 +1,5 @@
-import { authQueries } from '@/features/auth/api/auth.queries.ts';
 import type { QueryClient } from '@tanstack/react-query';
+import { authQueries } from '@/features/auth/api/auth.queries.ts';
 import type { User } from '@/features/auth/model/user.schemas.ts';
 
 /**
@@ -10,7 +10,7 @@ import type { User } from '@/features/auth/model/user.schemas.ts';
  * @returns `null` when nobody is logged in or the session expired.
  */
 function getCachedUser(queryClient: QueryClient): User | null {
-  return queryClient.getQueryData(authQueries.currentUser().queryKey) ?? null;
+	return queryClient.getQueryData(authQueries.currentUser().queryKey) ?? null;
 }
 
 export { getCachedUser };

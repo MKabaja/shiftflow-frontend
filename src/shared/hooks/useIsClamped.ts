@@ -6,26 +6,26 @@ import { useLayoutEffect, useState } from 'react';
  * Re-measures on every size change; while `enabled` is `false` it keeps the last result.
  */
 function useIsClamped<T extends HTMLElement>(
-  ref: RefObject<T | null>,
-  enabled: boolean = true,
+	ref: RefObject<T | null>,
+	enabled: boolean = true,
 ): boolean {
-  const [isClamped, setIsClamped] = useState(false);
+	const [isClamped, setIsClamped] = useState(false);
 
-  useLayoutEffect(() => {
-    const element = ref.current;
-    if (!enabled || !element) return;
+	useLayoutEffect(() => {
+		const element = ref.current;
+		if (!enabled || !element) return;
 
-    const observer = new ResizeObserver(() => {
-      setIsClamped(element.scrollHeight - element.clientHeight > 1);
-    });
-    observer.observe(element);
+		const observer = new ResizeObserver(() => {
+			setIsClamped(element.scrollHeight - element.clientHeight > 1);
+		});
+		observer.observe(element);
 
-    return () => {
-      observer.disconnect();
-    };
-  }, [ref, enabled]);
+		return () => {
+			observer.disconnect();
+		};
+	}, [ref, enabled]);
 
-  return isClamped;
+	return isClamped;
 }
 
 export { useIsClamped };

@@ -1,11 +1,11 @@
-import type { ReactElement } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, type RenderResult } from '@testing-library/react';
+import { type RenderResult, render } from '@testing-library/react';
+import type { ReactElement } from 'react';
 
 type QueryClientSetup = (queryClient: QueryClient) => void;
 
 type RenderWithQueryClientResult = RenderResult & {
-  queryClient: QueryClient;
+	queryClient: QueryClient;
 };
 
 /**
@@ -15,14 +15,18 @@ type RenderWithQueryClientResult = RenderResult & {
  * @returns The render result plus the `queryClient`.
  */
 export function renderWithQueryClient(
-  ui: ReactElement,
-  setup?: QueryClientSetup,
+	ui: ReactElement,
+	setup?: QueryClientSetup,
 ): RenderWithQueryClientResult {
-  const queryClient = new QueryClient({ defaultOptions: { queries: { retry: false } } });
-  setup?.(queryClient);
+	const queryClient = new QueryClient({
+		defaultOptions: { queries: { retry: false } },
+	});
+	setup?.(queryClient);
 
-  return {
-    queryClient,
-    ...render(<QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>),
-  };
+	return {
+		queryClient,
+		...render(
+			<QueryClientProvider client={queryClient}>{ui}</QueryClientProvider>,
+		),
+	};
 }
