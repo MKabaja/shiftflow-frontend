@@ -1,10 +1,13 @@
-import { createRoute, Link } from '@tanstack/react-router';
+import { createFileRoute, Link } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 import loginPinArt from '@/assets/login-employee.webp';
 import { AuthHeading } from '@/features/auth/components/AuthHeading.tsx';
 import { AuthSplit } from '@/features/auth/components/AuthSplit.tsx';
 import { LoginPinForm } from '@/features/auth/components/LoginPinForm.tsx';
-import { publicRoute } from '@/routes/_public.tsx';
+
+export const Route = createFileRoute('/_public/login-pin')({
+	component: LoginPinPage,
+});
 
 function LoginPinPage() {
 	const { t } = useTranslation('auth');
@@ -38,11 +41,3 @@ function LoginPinPage() {
 		</section>
 	);
 }
-
-const loginPinRoute = createRoute({
-	getParentRoute: () => publicRoute,
-	path: '/login-pin',
-	component: LoginPinPage,
-});
-
-export { loginPinRoute };
