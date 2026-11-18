@@ -9,14 +9,42 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as AppRouteRouteImport } from './routes/_app/route'
 import { Route as PublicRouteRouteImport } from './routes/_public/route'
+import { Route as AppEmployeePanelRouteRouteImport } from './routes/_app/_employee-panel/route'
+import { Route as AppManagerPanelRouteRouteImport } from './routes/_app/_manager-panel/route'
+import { Route as AppSettingsRouteImport } from './routes/_app/settings'
 import { Route as PublicIndexRouteImport } from './routes/_public/index'
 import { Route as PublicLoginRouteImport } from './routes/_public/login'
 import { Route as PublicLoginPinRouteImport } from './routes/_public/login-pin'
+import { Route as AppEmployeePanelAvailabilityRouteImport } from './routes/_app/_employee-panel/availability'
+import { Route as AppEmployeePanelHomeRouteImport } from './routes/_app/_employee-panel/home'
+import { Route as AppEmployeePanelMyScheduleRouteImport } from './routes/_app/_employee-panel/my-schedule'
+import { Route as AppManagerPanelEmployeesRouteImport } from './routes/_app/_manager-panel/employees'
+import { Route as AppManagerPanelNewsRouteImport } from './routes/_app/_manager-panel/news'
+import { Route as AppManagerPanelPositionsRouteImport } from './routes/_app/_manager-panel/positions'
+import { Route as AppManagerPanelScheduleRouteImport } from './routes/_app/_manager-panel/schedule'
 
+const AppRouteRoute = AppRouteRouteImport.update({
+  id: '/_app',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const PublicRouteRoute = PublicRouteRouteImport.update({
   id: '/_public',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AppEmployeePanelRouteRoute = AppEmployeePanelRouteRouteImport.update({
+  id: '/_employee-panel',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const AppManagerPanelRouteRoute = AppManagerPanelRouteRouteImport.update({
+  id: '/_manager-panel',
+  getParentRoute: () => AppRouteRoute,
+} as any)
+const AppSettingsRoute = AppSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AppRouteRoute,
 } as any)
 const PublicIndexRoute = PublicIndexRouteImport.update({
   id: '/',
@@ -33,49 +61,177 @@ const PublicLoginPinRoute = PublicLoginPinRouteImport.update({
   path: '/login-pin',
   getParentRoute: () => PublicRouteRoute,
 } as any)
+const AppEmployeePanelAvailabilityRoute =
+  AppEmployeePanelAvailabilityRouteImport.update({
+    id: '/availability',
+    path: '/availability',
+    getParentRoute: () => AppEmployeePanelRouteRoute,
+  } as any)
+const AppEmployeePanelHomeRoute = AppEmployeePanelHomeRouteImport.update({
+  id: '/home',
+  path: '/home',
+  getParentRoute: () => AppEmployeePanelRouteRoute,
+} as any)
+const AppEmployeePanelMyScheduleRoute =
+  AppEmployeePanelMyScheduleRouteImport.update({
+    id: '/my-schedule',
+    path: '/my-schedule',
+    getParentRoute: () => AppEmployeePanelRouteRoute,
+  } as any)
+const AppManagerPanelEmployeesRoute =
+  AppManagerPanelEmployeesRouteImport.update({
+    id: '/employees',
+    path: '/employees',
+    getParentRoute: () => AppManagerPanelRouteRoute,
+  } as any)
+const AppManagerPanelNewsRoute = AppManagerPanelNewsRouteImport.update({
+  id: '/news',
+  path: '/news',
+  getParentRoute: () => AppManagerPanelRouteRoute,
+} as any)
+const AppManagerPanelPositionsRoute =
+  AppManagerPanelPositionsRouteImport.update({
+    id: '/positions',
+    path: '/positions',
+    getParentRoute: () => AppManagerPanelRouteRoute,
+  } as any)
+const AppManagerPanelScheduleRoute = AppManagerPanelScheduleRouteImport.update({
+  id: '/schedule',
+  path: '/schedule',
+  getParentRoute: () => AppManagerPanelRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof PublicIndexRoute
+  '/settings': typeof AppSettingsRoute
   '/login': typeof PublicLoginRoute
   '/login-pin': typeof PublicLoginPinRoute
+  '/availability': typeof AppEmployeePanelAvailabilityRoute
+  '/home': typeof AppEmployeePanelHomeRoute
+  '/my-schedule': typeof AppEmployeePanelMyScheduleRoute
+  '/employees': typeof AppManagerPanelEmployeesRoute
+  '/news': typeof AppManagerPanelNewsRoute
+  '/positions': typeof AppManagerPanelPositionsRoute
+  '/schedule': typeof AppManagerPanelScheduleRoute
 }
 export interface FileRoutesByTo {
+  '/': typeof PublicIndexRoute
+  '/settings': typeof AppSettingsRoute
   '/login': typeof PublicLoginRoute
   '/login-pin': typeof PublicLoginPinRoute
-  '/': typeof PublicIndexRoute
+  '/availability': typeof AppEmployeePanelAvailabilityRoute
+  '/home': typeof AppEmployeePanelHomeRoute
+  '/my-schedule': typeof AppEmployeePanelMyScheduleRoute
+  '/employees': typeof AppManagerPanelEmployeesRoute
+  '/news': typeof AppManagerPanelNewsRoute
+  '/positions': typeof AppManagerPanelPositionsRoute
+  '/schedule': typeof AppManagerPanelScheduleRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
+  '/_app': typeof AppRouteRouteWithChildren
   '/_public': typeof PublicRouteRouteWithChildren
+  '/_app/_employee-panel': typeof AppEmployeePanelRouteRouteWithChildren
+  '/_app/_manager-panel': typeof AppManagerPanelRouteRouteWithChildren
+  '/_app/settings': typeof AppSettingsRoute
   '/_public/login': typeof PublicLoginRoute
   '/_public/login-pin': typeof PublicLoginPinRoute
   '/_public/': typeof PublicIndexRoute
+  '/_app/_employee-panel/availability': typeof AppEmployeePanelAvailabilityRoute
+  '/_app/_employee-panel/home': typeof AppEmployeePanelHomeRoute
+  '/_app/_employee-panel/my-schedule': typeof AppEmployeePanelMyScheduleRoute
+  '/_app/_manager-panel/employees': typeof AppManagerPanelEmployeesRoute
+  '/_app/_manager-panel/news': typeof AppManagerPanelNewsRoute
+  '/_app/_manager-panel/positions': typeof AppManagerPanelPositionsRoute
+  '/_app/_manager-panel/schedule': typeof AppManagerPanelScheduleRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/login' | '/login-pin'
+  fullPaths:
+    | '/'
+    | '/settings'
+    | '/login'
+    | '/login-pin'
+    | '/availability'
+    | '/home'
+    | '/my-schedule'
+    | '/employees'
+    | '/news'
+    | '/positions'
+    | '/schedule'
   fileRoutesByTo: FileRoutesByTo
-  to: '/login' | '/login-pin' | '/'
+  to:
+    | '/'
+    | '/settings'
+    | '/login'
+    | '/login-pin'
+    | '/availability'
+    | '/home'
+    | '/my-schedule'
+    | '/employees'
+    | '/news'
+    | '/positions'
+    | '/schedule'
   id:
     | '__root__'
+    | '/_app'
     | '/_public'
+    | '/_app/_employee-panel'
+    | '/_app/_manager-panel'
+    | '/_app/settings'
     | '/_public/login'
     | '/_public/login-pin'
     | '/_public/'
+    | '/_app/_employee-panel/availability'
+    | '/_app/_employee-panel/home'
+    | '/_app/_employee-panel/my-schedule'
+    | '/_app/_manager-panel/employees'
+    | '/_app/_manager-panel/news'
+    | '/_app/_manager-panel/positions'
+    | '/_app/_manager-panel/schedule'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
+  AppRouteRoute: typeof AppRouteRouteWithChildren
   PublicRouteRoute: typeof PublicRouteRouteWithChildren
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/_app': {
+      id: '/_app'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AppRouteRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/_public': {
       id: '/_public'
       path: ''
       fullPath: '/'
       preLoaderRoute: typeof PublicRouteRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/_app/_employee-panel': {
+      id: '/_app/_employee-panel'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AppEmployeePanelRouteRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/_app/_manager-panel': {
+      id: '/_app/_manager-panel'
+      path: ''
+      fullPath: '/'
+      preLoaderRoute: typeof AppManagerPanelRouteRouteImport
+      parentRoute: typeof AppRouteRoute
+    }
+    '/_app/settings': {
+      id: '/_app/settings'
+      path: '/settings'
+      fullPath: '/settings'
+      preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRouteRoute
     }
     '/_public/': {
       id: '/_public/'
@@ -98,8 +254,107 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PublicLoginPinRouteImport
       parentRoute: typeof PublicRouteRoute
     }
+    '/_app/_employee-panel/availability': {
+      id: '/_app/_employee-panel/availability'
+      path: '/availability'
+      fullPath: '/availability'
+      preLoaderRoute: typeof AppEmployeePanelAvailabilityRouteImport
+      parentRoute: typeof AppEmployeePanelRouteRoute
+    }
+    '/_app/_employee-panel/home': {
+      id: '/_app/_employee-panel/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof AppEmployeePanelHomeRouteImport
+      parentRoute: typeof AppEmployeePanelRouteRoute
+    }
+    '/_app/_employee-panel/my-schedule': {
+      id: '/_app/_employee-panel/my-schedule'
+      path: '/my-schedule'
+      fullPath: '/my-schedule'
+      preLoaderRoute: typeof AppEmployeePanelMyScheduleRouteImport
+      parentRoute: typeof AppEmployeePanelRouteRoute
+    }
+    '/_app/_manager-panel/employees': {
+      id: '/_app/_manager-panel/employees'
+      path: '/employees'
+      fullPath: '/employees'
+      preLoaderRoute: typeof AppManagerPanelEmployeesRouteImport
+      parentRoute: typeof AppManagerPanelRouteRoute
+    }
+    '/_app/_manager-panel/news': {
+      id: '/_app/_manager-panel/news'
+      path: '/news'
+      fullPath: '/news'
+      preLoaderRoute: typeof AppManagerPanelNewsRouteImport
+      parentRoute: typeof AppManagerPanelRouteRoute
+    }
+    '/_app/_manager-panel/positions': {
+      id: '/_app/_manager-panel/positions'
+      path: '/positions'
+      fullPath: '/positions'
+      preLoaderRoute: typeof AppManagerPanelPositionsRouteImport
+      parentRoute: typeof AppManagerPanelRouteRoute
+    }
+    '/_app/_manager-panel/schedule': {
+      id: '/_app/_manager-panel/schedule'
+      path: '/schedule'
+      fullPath: '/schedule'
+      preLoaderRoute: typeof AppManagerPanelScheduleRouteImport
+      parentRoute: typeof AppManagerPanelRouteRoute
+    }
   }
 }
+
+interface AppEmployeePanelRouteRouteChildren {
+  AppEmployeePanelAvailabilityRoute: typeof AppEmployeePanelAvailabilityRoute
+  AppEmployeePanelHomeRoute: typeof AppEmployeePanelHomeRoute
+  AppEmployeePanelMyScheduleRoute: typeof AppEmployeePanelMyScheduleRoute
+}
+
+const AppEmployeePanelRouteRouteChildren: AppEmployeePanelRouteRouteChildren = {
+  AppEmployeePanelAvailabilityRoute: AppEmployeePanelAvailabilityRoute,
+  AppEmployeePanelHomeRoute: AppEmployeePanelHomeRoute,
+  AppEmployeePanelMyScheduleRoute: AppEmployeePanelMyScheduleRoute,
+}
+
+const AppEmployeePanelRouteRouteWithChildren =
+  AppEmployeePanelRouteRoute._addFileChildren(
+    AppEmployeePanelRouteRouteChildren,
+  )
+
+interface AppManagerPanelRouteRouteChildren {
+  AppManagerPanelEmployeesRoute: typeof AppManagerPanelEmployeesRoute
+  AppManagerPanelNewsRoute: typeof AppManagerPanelNewsRoute
+  AppManagerPanelPositionsRoute: typeof AppManagerPanelPositionsRoute
+  AppManagerPanelScheduleRoute: typeof AppManagerPanelScheduleRoute
+}
+
+const AppManagerPanelRouteRouteChildren: AppManagerPanelRouteRouteChildren = {
+  AppManagerPanelEmployeesRoute: AppManagerPanelEmployeesRoute,
+  AppManagerPanelNewsRoute: AppManagerPanelNewsRoute,
+  AppManagerPanelPositionsRoute: AppManagerPanelPositionsRoute,
+  AppManagerPanelScheduleRoute: AppManagerPanelScheduleRoute,
+}
+
+const AppManagerPanelRouteRouteWithChildren =
+  AppManagerPanelRouteRoute._addFileChildren(AppManagerPanelRouteRouteChildren)
+
+interface AppRouteRouteChildren {
+  AppEmployeePanelRouteRoute: typeof AppEmployeePanelRouteRouteWithChildren
+  AppManagerPanelRouteRoute: typeof AppManagerPanelRouteRouteWithChildren
+  AppSettingsRoute: typeof AppSettingsRoute
+}
+
+const AppRouteRouteChildren: AppRouteRouteChildren = {
+  AppEmployeePanelRouteRoute: AppEmployeePanelRouteRouteWithChildren,
+  AppManagerPanelRouteRoute: AppManagerPanelRouteRouteWithChildren,
+  AppSettingsRoute: AppSettingsRoute,
+}
+
+const AppRouteRouteWithChildren = AppRouteRoute._addFileChildren(
+  AppRouteRouteChildren,
+)
 
 interface PublicRouteRouteChildren {
   PublicLoginRoute: typeof PublicLoginRoute
@@ -118,6 +373,7 @@ const PublicRouteRouteWithChildren = PublicRouteRoute._addFileChildren(
 )
 
 const rootRouteChildren: RootRouteChildren = {
+  AppRouteRoute: AppRouteRouteWithChildren,
   PublicRouteRoute: PublicRouteRouteWithChildren,
 }
 export const routeTree = rootRouteImport
