@@ -98,11 +98,7 @@
 	},
 	"overrides": [
 		{
-			"includes": [
-				"**/*.d.ts",
-				"src/app/queryClient.ts",
-				"src/shared/lib/config/router.ts"
-			],
+			"includes": ["**/*.d.ts", "src/app/queryClient.ts", "src/app/router.ts"],
 			"linter": {
 				"rules": { "style": { "useConsistentTypeDefinitions": "off" } }
 			}
