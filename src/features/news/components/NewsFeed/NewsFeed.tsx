@@ -34,7 +34,7 @@ function NewsFeed() {
 	return (
 		<section
 			aria-labelledby={headingId}
-			className="mx-auto flex w-full max-w-3xl flex-col gap-4"
+			className="flex flex-col gap-4"
 		>
 			<h1
 				id={headingId}

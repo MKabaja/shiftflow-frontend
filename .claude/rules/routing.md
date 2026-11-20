@@ -14,18 +14,22 @@ paths:
   Route, którego nie ma w `routeTree.gen.ts`, daje błąd typów w `createFileRoute` (nie ciche 404).
 - Nazwy w `routes/`: kebab-case = segment URL; `_nazwa` = pathless layout (bez segmentu w URL); `route.tsx` = layout
   folderu. Kropka w nazwie pliku to zagnieżdżenie, więc sufiksy typu `x.rola.ts` tu nie działają.
-- Plik route'a: `export const Route = createFileRoute(…)` na górze, komponent pod spodem. Kod ekranów (logika
-  w hookach, większe części jako komponenty) w `features/<f>/`; bez `-components/` w `routes/` i bez `features/*/pages/`.
+- Plik route'a: `export const Route = createFileRoute(…)` na górze, pod spodem **jego** komponent jako nazwana
+  funkcja: `<Nazwa>Layout` w `route.tsx`, `<Nazwa>Page` w pliku ekranu. Jednorazowych layoutów / stron nie
+  wydzielamy do osobnych plików. Klasy Tailwinda inline w pliku route'a (bez `*.styles.ts`).
+- Do `features/<f>/` idą tylko części samodzielne lub używane w kilku miejscach (formularze, `NewsFeed`) — wtedy route
+  wskazuje je wprost (`component: NewsFeed`), bez wrappera. Logika w hookach. Bez `-components/` w `routes/` i bez
+  `features/*/pages/`.
 
 ```
 __root                    kontekst: { queryClient }
-├── _public               (AuthLayout)  guard: zalogowany → landingPathFor(user)
+├── _public               (PublicLayout)  guard: zalogowany → landingPathFor(user)
 │   ├── /                 — landing (wybór roli)
 │   ├── /login            — admin/manager, login + hasło
 │   └── /login-pin        — pracownik, login + PIN
-└── _authenticated        (AppLayout)   guard: brak usera → /; zwraca { user }
+└── _authenticated        (AuthenticatedLayout)  guard: brak usera → /; zwraca { user }
     ├── /settings                       — obie role
-    ├── _employee-panel                 — moduł pracownika (bez guarda roli)
+    ├── _employee-panel      (EmployeePanelLayout: kolumna mobile-first, bez guarda roli)
     │   ├── /home
     │   ├── /availability
     │   └── /my-schedule
@@ -53,7 +57,8 @@ __root                    kontekst: { queryClient }
   `ensureQueryData` jest deprecated, nie wracaj do niego.
 - `landingPathFor(user)` jest **jedynym** miejscem decydującym o ekranie startowym: `/home` dla pracownika, `/schedule`
   dla pozostałych ról. Używają go formularze logowania (nawigacja w `onSuccess`) i guardy.
-- Pathless `_authenticated` istnieje, bo `/settings` jest wspólne dla obu ról — `_manager-panel` i `_employee-panel`
-  nie mają własnego `component`.
+- Pathless `_authenticated` istnieje, bo `/settings` jest wspólne dla obu ról. `_manager-panel` ma tylko guard roli
+  (widoki desktopowe na pełną szerokość); `_employee-panel` tylko wspólną kolumnę — widoki pracownika nie ustawiają
+  własnej szerokości.
 - Nawigacja: `Sidebar` (desktop) i `BottomNav` (mobile) czytają linki z `layouts/navigation/` (`navLinksFor`).
 - `defaultPendingComponent: Splash`. Devtools routera tylko przy `config.isDev`.

@@ -54,6 +54,6 @@ sterowalnego mocka), jest bezwartościowy.
 - Testy widoków i layoutów odłożone (decyzja 2026-07-29) — nie proponuj ich przy każdym tasku, odnotuj lukę.
 
 ## Pułapki pierwszego testu widoku / layoutu
-- jsdom nie ma `window.matchMedia` — `AppLayout` (`useMatchMedia`) rzuci wyjątek bez mocka w setupie.
+- jsdom nie ma `window.matchMedia` — `AuthenticatedLayout` (`useMatchMedia`) rzuci wyjątek bez mocka w setupie.
 - `define` z `vite.config.ts` nie działa w Vitest — `ProfileModal` rzuci `ReferenceError: __APP_VERSION__ is not
   defined`, dopóki `define` nie zostanie powtórzone w `vitest.config.ts`.
