@@ -14,7 +14,7 @@ import {
 
 type NavLabelKey = Extract<
 	ParseKeys<'common'>,
-	`nav.panel.${string}` | `nav.disposition.${string}` | 'nav.settings'
+	`nav.manager.${string}` | `nav.employee.${string}` | 'nav.settings'
 >;
 
 type NavLink = {
@@ -23,42 +23,42 @@ type NavLink = {
 	icon: LucideIcon;
 };
 
-const PANEL_NAV_LINKS: readonly NavLink[] = [
+const MANAGER_NAV_LINKS: readonly NavLink[] = [
 	{
-		labelKey: 'nav.panel.schedule',
+		labelKey: 'nav.manager.schedule',
 		to: '/schedule',
 		icon: CalendarDays,
 	},
 	{
-		labelKey: 'nav.panel.employees',
+		labelKey: 'nav.manager.employees',
 		to: '/employees',
 		icon: Users,
 	},
 	{
-		labelKey: 'nav.panel.positions',
+		labelKey: 'nav.manager.positions',
 		to: '/positions',
 		icon: Briefcase,
 	},
 	{
-		labelKey: 'nav.panel.news',
+		labelKey: 'nav.manager.news',
 		to: '/news',
 		icon: Newspaper,
 	},
 ];
 
-const DISPOSITION_NAV_LINKS: readonly NavLink[] = [
+const EMPLOYEE_NAV_LINKS: readonly NavLink[] = [
 	{
-		labelKey: 'nav.disposition.availability',
+		labelKey: 'nav.employee.availability',
 		to: '/availability',
 		icon: SquarePen,
 	},
 	{
-		labelKey: 'nav.disposition.home',
+		labelKey: 'nav.employee.home',
 		to: '/home',
 		icon: House,
 	},
 	{
-		labelKey: 'nav.disposition.mySchedule',
+		labelKey: 'nav.employee.mySchedule',
 		to: '/my-schedule',
 		icon: ClipboardList,
 	},
@@ -71,4 +71,4 @@ const SETTINGS_LINK: NavLink = {
 };
 
 export type { NavLink };
-export { DISPOSITION_NAV_LINKS, PANEL_NAV_LINKS, SETTINGS_LINK };
+export { EMPLOYEE_NAV_LINKS, MANAGER_NAV_LINKS, SETTINGS_LINK };

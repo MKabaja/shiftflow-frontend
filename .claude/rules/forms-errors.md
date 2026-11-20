@@ -14,7 +14,7 @@ paths:
 1. **`backend` (`shared/api/backend.ts`)** odrzuca: status spoza 2xx → `HttpError(status, body)`, brak odpowiedzi →
    `NetworkError`. Każdy 401 woła handler `onUnauthorized` (rejestrowany w `queryClient.ts`: wpisuje `null` pod
    `authQueries.currentUser()`).
-   Sam nie przekierowuje — wyrzuca guard `_app` przy najbliższej nawigacji. Endpoint, na którym 401 = złe dane,
+   Sam nie przekierowuje — wyrzuca guard `_authenticated` przy najbliższej nawigacji. Endpoint, na którym 401 = złe dane,
    a nie śmierć sesji (login, login-pin), przekazuje `ignoreUnauthorized: true`.
 2. **`parseApiError`** — czysta funkcja: dowolny błąd → `{ messageKey, fieldErrors?, statusCode? }`. `messageKey` to
    klucz i18n z przestrzeni `errors` (`ParseKeys<'errors'>`), nigdy surowy tekst backendu. Rozpoznaje tylko

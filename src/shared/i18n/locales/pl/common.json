@@ -19,17 +19,25 @@
 	"nav": {
 		"label": "Nawigacja główna",
 		"settings": "Ustawienia",
-		"panel": {
+		"manager": {
 			"schedule": "Grafik",
 			"employees": "Pracownicy",
 			"positions": "Pozycje",
 			"news": "Aktualności"
 		},
-		"disposition": {
+		"employee": {
 			"availability": "Dyspozycja",
 			"home": "Start",
 			"mySchedule": "Mój grafik"
 		}
+	},
+	"month": {
+		"previous": "Poprzedni miesiąc",
+		"next": "Następny miesiąc"
+	},
+	"comingSoon": {
+		"title": "Wkrótce",
+		"hint": "Ta część aplikacji jest w przygotowaniu."
 	},
 	"roles": {
 		"admin": "Administrator",

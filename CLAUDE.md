@@ -36,7 +36,8 @@ npm run build                        # tsc -b + vite build
 ## Gotowe =
 
 - `npm run check` przechodzi — podajesz rzeczywisty wynik, nigdy nie deklarujesz sukcesu bez uruchomienia.
-- Nowy route dopisany do drzewa w `router.ts`; nowa przestrzeń i18n we wszystkich 4 plikach (`rules/i18n.md`).
+- Nowy / zmieniony route → zregenerowany `src/routeTree.gen.ts` w tym samym commicie; nowa przestrzeń i18n we
+  wszystkich 4 plikach (`rules/i18n.md`).
 - Zmieniony lock → `npm ci` przeszło.
 
 ## Współpraca i granice
@@ -86,11 +87,12 @@ Agenci projektowi (`.claude/agents/`): `reviewer` — review zmian; `test-automa
 ## Architektura — decyzje
 
 - Kod funkcjonalności → `src/features/<nazwa>/{api,hooks,lib,components}`. `src/shared/` tylko dla rzeczy
-  używanych przez więcej niż jeden feature. Layout po zalogowaniu: **jeden** responsywny `AppLayout` (obie role).
+  używanych przez więcej niż jeden feature. Layout po zalogowaniu: **jeden** responsywny `AuthenticatedLayout` w
+  `routes/_authenticated/route.tsx` (obie role).
 - **Hook tylko, gdy potrzebuje stanu, efektu albo kontekstu.** Inaczej zwykła funkcja w `lib/` — wywoływalna poza
   Reactem (np. w `beforeLoad`) i testowalna bez `renderHook`.
-- **Routing jest code-based** (mimo nazw `_app.tsx`, `_panel.tsx`): nowy route działa dopiero po dopisaniu do drzewa
-  w `shared/lib/config/router.ts` — inaczej ciche 404. Szczegóły: `rules/routing.md`.
+- **Routing file-based** (`src/routes/`, drzewo generuje plugin Vite). Router i wejście aplikacji w `src/app/`.
+  Guardy biorą `queryClient` i `user` z kontekstu routera, nie z importu. Szczegóły: `rules/routing.md`.
 - **Zalogowany user = wyłącznie cache Query pod `authQueries.currentUser()` (klucz `['auth', 'me']`).** `useAuth`
   to `useQuery` + flagi ról, zero własnego stanu. `useLogin` i `useLoginWithPin` zapisują odpowiedź prosto do tego
   klucza. **Nie przenoś usera do Zustanda.**
@@ -110,12 +112,12 @@ Agenci projektowi (`.claude/agents/`): `reviewer` — review zmian; `test-automa
 
 | ADR | Decyzja | Status |
 | --- | --- | --- |
-| 001 | User tylko w cache Query (`auth.me`); async `beforeLoad` + `ensureQueryData` → sesja przeżywa F5 | wdrożony |
+| 001 | User tylko w cache Query (`auth.me`); async `beforeLoad` + `query` (`staleTime: 'static'`) → sesja przeżywa F5 | wdrożony |
 | 002 | Login i login-pin zwracają ten sam `UserResource` co `/me` | wdrożony |
 | 003 | Same-origin: względne `/api` (proxy Vite / nginx); cookie host-only `SameSite=Lax` — `duckdns.org` jest na PSL | wdrożony |
 | 004 | Zapamiętanie metody logowania w `localStorage` do celowanego redirectu po 401 | planowany (post-MVP); dziś 401 → `/` |
 | 005 | Stałe w `config.ts` zamiast `.env*`; wersja aplikacji przez `define` | wdrożony |
-| 006 | Migracja na file-based routing — osobny branch przed Branchem 5, żaden URL się nie zmienia | odroczony |
+| 006 | File-based routing (plugin Vite, `routes/` w folderach) + kontekst routera `{ queryClient }`; URL-e bez zmian | wdrożony |
 | 007 | Transport na `fetch` (`shared/api/backend.ts`) zamiast axios; błędy `HttpError` / `NetworkError` | wdrożony |
 | 008 | Zod parsuje każdą odpowiedź API; `backend` zwraca `unknown`; schematy = pełny kontrakt `*Resource` | wdrożony |
 

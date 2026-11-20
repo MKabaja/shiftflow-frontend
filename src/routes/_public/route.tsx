@@ -1,9 +1,19 @@
-import { Outlet } from '@tanstack/react-router';
+import { createFileRoute, Outlet, redirect } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
+import { getCurrentUser } from '@/features/auth/lib/getCurrentUser.ts';
+import { landingPathFor } from '@/features/auth/lib/landingPathFor.ts';
 import { LocaleSwitcher } from '@/shared/components/LocaleSwitcher';
 import { Logo } from '@/shared/components/Logo';
 
-function AuthLayout() {
+export const Route = createFileRoute('/_public')({
+	component: PublicLayout,
+	beforeLoad: async ({ context }) => {
+		const user = await getCurrentUser(context.queryClient);
+		if (user) throw redirect({ to: landingPathFor(user) });
+	},
+});
+
+function PublicLayout() {
 	const { t } = useTranslation();
 	const year = new Date().getFullYear();
 
@@ -24,5 +34,3 @@ function AuthLayout() {
 		</div>
 	);
 }
-
-export { AuthLayout };

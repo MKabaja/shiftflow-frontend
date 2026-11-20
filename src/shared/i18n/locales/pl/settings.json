@@ -1,0 +1,26 @@
+{
+	"page": {
+		"title": "Ustawienia"
+	},
+	"account": {
+		"title": "Konto",
+		"name": "Imię i nazwisko",
+		"login": "Login",
+		"email": "E-mail",
+		"role": "Rola"
+	},
+	"security": {
+		"title": "Bezpieczeństwo",
+		"changePassword": "Zmień hasło",
+		"changePin": "Zmień PIN"
+	},
+	"preferences": {
+		"title": "Preferencje",
+		"language": "Język"
+	},
+	"about": {
+		"title": "O aplikacji",
+		"version": "Wersja"
+	},
+	"logout": "Wyloguj"
+}

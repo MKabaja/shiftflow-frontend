@@ -4,10 +4,10 @@ import { RouterProvider } from '@tanstack/react-router';
 import { StrictMode } from 'react';
 import { createRoot } from 'react-dom/client';
 import { Toaster } from 'sonner';
-import { queryClient } from './app/queryClient.ts';
-import { config } from './shared/lib/config/config.ts';
-import { router } from './shared/lib/config/router.ts';
-import './shared/i18n';
+import { queryClient } from '@/app/queryClient.ts';
+import { router } from '@/app/router.ts';
+import { config } from '@/shared/lib/config/config.ts';
+import '@/shared/i18n';
 import '@/css/Index.css';
 
 const rootElement = document.getElementById('root');

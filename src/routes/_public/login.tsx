@@ -1,10 +1,13 @@
-import { createRoute, Link } from '@tanstack/react-router';
+import { createFileRoute, Link } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 import loginArt from '@/assets/login-admin.webp';
 import { AuthHeading } from '@/features/auth/components/AuthHeading.tsx';
 import { AuthSplit } from '@/features/auth/components/AuthSplit.tsx';
 import { LoginForm } from '@/features/auth/components/LoginForm.tsx';
-import { publicRoute } from '@/routes/_public.tsx';
+
+export const Route = createFileRoute('/_public/login')({
+	component: LoginPage,
+});
 
 function LoginPage() {
 	const { t } = useTranslation('auth');
@@ -38,11 +41,3 @@ function LoginPage() {
 		</section>
 	);
 }
-
-const loginRoute = createRoute({
-	getParentRoute: () => publicRoute,
-	path: '/login',
-	component: LoginPage,
-});
-
-export { loginRoute };

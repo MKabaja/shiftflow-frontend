@@ -1,17 +1,18 @@
-import { queryClient } from '@/app/queryClient.ts';
+import type { QueryClient } from '@tanstack/react-query';
 import { authQueries } from '@/features/auth/api/auth.queries.ts';
 import type { User } from '@/features/auth/model/user.schemas.ts';
 
 /**
- * Loads the logged-in user for route guards, from cache or the network.
+ * Returns the logged-in user from cache, requesting `/me` only when nothing is cached.
  *
- * Never rejects: any failure, not only `401`, resolves to `null`.
- *
- * @returns `null` when nobody is logged in or the request failed.
+ * @returns `null` when nobody is logged in or the request failed; never rejects.
  */
-async function getCurrentUser(): Promise<User | null> {
+async function getCurrentUser(queryClient: QueryClient): Promise<User | null> {
 	try {
-		return await queryClient.ensureQueryData(authQueries.currentUser());
+		return await queryClient.query({
+			...authQueries.currentUser(),
+			staleTime: 'static',
+		});
 	} catch {
 		return null;
 	}

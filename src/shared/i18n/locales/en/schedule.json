@@ -1,0 +1,16 @@
+{
+	"page": {
+		"title": "Schedule"
+	},
+	"empty": {
+		"title": "No schedules yet",
+		"hint": "Create your first schedule to start planning shifts.",
+		"create": "Create first schedule"
+	},
+	"mySchedule": {
+		"searchLabel": "Search employee",
+		"searchPlaceholder": "First or last name",
+		"onlyMe": "Only me",
+		"notPublished": "The schedule for this month hasn't been published yet"
+	}
+}

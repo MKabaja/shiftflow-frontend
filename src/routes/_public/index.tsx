@@ -1,9 +1,15 @@
+import { createFileRoute } from '@tanstack/react-router';
 import { Briefcase, UserCircle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { RoleCard } from '@/features/auth/components/RoleCard.tsx';
 
+export const Route = createFileRoute('/_public/')({
+	component: LandingPage,
+});
+
 function LandingPage() {
 	const { t } = useTranslation('auth');
+
 	return (
 		<section className="flex flex-col items-center gap-12">
 			<div className="flex flex-col items-center gap-2">
@@ -34,5 +40,3 @@ function LandingPage() {
 		</section>
 	);
 }
-
-export { LandingPage };

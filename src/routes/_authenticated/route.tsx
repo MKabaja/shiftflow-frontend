@@ -1,8 +1,9 @@
-import { Outlet } from '@tanstack/react-router';
+import { createFileRoute, Outlet, redirect } from '@tanstack/react-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { ProfileModal } from '@/features/auth/components/ProfileModal.tsx';
 import { useAuth } from '@/features/auth/hooks/useAuth.ts';
+import { getCurrentUser } from '@/features/auth/lib/getCurrentUser.ts';
 import { landingPathFor } from '@/features/auth/lib/landingPathFor.ts';
 import { BottomNav } from '@/layouts/components/BottomNav';
 import { Sidebar } from '@/layouts/components/Sidebar';
@@ -13,7 +14,16 @@ import { useMatchMedia } from '@/shared/hooks/useMatchMedia.ts';
 import { config } from '@/shared/lib/config/config.ts';
 import { cn } from '@/shared/lib/helpers/cn.ts';
 
-function AppLayout() {
+export const Route = createFileRoute('/_authenticated')({
+	component: AuthenticatedLayout,
+	beforeLoad: async ({ context }) => {
+		const user = await getCurrentUser(context.queryClient);
+		if (!user) throw redirect({ to: '/' });
+		return { user };
+	},
+});
+
+function AuthenticatedLayout() {
 	const { user } = useAuth();
 	const isDesktop = useMatchMedia(config.desktopMediaQuery);
 	const [isProfileOpen, setIsProfileOpen] = useState<boolean>(false);
@@ -60,5 +70,3 @@ function AppLayout() {
 		</div>
 	);
 }
-
-export { AppLayout };

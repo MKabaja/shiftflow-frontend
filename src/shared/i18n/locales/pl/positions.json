@@ -1,0 +1,16 @@
+{
+	"page": {
+		"title": "Pozycje"
+	},
+	"searchLabel": "Szukaj pozycji",
+	"searchPlaceholder": "Nazwa pozycji",
+	"add": "Dodaj pozycję",
+	"table": {
+		"color": "Kolor",
+		"name": "Nazwa",
+		"description": "Opis",
+		"createdBy": "Utworzył",
+		"actions": "Akcje"
+	},
+	"empty": "Brak pozycji"
+}

@@ -1,0 +1,22 @@
+{
+	"page": {
+		"title": "Pracownicy"
+	},
+	"list": {
+		"label": "Lista pracowników",
+		"searchLabel": "Szukaj pracownika",
+		"searchPlaceholder": "Imię, nazwisko lub login",
+		"statusLabel": "Status",
+		"status": {
+			"all": "Wszyscy",
+			"active": "Aktywni",
+			"inactive": "Nieaktywni"
+		},
+		"empty": "Brak pracowników",
+		"add": "Dodaj pracownika",
+		"import": "Importuj CSV"
+	},
+	"detail": {
+		"empty": "Wybierz pracownika z listy"
+	}
+}
