@@ -2,8 +2,5 @@
 	"page": {
 		"title": "Złóż dyspozycję",
 		"description": "Zaznacz dni, w które nie możesz przyjść do pracy"
-	},
-	"calendar": {
-		"label": "Kalendarz dyspozycji"
 	}
 }
