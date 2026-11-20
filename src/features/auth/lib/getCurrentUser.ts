@@ -9,7 +9,10 @@ import type { User } from '@/features/auth/model/user.schemas.ts';
  */
 async function getCurrentUser(queryClient: QueryClient): Promise<User | null> {
 	try {
-		return await queryClient.ensureQueryData(authQueries.currentUser());
+		return await queryClient.query({
+			...authQueries.currentUser(),
+			staleTime: 'static',
+		});
 	} catch {
 		return null;
 	}
