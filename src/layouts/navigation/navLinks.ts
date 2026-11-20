@@ -23,7 +23,7 @@ type NavLink = {
 	icon: LucideIcon;
 };
 
-const PANEL_NAV_LINKS: readonly NavLink[] = [
+const MANAGER_NAV_LINKS: readonly NavLink[] = [
 	{
 		labelKey: 'nav.manager.schedule',
 		to: '/schedule',
@@ -46,7 +46,7 @@ const PANEL_NAV_LINKS: readonly NavLink[] = [
 	},
 ];
 
-const DISPOSITION_NAV_LINKS: readonly NavLink[] = [
+const EMPLOYEE_NAV_LINKS: readonly NavLink[] = [
 	{
 		labelKey: 'nav.employee.availability',
 		to: '/availability',
@@ -71,4 +71,4 @@ const SETTINGS_LINK: NavLink = {
 };
 
 export type { NavLink };
-export { DISPOSITION_NAV_LINKS, PANEL_NAV_LINKS, SETTINGS_LINK };
+export { EMPLOYEE_NAV_LINKS, MANAGER_NAV_LINKS, SETTINGS_LINK };
