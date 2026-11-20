@@ -5,8 +5,8 @@ import { AuthLayout } from '@/layouts/AuthLayout.tsx';
 
 export const Route = createFileRoute('/_public')({
 	component: AuthLayout,
-	beforeLoad: async () => {
-		const user = await getCurrentUser();
+	beforeLoad: async ({ context }) => {
+		const user = await getCurrentUser(context.queryClient);
 		if (user) throw redirect({ to: landingPathFor(user) });
 	},
 });
