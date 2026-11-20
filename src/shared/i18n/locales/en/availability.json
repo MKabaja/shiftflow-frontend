@@ -1,0 +1,9 @@
+{
+	"page": {
+		"title": "Submit availability",
+		"description": "Mark the days you can't come to work"
+	},
+	"calendar": {
+		"label": "Availability calendar"
+	}
+}

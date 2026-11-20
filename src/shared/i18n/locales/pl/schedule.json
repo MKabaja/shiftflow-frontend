@@ -1,0 +1,16 @@
+{
+	"page": {
+		"title": "Grafik"
+	},
+	"empty": {
+		"title": "Brak harmonogramów",
+		"hint": "Utwórz pierwszy harmonogram, aby zaplanować zmiany.",
+		"create": "Utwórz pierwszy harmonogram"
+	},
+	"mySchedule": {
+		"searchLabel": "Szukaj pracownika",
+		"searchPlaceholder": "Imię lub nazwisko",
+		"onlyMe": "Tylko ja",
+		"notPublished": "Grafik na ten miesiąc nie został jeszcze opublikowany"
+	}
+}

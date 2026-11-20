@@ -19,17 +19,25 @@
 	"nav": {
 		"label": "Main navigation",
 		"settings": "Settings",
-		"panel": {
+		"manager": {
 			"schedule": "Schedule",
 			"employees": "Employees",
 			"positions": "Positions",
 			"news": "News"
 		},
-		"disposition": {
+		"employee": {
 			"availability": "Availability",
 			"home": "Home",
 			"mySchedule": "My schedule"
 		}
+	},
+	"month": {
+		"previous": "Previous month",
+		"next": "Next month"
+	},
+	"comingSoon": {
+		"title": "Coming soon",
+		"hint": "This part of the app is under construction."
 	},
 	"roles": {
 		"admin": "Administrator",

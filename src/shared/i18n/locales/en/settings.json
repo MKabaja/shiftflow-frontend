@@ -1,0 +1,26 @@
+{
+	"page": {
+		"title": "Settings"
+	},
+	"account": {
+		"title": "Account",
+		"name": "Full name",
+		"login": "Login",
+		"email": "Email",
+		"role": "Role"
+	},
+	"security": {
+		"title": "Security",
+		"changePassword": "Change password",
+		"changePin": "Change PIN"
+	},
+	"preferences": {
+		"title": "Preferences",
+		"language": "Language"
+	},
+	"about": {
+		"title": "About",
+		"version": "Version"
+	},
+	"logout": "Log out"
+}

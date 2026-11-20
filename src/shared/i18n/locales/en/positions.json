@@ -1,0 +1,16 @@
+{
+	"page": {
+		"title": "Positions"
+	},
+	"searchLabel": "Search positions",
+	"searchPlaceholder": "Position name",
+	"add": "Add position",
+	"table": {
+		"color": "Color",
+		"name": "Name",
+		"description": "Description",
+		"createdBy": "Created by",
+		"actions": "Actions"
+	},
+	"empty": "No positions"
+}

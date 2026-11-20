@@ -1,0 +1,22 @@
+{
+	"page": {
+		"title": "Employees"
+	},
+	"list": {
+		"label": "Employee list",
+		"searchLabel": "Search employee",
+		"searchPlaceholder": "Name or login",
+		"statusLabel": "Status",
+		"status": {
+			"all": "All",
+			"active": "Active",
+			"inactive": "Inactive"
+		},
+		"empty": "No employees",
+		"add": "Add employee",
+		"import": "Import CSV"
+	},
+	"detail": {
+		"empty": "Select an employee from the list"
+	}
+}
