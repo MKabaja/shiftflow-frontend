@@ -4,7 +4,6 @@ import { useTranslation } from 'react-i18next';
 import { VisibilityToggle } from '@/shared/components/VisibilityToggle';
 import { usePinInput } from '@/shared/hooks/usePinInput.ts';
 import { config } from '@/shared/lib/config/config.ts';
-import { cn } from '@/shared/lib/helpers/cn.ts';
 import { errorTextStyles } from '@/shared/lib/styles/errorTextStyles.ts';
 import {
 	boxRowStyles,
@@ -58,13 +57,13 @@ export function PinInput({
 	};
 
 	return (
-		<div className={cn(containerStyles)}>
-			<div className={cn(rowStyles)}>
+		<div className={containerStyles}>
+			<div className={rowStyles}>
 				<motion.div
 					role="group"
 					aria-label={t('pin.groupLabel')}
 					aria-describedby={errorMessage ? errorId : undefined}
-					className={cn(boxRowStyles)}
+					className={boxRowStyles}
 					animate={hasError ? { x: [0, -6, 6, -6, 6, 0] } : { x: 0 }}
 					transition={{ duration: 0.3 }}
 				>
@@ -84,7 +83,7 @@ export function PinInput({
 							onChange={(event) => handleChange(index, event)}
 							onKeyDown={(event) => handleKeyDown(index, event)}
 							onPaste={handlePaste}
-							className={cn(boxStyles({ hasError }))}
+							className={boxStyles({ hasError })}
 							animate={{ scale: digits[index] ? [1.05, 1] : 1 }}
 							transition={{ duration: 0.15 }}
 						/>
@@ -103,7 +102,7 @@ export function PinInput({
 			{errorMessage && (
 				<p
 					role="alert"
-					className={cn(errorTextStyles)}
+					className={errorTextStyles}
 					id={errorId}
 				>
 					{errorMessage}
