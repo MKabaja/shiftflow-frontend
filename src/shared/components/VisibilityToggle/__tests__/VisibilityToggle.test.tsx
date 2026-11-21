@@ -3,8 +3,8 @@ import userEvent from '@testing-library/user-event';
 import { useState } from 'react';
 import { VisibilityToggle } from '../VisibilityToggle.tsx';
 
-const renderToggle = (props = {}) =>
-	render(
+function renderToggle(props = {}) {
+	return render(
 		<VisibilityToggle
 			masked
 			setMasked={vi.fn()}
@@ -13,6 +13,7 @@ const renderToggle = (props = {}) =>
 			{...props}
 		/>,
 	);
+}
 
 function StatefulToggle() {
 	const [masked, setMasked] = useState(true);

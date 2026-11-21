@@ -14,26 +14,34 @@ import { NewsFeed } from '../NewsFeed.tsx';
 
 let newsRequestCount = 0;
 
-const mockNews = (resolver: HttpResponseResolver) => {
+function mockNews(resolver: HttpResponseResolver) {
 	server.use(
 		http.get('/api/news', (info) => {
 			newsRequestCount += 1;
 			return resolver(info);
 		}),
 	);
-};
+}
 
-const respondWith = (posts: NewsPost[]) => () => HttpResponse.json(page(posts));
-const failWithNetworkError = () => HttpResponse.error();
-const neverRespond = async () => {
+function respondWith(posts: NewsPost[]) {
+	return () => HttpResponse.json(page(posts));
+}
+
+function failWithNetworkError() {
+	return HttpResponse.error();
+}
+
+async function neverRespond() {
 	await delay('infinite');
-};
+}
 
-const renderNewsFeed = (setup?: Parameters<typeof renderWithQueryClient>[1]) =>
-	renderWithQueryClient(<NewsFeed />, setup);
+function renderNewsFeed(setup?: Parameters<typeof renderWithQueryClient>[1]) {
+	return renderWithQueryClient(<NewsFeed />, setup);
+}
 
-const getHeading = () =>
-	screen.getByRole('heading', { level: 1, name: 'News' });
+function getHeading() {
+	return screen.getByRole('heading', { level: 1, name: 'News' });
+}
 
 describe('NewsFeed', () => {
 	beforeEach(() => {

@@ -6,9 +6,9 @@ vi.mock('@/shared/components/Spinner', () => ({
 	Spinner: () => <span data-testid="spinner" />,
 }));
 
-const renderButton = (props = {}, children = 'Zapisz') => {
+function renderButton(props = {}, children = 'Zapisz') {
 	return render(<Button {...props}>{children}</Button>);
-};
+}
 
 describe('Button', () => {
 	it('renders children', () => {

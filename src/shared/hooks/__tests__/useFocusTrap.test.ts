@@ -1,18 +1,19 @@
 import { renderHook } from '@testing-library/react';
 import { useFocusTrap } from '../useFocusTrap.ts';
 
-const makeContainer = (html: string) => {
+function makeContainer(html: string) {
 	const container = document.createElement('div');
 	container.tabIndex = -1;
 	container.innerHTML = html;
 	document.body.appendChild(container);
 	return container;
-};
+}
 
-const tab = (target: HTMLElement, shiftKey = false) =>
-	target.dispatchEvent(
+function tab(target: HTMLElement, shiftKey = false) {
+	return target.dispatchEvent(
 		new KeyboardEvent('keydown', { key: 'Tab', shiftKey, bubbles: true }),
 	);
+}
 
 describe('useFocusTrap', () => {
 	afterEach(() => {

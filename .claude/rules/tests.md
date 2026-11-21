@@ -32,7 +32,8 @@ sterowalnego mocka), jest bezwartościowy.
 ## Konwencje
 - Vitest z `globals: true` — `describe` / `it` / `expect` / `vi` bez importów. Pliki w `__tests__/` obok kodu.
 - Teksty w fixture'ach — **po angielsku**; `test/setup.ts` przełącza i18n na `en`, więc asercje na tekstach po angielsku.
-- Helper renderujący zawsze: `const renderButton = (props = {}, children = 'Save') => render(<Button {...props}>{children}</Button>);`
+- Helpery na poziomie modułu to deklaracje `function` (jak w kodzie aplikacji), np.
+  `function renderButton(props = {}, children = 'Save') { return render(<Button {...props}>{children}</Button>); }`
 - `const user = userEvent.setup()` **w każdym teście**, nie współdzielony.
 - `<Link>` z TanStack Router zawsze mockowany (potrzebuje kontekstu routera):
   ```tsx

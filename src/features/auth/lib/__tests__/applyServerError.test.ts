@@ -35,7 +35,9 @@ const oneUsableFieldOneEmpty = makeValidationError({
 	password: [],
 });
 
-const makeSetError = <T extends FieldValues>() => vi.fn<UseFormSetError<T>>();
+function makeSetError<T extends FieldValues>() {
+	return vi.fn<UseFormSetError<T>>();
+}
 
 describe('applyServerError', () => {
 	describe('form-level errors (no field to attach to)', () => {
