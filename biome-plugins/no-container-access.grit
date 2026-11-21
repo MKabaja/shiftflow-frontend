@@ -1,0 +1,9 @@
+language js
+
+or {
+	`container.firstChild`,
+	`container.querySelector($selector)`,
+	`container.querySelectorAll($selector)`
+} as $access where {
+	register_diagnostic(span=$access, message="Query by role, label or text through screen.* instead of reading container.")
+}

@@ -1,0 +1,8 @@
+language js
+
+`const $binding = $render($args)` where {
+	$binding <: JsObjectBindingPattern(),
+	$render <: r"^render\w*",
+	$binding <: contains r"^(?:get|query|find)(?:All)?By[A-Z]\w*",
+	register_diagnostic(span=$binding, message="Query through screen.* instead of destructuring queries from render().")
+}

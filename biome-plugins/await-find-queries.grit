@@ -1,0 +1,7 @@
+language js
+
+`$object.$query($args)` as $call where {
+	$query <: r"^find(?:All)?By[A-Z]\w*",
+	not $call <: within `await $awaited`,
+	register_diagnostic(span=$call, message="Await findBy / findAllBy queries.")
+}
