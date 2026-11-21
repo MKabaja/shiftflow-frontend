@@ -2,7 +2,10 @@
 	"$schema": "https://biomejs.dev/schemas/2.6.7/schema.json",
 	"vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
 	"files": { "includes": ["**", "!!**/dist", "!src/routeTree.gen.ts"] },
-	"plugins": ["./biome-plugins/function-declarations.grit"],
+	"plugins": [
+		"./biome-plugins/function-declarations.grit",
+		"./biome-plugins/no-switch.grit"
+	],
 	"formatter": {
 		"enabled": true,
 		"includes": ["**", "!**/*.md", "!package.json"],
