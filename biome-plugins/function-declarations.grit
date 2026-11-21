@@ -1,0 +1,13 @@
+language js
+
+`const $name = $value` as $declaration where {
+	$value <: JsArrowFunctionExpression(),
+	not $declaration <: within or {
+		JsFunctionDeclaration(),
+		JsFunctionExpression(),
+		JsArrowFunctionExpression(),
+		JsMethodClassMember(),
+		JsMethodObjectMember()
+	},
+	register_diagnostic(span=$name, message="Use a function declaration instead of an arrow function assigned to a module-level const.")
+}
