@@ -16,6 +16,15 @@ type UsePinInputParams = {
 
 type PinBoxElement = HTMLInputElement | null;
 
+type NavigationKey = 'Backspace' | 'ArrowLeft' | 'ArrowRight';
+
+type KeyHandler = (
+	index: number,
+	event: KeyboardEvent<HTMLInputElement>,
+) => void;
+
+type KeyHandlerByKey = Record<NavigationKey, KeyHandler>;
+
 const DIGIT = /^\d$/;
 
 /**
@@ -35,7 +44,12 @@ export function usePinInput({
 		Array.from({ length }, () => ''),
 	);
 	const inputsRef = useRef<HTMLInputElement[]>([]);
-	const digits = isControlled ? splitValue(value, length) : internalDigits;
+	const digits = isControlled ? toDigits(value, length) : internalDigits;
+	const keyHandlerByKey: KeyHandlerByKey = {
+		Backspace: handleBackspace,
+		ArrowLeft: handleArrowLeft,
+		ArrowRight: handleArrowRight,
+	};
 
 	function handleChange(index: number, event: ChangeEvent<HTMLInputElement>) {
 		if (disabled) return;
@@ -49,33 +63,18 @@ export function usePinInput({
 		index: number,
 		event: KeyboardEvent<HTMLInputElement>,
 	) {
-		if (disabled) return;
-		switch (event.key) {
-			case 'Backspace':
-				handleBackspace(index, event);
-				break;
-			case 'ArrowLeft':
-				handleArrowLeft(index, event);
-				break;
-			case 'ArrowRight':
-				handleArrowRight(index, event);
-				break;
-			default:
-				break;
-		}
+		if (disabled || !isNavigationKey(event.key)) return;
+		keyHandlerByKey[event.key](index, event);
 	}
 
 	function handlePaste(event: ClipboardEvent<HTMLInputElement>) {
 		if (disabled) return;
 		event.preventDefault();
-		const pastedDigits = event.clipboardData
-			.getData('text')
-			.split('')
-			.filter((char) => DIGIT.test(char))
-			.slice(0, length);
-		if (pastedDigits.length === 0) return;
-		commit(Array.from({ length }, (_, index) => pastedDigits[index] ?? ''));
-		focusInput(pastedDigits.length - 1);
+		const pastedDigits = toDigits(event.clipboardData.getData('text'), length);
+		const filledCount = pastedDigits.filter(isFilled).length;
+		if (filledCount === 0) return;
+		applyDigits(pastedDigits);
+		focusInput(filledCount - 1);
 	}
 
 	function registerRef(index: number) {
@@ -86,25 +85,28 @@ export function usePinInput({
 
 	return { digits, registerRef, handleChange, handleKeyDown, handlePaste };
 
+	function isNavigationKey(key: string): key is NavigationKey {
+		return Object.hasOwn(keyHandlerByKey, key);
+	}
+
 	function focusInput(index: number) {
-		if (disabled) return;
 		const targetIndex = clamp(index, 0, length - 1);
 		const target = inputsRef.current[targetIndex];
 		target?.focus();
 		target?.select();
 	}
 
-	function commit(nextDigits: string[]) {
+	function applyDigits(nextDigits: string[]) {
 		if (!isControlled) setInternalDigits(nextDigits);
 		const pin = nextDigits.join('');
 		onChange?.(pin);
-		if (nextDigits.every((digit) => digit !== '')) onComplete?.(pin);
+		if (nextDigits.every(isFilled)) onComplete?.(pin);
 	}
 
 	function setDigit(index: number, digit: string) {
 		const nextDigits = [...digits];
 		nextDigits[index] = digit;
-		commit(nextDigits);
+		applyDigits(nextDigits);
 	}
 
 	function handleBackspace(
@@ -141,10 +143,15 @@ export function usePinInput({
 	}
 }
 
-function splitValue(value: string, length: number): string[] {
-	const digits = value.split('').filter((char) => DIGIT.test(char));
+function toDigits(text: string, length: number): string[] {
+	const digits = text.split('').filter((character) => DIGIT.test(character));
 	return Array.from({ length }, (_, index) => digits[index] ?? '');
 }
+
+function isFilled(digit: string): boolean {
+	return digit !== '';
+}
+
 function clamp(value: number, min: number, max: number): number {
 	return Math.max(min, Math.min(value, max));
 }
