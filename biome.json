@@ -86,6 +86,10 @@
 				"noDefaultExport": "error",
 				"noNestedTernary": "error",
 				"noNamespace": "error",
+				"useFilenamingConvention": {
+					"level": "error",
+					"options": { "filenameCases": ["camelCase", "PascalCase"] }
+				},
 				"useNamingConvention": {
 					"level": "error",
 					"options": {
@@ -167,6 +171,19 @@
 			"linter": {
 				"rules": {
 					"style": { "noDefaultExport": "off", "useNamingConvention": "off" }
+				}
+			}
+		},
+		{
+			"includes": ["src/routes/**", "src/vite-env.d.ts"],
+			"linter": {
+				"rules": {
+					"style": {
+						"useFilenamingConvention": {
+							"level": "error",
+							"options": { "filenameCases": ["kebab-case"] }
+						}
+					}
 				}
 			}
 		}

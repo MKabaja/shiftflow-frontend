@@ -9,6 +9,9 @@ paths:
 Pełny standard z przykładami: skill `react-clean-code`. Poniżej rdzeń + konwencje tego repo, które wygrywają ze skillem.
 
 ## TypeScript i moduły
+- Nazwy plików: komponenty PascalCase, hooki `useX.ts`, czyste funkcje nazwą funkcji (`landingPathFor.ts`), pozostałe
+  moduły camelCase z sufiksem roli po kropce (`auth.api.ts`, `user.schemas.ts`, `user.factory.ts`,
+  `resizeObserver.mock.ts`); `routes/` kebab-case. Wielkość liter pilnuje Biome (`useFilenamingConvention`), sufiks — review.
 - `tsconfig.app.json`: `noUnusedLocals`, `noUnusedParameters`, `erasableSyntaxOnly`, `verbatimModuleSyntax` — nieużyte
   importy i parametry to błędy kompilacji; typy importuj przez `import type` / `type` w specyfikatorze.
 - Rozszerzenia `.ts` / `.tsx` w importach są wymagane (`allowImportingTsExtensions`). Alias `@/` → `src/`.

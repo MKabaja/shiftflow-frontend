@@ -1,13 +1,13 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import type { NewsPost } from '@/features/news/model/newsPost.schemas.ts';
-import { makePost } from '@/test/factories/newsPost.ts';
+import { makePost } from '@/test/factories/newsPost.factory.ts';
 import {
 	setElementSize,
 	stubResizeObserver,
 	triggerResize,
 	triggerResizeIfObserved,
-} from '@/test/mocks/resizeObserver.ts';
+} from '@/test/mocks/resizeObserver.mock.ts';
 import { NewsCard } from '../NewsCard.tsx';
 
 function renderNewsCard(overrides: Partial<NewsPost> = {}) {

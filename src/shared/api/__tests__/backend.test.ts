@@ -1,7 +1,7 @@
 import { HttpResponse, http } from 'msw/http';
 import { queryClient } from '@/app/queryClient.ts';
 import { authQueries } from '@/features/auth/api/auth.queries.ts';
-import { makeUser } from '@/test/factories/user.ts';
+import { makeUser } from '@/test/factories/user.factory.ts';
 import { server } from '@/test/msw/server.ts';
 import { backend } from '../backend.ts';
 import { NetworkError } from '../networkError.ts';

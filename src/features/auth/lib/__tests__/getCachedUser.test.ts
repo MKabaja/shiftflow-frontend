@@ -1,6 +1,6 @@
 import { QueryClient } from '@tanstack/react-query';
 import { authQueries } from '@/features/auth/api/auth.queries.ts';
-import { makeUser } from '@/test/factories/user.ts';
+import { makeUser } from '@/test/factories/user.factory.ts';
 
 import { getCachedUser } from '../getCachedUser.ts';
 
