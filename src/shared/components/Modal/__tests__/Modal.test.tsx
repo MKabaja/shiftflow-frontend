@@ -3,10 +3,10 @@ import userEvent from '@testing-library/user-event';
 import type { ComponentProps } from 'react';
 import { Modal } from '../Modal.tsx';
 
-const noop = () => {};
+function noop() {}
 
-const renderModal = (props: Partial<ComponentProps<typeof Modal>> = {}) =>
-	render(
+function renderModal(props: Partial<ComponentProps<typeof Modal>> = {}) {
+	return render(
 		<Modal
 			isOpen
 			onClose={noop}
@@ -14,6 +14,7 @@ const renderModal = (props: Partial<ComponentProps<typeof Modal>> = {}) =>
 			{...props}
 		/>,
 	);
+}
 
 describe('Modal', () => {
 	describe('rendering', () => {

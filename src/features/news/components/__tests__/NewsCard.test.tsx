@@ -10,11 +10,11 @@ import {
 } from '@/test/mocks/resizeObserver.ts';
 import { NewsCard } from '../NewsCard.tsx';
 
-const renderNewsCard = (overrides: Partial<NewsPost> = {}) => {
+function renderNewsCard(overrides: Partial<NewsPost> = {}) {
 	const post = makePost(overrides);
 	const result = render(<NewsCard post={post} />);
 	return { post, content: screen.getByText(post.content), ...result };
-};
+}
 
 describe('NewsCard', () => {
 	beforeEach(() => {

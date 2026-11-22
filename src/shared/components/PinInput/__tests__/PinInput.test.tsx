@@ -3,15 +3,18 @@ import userEvent from '@testing-library/user-event';
 import { createRef } from 'react';
 import { PinInput } from '../PinInput.tsx';
 
-const renderPin = (props = {}) =>
-	render(
+function renderPin(props = {}) {
+	return render(
 		<PinInput
 			autoFocus={false}
 			{...props}
 		/>,
 	);
-const box = (n: number) =>
-	screen.getByLabelText(`PIN digit ${n} of 4`) as HTMLInputElement;
+}
+
+function box(n: number) {
+	return screen.getByLabelText(`PIN digit ${n} of 4`) as HTMLInputElement;
+}
 
 describe('PinInput', () => {
 	it('renders the config-driven number of boxes by default (4)', () => {

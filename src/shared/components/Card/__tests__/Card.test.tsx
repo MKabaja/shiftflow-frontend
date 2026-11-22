@@ -2,9 +2,9 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Card } from '../Card.tsx';
 
-const renderCard = (props = {}, children = 'Card content') => {
+function renderCard(props = {}, children = 'Card content') {
 	return render(<Card {...props}>{children}</Card>);
-};
+}
 
 describe('Card', () => {
 	it('renders children', () => {

@@ -1,0 +1,5 @@
+language js
+
+`fireEvent` as $fire where {
+	register_diagnostic(span=$fire, message="Use userEvent instead of fireEvent.")
+}

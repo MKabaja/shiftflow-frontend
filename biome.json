@@ -2,6 +2,37 @@
 	"$schema": "https://biomejs.dev/schemas/2.6.7/schema.json",
 	"vcs": { "enabled": true, "clientKind": "git", "useIgnoreFile": true },
 	"files": { "includes": ["**", "!!**/dist", "!src/routeTree.gen.ts"] },
+	"plugins": [
+		"./biome-plugins/function-declarations.grit",
+		"./biome-plugins/no-switch.grit",
+		{
+			"path": "./biome-plugins/prefer-user-event.grit",
+			"includes": ["**/__tests__/**"]
+		},
+		{
+			"path": "./biome-plugins/prefer-screen.grit",
+			"includes": ["**/__tests__/**"]
+		},
+		{
+			"path": "./biome-plugins/no-container-access.grit",
+			"includes": [
+				"**/__tests__/**",
+				"!**/Avatar/__tests__/Avatar.test.tsx",
+				"!**/Card/__tests__/Card.test.tsx",
+				"!**/ColorPicker/__tests__/ColorPicker.test.tsx",
+				"!**/Skeleton/__tests__/Skeleton.test.tsx",
+				"!**/Toggle/__tests__/Toggle.test.tsx"
+			]
+		},
+		{
+			"path": "./biome-plugins/await-find-queries.grit",
+			"includes": ["**/__tests__/**"]
+		},
+		{
+			"path": "./biome-plugins/prefer-presence-queries.grit",
+			"includes": ["**/__tests__/**"]
+		}
+	],
 	"formatter": {
 		"enabled": true,
 		"includes": ["**", "!**/*.md", "!package.json"],

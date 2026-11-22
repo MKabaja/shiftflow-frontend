@@ -7,13 +7,13 @@ import {
 } from '@/test/mocks/resizeObserver.ts';
 import { useIsClamped } from '../useIsClamped.ts';
 
-const renderUseIsClamped = (enabled = true) => {
+function renderUseIsClamped(enabled = true) {
 	const ref = { current: document.createElement('p') };
 	const result = renderHook(({ enabled }) => useIsClamped(ref, enabled), {
 		initialProps: { enabled },
 	});
 	return { element: ref.current, ...result };
-};
+}
 
 describe('useIsClamped', () => {
 	beforeEach(() => {

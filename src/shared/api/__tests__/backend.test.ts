@@ -6,17 +6,19 @@ import { server } from '@/test/msw/server.ts';
 import { backend } from '../backend.ts';
 import { NetworkError } from '../networkError.ts';
 
-const respondWithStatus = (path: string, status: number) => {
+function respondWithStatus(path: string, status: number) {
 	server.use(
 		http.all(`/api${path}`, () =>
 			HttpResponse.json({ message: 'Error' }, { status }),
 		),
 	);
-};
+}
 
 const loggedInUser = makeUser();
-const getCachedMe = () =>
-	queryClient.getQueryData(authQueries.currentUser().queryKey);
+
+function getCachedMe() {
+	return queryClient.getQueryData(authQueries.currentUser().queryKey);
+}
 
 describe('backend 401 handling', () => {
 	beforeEach(() => {

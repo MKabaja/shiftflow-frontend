@@ -3,7 +3,9 @@ import userEvent from '@testing-library/user-event';
 import { i18n } from '@/shared/i18n';
 import { LocaleSwitcher } from '../LocaleSwitcher.tsx';
 
-const renderLocaleSwitcher = () => render(<LocaleSwitcher />);
+function renderLocaleSwitcher() {
+	return render(<LocaleSwitcher />);
+}
 
 beforeEach(async () => {
 	await i18n.changeLanguage('en');

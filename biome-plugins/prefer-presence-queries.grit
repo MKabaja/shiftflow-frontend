@@ -1,0 +1,12 @@
+language js
+
+or {
+	`expect($object.$query($args)).toBeInTheDocument()` where {
+		$query <: r"^query(?:All)?By[A-Z]\w*"
+	},
+	`expect($object.$query($args)).not.toBeInTheDocument()` where {
+		$query <: r"^get(?:All)?By[A-Z]\w*"
+	}
+} as $assertion where {
+	register_diagnostic(span=$assertion, message="Use getBy for presence and queryBy for absence assertions.")
+}

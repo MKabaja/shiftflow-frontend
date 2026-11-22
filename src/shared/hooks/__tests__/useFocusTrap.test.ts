@@ -1,18 +1,19 @@
 import { renderHook } from '@testing-library/react';
 import { useFocusTrap } from '../useFocusTrap.ts';
 
-const makeContainer = (html: string) => {
-	const container = document.createElement('div');
-	container.tabIndex = -1;
-	container.innerHTML = html;
-	document.body.appendChild(container);
-	return container;
-};
+function makeTrap(html: string) {
+	const trap = document.createElement('div');
+	trap.tabIndex = -1;
+	trap.innerHTML = html;
+	document.body.appendChild(trap);
+	return trap;
+}
 
-const tab = (target: HTMLElement, shiftKey = false) =>
-	target.dispatchEvent(
+function tab(target: HTMLElement, shiftKey = false) {
+	return target.dispatchEvent(
 		new KeyboardEvent('keydown', { key: 'Tab', shiftKey, bubbles: true }),
 	);
+}
 
 describe('useFocusTrap', () => {
 	afterEach(() => {
@@ -20,34 +21,30 @@ describe('useFocusTrap', () => {
 	});
 
 	it('moves focus to the first focusable element on open', () => {
-		const container = makeContainer(
-			'<button>first</button><button>last</button>',
-		);
-		renderHook(() => useFocusTrap(true, { current: container }));
+		const trap = makeTrap('<button>first</button><button>last</button>');
+		renderHook(() => useFocusTrap(true, { current: trap }));
 
-		expect(container.querySelector('button')).toHaveFocus();
+		expect(trap.querySelector('button')).toHaveFocus();
 	});
 
 	it('focuses the container itself when it has no focusable children', () => {
-		const container = makeContainer('<p>no focusables here</p>');
-		renderHook(() => useFocusTrap(true, { current: container }));
+		const trap = makeTrap('<p>no focusables here</p>');
+		renderHook(() => useFocusTrap(true, { current: trap }));
 
-		expect(container).toHaveFocus();
+		expect(trap).toHaveFocus();
 	});
 
 	it('does nothing when closed', () => {
-		const container = makeContainer('<button>first</button>');
-		renderHook(() => useFocusTrap(false, { current: container }));
+		const trap = makeTrap('<button>first</button>');
+		renderHook(() => useFocusTrap(false, { current: trap }));
 
-		expect(container.querySelector('button')).not.toHaveFocus();
+		expect(trap.querySelector('button')).not.toHaveFocus();
 	});
 
 	it('wraps focus to the first element when Tab is pressed on the last', () => {
-		const container = makeContainer(
-			'<button>first</button><button>last</button>',
-		);
-		renderHook(() => useFocusTrap(true, { current: container }));
-		const [first, last] = container.querySelectorAll('button');
+		const trap = makeTrap('<button>first</button><button>last</button>');
+		renderHook(() => useFocusTrap(true, { current: trap }));
+		const [first, last] = trap.querySelectorAll('button');
 
 		last.focus();
 		tab(last);
@@ -55,11 +52,9 @@ describe('useFocusTrap', () => {
 	});
 
 	it('wraps focus to the last element when Shift+Tab is pressed on the first', () => {
-		const container = makeContainer(
-			'<button>first</button><button>last</button>',
-		);
-		renderHook(() => useFocusTrap(true, { current: container }));
-		const [first, last] = container.querySelectorAll('button');
+		const trap = makeTrap('<button>first</button><button>last</button>');
+		renderHook(() => useFocusTrap(true, { current: trap }));
+		const [first, last] = trap.querySelectorAll('button');
 
 		first.focus();
 		tab(first, true);

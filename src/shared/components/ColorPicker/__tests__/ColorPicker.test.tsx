@@ -2,14 +2,15 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { ColorPicker } from '../ColorPicker.tsx';
 
-const renderColorPicker = (props = {}) =>
-	render(
+function renderColorPicker(props = {}) {
+	return render(
 		<ColorPicker
 			value="#000000"
 			onChange={() => {}}
 			{...props}
 		/>,
 	);
+}
 
 describe('ColorPicker', () => {
 	it('renders the label associated with the hex input', () => {

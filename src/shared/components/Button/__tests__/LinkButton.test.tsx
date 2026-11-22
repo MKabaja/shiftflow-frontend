@@ -23,9 +23,9 @@ vi.mock('@tanstack/react-router', () => ({
 	),
 }));
 
-const renderLink = (
+function renderLink(
 	props: Partial<ComponentPropsWithoutRef<typeof LinkButton>> = {},
-) => {
+) {
 	return render(
 		<LinkButton
 			to="/"
@@ -34,7 +34,7 @@ const renderLink = (
 			Przejdź
 		</LinkButton>,
 	);
-};
+}
 
 describe('LinkButton', () => {
 	it('renders children', () => {

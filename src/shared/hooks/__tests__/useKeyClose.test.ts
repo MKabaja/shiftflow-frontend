@@ -1,8 +1,9 @@
 import { renderHook } from '@testing-library/react';
 import { useKeyClose } from '../useKeyClose.ts';
 
-const press = (key: string) =>
-	document.dispatchEvent(new KeyboardEvent('keydown', { key }));
+function press(key: string) {
+	return document.dispatchEvent(new KeyboardEvent('keydown', { key }));
+}
 
 describe('useKeyClose', () => {
 	it('calls onClose when Escape is pressed while open', () => {

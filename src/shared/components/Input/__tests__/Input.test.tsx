@@ -2,7 +2,10 @@ import { render, screen } from '@testing-library/react';
 import { createRef } from 'react';
 import { Input } from '../Input.tsx';
 
-const renderInput = (props = {}) => render(<Input {...props} />);
+function renderInput(props = {}) {
+	return render(<Input {...props} />);
+}
+
 const icon = <span data-testid="icon" />;
 
 describe('Input', () => {
