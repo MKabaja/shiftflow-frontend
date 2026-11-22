@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { type Ref, useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { VisibilityToggle } from '@/shared/components/VisibilityToggle';
+import { VisibilityToggle } from '@/shared/components/VisibilityToggle/VisibilityToggle.tsx';
 import { usePinInput } from '@/shared/hooks/usePinInput.ts';
 import { config } from '@/shared/lib/config/config.ts';
 import { errorTextStyles } from '@/shared/lib/styles/errorTextStyles.ts';

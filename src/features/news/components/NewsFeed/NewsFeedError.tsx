@@ -1,6 +1,6 @@
 import { useTranslation } from 'react-i18next';
-import { Alert } from '@/shared/components/Alert';
-import { Button } from '@/shared/components/Button';
+import { Alert } from '@/shared/components/Alert/Alert.tsx';
+import { Button } from '@/shared/components/Button/Button.tsx';
 
 type NewsFeedErrorProps = {
 	onRetry: () => void;

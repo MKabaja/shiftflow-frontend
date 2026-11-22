@@ -11,10 +11,10 @@ import {
 	type LoginPinFormValues,
 	loginPinSchema,
 } from '@/features/auth/model/login.schemas.ts';
-import { Alert } from '@/shared/components/Alert';
-import { Button } from '@/shared/components/Button';
-import { Input } from '@/shared/components/Input';
-import { PinInput } from '@/shared/components/PinInput';
+import { Alert } from '@/shared/components/Alert/Alert.tsx';
+import { Button } from '@/shared/components/Button/Button.tsx';
+import { Input } from '@/shared/components/Input/Input.tsx';
+import { PinInput } from '@/shared/components/PinInput/PinInput.tsx';
 import { config } from '@/shared/lib/config/config.ts';
 
 function LoginPinForm() {

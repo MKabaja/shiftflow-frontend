@@ -2,10 +2,10 @@ import { createFileRoute } from '@tanstack/react-router';
 import { type ReactNode, useId } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useAuth } from '@/features/auth/hooks/useAuth.ts';
-import { Badge } from '@/shared/components/Badge';
-import { Button } from '@/shared/components/Button';
-import { Card } from '@/shared/components/Card';
-import { LocaleSwitcher } from '@/shared/components/LocaleSwitcher';
+import { Badge } from '@/shared/components/Badge/Badge.tsx';
+import { Button } from '@/shared/components/Button/Button.tsx';
+import { Card } from '@/shared/components/Card/Card.tsx';
+import { LocaleSwitcher } from '@/shared/components/LocaleSwitcher/LocaleSwitcher.tsx';
 
 export const Route = createFileRoute('/_authenticated/settings')({
 	component: SettingsPage,

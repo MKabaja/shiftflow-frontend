@@ -3,11 +3,11 @@ import { LogOut, Settings } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { useLogout } from '@/features/auth/api/useLogout.ts';
 import { useAuth } from '@/features/auth/hooks/useAuth.ts';
-import { Avatar } from '@/shared/components/Avatar';
-import { Badge } from '@/shared/components/Badge';
-import { Button } from '@/shared/components/Button';
-import type { ModalPlacement } from '@/shared/components/Modal';
-import { Modal } from '@/shared/components/Modal';
+import { Avatar } from '@/shared/components/Avatar/Avatar.tsx';
+import { Badge } from '@/shared/components/Badge/Badge.tsx';
+import { Button } from '@/shared/components/Button/Button.tsx';
+import type { ModalPlacement } from '@/shared/components/Modal/Modal.tsx';
+import { Modal } from '@/shared/components/Modal/Modal.tsx';
 import { cn } from '@/shared/lib/helpers/cn.ts';
 import { focusStyles } from '@/shared/lib/styles/focusStyles.ts';
 

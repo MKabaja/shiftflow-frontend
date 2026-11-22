@@ -2,10 +2,10 @@ import type { LinkProps } from '@tanstack/react-router';
 import { Link, useMatchRoute } from '@tanstack/react-router';
 import { motion, useReducedMotion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
-import type { NavLink } from '@/layouts/navigation';
-import { Avatar } from '@/shared/components/Avatar';
-import { Logo } from '@/shared/components/Logo';
-import { Separator } from '@/shared/components/Separator';
+import type { NavLink } from '@/layouts/navigation/navLinks.ts';
+import { Avatar } from '@/shared/components/Avatar/Avatar.tsx';
+import { Logo } from '@/shared/components/Logo/Logo.tsx';
+import { Separator } from '@/shared/components/Separator/Separator.tsx';
 import { cn } from '@/shared/lib/helpers/cn.ts';
 import {
 	footerStyles,

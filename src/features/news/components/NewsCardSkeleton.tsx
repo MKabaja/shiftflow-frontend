@@ -1,5 +1,5 @@
-import { Card } from '@/shared/components/Card';
-import { Skeleton } from '@/shared/components/Skeleton';
+import { Card } from '@/shared/components/Card/Card.tsx';
+import { Skeleton } from '@/shared/components/Skeleton/Skeleton.tsx';
 
 function NewsCardSkeleton() {
 	return (

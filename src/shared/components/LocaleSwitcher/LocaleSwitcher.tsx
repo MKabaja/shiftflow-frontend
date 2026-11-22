@@ -1,12 +1,12 @@
 import type { ParseKeys } from 'i18next';
 import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button } from '@/shared/components/Button';
+import { Button } from '@/shared/components/Button/Button.tsx';
 import {
 	type SupportedLocale,
 	setLocale,
 	supportedLocales,
-} from '@/shared/i18n';
+} from '@/shared/i18n/i18n.ts';
 import { cn } from '@/shared/lib/helpers/cn.ts';
 import { containerStyles } from './LocaleSwitcher.styles.ts';
 

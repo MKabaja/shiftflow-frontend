@@ -1,7 +1,7 @@
 import { Link, useMatchRoute } from '@tanstack/react-router';
 import { motion, useReducedMotion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
-import type { NavLink } from '@/layouts/navigation';
+import type { NavLink } from '@/layouts/navigation/navLinks.ts';
 import { cn } from '@/shared/lib/helpers/cn.ts';
 
 import {

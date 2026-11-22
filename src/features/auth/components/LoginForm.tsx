@@ -12,10 +12,10 @@ import {
 	type LoginFormValues,
 	loginSchema,
 } from '@/features/auth/model/login.schemas.ts';
-import { Alert } from '@/shared/components/Alert';
-import { Button } from '@/shared/components/Button';
-import { Input } from '@/shared/components/Input';
-import { VisibilityToggle } from '@/shared/components/VisibilityToggle';
+import { Alert } from '@/shared/components/Alert/Alert.tsx';
+import { Button } from '@/shared/components/Button/Button.tsx';
+import { Input } from '@/shared/components/Input/Input.tsx';
+import { VisibilityToggle } from '@/shared/components/VisibilityToggle/VisibilityToggle.tsx';
 import { config } from '@/shared/lib/config/config.ts';
 
 function LoginForm() {

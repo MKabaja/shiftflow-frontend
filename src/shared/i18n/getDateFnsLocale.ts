@@ -1,6 +1,6 @@
 import type { Locale } from 'date-fns';
 import { enUS, pl } from 'date-fns/locale';
-import type { SupportedLocale } from '@/shared/i18n';
+import type { SupportedLocale } from '@/shared/i18n/i18n.ts';
 
 const dateFnsLocales: Record<SupportedLocale, Locale> = { pl, en: enUS };
 

@@ -1,7 +1,8 @@
 import type { LinkProps } from '@tanstack/react-router';
 import type { LucideIcon } from 'lucide-react';
-import { type ButtonVariant, LinkButton } from '@/shared/components/Button';
-import { Card } from '@/shared/components/Card';
+import type { ButtonVariant } from '@/shared/components/Button/Button.tsx';
+import { LinkButton } from '@/shared/components/Button/LinkButton.tsx';
+import { Card } from '@/shared/components/Card/Card.tsx';
 
 type RoleCardProps = {
 	icon: LucideIcon;

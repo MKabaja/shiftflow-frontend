@@ -69,7 +69,12 @@
 				"useExhaustiveDependencies": "error",
 				"useHookAtTopLevel": "error",
 				"noNestedComponentDefinitions": "error",
-				"useJsxKeyInIterable": "error"
+				"useJsxKeyInIterable": "error",
+				"useImportExtensions": "error"
+			},
+			"performance": {
+				"noBarrelFile": "error",
+				"noReExportAll": "error"
 			},
 			"style": {
 				"useConsistentTypeDefinitions": {

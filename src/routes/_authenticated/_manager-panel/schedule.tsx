@@ -2,8 +2,8 @@ import { createFileRoute } from '@tanstack/react-router';
 import { CalendarPlus } from 'lucide-react';
 import { useId } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button } from '@/shared/components/Button';
-import { Card } from '@/shared/components/Card';
+import { Button } from '@/shared/components/Button/Button.tsx';
+import { Card } from '@/shared/components/Card/Card.tsx';
 
 export const Route = createFileRoute('/_authenticated/_manager-panel/schedule')(
 	{

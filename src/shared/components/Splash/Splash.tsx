@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { Spinner } from '@/shared/components/Spinner';
+import { Spinner } from '@/shared/components/Spinner/Spinner.tsx';
 import { baseStyles } from '@/shared/components/Splash/Splash.styles.ts';
 
 export function Splash() {

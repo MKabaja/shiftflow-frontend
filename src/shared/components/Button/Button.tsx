@@ -1,6 +1,6 @@
 import { type HTMLMotionProps, motion } from 'motion/react';
 import type { ReactNode } from 'react';
-import { Spinner } from '@/shared/components/Spinner';
+import { Spinner } from '@/shared/components/Spinner/Spinner.tsx';
 import { cn } from '@/shared/lib/helpers/cn.ts';
 import { disabledStyles } from '@/shared/lib/styles/disabledStyles.ts';
 import { focusStyles } from '@/shared/lib/styles/focusStyles.ts';

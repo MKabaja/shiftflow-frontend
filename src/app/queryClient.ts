@@ -4,7 +4,7 @@ import { ZodError } from 'zod';
 import { authQueries } from '@/features/auth/api/auth.queries.ts';
 import { onUnauthorized } from '@/shared/api/backend.ts';
 import { parseApiError } from '@/shared/api/parseApiError.ts';
-import { i18n } from '@/shared/i18n';
+import { i18n } from '@/shared/i18n/i18n.ts';
 import { config } from '@/shared/lib/config/config.ts';
 
 type AppMeta = {

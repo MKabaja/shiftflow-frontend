@@ -2,7 +2,7 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Button } from '../Button.tsx';
 
-vi.mock('@/shared/components/Spinner', () => ({
+vi.mock('@/shared/components/Spinner/Spinner.tsx', () => ({
 	Spinner: () => <span data-testid="spinner" />,
 }));
 

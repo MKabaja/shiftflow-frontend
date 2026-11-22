@@ -2,7 +2,7 @@ import { createFileRoute } from '@tanstack/react-router';
 import { Hourglass } from 'lucide-react';
 import { useId } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Card } from '@/shared/components/Card';
+import { Card } from '@/shared/components/Card/Card.tsx';
 
 export const Route = createFileRoute('/_authenticated/_manager-panel/news')({
 	component: NewsPage,
