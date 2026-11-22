@@ -1,4 +1,4 @@
-import { NewsCard } from '@/features/news/components/NewsCard.tsx';
+import { NewsCard } from '@/features/news/components/NewsCard/NewsCard.tsx';
 import type { NewsPost } from '@/features/news/model/newsPost.schemas.ts';
 
 type NewsFeedListProps = {

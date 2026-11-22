@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router';
 import { Briefcase, UserCircle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { RoleCard } from '@/features/auth/components/RoleCard.tsx';
+import { RoleCard } from '@/features/auth/components/RoleCard/RoleCard.tsx';
 
 export const Route = createFileRoute('/_public/')({
 	component: LandingPage,

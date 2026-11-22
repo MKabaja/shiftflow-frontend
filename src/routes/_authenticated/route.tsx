@@ -5,7 +5,7 @@ import { BottomNav } from '@/app/layouts/BottomNav/BottomNav.tsx';
 import { SETTINGS_LINK } from '@/app/layouts/navigation/navLinks.ts';
 import { navLinksFor } from '@/app/layouts/navigation/navLinksFor.ts';
 import { Sidebar } from '@/app/layouts/Sidebar/Sidebar.tsx';
-import { ProfileModal } from '@/features/auth/components/ProfileModal.tsx';
+import { ProfileModal } from '@/features/auth/components/ProfileModal/ProfileModal.tsx';
 import { useAuth } from '@/features/auth/hooks/useAuth.ts';
 import { getCurrentUser } from '@/features/auth/lib/getCurrentUser.ts';
 import { landingPathFor } from '@/features/auth/lib/landingPathFor.ts';

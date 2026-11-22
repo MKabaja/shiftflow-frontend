@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-import { NewsCardSkeleton } from '@/features/news/components/NewsCardSkeleton.tsx';
+import { NewsCardSkeleton } from '@/features/news/components/NewsCardSkeleton/NewsCardSkeleton.tsx';
 
 const SKELETON_COUNT = 2;
 
