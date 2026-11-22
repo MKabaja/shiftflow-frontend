@@ -175,6 +175,46 @@
 			}
 		},
 		{
+			"includes": ["src/shared/**"],
+			"linter": {
+				"rules": {
+					"style": {
+						"noRestrictedImports": {
+							"level": "error",
+							"options": {
+								"patterns": [
+									{
+										"group": ["@/features/**", "@/app/**", "@/routes/**"],
+										"message": "shared/ must not depend on features/, app/ or routes/."
+									}
+								]
+							}
+						}
+					}
+				}
+			}
+		},
+		{
+			"includes": ["src/features/**"],
+			"linter": {
+				"rules": {
+					"style": {
+						"noRestrictedImports": {
+							"level": "error",
+							"options": {
+								"patterns": [
+									{
+										"group": ["@/app/**", "@/routes/**"],
+										"message": "features/ must not depend on app/ or routes/."
+									}
+								]
+							}
+						}
+					}
+				}
+			}
+		},
+		{
 			"includes": ["src/routes/**", "src/vite-env.d.ts"],
 			"linter": {
 				"rules": {

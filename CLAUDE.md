@@ -89,6 +89,8 @@ Agenci projektowi (`.claude/agents/`): `reviewer` — review zmian; `test-automa
 - Kod funkcjonalności → `src/features/<nazwa>/{api,hooks,lib,components}`. `src/shared/` tylko dla rzeczy
   używanych przez więcej niż jeden feature. Layout po zalogowaniu: **jeden** responsywny `AuthenticatedLayout` w
   `routes/_authenticated/route.tsx` (obie role).
+- **Granice importów** (Biome `noRestrictedImports`, też w testach): `shared/` ↛ `features/`, `app/`, `routes/`;
+  `features/` ↛ `app/`, `routes/`. Między feature'ami tylko `model/` i `api/` innego feature'a — pilnuje review.
 - **Hook tylko, gdy potrzebuje stanu, efektu albo kontekstu.** Inaczej zwykła funkcja w `lib/` — wywoływalna poza
   Reactem (np. w `beforeLoad`) i testowalna bez `renderHook`.
 - **Routing file-based** (`src/routes/`, drzewo generuje plugin Vite). Router i wejście aplikacji w `src/app/`.

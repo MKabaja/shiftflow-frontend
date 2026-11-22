@@ -1,10 +1,10 @@
 import { HttpResponse, http } from 'msw/http';
-import { queryClient } from '@/app/queryClient.ts';
 import { authQueries } from '@/features/auth/api/auth.queries.ts';
+import { backend } from '@/shared/api/backend.ts';
+import { NetworkError } from '@/shared/api/networkError.ts';
 import { makeUser } from '@/test/factories/user.factory.ts';
 import { server } from '@/test/msw/server.ts';
-import { backend } from '../backend.ts';
-import { NetworkError } from '../networkError.ts';
+import { queryClient } from '../queryClient.ts';
 
 function respondWithStatus(path: string, status: number) {
 	server.use(
