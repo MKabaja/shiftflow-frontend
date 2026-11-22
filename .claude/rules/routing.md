@@ -2,7 +2,7 @@
 paths:
   - "src/routes/**"
   - "src/app/router.ts"
-  - "src/layouts/**"
+  - "src/app/layouts/**"
   - "src/features/auth/lib/**"
 ---
 
@@ -60,5 +60,5 @@ __root                    kontekst: { queryClient }
 - Pathless `_authenticated` istnieje, bo `/settings` jest wspólne dla obu ról. `_manager-panel` ma tylko guard roli
   (widoki desktopowe na pełną szerokość); `_employee-panel` tylko wspólną kolumnę — widoki pracownika nie ustawiają
   własnej szerokości.
-- Nawigacja: `Sidebar` (desktop) i `BottomNav` (mobile) czytają linki z `layouts/navigation/` (`navLinksFor`).
+- Nawigacja: `Sidebar` (desktop) i `BottomNav` (mobile) czytają linki z `app/layouts/navigation/` (`navLinksFor`).
 - `defaultPendingComponent: Splash`. Devtools routera tylko przy `config.isDev`.

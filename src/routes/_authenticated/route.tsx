@@ -1,14 +1,14 @@
 import { createFileRoute, Outlet, redirect } from '@tanstack/react-router';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { BottomNav } from '@/app/layouts/BottomNav/BottomNav.tsx';
+import { SETTINGS_LINK } from '@/app/layouts/navigation/navLinks.ts';
+import { navLinksFor } from '@/app/layouts/navigation/navLinksFor.ts';
+import { Sidebar } from '@/app/layouts/Sidebar/Sidebar.tsx';
 import { ProfileModal } from '@/features/auth/components/ProfileModal.tsx';
 import { useAuth } from '@/features/auth/hooks/useAuth.ts';
 import { getCurrentUser } from '@/features/auth/lib/getCurrentUser.ts';
 import { landingPathFor } from '@/features/auth/lib/landingPathFor.ts';
-import { BottomNav } from '@/layouts/components/BottomNav/BottomNav.tsx';
-import { Sidebar } from '@/layouts/components/Sidebar/Sidebar.tsx';
-import { SETTINGS_LINK } from '@/layouts/navigation/navLinks.ts';
-import { navLinksFor } from '@/layouts/navigation/navLinksFor.ts';
 import { Avatar } from '@/shared/components/Avatar/Avatar.tsx';
 import { Logo } from '@/shared/components/Logo/Logo.tsx';
 import { useMatchMedia } from '@/shared/hooks/useMatchMedia.ts';

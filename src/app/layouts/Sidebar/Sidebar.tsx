@@ -2,7 +2,7 @@ import type { LinkProps } from '@tanstack/react-router';
 import { Link, useMatchRoute } from '@tanstack/react-router';
 import { motion, useReducedMotion } from 'motion/react';
 import { useTranslation } from 'react-i18next';
-import type { NavLink } from '@/layouts/navigation/navLinks.ts';
+import type { NavLink } from '@/app/layouts/navigation/navLinks.ts';
 import { Avatar } from '@/shared/components/Avatar/Avatar.tsx';
 import { Logo } from '@/shared/components/Logo/Logo.tsx';
 import { Separator } from '@/shared/components/Separator/Separator.tsx';
