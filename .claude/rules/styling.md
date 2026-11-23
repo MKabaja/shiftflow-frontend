@@ -17,14 +17,15 @@ sprawdzaj też zgodność z nim i z `docs/Details/PLAN_part2_components_views.md
 - `css/theme.css` — **wszystkie tokeny** w `@theme { … }`: kolory, cienie `--shadow-nm-*`, skala z-index
   (`--z-sidebar`, `--z-bottom-nav`, `--z-modal`), responsywna typografia. Listę sprawdzaj w pliku, nie zgaduj.
 - `css/globals.css` — `@layer base`: reset, ciemny `color-scheme`, fonty, linki, inputy, `focus-visible`, zaznaczenie.
-- Język wizualny: **ciemny neumorfizm**, akcent „Mining Gold” `--color-accent: #C9A347`, tło `#1E1E20`.
+- Język wizualny: **ciemny neumorfizm**, akcent „Mining Gold” `--color-accent: #C9A347`, tło `#111113`.
 - Cienie tylko przez utility `shadow-nm-*`, nigdy surowy `box-shadow`.
 - Fonty: Inter (`--font-body`) i Space Grotesk (`--font-display`). `h1`–`h6` i `th` dziedziczą `font-display`
   z `globals.css` — nie dodawaj go ręcznie.
 - **Utility kolorów powtarzają prefiks tokena**: `bg-bg-card`, `text-text-primary`. `bg-card` / `text-primary` nie
   generują niczego, bez błędu. Autorytatywna lista: `themeColors` w `shared/lib/helpers/cn.ts`.
 - Tokeny typografii (`text-display-*`, `text-body-*`, `text-label`) mają własne `line-height` i `font-weight` — nie
-  łącz ich z `font-bold` / `leading-*`.
+  łącz ich z `font-bold` / `leading-*`. `text-display-hero` i `text-overline` mają też `letter-spacing` — bez
+  `tracking-*`.
 - Powtarzalne zestawy klas (focus ring, disabled, tekst błędu) → `shared/lib/styles/`, importowane do `*.styles.ts`.
   Nigdy nie kopiuj ich ręcznie.
 - `cn()` tylko przy łączeniu kilku źródeł klas, nigdy na stałym stringu.

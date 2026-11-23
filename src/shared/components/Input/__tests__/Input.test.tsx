@@ -86,7 +86,7 @@ describe('Input', () => {
 		const input = screen.getByRole('textbox', { name: 'login' });
 
 		expect(input).toHaveClass('bg-red-500');
-		expect(input).not.toHaveClass('bg-bg-offset');
+		expect(input).not.toHaveClass('bg-bg-inset');
 	});
 
 	it('disables the input when disabled is passed', () => {
