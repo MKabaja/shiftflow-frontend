@@ -46,7 +46,7 @@ function Toggle({
 				disabled ? labelDisabledStyles : labelEnabledStyles,
 			)}
 		>
-			<div
+			<span
 				className={cn(
 					trackBaseStyles,
 					track,
@@ -64,17 +64,19 @@ function Toggle({
 					onChange={(e) => onChange(e.target.checked)}
 					className="sr-only"
 				/>
-				<motion.div
+				<motion.span
 					className={cn(knobBaseStyles, knob)}
 					animate={{ x: checked ? travel : 0 }}
 					transition={{ duration: 0.2, ease: 'easeOut' }}
 				/>
-			</div>
+			</span>
 			{label && (
-				<div>
+				<span>
 					<span className={labelTextStyles}>{label}</span>
-					{description && <p className={descriptionStyles}>{description}</p>}
-				</div>
+					{description && (
+						<span className={descriptionStyles}>{description}</span>
+					)}
+				</span>
 			)}
 		</label>
 	);

@@ -25,7 +25,7 @@ const labelBaseStyles = 'flex items-center gap-3';
 const labelEnabledStyles = 'cursor-pointer';
 const labelDisabledStyles = 'cursor-not-allowed opacity-40';
 const labelTextStyles = 'text-body-md text-text-primary';
-const descriptionStyles = 'mt-0.5 text-body-sm text-text-muted';
+const descriptionStyles = 'mt-0.5 block text-body-sm text-text-muted';
 
 export {
 	descriptionStyles,
