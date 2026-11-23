@@ -17,9 +17,10 @@ paths:
 - Plik route'a: `export const Route = createFileRoute(…)` na górze, pod spodem **jego** komponent jako nazwana
   funkcja: `<Nazwa>Layout` w `route.tsx`, `<Nazwa>Page` w pliku ekranu. Jednorazowych layoutów / stron nie
   wydzielamy do osobnych plików. Klasy Tailwinda inline w pliku route'a (bez `*.styles.ts`).
-- Do `features/<f>/` idą tylko części samodzielne lub używane w kilku miejscach (formularze, `NewsFeed`) — wtedy route
-  wskazuje je wprost (`component: NewsFeed`), bez wrappera. Logika w hookach. Bez `-components/` w `routes/` i bez
-  `features/*/pages/`.
+- Widok ekranu zawsze w pliku route'a, bez wyjątków (`component: HomePage`, nie `component: NewsFeed`). Do
+  `features/<f>/` idą tylko części: formularze, listy, stany (`LoginForm`, `NewsFeedList`, `NewsFeedError`). Złożona
+  logika danych → hook albo `lib/`; samo `useQuery` + wybór stanu zostaje w widoku. Bez `-components/` w `routes/`
+  i bez `features/*/pages/`.
 
 ```
 __root                    kontekst: { queryClient }

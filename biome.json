@@ -149,7 +149,7 @@
 		},
 		{
 			"includes": [
-				"src/features/news/components/NewsFeed/NewsFeedLoading.tsx",
+				"src/features/news/components/NewsFeedLoading/NewsFeedLoading.tsx",
 				"src/shared/components/PinInput/PinInput.tsx"
 			],
 			"linter": { "rules": { "suspicious": { "noArrayIndexKey": "off" } } }
