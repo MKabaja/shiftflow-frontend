@@ -20,7 +20,7 @@ input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
 input:-webkit-autofill:active {
-	-webkit-box-shadow: 0 0 0 1000px var(--color-bg-offset) inset !important;
+	-webkit-box-shadow: 0 0 0 1000px var(--color-bg-inset) inset !important;
 	-webkit-text-fill-color: var(--color-text-primary) !important;
 	caret-color: var(--color-text-primary);
 }
@@ -36,7 +36,7 @@ input:-webkit-autofill:active {
 }
 
 ::-webkit-scrollbar-thumb {
-	background: var(--color-bg-card);
+	background: var(--color-bg-elevated);
 	border-radius: 5px;
 }
 
