@@ -62,9 +62,13 @@ Pełny standard z przykładami: skill `react-clean-code`. Poniżej rdzeń + konw
 - Teksty UI zawsze przez `t()`, nigdy na sztywno.
 
 ## Komponenty
-- Folder na komponent: `Nazwa.tsx`, `Nazwa.styles.ts`, `__tests__/Nazwa.test.tsx`
+- Folder na komponent: `Nazwa.tsx`, opcjonalnie `Nazwa.styles.ts`, `__tests__/Nazwa.test.tsx`
   (`shared/components/`, `app/layouts/`, komponenty feature'ów). Bez `index.ts` — importy prosto z pliku
   (`@/shared/components/Button/Button.tsx`).
-- Klasy Tailwinda w `Nazwa.styles.ts` (obiekty z nazwanymi typami `Record<Wariant, string>`), nie w TSX.
+- Klasy Tailwinda:
+  - `shared/components/` i `app/layouts/` → `Nazwa.styles.ts` (warianty jako `Record<Wariant, string>` z nazwanym
+    typem), nie w TSX;
+  - komponenty feature'ów i pliki route'ów → inline w TSX, bez `*.styles.ts`; plik stylów dopiero, gdy komponent
+    dostaje warianty.
 - Komponenty współdzielone wołają `t()` tylko dla stałych, uniwersalnych tekstów („Zamknij” w `Modal`); etykiety
   zależne od użycia (np. `Avatar.label`) przekazuje wywołujący.
