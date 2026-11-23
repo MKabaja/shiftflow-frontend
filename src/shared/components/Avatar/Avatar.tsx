@@ -8,17 +8,16 @@ import { getInitials } from '@/shared/lib/helpers/getInitials.ts';
 import { hashColor } from '@/shared/lib/helpers/hashColor.ts';
 import { focusStyles } from '@/shared/lib/styles/focusStyles.ts';
 
-export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 type FallbackSize = Record<AvatarSize, number>;
 type AvatarProps = {
 	size?: AvatarSize;
 	name?: string;
 	label?: string;
-	imageUrl?: string; // for future implementation
 	onClick?: () => void;
 };
-const IconSizes: FallbackSize = {
+const iconSizes: FallbackSize = {
 	xs: 12,
 	sm: 16,
 	md: 20,
@@ -26,7 +25,7 @@ const IconSizes: FallbackSize = {
 	xl: 40,
 };
 
-export function Avatar({ size = 'md', name, label, onClick }: AvatarProps) {
+function Avatar({ size = 'md', name, label, onClick }: AvatarProps) {
 	const Tag = onClick ? 'button' : 'div';
 	const accessibleName = label || name || undefined;
 	const content = name ? (
@@ -35,7 +34,7 @@ export function Avatar({ size = 'md', name, label, onClick }: AvatarProps) {
 		<User
 			aria-hidden="true"
 			className="text-border"
-			size={IconSizes[size]}
+			size={iconSizes[size]}
 		/>
 	);
 
@@ -57,3 +56,6 @@ export function Avatar({ size = 'md', name, label, onClick }: AvatarProps) {
 		</Tag>
 	);
 }
+
+export type { AvatarSize };
+export { Avatar };

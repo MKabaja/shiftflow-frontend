@@ -1,0 +1,129 @@
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useNavigate } from '@tanstack/react-router';
+import type { ParseKeys } from 'i18next';
+import { Lock, User } from 'lucide-react';
+import { useState } from 'react';
+import { useController, useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
+import { useLogin } from '@/features/auth/api/useLogin.ts';
+import { applyServerError } from '@/features/auth/lib/applyServerError.ts';
+import { landingPathFor } from '@/features/auth/lib/landingPathFor.ts';
+import {
+	type LoginFormValues,
+	loginSchema,
+} from '@/features/auth/model/login.schemas.ts';
+import { Alert } from '@/shared/components/Alert/Alert.tsx';
+import { Button } from '@/shared/components/Button/Button.tsx';
+import { Input } from '@/shared/components/Input/Input.tsx';
+import { VisibilityToggle } from '@/shared/components/VisibilityToggle/VisibilityToggle.tsx';
+import { config } from '@/shared/lib/config/config.ts';
+
+export function LoginForm() {
+	const { t } = useTranslation('auth');
+	const { t: tErrors } = useTranslation('errors');
+	const [isPasswordMasked, setIsPasswordMasked] = useState(true);
+	const { mutate, isPending } = useLogin();
+	const navigate = useNavigate();
+
+	const {
+		control,
+		handleSubmit,
+		formState: { errors },
+		setError,
+		clearErrors,
+	} = useForm<LoginFormValues>({
+		resolver: zodResolver(loginSchema),
+		defaultValues: { login: '', password: '' },
+	});
+
+	const { field: loginField, fieldState: loginFieldState } = useController({
+		control,
+		name: 'login',
+	});
+	const { field: passwordField, fieldState: passwordFieldState } =
+		useController({
+			control,
+			name: 'password',
+		});
+
+	const loginErrorKey = loginFieldState.error?.message;
+	const passwordErrorKey = passwordFieldState.error?.message;
+	const backendErrorKey = errors.root?.serverError?.message;
+	const backendError = backendErrorKey
+		? tErrors(backendErrorKey as ParseKeys<'errors'>)
+		: undefined;
+
+	const loginError = loginErrorKey
+		? t(loginErrorKey as ParseKeys<'auth'>)
+		: undefined;
+	const passwordError = passwordErrorKey
+		? t(passwordErrorKey as ParseKeys<'auth'>, {
+				min: config.passwordMinLength,
+			})
+		: undefined;
+
+	function submitCredentials(values: LoginFormValues) {
+		clearErrors('root.serverError');
+		mutate(values, {
+			onSuccess: (user) => void navigate({ to: landingPathFor(user) }),
+			onError: (error) =>
+				applyServerError(error, setError, 'auth.invalidCredentials'),
+		});
+	}
+
+	function clearServerError() {
+		if (backendError) clearErrors('root.serverError');
+	}
+
+	return (
+		<form
+			className="flex w-full flex-col gap-4"
+			noValidate
+			onSubmit={handleSubmit(submitCredentials)}
+		>
+			<Input
+				{...loginField}
+				onChange={(event) => {
+					clearServerError();
+					loginField.onChange(event);
+				}}
+				label={t('login.loginLabel')}
+				placeholder={t('login.loginPlaceholder')}
+				autoComplete="username"
+				leftIcon={<User className="size-4" />}
+				error={loginError}
+			/>
+
+			<Input
+				{...passwordField}
+				onChange={(event) => {
+					clearServerError();
+					passwordField.onChange(event);
+				}}
+				label={t('login.passwordLabel')}
+				placeholder={t('login.passwordPlaceholder')}
+				type={isPasswordMasked ? 'password' : 'text'}
+				autoComplete="current-password"
+				leftIcon={<Lock className="size-4" />}
+				rightIcon={
+					<VisibilityToggle
+						masked={isPasswordMasked}
+						onToggle={() => setIsPasswordMasked((isMasked) => !isMasked)}
+						showLabel={t('login.showPassword')}
+						hideLabel={t('login.hidePassword')}
+					/>
+				}
+				error={passwordError}
+			/>
+			<Alert message={backendError} />
+			<Button
+				type="submit"
+				size="lg"
+				className="mt-2 w-full"
+				isLoading={isPending}
+			>
+				{t('login.submit')}
+			</Button>
+		</form>
+	);
+}

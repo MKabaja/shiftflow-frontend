@@ -6,7 +6,7 @@ import { fetchLatestNews } from '@/features/news/api/news.api.ts';
  *
  * `latest` is marked `handled`: errors skip the global toast, the list shows them in place.
  */
-const newsQueries = {
+export const newsQueries = {
 	all: () => ['news'] as const,
 	latest: () =>
 		queryOptions({
@@ -15,5 +15,3 @@ const newsQueries = {
 			meta: { handled: true },
 		}),
 };
-
-export { newsQueries };

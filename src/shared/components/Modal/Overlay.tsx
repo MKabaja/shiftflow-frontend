@@ -21,8 +21,8 @@ export function Overlay({ onClose, placement, children }: OverlayProps) {
 				'fixed inset-0 z-modal flex bg-black/70 backdrop-blur-sm',
 				overlayPlacementStyles[placement],
 			)}
-			onClick={(e) => {
-				if (e.target === e.currentTarget) onClose();
+			onClick={(event) => {
+				if (event.target === event.currentTarget) onClose();
 			}}
 		>
 			{children}

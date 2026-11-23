@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { i18n } from '@/shared/i18n';
+import { i18n } from '@/shared/i18n/i18n.ts';
 import { LocaleSwitcher } from '../LocaleSwitcher.tsx';
 
 function renderLocaleSwitcher() {

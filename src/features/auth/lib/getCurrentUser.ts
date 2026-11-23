@@ -7,7 +7,9 @@ import type { User } from '@/features/auth/model/user.schemas.ts';
  *
  * @returns `null` when nobody is logged in or the request failed; never rejects.
  */
-async function getCurrentUser(queryClient: QueryClient): Promise<User | null> {
+export async function getCurrentUser(
+	queryClient: QueryClient,
+): Promise<User | null> {
 	try {
 		return await queryClient.query({
 			...authQueries.currentUser(),
@@ -17,5 +19,3 @@ async function getCurrentUser(queryClient: QueryClient): Promise<User | null> {
 		return null;
 	}
 }
-
-export { getCurrentUser };

@@ -6,8 +6,8 @@ import {
 } from '@/shared/components/Logo/Logo.styles.ts';
 import { cn } from '@/shared/lib/helpers/cn.ts';
 
-export type LogoSize = 'sm' | 'md' | 'lg' | 'xl';
-export type LogoVariant = 'wordmark' | 'icon';
+type LogoSize = 'sm' | 'md' | 'lg' | 'xl';
+type LogoVariant = 'wordmark' | 'icon';
 type VariantSrc = Record<LogoVariant, string>;
 
 type LogoProps = {
@@ -21,7 +21,7 @@ const variantMap: VariantSrc = {
 	icon: logoIconUrl,
 };
 
-export function Logo({ size, className, variant = 'wordmark' }: LogoProps) {
+function Logo({ size, className, variant = 'wordmark' }: LogoProps) {
 	return (
 		<img
 			src={variantMap[variant]}
@@ -30,3 +30,6 @@ export function Logo({ size, className, variant = 'wordmark' }: LogoProps) {
 		/>
 	);
 }
+
+export type { LogoSize, LogoVariant };
+export { Logo };

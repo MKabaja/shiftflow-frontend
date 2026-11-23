@@ -1,9 +1,9 @@
 import { createFileRoute, Link } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 import loginArt from '@/assets/login-admin.webp';
-import { AuthHeading } from '@/features/auth/components/AuthHeading.tsx';
-import { AuthSplit } from '@/features/auth/components/AuthSplit.tsx';
-import { LoginForm } from '@/features/auth/components/LoginForm.tsx';
+import { AuthHeading } from '@/features/auth/components/AuthHeading/AuthHeading.tsx';
+import { AuthSplit } from '@/features/auth/components/AuthSplit/AuthSplit.tsx';
+import { LoginForm } from '@/features/auth/components/LoginForm/LoginForm.tsx';
 
 export const Route = createFileRoute('/_public/login')({
 	component: LoginPage,

@@ -10,7 +10,7 @@ import { config } from '@/shared/lib/config/config.ts';
  * `currentUser` is shared by hooks and route guards. Its data is `null` after a `401` clears the
  * session. A `401` is not retried; other errors retry once.
  */
-const authQueries = {
+export const authQueries = {
 	all: () => ['auth'] as const,
 	currentUser: () =>
 		queryOptions({
@@ -26,5 +26,3 @@ function retryUnlessUnauthorized(failureCount: number, error: Error): boolean {
 	if (error instanceof HttpError && error.status === 401) return false;
 	return failureCount < 1;
 }
-
-export { authQueries };

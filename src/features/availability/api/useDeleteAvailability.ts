@@ -12,7 +12,7 @@ import {
  * Optimistic: removes it from the month cache first, restores it on error, refetches when settled.
  * Errors go to the global toast.
  */
-function useDeleteAvailability() {
+export function useDeleteAvailability() {
 	const queryClient = useQueryClient();
 
 	return useMutation({
@@ -27,5 +27,3 @@ function useDeleteAvailability() {
 			invalidateMonth(queryClient, snapshot),
 	});
 }
-
-export { useDeleteAvailability };

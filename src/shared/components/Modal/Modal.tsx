@@ -21,13 +21,14 @@ import {
 } from './Modal.styles.ts';
 import { Overlay } from './Overlay.tsx';
 
-export type ModalSize = 'sm' | 'md' | 'lg' | 'xl';
-export type ModalPlacement = 'center' | 'sheet';
+type ModalSize = 'sm' | 'md' | 'lg' | 'xl';
+type ModalPlacement = 'center' | 'sheet';
 
 type AnimationProps = 'initial' | 'animate' | 'exit';
 type PanelAnimation = Pick<HTMLMotionProps<'div'>, AnimationProps>;
+type PanelAnimationByPlacement = Record<ModalPlacement, PanelAnimation>;
 
-const panelAnimations: Record<ModalPlacement, PanelAnimation> = {
+const panelAnimations: PanelAnimationByPlacement = {
 	center: {
 		initial: { opacity: 0, scale: 0.95 },
 		animate: { opacity: 1, scale: 1 },
@@ -59,7 +60,7 @@ type ModalProps = HTMLMotionProps<'div'> & {
 	meta?: ReactNode;
 };
 
-export function Modal({
+function Modal({
 	isOpen,
 	onClose,
 	title,
@@ -110,7 +111,7 @@ export function Modal({
 						<header className={headerStyles}>
 							<div>
 								<h2
-									className={cn(titleStyles)}
+									className={titleStyles}
 									id={titleId}
 								>
 									{title}
@@ -118,7 +119,7 @@ export function Modal({
 								{description && (
 									<p
 										id={descId}
-										className={cn(descriptionStyles)}
+										className={descriptionStyles}
 									>
 										{description}
 									</p>
@@ -131,19 +132,22 @@ export function Modal({
 								onClick={onClose}
 								aria-label={t('actions.close')}
 							>
-								<X size={16}></X>
+								<X size={16} />
 							</button>
 						</header>
 						<div
 							tabIndex={-1}
-							className={cn(bodyStyles)}
+							className={bodyStyles}
 						>
 							{children}
 						</div>
-						{footer && <footer className={cn(footerStyles)}>{footer}</footer>}
+						{footer && <footer className={footerStyles}>{footer}</footer>}
 					</motion.div>
 				</Overlay>
 			)}
 		</AnimatePresence>
 	);
 }
+
+export type { ModalPlacement, ModalSize };
+export { Modal };

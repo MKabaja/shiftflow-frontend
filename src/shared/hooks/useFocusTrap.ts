@@ -15,7 +15,7 @@ const SELECTOR: string = [
  *
  * @param containerRef - Give it `tabIndex={-1}` so it can hold focus when it has no focusable children.
  */
-function useFocusTrap<T extends HTMLElement>(
+export function useFocusTrap<T extends HTMLElement>(
 	isOpen: boolean,
 	containerRef: RefObject<T | null>,
 ) {
@@ -24,25 +24,25 @@ function useFocusTrap<T extends HTMLElement>(
 		const container = containerRef.current;
 		const focusableElements = getFocusableElements(container);
 		const first = focusableElements[0];
-		(first ?? container)?.focus();
+		(first ?? container).focus();
 	}, [isOpen, containerRef]);
 
 	useEffect(() => {
 		if (!isOpen || !containerRef.current) return;
 		const container = containerRef.current;
 
-		function handleKeyDown(e: KeyboardEvent) {
-			if (e.key !== 'Tab') return;
+		function handleKeyDown(event: KeyboardEvent) {
+			if (event.key !== 'Tab') return;
 			const focusableElements = getFocusableElements(container);
 			const first = focusableElements[0];
 			const last = focusableElements[focusableElements.length - 1];
 
-			if (e.shiftKey && document.activeElement === first) {
-				e.preventDefault();
+			if (event.shiftKey && document.activeElement === first) {
+				event.preventDefault();
 				last.focus();
 			}
-			if (!e.shiftKey && document.activeElement === last) {
-				e.preventDefault();
+			if (!event.shiftKey && document.activeElement === last) {
+				event.preventDefault();
 				first.focus();
 			}
 		}
@@ -52,8 +52,7 @@ function useFocusTrap<T extends HTMLElement>(
 		};
 	}, [isOpen, containerRef]);
 }
+
 function getFocusableElements(container: HTMLElement): HTMLElement[] {
 	return Array.from(container.querySelectorAll<HTMLElement>(SELECTOR));
 }
-
-export { useFocusTrap };

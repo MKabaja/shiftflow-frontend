@@ -7,7 +7,7 @@ function renderToggle(props = {}) {
 	return render(
 		<VisibilityToggle
 			masked
-			setMasked={vi.fn()}
+			onToggle={vi.fn()}
 			showLabel="Show password"
 			hideLabel="Hide password"
 			{...props}
@@ -20,7 +20,7 @@ function StatefulToggle() {
 	return (
 		<VisibilityToggle
 			masked={masked}
-			setMasked={setMasked}
+			onToggle={() => setMasked((isMasked) => !isMasked)}
 			showLabel="Show password"
 			hideLabel="Hide password"
 		/>
@@ -58,14 +58,14 @@ describe('VisibilityToggle', () => {
 	});
 
 	it('does not toggle when disabled', async () => {
-		const setMasked = vi.fn();
+		const onToggle = vi.fn();
 		const user = userEvent.setup();
-		renderToggle({ disabled: true, setMasked });
+		renderToggle({ disabled: true, onToggle });
 		const toggle = screen.getByRole('button');
 
 		expect(toggle).toBeDisabled();
 		await user.click(toggle);
-		expect(setMasked).not.toHaveBeenCalled();
+		expect(onToggle).not.toHaveBeenCalled();
 	});
 
 	it('merges the className escape hatch', () => {

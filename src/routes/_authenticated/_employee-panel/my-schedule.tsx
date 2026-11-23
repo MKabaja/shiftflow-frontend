@@ -3,10 +3,10 @@ import { format } from 'date-fns';
 import { CalendarX, ChevronLeft, ChevronRight, Search } from 'lucide-react';
 import { useId } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button } from '@/shared/components/Button';
-import { Card } from '@/shared/components/Card';
-import { Input } from '@/shared/components/Input';
-import { Toggle } from '@/shared/components/Toggle';
+import { Button } from '@/shared/components/Button/Button.tsx';
+import { Card } from '@/shared/components/Card/Card.tsx';
+import { Input } from '@/shared/components/Input/Input.tsx';
+import { Toggle } from '@/shared/components/Toggle/Toggle.tsx';
 import { getDateFnsLocale } from '@/shared/i18n/getDateFnsLocale.ts';
 
 export const Route = createFileRoute(

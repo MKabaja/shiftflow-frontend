@@ -2,7 +2,7 @@ import type { ReactNode } from 'react';
 import { cn } from '@/shared/lib/helpers/cn.ts';
 import { baseStyles, sizeStyles, variantStyles } from './Badge.styles.ts';
 
-export type BadgeVariant =
+type BadgeVariant =
 	| 'default'
 	| 'accent'
 	| 'success'
@@ -10,21 +10,20 @@ export type BadgeVariant =
 	| 'danger'
 	| 'info'
 	| 'outline';
-export type BadgeSize = 'sm' | 'md';
+type BadgeSize = 'sm' | 'md';
 
 type BadgeProps = {
-	variant: BadgeVariant;
+	variant?: BadgeVariant;
 	children?: ReactNode;
 	size?: BadgeSize;
 };
-export function Badge({
-	variant = 'default',
-	size = 'sm',
-	children,
-}: BadgeProps) {
+function Badge({ variant = 'default', size = 'sm', children }: BadgeProps) {
 	return (
 		<span className={cn(baseStyles, variantStyles[variant], sizeStyles[size])}>
 			{children}
 		</span>
 	);
 }
+
+export type { BadgeSize, BadgeVariant };
+export { Badge };

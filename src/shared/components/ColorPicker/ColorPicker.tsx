@@ -13,7 +13,7 @@ import {
 } from './ColorPicker.styles.ts';
 import './ColorPicker.css';
 
-export type ColorPickerProps = {
+type ColorPickerProps = {
 	label?: string;
 	error?: string;
 	value: string;
@@ -23,7 +23,7 @@ export type ColorPickerProps = {
 	className?: string;
 };
 
-export function ColorPicker({
+function ColorPicker({
 	id,
 	label,
 	error,
@@ -47,13 +47,13 @@ export function ColorPicker({
 			{label && (
 				<label
 					id={labelId}
-					className={cn(labelStyles)}
+					className={labelStyles}
 					htmlFor={inputId}
 				>
 					{label}
 				</label>
 			)}
-			<div className={cn(cardStyles)}>
+			<div className={cardStyles}>
 				<div
 					className={cn('sf-color-picker', disabled && disabledContainerStyles)}
 					aria-disabled={disabled || undefined}
@@ -63,10 +63,10 @@ export function ColorPicker({
 						onChange={onChange}
 					/>
 				</div>
-				<div className={cn(swatchRowStyles)}>
+				<div className={swatchRowStyles}>
 					<span
 						aria-hidden="true"
-						className={cn(swatchStyles)}
+						className={swatchStyles}
 						style={{ backgroundColor: value }}
 					/>
 					<HexColorInput
@@ -83,7 +83,7 @@ export function ColorPicker({
 			</div>
 			{error && (
 				<p
-					className={cn(errorTextStyles)}
+					className={errorTextStyles}
 					id={errorId}
 				>
 					{error}
@@ -92,3 +92,6 @@ export function ColorPicker({
 		</div>
 	);
 }
+
+export type { ColorPickerProps };
+export { ColorPicker };

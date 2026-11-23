@@ -7,7 +7,7 @@ import { Toaster } from 'sonner';
 import { queryClient } from '@/app/queryClient.ts';
 import { router } from '@/app/router.ts';
 import { config } from '@/shared/lib/config/config.ts';
-import '@/shared/i18n';
+import '@/shared/i18n/i18n.ts';
 import '@/css/Index.css';
 
 const rootElement = document.getElementById('root');

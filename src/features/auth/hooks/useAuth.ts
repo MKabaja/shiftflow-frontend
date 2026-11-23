@@ -15,7 +15,7 @@ type UseAuthResult = {
  *
  * @returns `user` is `null` when nobody is logged in or before the first fetch.
  */
-function useAuth(): UseAuthResult {
+export function useAuth(): UseAuthResult {
 	const { data: user } = useQuery(authQueries.currentUser());
 	return {
 		user: user ?? null,
@@ -25,5 +25,3 @@ function useAuth(): UseAuthResult {
 		isEmployee: user?.role === 'employee',
 	};
 }
-
-export { useAuth };

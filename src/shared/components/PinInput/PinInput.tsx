@@ -1,7 +1,7 @@
 import { motion } from 'motion/react';
 import { type Ref, useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { VisibilityToggle } from '@/shared/components/VisibilityToggle';
+import { VisibilityToggle } from '@/shared/components/VisibilityToggle/VisibilityToggle.tsx';
 import { usePinInput } from '@/shared/hooks/usePinInput.ts';
 import { config } from '@/shared/lib/config/config.ts';
 import { errorTextStyles } from '@/shared/lib/styles/errorTextStyles.ts';
@@ -12,7 +12,7 @@ import {
 	rowStyles,
 } from './PinInput.styles.ts';
 
-export type PinInputProps = {
+type PinInputProps = {
 	ref?: Ref<HTMLInputElement>;
 	length?: number;
 	value?: string;
@@ -24,7 +24,7 @@ export type PinInputProps = {
 	autoFocus?: boolean;
 };
 
-export function PinInput({
+function PinInput({
 	ref,
 	length = config.pinLength,
 	value,
@@ -92,7 +92,7 @@ export function PinInput({
 
 				<VisibilityToggle
 					masked={masked}
-					setMasked={setMasked}
+					onToggle={() => setMasked((isMasked) => !isMasked)}
 					showLabel={t('pin.showPin')}
 					hideLabel={t('pin.hidePin')}
 					disabled={disabled}
@@ -111,3 +111,6 @@ export function PinInput({
 		</div>
 	);
 }
+
+export type { PinInputProps };
+export { PinInput };

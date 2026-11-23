@@ -2,8 +2,8 @@ import { createFileRoute, Outlet, redirect } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 import { getCurrentUser } from '@/features/auth/lib/getCurrentUser.ts';
 import { landingPathFor } from '@/features/auth/lib/landingPathFor.ts';
-import { LocaleSwitcher } from '@/shared/components/LocaleSwitcher';
-import { Logo } from '@/shared/components/Logo';
+import { LocaleSwitcher } from '@/shared/components/LocaleSwitcher/LocaleSwitcher.tsx';
+import { Logo } from '@/shared/components/Logo/Logo.tsx';
 
 export const Route = createFileRoute('/_public')({
 	component: PublicLayout,

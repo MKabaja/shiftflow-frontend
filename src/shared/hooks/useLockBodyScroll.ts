@@ -1,9 +1,10 @@
 import { useEffect } from 'react';
 
 type Axis = 'x' | 'y' | 'both';
-type Properties = 'overflowX' | 'overflowY' | 'overflow';
+type OverflowProperty = 'overflowX' | 'overflowY' | 'overflow';
+type OverflowPropertyByAxis = Record<Axis, OverflowProperty>;
 
-const axisMap: Record<Axis, Properties> = {
+const overflowPropertyByAxis: OverflowPropertyByAxis = {
 	x: 'overflowX',
 	y: 'overflowY',
 	both: 'overflow',
@@ -12,9 +13,9 @@ const axisMap: Record<Axis, Properties> = {
 /**
  * Locks body scroll on `axis` while open; restores the previous value on close or unmount.
  */
-export function useLockBodyScroll(isOpen: boolean, axis: Axis = 'both'): void {
+function useLockBodyScroll(isOpen: boolean, axis: Axis = 'both'): void {
 	useEffect(() => {
-		const property = axisMap[axis];
+		const property = overflowPropertyByAxis[axis];
 		const previousValue = document.body.style[property];
 
 		setBodyStyle(property, isOpen ? 'hidden' : '');
@@ -24,6 +25,10 @@ export function useLockBodyScroll(isOpen: boolean, axis: Axis = 'both'): void {
 		};
 	}, [isOpen, axis]);
 }
-function setBodyStyle(property: Properties, value: string) {
+
+function setBodyStyle(property: OverflowProperty, value: string) {
 	document.body.style[property] = value;
 }
+
+export type { Axis };
+export { useLockBodyScroll };

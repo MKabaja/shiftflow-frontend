@@ -1,8 +1,6 @@
 import { useCallback, useState } from 'react';
-import { useKeyClose } from './useKeyClose';
-import { useLockBodyScroll } from './useLockBodyScroll';
-
-type Axis = 'x' | 'y' | 'both';
+import { useKeyClose } from './useKeyClose.ts';
+import { type Axis, useLockBodyScroll } from './useLockBodyScroll.ts';
 
 /**
  * Manages open state of a dropdown; while open it locks body scroll and closes on `Escape`.

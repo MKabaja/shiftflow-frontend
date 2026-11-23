@@ -1,13 +1,13 @@
 import { type HTMLMotionProps, motion } from 'motion/react';
 import type { ReactNode } from 'react';
-import { Spinner } from '@/shared/components/Spinner';
+import { Spinner } from '@/shared/components/Spinner/Spinner.tsx';
 import { cn } from '@/shared/lib/helpers/cn.ts';
 import { disabledStyles } from '@/shared/lib/styles/disabledStyles.ts';
 import { focusStyles } from '@/shared/lib/styles/focusStyles.ts';
 import { baseStyles, sizeStyles, variantStyles } from './Button.styles.ts';
 
-export type ButtonSize = 'sm' | 'md' | 'lg';
-export type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
+type ButtonSize = 'sm' | 'md' | 'lg';
+type ButtonVariant = 'primary' | 'secondary' | 'ghost' | 'danger';
 
 type ButtonProps = HTMLMotionProps<'button'> & {
 	children: ReactNode;
@@ -16,7 +16,7 @@ type ButtonProps = HTMLMotionProps<'button'> & {
 	isLoading?: boolean;
 };
 
-export function Button({
+function Button({
 	ref,
 	variant = 'primary',
 	size = 'sm',
@@ -56,3 +56,6 @@ export function Button({
 		</motion.button>
 	);
 }
+
+export type { ButtonSize, ButtonVariant };
+export { Button };

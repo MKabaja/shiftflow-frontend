@@ -4,7 +4,7 @@ import {
 	stubResizeObserver,
 	triggerResize,
 	triggerResizeIfObserved,
-} from '@/test/mocks/resizeObserver.ts';
+} from '@/test/mocks/resizeObserver.mock.ts';
 import { useIsClamped } from '../useIsClamped.ts';
 
 function renderUseIsClamped(enabled = true) {

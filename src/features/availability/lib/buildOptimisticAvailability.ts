@@ -8,7 +8,7 @@ import type {
  *
  * @param now - Sets the timestamps and the temporary `id`, which is negative so it never collides with a real one.
  */
-function buildOptimisticAvailability(
+export function buildOptimisticAvailability(
 	payload: AvailabilityPayload,
 	userId: number,
 	now: Date,
@@ -23,5 +23,3 @@ function buildOptimisticAvailability(
 		updated_at: timestamp,
 	};
 }
-
-export { buildOptimisticAvailability };

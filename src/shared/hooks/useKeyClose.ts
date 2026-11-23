@@ -13,11 +13,11 @@ export function useKeyClose(
 	useEffect(() => {
 		if (!isOpen) return;
 
-		const handler = (e: KeyboardEvent) => {
-			if (e.key === key) onClose();
-		};
+		function handleKeyDown(event: KeyboardEvent) {
+			if (event.key === key) onClose();
+		}
 
-		document.addEventListener('keydown', handler);
-		return () => document.removeEventListener('keydown', handler);
+		document.addEventListener('keydown', handleKeyDown);
+		return () => document.removeEventListener('keydown', handleKeyDown);
 	}, [isOpen, onClose, key]);
 }

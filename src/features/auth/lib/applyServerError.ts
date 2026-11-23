@@ -7,7 +7,7 @@ type InvalidCredentialsKey = Extract<
 	'auth.invalidCredentials' | 'auth.invalidPin'
 >;
 
-function applyServerError<T extends FieldValues>(
+export function applyServerError<T extends FieldValues>(
 	error: unknown,
 	setError: UseFormSetError<T>,
 	invalidKey: InvalidCredentialsKey,
@@ -38,5 +38,3 @@ function applyServerError<T extends FieldValues>(
 		message: key,
 	});
 }
-
-export { applyServerError };

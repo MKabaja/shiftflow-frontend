@@ -5,7 +5,7 @@ import { delay } from 'msw/utils/delay';
 import type { ReactNode } from 'react';
 import { authQueries } from '@/features/auth/api/auth.queries.ts';
 import type { User } from '@/features/auth/model/user.schemas.ts';
-import { makeUser } from '@/test/factories/user.ts';
+import { makeUser } from '@/test/factories/user.factory.ts';
 import { server } from '@/test/msw/server.ts';
 import { useAuth } from '../useAuth.ts';
 

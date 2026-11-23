@@ -2,7 +2,7 @@ import type { ComponentProps, ReactNode } from 'react';
 import { cn } from '@/shared/lib/helpers/cn.ts';
 import { baseStyles, interactiveStyles, variantStyles } from './Card.styles.ts';
 
-export type CardVariant = 'default' | 'elevated' | 'auth';
+type CardVariant = 'default' | 'elevated' | 'auth';
 
 type CardProps = ComponentProps<'div'> & {
 	children: ReactNode;
@@ -10,7 +10,7 @@ type CardProps = ComponentProps<'div'> & {
 	interactive?: boolean;
 };
 
-export function Card({
+function Card({
 	children,
 	className,
 	variant = 'default',
@@ -31,3 +31,6 @@ export function Card({
 		</div>
 	);
 }
+
+export type { CardVariant };
+export { Card };

@@ -3,8 +3,8 @@ import { addDays, format, startOfWeek } from 'date-fns';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useId } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Button } from '@/shared/components/Button';
-import { Card } from '@/shared/components/Card';
+import { Button } from '@/shared/components/Button/Button.tsx';
+import { Card } from '@/shared/components/Card/Card.tsx';
 import { getDateFnsLocale } from '@/shared/i18n/getDateFnsLocale.ts';
 import { cn } from '@/shared/lib/helpers/cn.ts';
 

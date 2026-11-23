@@ -2,12 +2,19 @@ import { motion } from 'motion/react';
 import { type Ref, useId } from 'react';
 import { cn } from '@/shared/lib/helpers/cn.ts';
 import {
+	descriptionStyles,
 	knobBaseStyles,
+	labelBaseStyles,
+	labelDisabledStyles,
+	labelEnabledStyles,
+	labelTextStyles,
 	sizeStyles,
 	trackBaseStyles,
+	trackCheckedStyles,
+	trackUncheckedStyles,
 } from './Toggle.styles.ts';
 
-export type ToggleSize = 'sm' | 'md';
+type ToggleSize = 'sm' | 'md';
 
 type ToggleProps = {
 	ref?: Ref<HTMLInputElement>;
@@ -19,7 +26,7 @@ type ToggleProps = {
 	size?: ToggleSize;
 };
 
-export function Toggle({
+function Toggle({
 	ref,
 	checked,
 	onChange,
@@ -35,15 +42,15 @@ export function Toggle({
 		<label
 			htmlFor={id}
 			className={cn(
-				'flex items-center gap-3',
-				disabled ? 'cursor-not-allowed opacity-40' : 'cursor-pointer',
+				labelBaseStyles,
+				disabled ? labelDisabledStyles : labelEnabledStyles,
 			)}
 		>
-			<div
+			<span
 				className={cn(
 					trackBaseStyles,
 					track,
-					checked ? 'bg-accent/30' : 'bg-bg-offset',
+					checked ? trackCheckedStyles : trackUncheckedStyles,
 				)}
 			>
 				<input
@@ -57,20 +64,23 @@ export function Toggle({
 					onChange={(e) => onChange(e.target.checked)}
 					className="sr-only"
 				/>
-				<motion.div
+				<motion.span
 					className={cn(knobBaseStyles, knob)}
 					animate={{ x: checked ? travel : 0 }}
 					transition={{ duration: 0.2, ease: 'easeOut' }}
 				/>
-			</div>
+			</span>
 			{label && (
-				<div>
-					<span className="text-body-md text-text-primary">{label}</span>
+				<span>
+					<span className={labelTextStyles}>{label}</span>
 					{description && (
-						<p className="mt-0.5 text-body-sm text-text-muted">{description}</p>
+						<span className={descriptionStyles}>{description}</span>
 					)}
-				</div>
+				</span>
 			)}
 		</label>
 	);
 }
+
+export type { ToggleSize };
+export { Toggle };

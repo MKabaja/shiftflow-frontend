@@ -9,9 +9,15 @@ paths:
 Pełny standard z przykładami: skill `react-clean-code`. Poniżej rdzeń + konwencje tego repo, które wygrywają ze skillem.
 
 ## TypeScript i moduły
+- Nazwy plików: komponenty PascalCase, hooki `useX.ts`, czyste funkcje nazwą funkcji (`landingPathFor.ts`), pozostałe
+  moduły camelCase z sufiksem roli po kropce (`auth.api.ts`, `user.schemas.ts`, `user.factory.ts`,
+  `resizeObserver.mock.ts`); `routes/` kebab-case. Wielkość liter pilnuje Biome (`useFilenamingConvention`), sufiks — review.
 - `tsconfig.app.json`: `noUnusedLocals`, `noUnusedParameters`, `erasableSyntaxOnly`, `verbatimModuleSyntax` — nieużyte
   importy i parametry to błędy kompilacji; typy importuj przez `import type` / `type` w specyfikatorze.
 - Rozszerzenia `.ts` / `.tsx` w importach są wymagane (`allowImportingTsExtensions`). Alias `@/` → `src/`.
+- Eksporty nazwane, styl zależy od ich liczby (typy też się liczą): **jeden** → inline (`export function X`,
+  `export const X`); **dwa i więcej** → bez `export` przy deklaracjach, na dole pliku `export type { … }` i
+  `export { … }`. Pliki route'ów: `export const Route` inline. Lint tego nie pilnuje — review.
 - `type`, nie `interface` — `interface` tylko w augmentacji modułów (`declare module '…'`).
 - Bez `any`, nieuzasadnionych `as`, `!`, `@ts-ignore`.
 - Nazwane aliasy typów zamiast inline unii kluczy w `Pick` / `Omit` / `Record` i inline sygnatur.
@@ -56,8 +62,13 @@ Pełny standard z przykładami: skill `react-clean-code`. Poniżej rdzeń + konw
 - Teksty UI zawsze przez `t()`, nigdy na sztywno.
 
 ## Komponenty
-- Folder na komponent: `Nazwa.tsx`, `Nazwa.styles.ts`, `index.ts`, `__tests__/Nazwa.test.tsx`
-  (`shared/components/`, `layouts/components/`, komponenty feature'ów).
-- Klasy Tailwinda w `Nazwa.styles.ts` (obiekty z nazwanymi typami `Record<Wariant, string>`), nie w TSX.
+- Folder na komponent: `Nazwa.tsx`, opcjonalnie `Nazwa.styles.ts`, `__tests__/Nazwa.test.tsx`
+  (`shared/components/`, `app/layouts/`, komponenty feature'ów). Bez `index.ts` — importy prosto z pliku
+  (`@/shared/components/Button/Button.tsx`).
+- Klasy Tailwinda:
+  - `shared/components/` i `app/layouts/` → `Nazwa.styles.ts` (warianty jako `Record<Wariant, string>` z nazwanym
+    typem), nie w TSX;
+  - komponenty feature'ów i pliki route'ów → inline w TSX, bez `*.styles.ts`; plik stylów dopiero, gdy komponent
+    dostaje warianty.
 - Komponenty współdzielone wołają `t()` tylko dla stałych, uniwersalnych tekstów („Zamknij” w `Modal`); etykiety
   zależne od użycia (np. `Avatar.label`) przekazuje wywołujący.

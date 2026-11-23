@@ -1,0 +1,18 @@
+import { NewsCard } from '@/features/news/components/NewsCard/NewsCard.tsx';
+import type { NewsPost } from '@/features/news/model/newsPost.schemas.ts';
+
+type NewsFeedListProps = {
+	posts: NewsPost[];
+};
+
+export function NewsFeedList({ posts }: NewsFeedListProps) {
+	return (
+		<ul className="flex flex-col gap-4">
+			{posts.map((post) => (
+				<li key={post.id}>
+					<NewsCard post={post} />
+				</li>
+			))}
+		</ul>
+	);
+}
