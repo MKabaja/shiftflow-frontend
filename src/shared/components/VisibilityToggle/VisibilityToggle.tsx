@@ -1,11 +1,10 @@
 import { Eye, EyeOff } from 'lucide-react';
-import type { Dispatch, SetStateAction } from 'react';
 import { cn } from '@/shared/lib/helpers/cn.ts';
 import { baseStyles, iconStyles } from './VisibilityToggle.styles.ts';
 
 type VisibilityToggleProps = {
 	masked: boolean;
-	setMasked: Dispatch<SetStateAction<boolean>>;
+	onToggle: () => void;
 	showLabel: string;
 	hideLabel: string;
 	disabled?: boolean;
@@ -14,7 +13,7 @@ type VisibilityToggleProps = {
 
 export function VisibilityToggle({
 	masked,
-	setMasked,
+	onToggle,
 	showLabel,
 	hideLabel,
 	disabled = false,
@@ -23,16 +22,16 @@ export function VisibilityToggle({
 	return (
 		<button
 			type="button"
-			onClick={() => setMasked((prev) => !prev)}
+			onClick={onToggle}
 			disabled={disabled}
 			aria-label={masked ? showLabel : hideLabel}
 			aria-pressed={!masked}
 			className={cn(baseStyles, className)}
 		>
 			{masked ? (
-				<Eye className={cn(iconStyles)} />
+				<Eye className={iconStyles} />
 			) : (
-				<EyeOff className={cn(iconStyles)} />
+				<EyeOff className={iconStyles} />
 			)}
 		</button>
 	);

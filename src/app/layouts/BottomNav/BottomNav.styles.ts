@@ -7,9 +7,7 @@ const listStyles: string = 'flex w-full items-center';
 
 const itemStyles: string = 'relative flex-1';
 
-const linkStyles: string =
-	'text-text-muted text-body-sm relative flex w-full flex-col items-center gap-1 rounded-md py-2 transition-colors duration-200' +
-	focusStyles;
+const linkStyles: string = `text-text-muted text-body-sm relative flex w-full flex-col items-center gap-1 rounded-md py-2 transition-colors duration-200 ${focusStyles}`;
 
 const linkActiveStyles: string = 'text-accent';
 

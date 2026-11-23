@@ -17,7 +17,7 @@ export function Alert({ message, className }: AlertProps) {
 		>
 			<TriangleAlert
 				aria-hidden="true"
-				className={cn(iconStyles)}
+				className={iconStyles}
 			/>
 			{message}
 		</p>

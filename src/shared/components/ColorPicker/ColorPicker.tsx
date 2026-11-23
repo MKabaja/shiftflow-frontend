@@ -47,13 +47,13 @@ function ColorPicker({
 			{label && (
 				<label
 					id={labelId}
-					className={cn(labelStyles)}
+					className={labelStyles}
 					htmlFor={inputId}
 				>
 					{label}
 				</label>
 			)}
-			<div className={cn(cardStyles)}>
+			<div className={cardStyles}>
 				<div
 					className={cn('sf-color-picker', disabled && disabledContainerStyles)}
 					aria-disabled={disabled || undefined}
@@ -63,10 +63,10 @@ function ColorPicker({
 						onChange={onChange}
 					/>
 				</div>
-				<div className={cn(swatchRowStyles)}>
+				<div className={swatchRowStyles}>
 					<span
 						aria-hidden="true"
-						className={cn(swatchStyles)}
+						className={swatchStyles}
 						style={{ backgroundColor: value }}
 					/>
 					<HexColorInput
@@ -83,7 +83,7 @@ function ColorPicker({
 			</div>
 			{error && (
 				<p
-					className={cn(errorTextStyles)}
+					className={errorTextStyles}
 					id={errorId}
 				>
 					{error}

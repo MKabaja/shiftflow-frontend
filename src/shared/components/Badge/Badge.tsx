@@ -13,7 +13,7 @@ type BadgeVariant =
 type BadgeSize = 'sm' | 'md';
 
 type BadgeProps = {
-	variant: BadgeVariant;
+	variant?: BadgeVariant;
 	children?: ReactNode;
 	size?: BadgeSize;
 };

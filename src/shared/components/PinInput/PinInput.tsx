@@ -92,7 +92,7 @@ function PinInput({
 
 				<VisibilityToggle
 					masked={masked}
-					setMasked={setMasked}
+					onToggle={() => setMasked((isMasked) => !isMasked)}
 					showLabel={t('pin.showPin')}
 					hideLabel={t('pin.hidePin')}
 					disabled={disabled}

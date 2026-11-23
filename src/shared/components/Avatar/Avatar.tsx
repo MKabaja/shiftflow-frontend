@@ -15,10 +15,9 @@ type AvatarProps = {
 	size?: AvatarSize;
 	name?: string;
 	label?: string;
-	imageUrl?: string; // for future implementation
 	onClick?: () => void;
 };
-const IconSizes: FallbackSize = {
+const iconSizes: FallbackSize = {
 	xs: 12,
 	sm: 16,
 	md: 20,
@@ -35,7 +34,7 @@ function Avatar({ size = 'md', name, label, onClick }: AvatarProps) {
 		<User
 			aria-hidden="true"
 			className="text-border"
-			size={IconSizes[size]}
+			size={iconSizes[size]}
 		/>
 	);
 

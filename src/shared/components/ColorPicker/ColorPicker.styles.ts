@@ -1,5 +1,6 @@
 import { cn } from '@/shared/lib/helpers/cn.ts';
 import { disabledStyles } from '@/shared/lib/styles/disabledStyles.ts';
+import { errorTextStyles } from '@/shared/lib/styles/errorTextStyles.ts';
 import { inputFocusStyles } from '@/shared/lib/styles/inputFocusStyles.ts';
 
 type HexInputStyleProps = {
@@ -20,7 +21,6 @@ const cardStyles: string =
 	'flex flex-col gap-3 rounded-md bg-bg-card p-4 shadow-nm-raised';
 const swatchRowStyles: string = 'flex items-center gap-2';
 const swatchStyles: string = 'h-8 w-8 shrink-0 rounded-md border border-border';
-const errorTextStyles: string = 'text-danger mt-1 text-body-sm';
 
 export {
 	cardStyles,

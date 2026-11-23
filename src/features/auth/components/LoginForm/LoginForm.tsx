@@ -108,7 +108,7 @@ export function LoginForm() {
 				rightIcon={
 					<VisibilityToggle
 						masked={isPasswordMasked}
-						setMasked={setIsPasswordMasked}
+						onToggle={() => setIsPasswordMasked((isMasked) => !isMasked)}
 						showLabel={t('login.showPassword')}
 						hideLabel={t('login.hidePassword')}
 					/>

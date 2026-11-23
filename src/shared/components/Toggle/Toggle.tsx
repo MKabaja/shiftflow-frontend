@@ -2,9 +2,16 @@ import { motion } from 'motion/react';
 import { type Ref, useId } from 'react';
 import { cn } from '@/shared/lib/helpers/cn.ts';
 import {
+	descriptionStyles,
 	knobBaseStyles,
+	labelBaseStyles,
+	labelDisabledStyles,
+	labelEnabledStyles,
+	labelTextStyles,
 	sizeStyles,
 	trackBaseStyles,
+	trackCheckedStyles,
+	trackUncheckedStyles,
 } from './Toggle.styles.ts';
 
 type ToggleSize = 'sm' | 'md';
@@ -35,15 +42,15 @@ function Toggle({
 		<label
 			htmlFor={id}
 			className={cn(
-				'flex items-center gap-3',
-				disabled ? 'cursor-not-allowed opacity-40' : 'cursor-pointer',
+				labelBaseStyles,
+				disabled ? labelDisabledStyles : labelEnabledStyles,
 			)}
 		>
 			<div
 				className={cn(
 					trackBaseStyles,
 					track,
-					checked ? 'bg-accent/30' : 'bg-bg-offset',
+					checked ? trackCheckedStyles : trackUncheckedStyles,
 				)}
 			>
 				<input
@@ -65,10 +72,8 @@ function Toggle({
 			</div>
 			{label && (
 				<div>
-					<span className="text-body-md text-text-primary">{label}</span>
-					{description && (
-						<p className="mt-0.5 text-body-sm text-text-muted">{description}</p>
-					)}
+					<span className={labelTextStyles}>{label}</span>
+					{description && <p className={descriptionStyles}>{description}</p>}
 				</div>
 			)}
 		</label>
