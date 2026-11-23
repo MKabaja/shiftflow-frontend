@@ -99,7 +99,7 @@ the field name, the rest under `root.serverError`. There is no second error chan
 
 ### Design system
 
-Dark neumorphic, with a "Mining Gold" accent (`#C9A347`) on a `#1E1E20` base. Tailwind v4 is configured through
+Dark neumorphic, with a "Mining Gold" accent (`#C9A347`) on a `#111113` base. Tailwind v4 is configured through
 CSS only: `src/css/theme.css` holds every token (colour palette, neumorphic shadow presets, z-index scale, type
 scale) inside `@theme`, and components consume them as utilities (`shadow-nm-raised`, `text-display-md`).
 Neumorphic shadows use alpha rather than hex, so the same token is correct on every surface it lands on.
