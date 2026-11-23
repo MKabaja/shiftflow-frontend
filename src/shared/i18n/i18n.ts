@@ -44,24 +44,27 @@ const resources = {
 	},
 } as const;
 
-const LOCALE_KEY: string = 'shiftflow.locale';
+const LOCALE_KEY = 'shiftflow.locale';
 
 type SupportedLocale = keyof typeof resources;
 const supportedLocales = Object.keys(resources) as SupportedLocale[];
 
+function isSupportedLocale(value: string): value is SupportedLocale {
+	return Object.hasOwn(resources, value);
+}
+
 function getInitialLocale(): SupportedLocale {
 	const locale =
 		getStoredLocale() ?? document.documentElement.lang.split('-')[0];
-	return supportedLocales.includes(locale as SupportedLocale)
-		? (locale as SupportedLocale)
-		: 'pl';
+	return isSupportedLocale(locale) ? locale : 'pl';
 }
 
-function getStoredLocale(): string | undefined | null {
+function getStoredLocale(): string | null {
 	try {
 		return localStorage.getItem(LOCALE_KEY);
 	} catch (error) {
 		console.error('getStoredLocale()', error);
+		return null;
 	}
 }
 
@@ -96,4 +99,4 @@ void i18n.use(initReactI18next).init({
 document.documentElement.lang = i18n.resolvedLanguage ?? 'pl';
 
 export type { SupportedLocale };
-export { i18n, setLocale, supportedLocales };
+export { i18n, isSupportedLocale, setLocale, supportedLocales };
