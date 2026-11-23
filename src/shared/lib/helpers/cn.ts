@@ -7,6 +7,8 @@ const themeColors = [
 	'accent-text',
 	'accent-light',
 	'bg-deep',
+	'bg-nav',
+	'bg-inset',
 	'bg-surface',
 	'bg-primary',
 	'bg-offset',
@@ -14,6 +16,7 @@ const themeColors = [
 	'bg-card-auth',
 	'bg-elevated',
 	'text-primary',
+	'text-secondary',
 	'text-muted',
 	'text-disabled',
 	'border',
@@ -26,6 +29,7 @@ const themeColors = [
 ];
 
 const themeFontSizes = [
+	'display-hero',
 	'display-2xl',
 	'display-xl',
 	'display-lg',
@@ -36,6 +40,7 @@ const themeFontSizes = [
 	'body-sm',
 	'body-xs',
 	'label',
+	'overline',
 ];
 
 const twMerge = extendTailwindMerge({
