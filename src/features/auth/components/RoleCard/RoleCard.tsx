@@ -13,7 +13,7 @@ type RoleCardProps = {
 	variant?: ButtonVariant;
 };
 
-function RoleCard({
+export function RoleCard({
 	icon: Icon,
 	title,
 	description,
@@ -44,5 +44,3 @@ function RoleCard({
 		</Card>
 	);
 }
-
-export { RoleCard };

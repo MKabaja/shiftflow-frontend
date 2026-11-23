@@ -17,7 +17,7 @@ import { Input } from '@/shared/components/Input/Input.tsx';
 import { PinInput } from '@/shared/components/PinInput/PinInput.tsx';
 import { config } from '@/shared/lib/config/config.ts';
 
-function LoginPinForm() {
+export function LoginPinForm() {
 	const { t } = useTranslation('auth');
 	const { t: tErrors } = useTranslation('errors');
 	const { mutate, isPending } = useLoginWithPin();
@@ -117,5 +117,3 @@ function LoginPinForm() {
 		</form>
 	);
 }
-
-export { LoginPinForm };

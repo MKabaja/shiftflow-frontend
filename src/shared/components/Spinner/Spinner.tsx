@@ -2,8 +2,8 @@ import { useTranslation } from 'react-i18next';
 import { cn } from '@/shared/lib/helpers/cn.ts';
 import { baseStyles, sizeStyles, variantStyles } from './Spinner.styles.ts';
 
-export type SpinnerSize = 'sm' | 'md' | 'lg';
-export type SpinnerVariant = 'accent' | 'contrast';
+type SpinnerSize = 'sm' | 'md' | 'lg';
+type SpinnerVariant = 'accent' | 'contrast';
 
 type SpinnerProps = {
 	variant?: SpinnerVariant;
@@ -11,11 +11,7 @@ type SpinnerProps = {
 	label?: string;
 };
 
-export function Spinner({
-	size = 'md',
-	label,
-	variant = 'accent',
-}: SpinnerProps) {
+function Spinner({ size = 'md', label, variant = 'accent' }: SpinnerProps) {
 	const { t } = useTranslation();
 	const text = label ?? t('loading');
 
@@ -30,3 +26,6 @@ export function Spinner({
 		</>
 	);
 }
+
+export type { SpinnerSize, SpinnerVariant };
+export { Spinner };

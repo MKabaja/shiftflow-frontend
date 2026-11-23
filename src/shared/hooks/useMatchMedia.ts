@@ -1,6 +1,6 @@
 import { useMemo, useSyncExternalStore } from 'react';
 
-function useMatchMedia(query: string) {
+export function useMatchMedia(query: string) {
 	const breakPointQuery: MediaQueryList = useMemo(
 		() => window.matchMedia(query),
 		[query],
@@ -19,5 +19,3 @@ function useMatchMedia(query: string) {
 
 	return useSyncExternalStore(subscribe, getSnapshot);
 }
-
-export { useMatchMedia };

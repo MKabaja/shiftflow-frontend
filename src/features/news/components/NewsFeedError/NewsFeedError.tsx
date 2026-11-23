@@ -6,7 +6,7 @@ type NewsFeedErrorProps = {
 	onRetry: () => void;
 };
 
-function NewsFeedError({ onRetry }: NewsFeedErrorProps) {
+export function NewsFeedError({ onRetry }: NewsFeedErrorProps) {
 	const { t } = useTranslation('news');
 	const { t: tCommon } = useTranslation('common');
 
@@ -22,5 +22,3 @@ function NewsFeedError({ onRetry }: NewsFeedErrorProps) {
 		</div>
 	);
 }
-
-export { NewsFeedError };

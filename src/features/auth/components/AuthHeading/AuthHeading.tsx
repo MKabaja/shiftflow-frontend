@@ -3,7 +3,7 @@ type AuthHeadingProps = {
 	subtitle: string;
 };
 
-function AuthHeading({ title, subtitle }: AuthHeadingProps) {
+export function AuthHeading({ title, subtitle }: AuthHeadingProps) {
 	return (
 		<hgroup className="mb-8 flex flex-col gap-1">
 			<h1 className="text-display-lg lg:text-display-xl">{title}</h1>
@@ -11,5 +11,3 @@ function AuthHeading({ title, subtitle }: AuthHeadingProps) {
 		</hgroup>
 	);
 }
-
-export { AuthHeading };

@@ -18,7 +18,7 @@ declare module '@tanstack/react-query' {
 	}
 }
 
-const queryClient = new QueryClient({
+export const queryClient = new QueryClient({
 	queryCache: new QueryCache({
 		onError: (error, query) => {
 			logContractError(error);
@@ -59,5 +59,3 @@ function notifyError(error: unknown) {
 	const { messageKey } = parseApiError(error);
 	toast.error(i18n.t(messageKey, { ns: 'errors' }));
 }
-
-export { queryClient };

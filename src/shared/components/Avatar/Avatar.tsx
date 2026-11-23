@@ -8,7 +8,7 @@ import { getInitials } from '@/shared/lib/helpers/getInitials.ts';
 import { hashColor } from '@/shared/lib/helpers/hashColor.ts';
 import { focusStyles } from '@/shared/lib/styles/focusStyles.ts';
 
-export type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+type AvatarSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
 type FallbackSize = Record<AvatarSize, number>;
 type AvatarProps = {
@@ -26,7 +26,7 @@ const IconSizes: FallbackSize = {
 	xl: 40,
 };
 
-export function Avatar({ size = 'md', name, label, onClick }: AvatarProps) {
+function Avatar({ size = 'md', name, label, onClick }: AvatarProps) {
 	const Tag = onClick ? 'button' : 'div';
 	const accessibleName = label || name || undefined;
 	const content = name ? (
@@ -57,3 +57,6 @@ export function Avatar({ size = 'md', name, label, onClick }: AvatarProps) {
 		</Tag>
 	);
 }
+
+export type { AvatarSize };
+export { Avatar };

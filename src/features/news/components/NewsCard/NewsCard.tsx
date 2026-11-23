@@ -14,7 +14,7 @@ type NewsCardProps = {
 	post: NewsPost;
 };
 
-function NewsCard({ post }: NewsCardProps) {
+export function NewsCard({ post }: NewsCardProps) {
 	const { t, i18n } = useTranslation('news');
 	const [expanded, setExpanded] = useState(false);
 	const contentRef = useRef<HTMLParagraphElement>(null);
@@ -83,5 +83,3 @@ function NewsCard({ post }: NewsCardProps) {
 		</Card>
 	);
 }
-
-export { NewsCard };

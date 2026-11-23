@@ -21,8 +21,8 @@ import {
 } from './Modal.styles.ts';
 import { Overlay } from './Overlay.tsx';
 
-export type ModalSize = 'sm' | 'md' | 'lg' | 'xl';
-export type ModalPlacement = 'center' | 'sheet';
+type ModalSize = 'sm' | 'md' | 'lg' | 'xl';
+type ModalPlacement = 'center' | 'sheet';
 
 type AnimationProps = 'initial' | 'animate' | 'exit';
 type PanelAnimation = Pick<HTMLMotionProps<'div'>, AnimationProps>;
@@ -59,7 +59,7 @@ type ModalProps = HTMLMotionProps<'div'> & {
 	meta?: ReactNode;
 };
 
-export function Modal({
+function Modal({
 	isOpen,
 	onClose,
 	title,
@@ -147,3 +147,6 @@ export function Modal({
 		</AnimatePresence>
 	);
 }
+
+export type { ModalPlacement, ModalSize };
+export { Modal };

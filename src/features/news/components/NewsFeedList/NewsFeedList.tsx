@@ -5,7 +5,7 @@ type NewsFeedListProps = {
 	posts: NewsPost[];
 };
 
-function NewsFeedList({ posts }: NewsFeedListProps) {
+export function NewsFeedList({ posts }: NewsFeedListProps) {
 	return (
 		<ul className="flex flex-col gap-4">
 			{posts.map((post) => (
@@ -16,5 +16,3 @@ function NewsFeedList({ posts }: NewsFeedListProps) {
 		</ul>
 	);
 }
-
-export { NewsFeedList };

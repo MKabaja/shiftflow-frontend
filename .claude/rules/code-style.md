@@ -15,6 +15,9 @@ Pełny standard z przykładami: skill `react-clean-code`. Poniżej rdzeń + konw
 - `tsconfig.app.json`: `noUnusedLocals`, `noUnusedParameters`, `erasableSyntaxOnly`, `verbatimModuleSyntax` — nieużyte
   importy i parametry to błędy kompilacji; typy importuj przez `import type` / `type` w specyfikatorze.
 - Rozszerzenia `.ts` / `.tsx` w importach są wymagane (`allowImportingTsExtensions`). Alias `@/` → `src/`.
+- Eksporty nazwane, styl zależy od ich liczby (typy też się liczą): **jeden** → inline (`export function X`,
+  `export const X`); **dwa i więcej** → bez `export` przy deklaracjach, na dole pliku `export type { … }` i
+  `export { … }`. Pliki route'ów: `export const Route` inline. Lint tego nie pilnuje — review.
 - `type`, nie `interface` — `interface` tylko w augmentacji modułów (`declare module '…'`).
 - Bez `any`, nieuzasadnionych `as`, `!`, `@ts-ignore`.
 - Nazwane aliasy typów zamiast inline unii kluczy w `Pick` / `Omit` / `Record` i inline sygnatur.

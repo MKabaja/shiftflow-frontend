@@ -15,7 +15,7 @@ const SELECTOR: string = [
  *
  * @param containerRef - Give it `tabIndex={-1}` so it can hold focus when it has no focusable children.
  */
-function useFocusTrap<T extends HTMLElement>(
+export function useFocusTrap<T extends HTMLElement>(
 	isOpen: boolean,
 	containerRef: RefObject<T | null>,
 ) {
@@ -55,5 +55,3 @@ function useFocusTrap<T extends HTMLElement>(
 function getFocusableElements(container: HTMLElement): HTMLElement[] {
 	return Array.from(container.querySelectorAll<HTMLElement>(SELECTOR));
 }
-
-export { useFocusTrap };

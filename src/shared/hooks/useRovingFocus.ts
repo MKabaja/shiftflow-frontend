@@ -14,7 +14,7 @@ const actionStrategy: Record<Action, ActionFunction> = {
  *
  * @param selector - CSS selector of the items within the container.
  */
-function useRovingFocus<T extends HTMLElement>(
+export function useRovingFocus<T extends HTMLElement>(
 	containerRef: RefObject<T | null>,
 	isOpen: boolean,
 	selector = 'a',
@@ -55,5 +55,3 @@ function useRovingFocus<T extends HTMLElement>(
 		};
 	}, [containerRef, selector, isOpen]);
 }
-
-export { useRovingFocus };

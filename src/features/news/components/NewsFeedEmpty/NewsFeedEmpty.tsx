@@ -1,7 +1,7 @@
 import { Newspaper } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
-function NewsFeedEmpty() {
+export function NewsFeedEmpty() {
 	const { t } = useTranslation('news');
 
 	return (
@@ -15,5 +15,3 @@ function NewsFeedEmpty() {
 		</div>
 	);
 }
-
-export { NewsFeedEmpty };

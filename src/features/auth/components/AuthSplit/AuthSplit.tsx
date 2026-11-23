@@ -6,7 +6,7 @@ type AuthSplitProps = {
 	children: ReactNode;
 };
 
-function AuthSplit({ image, children }: AuthSplitProps) {
+export function AuthSplit({ image, children }: AuthSplitProps) {
 	return (
 		<Card
 			variant="auth"
@@ -24,5 +24,3 @@ function AuthSplit({ image, children }: AuthSplitProps) {
 		</Card>
 	);
 }
-
-export { AuthSplit };

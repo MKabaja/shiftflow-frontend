@@ -7,7 +7,7 @@ import type { AvailabilityQueryParams } from '@/features/availability/model/avai
  *
  * `month` is marked `handled`: errors skip the global toast, the calendar shows them in place.
  */
-const availabilityQueries = {
+export const availabilityQueries = {
 	all: () => ['availability'] as const,
 	month: (params: AvailabilityQueryParams) =>
 		queryOptions({
@@ -21,5 +21,3 @@ const availabilityQueries = {
 			meta: { handled: true },
 		}),
 };
-
-export { availabilityQueries };

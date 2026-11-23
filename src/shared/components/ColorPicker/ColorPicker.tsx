@@ -13,7 +13,7 @@ import {
 } from './ColorPicker.styles.ts';
 import './ColorPicker.css';
 
-export type ColorPickerProps = {
+type ColorPickerProps = {
 	label?: string;
 	error?: string;
 	value: string;
@@ -23,7 +23,7 @@ export type ColorPickerProps = {
 	className?: string;
 };
 
-export function ColorPicker({
+function ColorPicker({
 	id,
 	label,
 	error,
@@ -92,3 +92,6 @@ export function ColorPicker({
 		</div>
 	);
 }
+
+export type { ColorPickerProps };
+export { ColorPicker };

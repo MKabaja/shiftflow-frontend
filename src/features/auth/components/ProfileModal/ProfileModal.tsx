@@ -17,7 +17,11 @@ type ProfileModalProps = {
 	placement: ModalPlacement;
 };
 
-function ProfileModal({ isOpen, onClose, placement }: ProfileModalProps) {
+export function ProfileModal({
+	isOpen,
+	onClose,
+	placement,
+}: ProfileModalProps) {
 	const { user } = useAuth();
 	const { t } = useTranslation('auth');
 	const positions = user?.positions ?? [];
@@ -106,5 +110,3 @@ function ProfileModal({ isOpen, onClose, placement }: ProfileModalProps) {
 		</Modal>
 	);
 }
-
-export { ProfileModal };

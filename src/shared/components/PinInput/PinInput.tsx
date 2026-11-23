@@ -12,7 +12,7 @@ import {
 	rowStyles,
 } from './PinInput.styles.ts';
 
-export type PinInputProps = {
+type PinInputProps = {
 	ref?: Ref<HTMLInputElement>;
 	length?: number;
 	value?: string;
@@ -24,7 +24,7 @@ export type PinInputProps = {
 	autoFocus?: boolean;
 };
 
-export function PinInput({
+function PinInput({
 	ref,
 	length = config.pinLength,
 	value,
@@ -111,3 +111,6 @@ export function PinInput({
 		</div>
 	);
 }
+
+export type { PinInputProps };
+export { PinInput };

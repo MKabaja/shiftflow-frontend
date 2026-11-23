@@ -5,7 +5,7 @@ import { type RefObject, useLayoutEffect, useRef } from 'react';
  *
  * @param triggerRef - Element to focus on close; when omitted, the element focused at open time.
  */
-function useFocusReturn<T extends HTMLElement>(
+export function useFocusReturn<T extends HTMLElement>(
 	isOpen: boolean,
 	triggerRef?: RefObject<T | null>,
 ) {
@@ -26,5 +26,3 @@ function useFocusReturn<T extends HTMLElement>(
 		preIsOpenRef.current = isOpen;
 	}, [isOpen, triggerRef]);
 }
-
-export { useFocusReturn };

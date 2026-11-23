@@ -1,7 +1,7 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { logout } from '@/features/auth/api/auth.api.ts';
 
-function useLogout() {
+export function useLogout() {
 	const queryClient = useQueryClient();
 
 	return useMutation({
@@ -9,5 +9,3 @@ function useLogout() {
 		onSuccess: () => queryClient.clear(),
 	});
 }
-
-export { useLogout };

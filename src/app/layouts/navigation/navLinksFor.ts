@@ -5,8 +5,6 @@ import { EMPLOYEE_NAV_LINKS, MANAGER_NAV_LINKS } from './navLinks.ts';
 /**
  * Returns the navigation links for a user: employee links for an employee, manager links otherwise.
  */
-function navLinksFor(user: User | null): readonly NavLink[] {
+export function navLinksFor(user: User | null): readonly NavLink[] {
 	return user?.role === 'employee' ? EMPLOYEE_NAV_LINKS : MANAGER_NAV_LINKS;
 }
-
-export { navLinksFor };

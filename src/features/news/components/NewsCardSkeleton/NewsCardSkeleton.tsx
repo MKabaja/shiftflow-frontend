@@ -1,7 +1,7 @@
 import { Card } from '@/shared/components/Card/Card.tsx';
 import { Skeleton } from '@/shared/components/Skeleton/Skeleton.tsx';
 
-function NewsCardSkeleton() {
+export function NewsCardSkeleton() {
 	return (
 		<Card className="flex flex-col gap-3">
 			<div className="flex items-center gap-3">
@@ -20,5 +20,3 @@ function NewsCardSkeleton() {
 		</Card>
 	);
 }
-
-export { NewsCardSkeleton };

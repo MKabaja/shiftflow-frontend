@@ -7,7 +7,7 @@ import {
 	trackBaseStyles,
 } from './Toggle.styles.ts';
 
-export type ToggleSize = 'sm' | 'md';
+type ToggleSize = 'sm' | 'md';
 
 type ToggleProps = {
 	ref?: Ref<HTMLInputElement>;
@@ -19,7 +19,7 @@ type ToggleProps = {
 	size?: ToggleSize;
 };
 
-export function Toggle({
+function Toggle({
 	ref,
 	checked,
 	onChange,
@@ -74,3 +74,6 @@ export function Toggle({
 		</label>
 	);
 }
+
+export type { ToggleSize };
+export { Toggle };

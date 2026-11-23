@@ -3,7 +3,7 @@ import { NewsCardSkeleton } from '@/features/news/components/NewsCardSkeleton/Ne
 
 const SKELETON_COUNT = 2;
 
-function NewsFeedLoading() {
+export function NewsFeedLoading() {
 	const { t } = useTranslation('common');
 
 	return (
@@ -18,5 +18,3 @@ function NewsFeedLoading() {
 		</div>
 	);
 }
-
-export { NewsFeedLoading };

@@ -17,7 +17,7 @@ const localeLabels: AriaLabels = {
 	en: 'locale.en',
 };
 
-function LocaleSwitcher(): ReactNode {
+export function LocaleSwitcher(): ReactNode {
 	const { t, i18n } = useTranslation();
 	const currentLanguage = i18n.resolvedLanguage;
 
@@ -46,5 +46,3 @@ function LocaleSwitcher(): ReactNode {
 		</div>
 	);
 }
-
-export { LocaleSwitcher };

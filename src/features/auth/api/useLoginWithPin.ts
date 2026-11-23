@@ -2,7 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { loginWithPin } from '@/features/auth/api/auth.api.ts';
 import { authQueries } from '@/features/auth/api/auth.queries.ts';
 
-function useLoginWithPin() {
+export function useLoginWithPin() {
 	const queryClient = useQueryClient();
 
 	return useMutation({
@@ -12,5 +12,3 @@ function useLoginWithPin() {
 			queryClient.setQueryData(authQueries.currentUser().queryKey, user),
 	});
 }
-
-export { useLoginWithPin };

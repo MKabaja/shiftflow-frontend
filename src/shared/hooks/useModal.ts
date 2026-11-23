@@ -9,7 +9,7 @@ import { useLockBodyScroll } from '@/shared/hooks/useLockBodyScroll.ts';
  *
  * @returns `panelRef` — attach it to the modal panel to enable the focus trap.
  */
-function useModal(isOpen: boolean, onClose: () => void) {
+export function useModal(isOpen: boolean, onClose: () => void) {
 	const panelRef = useRef<HTMLDivElement>(null);
 
 	useLockBodyScroll(isOpen, 'both');
@@ -19,5 +19,3 @@ function useModal(isOpen: boolean, onClose: () => void) {
 
 	return { panelRef };
 }
-
-export { useModal };

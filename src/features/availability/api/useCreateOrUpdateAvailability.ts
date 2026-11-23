@@ -14,7 +14,7 @@ import { buildOptimisticAvailability } from '@/features/availability/lib/buildOp
  * Optimistic: updates the month cache first, rolls back on error, refetches when settled.
  * Errors go to the global toast.
  */
-function useCreateOrUpdateAvailability() {
+export function useCreateOrUpdateAvailability() {
 	const queryClient = useQueryClient();
 
 	return useMutation({
@@ -47,5 +47,3 @@ function useCreateOrUpdateAvailability() {
 			invalidateMonth(queryClient, snapshot),
 	});
 }
-
-export { useCreateOrUpdateAvailability };

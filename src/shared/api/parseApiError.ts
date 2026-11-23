@@ -2,7 +2,7 @@ import type { ParseKeys } from 'i18next';
 import { apiErrorBodySchema, HttpError } from '@/shared/api/httpError.ts';
 import { NetworkError } from '@/shared/api/networkError.ts';
 
-export type ParsedApiError = {
+type ParsedApiError = {
 	messageKey: ParseKeys<'errors'>;
 	fieldErrors?: Record<string, string[]>;
 	statusCode?: number;
@@ -45,4 +45,5 @@ function parseApiError(error: unknown): ParsedApiError {
 	};
 }
 
+export type { ParsedApiError };
 export { parseApiError };

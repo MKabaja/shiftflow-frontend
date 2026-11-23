@@ -18,7 +18,7 @@ import { Input } from '@/shared/components/Input/Input.tsx';
 import { VisibilityToggle } from '@/shared/components/VisibilityToggle/VisibilityToggle.tsx';
 import { config } from '@/shared/lib/config/config.ts';
 
-function LoginForm() {
+export function LoginForm() {
 	const { t } = useTranslation('auth');
 	const { t: tErrors } = useTranslation('errors');
 	const [isPasswordMasked, setIsPasswordMasked] = useState(true);
@@ -127,5 +127,3 @@ function LoginForm() {
 		</form>
 	);
 }
-
-export { LoginForm };

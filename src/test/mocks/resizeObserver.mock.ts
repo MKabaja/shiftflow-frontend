@@ -33,7 +33,7 @@ class MockResizeObserver implements ResizeObserver {
  *
  * Call in `beforeEach`; restore with `vi.unstubAllGlobals()` in `afterEach`.
  */
-export function stubResizeObserver(): void {
+function stubResizeObserver(): void {
 	observed.clear();
 	vi.stubGlobal('ResizeObserver', MockResizeObserver);
 }
@@ -43,7 +43,7 @@ export function stubResizeObserver(): void {
  *
  * @throws When no observer watches `element`.
  */
-export function triggerResize(element: Element): void {
+function triggerResize(element: Element): void {
 	const observer = observed.get(element);
 	if (!observer)
 		throw new Error('No active ResizeObserver watches this element');
@@ -53,7 +53,7 @@ export function triggerResize(element: Element): void {
 /**
  * Like {@link triggerResize}, but does nothing when no observer watches `element`.
  */
-export function triggerResizeIfObserved(element: Element): void {
+function triggerResizeIfObserved(element: Element): void {
 	const observer = observed.get(element);
 	if (observer) act(() => observer.notify());
 }
@@ -61,7 +61,7 @@ export function triggerResizeIfObserved(element: Element): void {
 /**
  * Sets `scrollHeight` and `clientHeight` of the element, which are always `0` in jsdom.
  */
-export function setElementSize(
+function setElementSize(
 	element: HTMLElement,
 	scrollHeight: number,
 	clientHeight: number,
@@ -75,3 +75,10 @@ export function setElementSize(
 		value: clientHeight,
 	});
 }
+
+export {
+	setElementSize,
+	stubResizeObserver,
+	triggerResize,
+	triggerResizeIfObserved,
+};
