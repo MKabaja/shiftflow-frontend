@@ -9,20 +9,22 @@ export function useFocusReturn<T extends HTMLElement>(
 	isOpen: boolean,
 	triggerRef?: RefObject<T | null>,
 ) {
-	const preIsOpenRef = useRef<boolean>(isOpen);
+	const wasOpenRef = useRef(isOpen);
 	const fallbackRef = useRef<HTMLElement | null>(null);
 
 	useLayoutEffect(() => {
-		const wasOpened: boolean = !preIsOpenRef.current && isOpen && !triggerRef;
-		const wasClosed: boolean = preIsOpenRef.current && !isOpen;
+		const wasOpened = !wasOpenRef.current && isOpen && !triggerRef;
+		const wasClosed = wasOpenRef.current && !isOpen;
 
 		if (wasOpened) {
-			fallbackRef.current = document.activeElement as HTMLElement | null;
+			const { activeElement } = document;
+			fallbackRef.current =
+				activeElement instanceof HTMLElement ? activeElement : null;
 		}
 		if (wasClosed) {
 			const target = triggerRef?.current ?? fallbackRef.current;
 			target?.focus();
 		}
-		preIsOpenRef.current = isOpen;
+		wasOpenRef.current = isOpen;
 	}, [isOpen, triggerRef]);
 }

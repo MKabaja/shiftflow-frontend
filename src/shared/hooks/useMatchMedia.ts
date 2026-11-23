@@ -1,21 +1,18 @@
-import { useMemo, useSyncExternalStore } from 'react';
+import { useCallback, useMemo, useSyncExternalStore } from 'react';
 
-export function useMatchMedia(query: string) {
-	const breakPointQuery: MediaQueryList = useMemo(
-		() => window.matchMedia(query),
-		[query],
+/**
+ * Tells whether the media `query` matches, re-rendering when the result changes.
+ */
+export function useMatchMedia(query: string): boolean {
+	const mediaQueryList = useMemo(() => window.matchMedia(query), [query]);
+
+	const subscribe = useCallback(
+		(onChange: () => void) => {
+			mediaQueryList.addEventListener('change', onChange);
+			return () => mediaQueryList.removeEventListener('change', onChange);
+		},
+		[mediaQueryList],
 	);
 
-	function subscribe(callback: () => void) {
-		breakPointQuery.addEventListener('change', callback);
-
-		return () => {
-			breakPointQuery.removeEventListener('change', callback);
-		};
-	}
-	function getSnapshot() {
-		return breakPointQuery.matches;
-	}
-
-	return useSyncExternalStore(subscribe, getSnapshot);
+	return useSyncExternalStore(subscribe, () => mediaQueryList.matches);
 }
