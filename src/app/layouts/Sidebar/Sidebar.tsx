@@ -1,87 +1,32 @@
-import type { LinkProps } from '@tanstack/react-router';
-import { Link, useMatchRoute } from '@tanstack/react-router';
-import { motion, useReducedMotion } from 'motion/react';
+import { useMatchRoute } from '@tanstack/react-router';
 import { useTranslation } from 'react-i18next';
 import type { NavLink } from '@/app/layouts/navigation/navLinks.ts';
 import { Avatar } from '@/shared/components/Avatar/Avatar.tsx';
-import { Logo } from '@/shared/components/Logo/Logo.tsx';
 import { Separator } from '@/shared/components/Separator/Separator.tsx';
-import { cn } from '@/shared/lib/helpers/cn.ts';
 import {
 	footerStyles,
-	iconStyles,
-	indicatorStyles,
 	itemStyles,
-	labelStyles,
-	linkActiveStyles,
-	linkStyles,
 	listStyles,
-	logoLinkStyles,
-	logoStyles,
 	panelStyles,
 	spacerStyles,
 	userNameStyles,
 	userStyles,
 } from './Sidebar.styles.ts';
+import { SidebarHeader } from './SidebarHeader.tsx';
+import { SidebarNavLink } from './SidebarNavLink.tsx';
 
 type SidebarProps = {
 	links: readonly NavLink[];
 	settingsLink: NavLink;
-	homeTo: NonNullable<LinkProps['to']>;
+	landingPath: NavLink['to'];
 	userName?: string;
 	onProfileClick: () => void;
 };
 
-type SidebarNavLinkProps = {
-	link: NavLink;
-	isActive: boolean;
-};
-
-function SidebarNavLink({
-	link: { icon: Icon, labelKey, to },
-	isActive,
-}: SidebarNavLinkProps) {
-	const { t } = useTranslation();
-	const shouldReduceMotion = useReducedMotion();
-
-	const label = t(labelKey);
-
-	return (
-		<>
-			{isActive && (
-				<motion.span
-					layoutId="sidebar-indicator"
-					transition={
-						shouldReduceMotion
-							? { duration: 0 }
-							: { type: 'spring', stiffness: 400, damping: 32 }
-					}
-					className={indicatorStyles}
-				/>
-			)}
-
-			<Link
-				to={to}
-				title={label}
-				aria-current={isActive ? 'page' : undefined}
-				className={cn(linkStyles, isActive && linkActiveStyles)}
-			>
-				<Icon
-					size={20}
-					aria-hidden={true}
-					className={iconStyles}
-				/>
-
-				<span className={labelStyles}>{label}</span>
-			</Link>
-		</>
-	);
-}
-
 function Sidebar({
 	links,
 	settingsLink,
-	homeTo,
+	landingPath,
 	userName,
 	onProfileClick,
 }: SidebarProps) {
@@ -95,16 +40,7 @@ function Sidebar({
 	return (
 		<div className={spacerStyles}>
 			<div className={panelStyles}>
-				<Link
-					to={homeTo}
-					className={logoLinkStyles}
-				>
-					<Logo
-						variant="icon"
-						size="md"
-						className={logoStyles}
-					/>
-				</Link>
+				<SidebarHeader landingPath={landingPath} />
 
 				<nav aria-label={t('nav.label')}>
 					<ul className={listStyles}>

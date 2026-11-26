@@ -31,7 +31,7 @@ function AuthenticatedLayout() {
 	const { t } = useTranslation('auth');
 
 	const links = navLinksFor(user);
-	const homeTo = user ? landingPathFor(user) : '/';
+	const landingPath = user ? landingPathFor(user) : '/';
 
 	return (
 		<div
@@ -41,7 +41,7 @@ function AuthenticatedLayout() {
 				<Sidebar
 					links={links}
 					settingsLink={SETTINGS_LINK}
-					homeTo={homeTo}
+					landingPath={landingPath}
 					userName={user?.name}
 					onProfileClick={() => setIsProfileOpen(true)}
 				/>
